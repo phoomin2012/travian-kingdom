@@ -4,6 +4,12 @@ If you want to support, you can donate us by Paypal. https://paypal.me/PhuminSho
 
 We use this github to report process and showcase of this script.
 
+# Menu
+  - [Menu](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#menu)
+  - [Feature](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#feature)
+  - [Screenshot](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#screenshot)
+  - [Subscribe](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#subscribe)
+  - [FAQ](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#faq)
 
 # Feature
 - Index
@@ -66,7 +72,7 @@ We use this github to report process and showcase of this script.
     - [ ] Auto extend
     - [ ] Lifetime bonus
   - Report
-    - [ ] Attack report (not correct infomation)
+    - [ ] Attack report (not correct infomation)
     - [ ] Raid report
     - [ ] Siege report
     - [ ] Spy report
