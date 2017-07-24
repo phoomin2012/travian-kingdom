@@ -1,15 +1,13 @@
 # Travian Kingdom Clone Script
 This project is clone Travian Kingdom game. Now, **not finish** yet.
 If you want to support, you can donate us by Paypal. https://paypal.me/PhuminShop (Every donation will be list in credit file)
-
-We use this github to report process and showcase of this script.
+Files will upload fast as fast I can.
 
 # Menu
   - [Menu](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#menu)
   - [Feature](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#feature)
   - [Screenshot](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#screenshot)
   - [Subscribe](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#subscribe)
-  - [FAQ](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#faq)
 
 # Feature
 - Index
@@ -30,6 +28,8 @@ We use this github to report process and showcase of this script.
   - News
     - [ ] Show news
   - Account
+    - [x] Login
+    - [x] Register
     - [ ] Change picture avatar
     - [ ] Change email
     - [ ] Change password
@@ -48,29 +48,29 @@ We use this github to report process and showcase of this script.
     - [x] Finish now
   - Troops & Merchants
     - [x] Train troop
-    - [ ] Send attack (no attack)
+    - [x] Send attack (no attack)
     - [ ] Send raid (no attack)
     - [ ] Send siege (no attack)
     - [x] Settle new village
     - [ ] Conqure village
     - [x] Send resources
   - Hero
-    - [ ] Adventure
+    - [x] Adventure (generate item with no effect)
     - [ ] Attack
-    - [ ] Inventory
-    - [ ] Attributes
-    - [ ] Change hero face
-    - [ ] Hero equipment
+    - [x] Inventory
+    - [x] Attributes
+    - [x] Change hero face
+    - [x] Hero equipment
   - Silver & Gold
-    - [ ] Exchange sliver & gold
+    - [x] Exchange sliver & gold
     - [ ] Travian Plus
-    - [ ] Resource bonus
-    - [ ] Crop bonus
+    - [x] Resource bonus
+    - [x] Crop bonus
     - [ ] Starter pack
     - [ ] Invite friends
     - [ ] Purchase gold
     - [ ] Auto extend
-    - [ ] Lifetime bonus
+    - [x] Lifetime bonus
   - Report
     - [ ] Attack report (not correct infomation)
     - [ ] Raid report
@@ -112,7 +112,7 @@ We use this github to report process and showcase of this script.
       - [ ] Search
     - [ ] World
   - Quest
-    - [ ] Tutorial gameplay
+    - [x] Tutorial gameplay
     - [ ] Tutorial governer
     - [ ] Tutorial king
     - [ ] Daliy quest
@@ -137,7 +137,7 @@ We use this github to report process and showcase of this script.
     - [x] Show member
     - [ ] Invite player
     - [ ] Invite dukes
-    - [ ] Treasure active
+    - [x] Treasure active
     - [ ] Internation statistics
     - [ ] Kingdom events
     - [ ] Ranking
@@ -146,9 +146,9 @@ We use this github to report process and showcase of this script.
     - [ ] Diplomacy
     - [ ] Create offer
   - Notification
-    - [ ] Show notification
-    - [ ] Remove notification
-    - [ ] Remove all notification
+    - [x] Show notification
+    - [x] Remove notification
+    - [x] Remove all notification
   - Map
     - [x] Show map cell
     - [x] Show map cell detail
@@ -161,7 +161,7 @@ We use this github to report process and showcase of this script.
     - [ ] Natar village
     - [ ] WW village
     - [x] Vocano
-    - [ ] Kingdom borders
+    - [x] Kingdom borders
     - [ ] Game messages
     - [ ] Player messages
     - [ ] Kingdom markers
@@ -198,14 +198,7 @@ We use this github to report process and showcase of this script.
 ![Travian Kingdom Clone Script](https://s11.postimg.org/5vs1owv8z/Screen_Shot_2560-05-02_at_09.18.24.png)
 
 # Subscribe
-$300 to be a part of this project. You can access all source code and join the project.
-We will support you lifetime. If you interest, contact me phoomin009@gmail.com
-
-# FAQ
-> Q: Why too expensive?
->
-> F: To be sure that you will think so much to share it free.
-
-> Q: What I will get if I subscribe?
->
-> F: You can access the source code and database file. You can help us to develop or report bugs and use this script to open your server.
+***NOW IS FREE***
+Use **watch** button if you want to know about activities.
+If you **like** this project, please give **star**.
+***THANKS***
