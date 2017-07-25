@@ -212,8 +212,11 @@ Files will upload fast as fast I can.
     If you want empty data, you should empty every table except ```global_server_data```<br>
     If you want to change speed world, you can edit in ```global_server_data``` table too<br>
   3. Config mysql password in ```index/engine/config.php```
-  4. Start automatice process with command ```php server2/server.php``` and ```node server/app2``` and ```node server_lobby/app```
+  4. Start automatice process with command ```php server2/server.php``` and ```node server/app2``` and ```node server_lobby/app``` (don't forget to install nodejs module with ```npm install``` before run)
   5. Let's enjoy your server
+  
+  **To generate world**<br>
+  go to sub domain that game avaliable. go to api folder and go to debug.php?a=createWorld
   
 Please note that this script doesn't finish yet.
 If you found bug please use [Issues](https://github.com/phoomin2012/travian-kingdom-clone/issues) to report and use [Pulls Requests](https://github.com/phoomin2012/travian-kingdom-clone/pulls) to request feature that offical have or fix bug or add new feature to main project.
