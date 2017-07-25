@@ -1,0 +1,36 @@
+{
+    "time": 1493907323663,
+    "serialNo": 352,
+    "response": {
+        "535412783": {
+            "villageId": "535412783",
+            "dominating": true,
+            "connected": true,
+            "dominatingPlayerId": 8631
+        },
+        "535445550": {
+            "villageId": "535445550",
+            "dominating": true,
+            "connected": true,
+            "dominatingPlayerId": 8631
+        },
+        "535412785": {
+            "villageId": "535412785",
+            "dominating": true,
+            "connected": true,
+            "dominatingPlayerId": 8631
+        },
+        "535445554": {
+            "villageId": "535445554",
+            "dominating": true,
+            "connected": true,
+            "dominatingPlayerId": 8631
+        },
+        "535511088": {
+            "villageId": "535511088",
+            "dominating": true,
+            "connected": true,
+            "dominatingPlayerId": 8631
+        }
+    }
+}

@@ -1,0 +1,446 @@
+{
+    "time": 1488793031081,
+    "serialNo": 18070,
+    "response": {
+        "sourceId": 0,
+        "sourceName": "",
+        "destId": 0,
+        "destType": 0,
+        "destName": "",
+        "sourcePlayerId": 0,
+        "sourcePlayerName": "attacker",
+        "sourceKingdomId": null,
+        "sourceKingdomTag": "",
+        "sourceTribeId": 1,
+        "destPlayerId": -1,
+        "destPlayerName": "Robber",
+        "destKingdomId": null,
+        "destKingdomTag": "",
+        "destTribeId": 5,
+        "destX": null,
+        "destY": null,
+        "attackType": 0,
+        "troopId": -1,
+        "capacity": 350,
+        "bounty": null,
+        "ownRole": "defender",
+        "otherKingdomId": null,
+        "treasures": null,
+        "victoryPoints": null,
+        "supply": 0,
+        "tributeBounty": null,
+        "stolenGoods": null,
+        "playerId": 0,
+        "time": 1488793031,
+        "statistics": {
+            "lossPercent": {
+                "attacker": 26.49,
+                "defender": 100
+            },
+            "totalEffective": {
+                "attacker": 400.02,
+                "defender": 165
+            },
+            "losses": {
+                "resources": {
+                    "attacker": 675,
+                    "defender": 1390
+                },
+                "crop": {
+                    "attacker": 3,
+                    "defender": 4
+                },
+                "time": {
+                    "attacker": 651,
+                    "defender": 489
+                }
+            }
+        },
+        "modules": [{
+                "name": "troops\/attacker",
+                "body": {
+                    "tribeId": 1,
+                    "playerId": 0,
+                    "playerName": "attacker",
+                    "villageId": 0,
+                    "villageName": "",
+                    "originalTroops": {
+                        "1": 10,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    },
+                    "lostTroops": {
+                        "1": 3,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    }
+                }
+            }, {
+                "name": "troops\/defender",
+                "body": {
+                    "tribeId": 5,
+                    "playerId": -1,
+                    "playerName": "Robber",
+                    "villageId": 0,
+                    "villageName": "",
+                    "originalTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    },
+                    "lostTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    }
+                }
+            }, {
+                "name": "troops\/supporter",
+                "body": {
+                    "tribeId": 1,
+                    "playerId": -2,
+                    "playerName": "defender",
+                    "villageId": 1,
+                    "villageName": "",
+                    "originalTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    },
+                    "lostTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    }
+                }
+            }, {
+                "name": "troops\/supporter",
+                "body": {
+                    "tribeId": 2,
+                    "playerId": -3,
+                    "playerName": "defender",
+                    "villageId": 2,
+                    "villageName": "",
+                    "originalTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    },
+                    "lostTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    }
+                }
+            }, {
+                "name": "troops\/supporter",
+                "body": {
+                    "tribeId": 3,
+                    "playerId": -4,
+                    "playerName": "defender",
+                    "villageId": 3,
+                    "villageName": "",
+                    "originalTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    },
+                    "lostTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    }
+                }
+            }, {
+                "name": "troops\/supporter",
+                "body": {
+                    "tribeId": 4,
+                    "playerId": -5,
+                    "playerName": "defender",
+                    "villageId": 4,
+                    "villageName": "",
+                    "originalTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    },
+                    "lostTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    }
+                }
+            }, {
+                "name": "troops\/tribeSum",
+                "body": {
+                    "tribeId": 1,
+                    "playerId": -1,
+                    "playerName": "",
+                    "villageId": -1,
+                    "villageName": "",
+                    "originalTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    },
+                    "lostTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    }
+                }
+            }, {
+                "name": "troops\/tribeSum",
+                "body": {
+                    "tribeId": 2,
+                    "playerId": -1,
+                    "playerName": "",
+                    "villageId": -1,
+                    "villageName": "",
+                    "originalTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    },
+                    "lostTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    }
+                }
+            }, {
+                "name": "troops\/tribeSum",
+                "body": {
+                    "tribeId": 3,
+                    "playerId": -1,
+                    "playerName": "",
+                    "villageId": -1,
+                    "villageName": "",
+                    "originalTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    },
+                    "lostTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    }
+                }
+            }, {
+                "name": "troops\/tribeSum",
+                "body": {
+                    "tribeId": 4,
+                    "playerId": -1,
+                    "playerName": "",
+                    "villageId": -1,
+                    "villageName": "",
+                    "originalTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    },
+                    "lostTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    }
+                }
+            }, {
+                "name": "troops\/tribeSum",
+                "body": {
+                    "tribeId": 5,
+                    "playerId": -1,
+                    "playerName": "",
+                    "villageId": -1,
+                    "villageName": "",
+                    "originalTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    },
+                    "lostTroops": {
+                        "1": 1,
+                        "2": 0,
+                        "3": 0,
+                        "4": 0,
+                        "5": 0,
+                        "6": 0,
+                        "7": 0,
+                        "8": 0,
+                        "9": 0,
+                        "10": 0,
+                        "11": 0
+                    }
+                }
+            }]
+    }
+}

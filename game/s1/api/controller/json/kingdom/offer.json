@@ -1,0 +1,75 @@
+{
+    "cache": [{
+            "name": "Kingdom:789",
+            "data": {
+                "groupId": "789",
+                "members": [{
+                        "playerId": 8631,
+                        "name": "phoomin009",
+                        "isKing": true,
+                        "isDuke": false,
+                        "kingdomId": "789",
+                        "population": "20",
+                        "victoryPoints": "5",
+                        "villages": 1
+                    }],
+                "tag": "$$$",
+                "description": {
+                    "groupId": "789",
+                    "publicDescription": null,
+                    "internalDescription": null
+                },
+                "diplomacy": {
+                    "treaties": [],
+                    "ownOffers": [{
+                            "id": "1236",
+                            "kingdomId": "789",
+                            "otherKingdomId": "753",
+                            "type": "1",
+                            "status": "0",
+                            "offered": "1493943892",
+                            "otherKingdomTag": "samir"
+                        }],
+                    "foreignOffers": []
+                }
+            }
+        }, {
+            "name": "Kingdom:753",
+            "data": {
+                "groupId": "753",
+                "members": [{
+                        "playerId": 8066,
+                        "name": "samir",
+                        "isKing": true,
+                        "isDuke": false,
+                        "kingdomId": "753",
+                        "population": "13",
+                        "victoryPoints": "0",
+                        "villages": 1
+                    }],
+                "tag": "samir",
+                "description": {
+                    "groupId": "753",
+                    "publicDescription": null,
+                    "internalDescription": null
+                },
+                "diplomacy": {
+                    "treaties": [],
+                    "ownOffers": [],
+                    "foreignOffers": [{
+                            "id": "1235",
+                            "kingdomId": "753",
+                            "otherKingdomId": "789",
+                            "type": "1",
+                            "status": "1",
+                            "offered": "1493943892",
+                            "otherKingdomTag": "$$$"
+                        }]
+                }
+            }
+        }],
+    "ignoreSerial": 2,
+    "time": 1493943892675,
+    "serialNo": 961,
+    "response": []
+}

@@ -1,0 +1,316 @@
+#about .links-block .left,
+#about .links-block .right,
+#more-games .game-block,
+#community .description
+{
+    text-align: right !important;
+}
+
+#container > .header .top-nav-wrapper *,
+.accordion-content * {
+    direction: ltr !important;
+}
+
+#more-games .game-block .content-block {
+    float: right !important;
+    margin-right: auto;
+    margin-left: 14px;
+}
+
+#pop-up-window-wrap .close-btn {
+    float: left !important;
+}
+
+.slide-control span.slide-btn:first-of-type {
+    margin-left: 0px !important;;
+    margin-right: 0px !important;;
+}
+
+.slide-control span.slide-btn {
+    margin-left: 0px !important;
+    margin-right: 8px !important;
+}
+
+#main .main-wrapper .bottom-wrapper .playnow {
+    left: auto;
+    right: 195px !important;
+}
+
+#main .main-wrapper .bottom-wrapper .playnow .open-beta{
+    left: auto;
+    right: 151px !important;
+}
+
+#main .main-wrapper .bottom-wrapper .mobile-button {
+    left: auto;
+    right: 284px !important;
+}
+
+#community .help-center-wrap {
+    float: right !important;
+    text-align: right !important;
+}
+
+#community .social-wrap {
+    float: left !important;
+    text-align: right !important;
+}
+
+#community .help-center-wrap .help-sub-block .help-ico {
+    left: auto;
+    right: 12px;
+}
+
+#community .help-center-wrap .help-sub-block {
+    margin-left: auto;
+    margin-right: 32px;
+    padding-left: 10px;
+    padding-right: 64px;
+}
+
+#community .help-center-wrap .vertical-line {
+    left: auto;
+    right: 13px;
+}
+
+#community .help-center-wrap .help-hr-line {
+    left: auto;
+    right: 14px;
+}
+
+#community .help-center-wrap .help-block-main .help-ico {
+    left: auto;
+    right: 8px;
+}
+
+#community .help-center-wrap .help-block-main .help-ico.hover {
+    left: auto;
+    right: 7px;
+}
+
+#community .help-center-wrap .help-block-main .help-center-text {
+    padding-left: 0px;
+    padding-right: 96px;
+}
+
+#community .help-center-wrap .help-block-main .help-center-text .help-description {
+    padding-right: 0px;
+    padding-left: 20px;
+}
+
+#community .social-wrap .social-block-main .social-text {
+    margin-left: 0px;
+    margin-right: 68px;
+}
+
+#community .social-wrap .social-block-main .social-ico {
+    left: auto;
+    right: 15px;
+}
+
+#container .mobile-nav-wrapper .mobile-menu .menu-item {
+    list-style-type: none;
+}
+
+#pop-up-window-wrap #tribe-pop-up .info-text .info-list {
+    margin-left: 0px;
+    margin-right: 107px;
+}
+
+#pop-up-window-wrap #tribe-pop-up .info-text .info-more .info-list {
+    margin-right: 51px;
+    margin-left: 48px;
+}
+
+#pop-up-window-wrap #tribe-pop-up .info-text .info-more .info-header {
+    text-align: right;
+    margin-left: 48px;
+    margin-right: 51px;
+}
+
+#pop-up-window-wrap #tribe-pop-up .info-text.active .green-button-wrapper {
+    margin-top: 19px;
+}
+
+#pop-up-window-wrap #tribe-pop-up .info-text.active {
+    margin-top: 117px;
+}
+
+#pop-up-window-wrap .pop-up-small#game-world .pop-up-window-content .worlds-wrap .world-block > div {
+    float: right !important;
+}
+
+#pop-up-window-wrap .pop-up-small#game-world .pop-up-window-content .worlds-wrap .world-block .server-data .server-age {
+    float: left !important;
+}
+
+#pop-up-window-wrap .pop-up-small#game-world .pop-up-window-content .worlds-wrap .world-block .world-name {
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-right: 7px;
+}
+
+@media screen and (max-width: 500px) {
+#main .main-wrapper .bottom-wrapper .playnow {
+    right: 0px !important;
+}
+
+#main .main-wrapper .bottom-wrapper .playnow .open-beta {
+    right: 84px !important;
+}
+
+#container .mobile-nav-wrapper .mobile-menu .menu-item a {
+    padding-left: 0px;
+    padding-right: 50px;
+}
+
+#container .mobile-nav-wrapper .mobile-menu .menu-item a img {
+    left: auto;
+    right: 5px;
+}
+
+#container #content-wrapper .window-wrapper#community .content-pop-up .help-center-wrap .help-block-main .help-center-text {
+    padding-left: 0px !important;
+}
+#community .help-center-wrap .help-block-main .help-center-text {
+    padding-right: 60px !important;
+}
+#container #content-wrapper .window-wrapper#community .content-pop-up .help-center-wrap .help-block-main .help-center-text .help-description-mobile {
+    padding-right: 0px !important;
+}
+#container #content-wrapper .window-wrapper#community .content-pop-up .help-center-wrap .vertical-line {
+    left: auto;
+    right: 15px !important;
+}
+#community .help-center-wrap .help-sub-block {
+    padding-right: 48px;
+}
+#container #content-wrapper .window-wrapper#about .content-pop-up .links-block .left {
+    margin-left: 0px;
+    margin-right: 59px;
+}
+
+#container #content-wrapper .window-wrapper#about .content-pop-up .links-block .right {
+    margin-left: 0px;
+    margin-right: 59px;
+}
+#container .mobile-nav-wrapper .mobile-menu .menu-item:last-child {
+    height: 60px;
+}
+}
+
+@media screen and (max-width: 800px) {
+#main .main-wrapper .bottom-wrapper .playnow {
+    right: 0px !important;
+}
+#main .main-wrapper .bottom-wrapper .playnow .open-beta {
+    right: 84px !important;
+}
+
+#container .mobile-nav-wrapper .mobile-menu .menu-item a {
+    padding-left: 0px;
+    padding-right: 50px;
+}
+
+#container .mobile-nav-wrapper .mobile-menu .menu-item a img {
+    left: auto;
+    right: 5px;
+}
+#container .mobile-nav-wrapper .mobile-menu .menu-item a {
+    padding-left: 0px;
+    padding-right: 50px;
+}
+#container .mobile-nav-wrapper .mobile-menu .menu-item a img {
+    left: auto;
+    right: 5px;
+}
+#container #content-wrapper .window-wrapper#community .social-block-main .social-text {
+    margin-right: 66px;
+}
+}
+
+.mobile #container .header .control-block .nav-button.language .language-box.accordions-wrapper {
+    direction: ltr !important;
+}
+
+.mobile #container > .header .control-block .nav-button.language .language-box {
+    right: -5px;
+    left: auto;
+    top: 50px;
+}
+
+.mobile #container .header .top-line .mobile-header .header-btn.burger {
+    float: right;
+    right: 8px;
+    -webkit-transition: right 0.5s linear;
+    -moz-transition: right 0.5s linear;
+    -o-transition: right 0.5s linear;
+    -ms-transition: right 0.5s linear;
+    transition: right 0.5s linear;
+    -webkit-transform: translatez(0);
+    -moz-transform: translatez(0);
+    -ms-transform: translatez(0);
+    -o-transform: translatez(0);
+    transform: translatez(0);
+}
+
+.mobile #container .header .top-line .mobile-header .header-btn.burger .burger-icon {
+    display: block;
+    top: 7px;
+    position: relative;
+    margin: auto;
+}
+
+.mobile #container .header .top-line .mobile-header.active .header-btn.burger {
+    right: 270px;
+}
+
+.mobile #container .header .top-line .mobile-header.active .header-btn.burger .burger-icon {
+    display: none;
+}
+
+.mobile #container .header .control-block {
+    right: -260px;
+    width: 261px;
+    position: absolute;
+    top: -50px;
+    -webkit-transition: right 0.5s linear;
+    -moz-transition: right 0.5s linear;
+    -o-transition: right 0.5s linear;
+    -ms-transition: right 0.5s linear;
+    transition: right 0.5s linear;
+    -webkit-transform: translatez(0);
+    -moz-transform: translatez(0);
+    -ms-transform: translatez(0);
+    -o-transform: translatez(0);
+    transform: translatez(0);
+}
+
+.mobile #container .header .control-block.swiped {
+    right: 0px;
+}
+
+.mobile #container .mobile-nav-wrapper {
+    display: block;
+    width: 264px;
+    top: 50px;
+    z-index: 31;
+    right: -260px;
+    background-color: #464646;
+    -webkit-transition: right 0.5s linear;
+    -moz-transition: right 0.5s linear;
+    -o-transition: right 0.5s linear;
+    -ms-transition: right 0.5s linear;
+    transition: right 0.5s linear;
+    -webkit-transform: translatez(0);
+    -moz-transform: translatez(0);
+    -ms-transform: translatez(0);
+    -o-transform: translatez(0);
+    transform: translatez(0);
+    bottom: 0;
+}
+
+.mobile #container .mobile-nav-wrapper.swiped {
+    right: 0px;
+}

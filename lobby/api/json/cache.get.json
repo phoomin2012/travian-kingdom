@@ -1,0 +1,204 @@
+{
+    "cache": [{
+            "name": "Player:13953",
+            "data": {
+                "playerId": "13953",
+                "avatarName": "phoomin009_COM",
+                "userAccountIdentifier": "52219",
+                "isInstantAccount": "0",
+                "isActivated": "1"
+            }
+        }, {
+            "name": "Session:63da871052d28b5c047b",
+            "data": {
+                "sessionId": "63da871052d28b5c047b",
+                "type": 0,
+                "country": "us"
+            }
+        }, {
+            "name": "Feed:us:0",
+            "data": {
+                "entries": [{
+                        "id": "58ecd6e7264b5",
+                        "title": "Easter contest - Day 2",
+                        "dateCreated": 1491920100,
+                        "content": "<a href=\"http:\/\/forum.kingdoms.com\/thread\/13663-easter-contest-day-2\/#post92356\" target=\"_blank\" style=\"font-size: 12px;\"><img src=\"http:\/\/blog.kingdoms.com\/wp-content\/uploads\/2017\/04\/Easter-eggs-blank.png\" align=\"middle\" width=\"80%\"><\/a><br>Dear players,<br><span style=\"font-family: tahoma, arial, helvetica, sans-serif;\"><span style=\"font-size: 12px;\">the second Easter contest has just started, don't miss out on your chance to win cool prizes!&nbsp;<\/span><\/span><br><br><span style=\"font-family: tahoma, arial, helvetica, sans-serif;\"><a href=\"http:\/\/forum.kingdoms.com\/thread\/13663-easter-contest-day-2\/#post92356\" target=\"_blank\">Find out all the details on our forums.<\/a><\/span>"
+                    }, {
+                        "id": "58eb538291b96",
+                        "title": "Easter contest",
+                        "dateCreated": 1491820920,
+                        "content": "<a href=\"https:\/\/www.facebook.com\/TravianKingdoms\" target=\"_blank\" style=\"font-size: 12px;\"><img src=\"http:\/\/blog.kingdoms.com\/wp-content\/uploads\/2017\/04\/travian-kingdoms_easter_contest_2017.jpg\" align=\"middle\" width=\"95%\"><\/a><br>Dear players,<br><span style=\"font-family: tahoma, arial, helvetica, sans-serif;\"><span style=\"font-size: 12px;\">don't miss out on your chance to win cool prizes!&nbsp;<\/span><\/span><br><br><span style=\"font-family: tahoma, arial, helvetica, sans-serif;\"><a href=\"http:\/\/forum.kingdoms.com\/thread\/13635-easter-is-around-the-corner-win-cool-prizes\/#post91667\" target=\"_blank\">Find out all the details on our forums.<\/a><\/span>"
+                    }, {
+                        "id": "58e7488d4bbc3",
+                        "title": "Become a better offensive player!",
+                        "dateCreated": 1491562800,
+                        "content": "<a href=\"http:\/\/blog.kingdoms.com\/2017\/04\/01\/become-better-off-player\/\" target=\"_blank\" style=\"font-size: 12px;\"><img src=\"http:\/\/blog.kingdoms.com\/wp-content\/uploads\/2017\/04\/Troops-ready-for-battle-lobby.jpg\" align=\"middle\" width=\"95%\"><\/a>\n<br><br>Dear players, don't miss out on your chance to improve your skills and crush your enemies by checking out the new guide for off players on our blog.\n\n<a href=\"http:\/\/blog.kingdoms.com\/2017\/04\/01\/become-better-off-player\/\" target=\"_blank\">More information...<\/a>"
+                    }, {
+                        "id": "58e51b9ee9737",
+                        "title": "COMx3 has just started - Join Now!",
+                        "dateCreated": 1491413400,
+                        "content": "<a href=\"http:\/\/lobby.kingdoms.com\/#\/newGameworld\" _blank\"=\"\" style=\"font-family: tahoma, arial, helvetica, sans-serif; font-size: 12px;\"><img src=\"http:\/\/blog.kingdoms.com\/wp-content\/uploads\/2016\/12\/English-1.jpg\" align=\"middle\" width=\"95%\"><\/a><br><br><font face=\"tahoma, arial, helvetica, sans-serif\"><span style=\"font-size: 12px;\"><b>The Travian Kingdoms international speed game world COMx3 has just started!<\/b>&nbsp;<\/span><\/font><br><br><font face=\"tahoma, arial, helvetica, sans-serif\"><span style=\"font-size: 12px;\">A lot of treasures are waiting for you to grab them. Join the fight now!<\/span><\/font><br><br><font face=\"tahoma, arial, helvetica, sans-serif\"><span style=\"font-size: 12px;\">A lot of fun and glorious battles await you!<\/span><\/font><br><br><a href=\"http:\/\/lobby.kingdoms.com\/#\/newGameworld\">Start playing now!<\/a>"
+                    }, {
+                        "id": "58e4dcf57482d",
+                        "title": "Take part in our WinonWednesday Quiz!",
+                        "dateCreated": 1491393769,
+                        "content": "<a href=\"https:\/\/www.facebook.com\/TravianKingdoms\" target=\"_blank\" style=\"font-size: 12px;\"><img src=\"http:\/\/blog.kingdoms.com\/wp-content\/uploads\/2017\/04\/winonwednesday-cw14-lobby.jpg\" align=\"middle\" width=\"95%\"><\/a><br><br><span style=\"font-family: tahoma, arial, helvetica, sans-serif;\"><span style=\"font-size: 12px;\"><b>Wednesday special!<\/b><br> We have just started a new round of our Wednesday special on Facebook! Take part and be in with a chance to win 50 Gold for Travian Kingdoms!<br> To take part in this prize draw you need a Facebook account.<\/span><br><br>\n<a href=\"https:\/\/www.facebook.com\/TravianKingdoms\" target=\"_blank\">Find out all the details in our Facebook post.<\/a>"
+                    }]
+            }
+        }, {
+            "name": "Collection:Gold:us",
+            "data": {
+                "cache": [],
+                "operation": 1
+            }
+        }, {
+            "name": "Collection:Sitter:1",
+            "data": {
+                "cache": [{
+                        "name": "Sitter:708059",
+                        "data": {
+                            "id": "708059",
+                            "sittedByUserAccountIdentifier": "52219",
+                            "avatarIdentifier": "3502567",
+                            "avatarName": "\u0394zura\u03a3\u03b2",
+                            "consumersId": "540",
+                            "type": "1",
+                            "rights": {
+                                "1": true,
+                                "2": true,
+                                "3": true,
+                                "4": true
+                            },
+                            "ownerAccountName": "\u0394zura\u03a3\u03b2#EN",
+                            "sittedByAccountName": "phoomin009_COM",
+                            "worldName": "COM4",
+                            "lastClick": "1490839923",
+                            "spawnedOnMap": "1490326997"
+                        }
+                    }],
+                "operation": 1
+            }
+        }, {
+            "name": "Collection:Sitter:4",
+            "data": {
+                "cache": [],
+                "operation": 1
+            }
+        }, {
+            "name": "GameWorld:528",
+            "data": {
+                "consumersId": "528",
+                "identifier": "travian-ks-en-com3",
+                "country": "en",
+                "region": "international",
+                "status": "2",
+                "gameId": "30",
+                "applicationId": "travian-ks",
+                "applicationCountryId": "en",
+                "applicationInstanceId": "com3",
+                "worldName": "COM3",
+                "worldStartTime": "1487595600",
+                "playersRegistered": "2688",
+                "playersActive": "1838",
+                "playersOnline": "271",
+                "worldCapacity": "0",
+                "recommended": "",
+                "blacklisted": "0",
+                "baseUrl": "http:\/\/com3.kingdoms.com",
+                "daysSinceStart": 51,
+                "speedGame": "1",
+                "speedTroops": "1",
+                "specialRules": ["none"],
+                "canTransferMoney": "1",
+                "tribes": {
+                    "1": "873",
+                    "2": "537",
+                    "3": "1278"
+                }
+            }
+        }, {
+            "name": "GameWorld:527",
+            "data": {
+                "consumersId": "527",
+                "identifier": "travian-ks-en-com2",
+                "country": "en",
+                "region": "international",
+                "status": "2",
+                "gameId": "30",
+                "applicationId": "travian-ks",
+                "applicationCountryId": "en",
+                "applicationInstanceId": "com2",
+                "worldName": "COM2",
+                "worldStartTime": "1485781200",
+                "playersRegistered": "1203",
+                "playersActive": "887",
+                "playersOnline": "145",
+                "worldCapacity": "0",
+                "recommended": "",
+                "blacklisted": "0",
+                "baseUrl": "http:\/\/com2.kingdoms.com",
+                "daysSinceStart": 72,
+                "speedGame": "1",
+                "speedTroops": "1",
+                "specialRules": ["none"],
+                "canTransferMoney": "1",
+                "tribes": {
+                    "1": "395",
+                    "2": "221",
+                    "3": "587"
+                }
+            }
+        }, {
+            "name": "GameWorld:541",
+            "data": {
+                "consumersId": "541",
+                "identifier": "travian-ks-en-comx3",
+                "country": "en",
+                "region": "international",
+                "status": "2",
+                "gameId": "30",
+                "applicationId": "travian-ks",
+                "applicationCountryId": "en",
+                "applicationInstanceId": "comx3",
+                "worldName": "COMX3",
+                "worldStartTime": "1491393600",
+                "playersRegistered": "3932",
+                "playersActive": "3304",
+                "playersOnline": "562",
+                "worldCapacity": "0",
+                "recommended": "",
+                "blacklisted": "0",
+                "baseUrl": "http:\/\/comx3.kingdoms.com",
+                "daysSinceStart": 7,
+                "speedGame": "3",
+                "speedTroops": "2",
+                "specialRules": ["none"],
+                "canTransferMoney": "1",
+                "tribes": {
+                    "1": "1367",
+                    "2": "878",
+                    "3": "1687"
+                }
+            }
+        }, {
+            "name": "UserAccountImage:52219",
+            "data": {
+                "avatarIdentifier": "3537093",
+                "userAccountIdentifier": "52219",
+                "gender": "0",
+                "hairColor": "1",
+                "face": {
+                    "beard": "4",
+                    "ear": "0",
+                    "eye": "8",
+                    "eyebrow": "7",
+                    "hair": "5",
+                    "mouth": "3",
+                    "nose": "2"
+                }
+            }
+        }],
+    "time": "1492049197",
+    "serialNo": 19290,
+    "response": []
+}

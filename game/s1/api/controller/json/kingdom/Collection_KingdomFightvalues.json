@@ -1,0 +1,97 @@
+{
+    "cache": [{
+            "name": "Collection:KingdomFightvalues:789",
+            "data": {
+                "cache": [{
+                        "name": "KingdomFightvalues:14860",
+                        "data": {
+                            "statsId": "14860",
+                            "groupId": "789",
+                            "type": "1",
+                            "d1": "0",
+                            "d2": "0",
+                            "d3": "0",
+                            "d4": "5130",
+                            "d5": "170",
+                            "d6": "0",
+                            "d7": "0"
+                        }
+                    }, {
+                        "name": "KingdomFightvalues:14861",
+                        "data": {
+                            "statsId": "14861",
+                            "groupId": "789",
+                            "type": "2",
+                            "d1": "0",
+                            "d2": "0",
+                            "d3": "0",
+                            "d4": "6490",
+                            "d5": "275",
+                            "d6": "0",
+                            "d7": "0"
+                        }
+                    }, {
+                        "name": "KingdomFightvalues:14866",
+                        "data": {
+                            "statsId": "14866",
+                            "groupId": "789",
+                            "type": "4",
+                            "d1": "0",
+                            "d2": "0",
+                            "d3": "0",
+                            "d4": "1",
+                            "d5": "1",
+                            "d6": "0",
+                            "d7": "0"
+                        }
+                    }, {
+                        "name": "KingdomFightvalues:15126",
+                        "data": {
+                            "statsId": "15126",
+                            "groupId": "789",
+                            "type": "3",
+                            "d1": "0",
+                            "d2": "0",
+                            "d3": "0",
+                            "d4": "0",
+                            "d5": "65",
+                            "d6": "0",
+                            "d7": "0"
+                        }
+                    }, {
+                        "name": "KingdomFightvalues:15154",
+                        "data": {
+                            "statsId": "15154",
+                            "groupId": "789",
+                            "type": "4",
+                            "d1": "0",
+                            "d2": "0",
+                            "d3": "0",
+                            "d4": "0",
+                            "d5": "1",
+                            "d6": "0",
+                            "d7": "0"
+                        }
+                    }, {
+                        "name": "KingdomFightvalues:15155",
+                        "data": {
+                            "statsId": "15155",
+                            "groupId": "789",
+                            "type": "3",
+                            "d1": "0",
+                            "d2": "0",
+                            "d3": "0",
+                            "d4": "0",
+                            "d5": "65",
+                            "d6": "0",
+                            "d7": "0"
+                        }
+                    }],
+                "operation": 1
+            }
+        }],
+    "ignoreSerial": 0,
+    "time": 1493944021767,
+    "serialNo": 978,
+    "response": []
+}

@@ -1,0 +1,113 @@
+/*************************************************************** T5 COLOR SCHEME see: http://chir.ag/projects/name-that-color ************************************************************* */
+/*************************************************************** GENERAL VARIABLES ************************************************************* */
+/********** DIRECTIONS ********* */
+/********** TEXT ********* */
+/********** MODAL ********* */
+/*************************************************************** COLORS ************************************************************* */
+/********** TEXT ********* */
+/********** SHADOWS ********* */
+/********** HUD - HEADER ********* */
+/********** BUTTON ********* */
+/********** FILTER ********* */
+/********** FORMS ********* */
+/********** TABLE ********* */
+/********** TOOLTIP ********* */
+/********** INFOFIELD ********* */
+/********** MAP ********* */
+/********** FEEDBACK / RESULTS ********* */
+/*************************************************************** FUNCTIONAL MIXINS ************************************************************* */
+/********** TEXT ********* */
+/********** IMAGES ********* */
+/********** FRAMES ********* */
+/********** COLOR ********* */
+/********** POSITIONING ********* */
+/********** DIRECTIONS (RTL) ********* */
+/********** SPRITES ********* */
+/********** ANIMATION ********* */
+/*************************************************************** LISTS ************************************************************* */
+/*************************************************************** PREPARED STYLES ************************************************************* */
+/** Simple arrow shape */
+/* Styling for arrow shapes */
+/* Stripes in a defined color, with transparent gaps */
+/* Dummy icon mixin */
+.modal.cheatSheet .modalContent { width: 1000px; }
+.modal.cheatSheet .modalContent .windowOverlay .inWindowPopup .inWindowPopupContent { width: 968px; }
+.modal.cheatSheet .expandableContent { margin-top: 20px; }
+.modal.cheatSheet .expandableContent:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+.modal.cheatSheet .expandableContent:first-child { margin-top: 0; }
+.modal.cheatSheet .expandableContent .collapserContent { padding: 20px 20px 0; }
+.modal.cheatSheet h5 { font-size: 1.15385rem; }
+.modal.cheatSheet .buttonExample { margin-bottom: 20px; }
+.modal.cheatSheet .buttonExample:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+.modal.cheatSheet .buttonExample .mainLayoutMenuButton { float: right; margin-left: 25px; }
+.modal.cheatSheet .colors { font-size: 1rem; }
+.modal.cheatSheet .colors .colorBlock { width: 23%; margin-left: 1%; margin-bottom: 25px; display: inline-block; vertical-align: top; }
+.modal.cheatSheet .colors .colorBlock .color { margin-bottom: 5px; }
+.modal.cheatSheet .colors .colorBlock .color:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+.modal.cheatSheet .colors .colorBlock .color .example { float: right; border: 1px solid black; width: 35%; height: 30px; margin-left: 5px; }
+.modal.cheatSheet .colors .colorBlock .color .name { float: right; line-height: 15px; display: inline-block; }
+.modal.cheatSheet .colors .colorBlock .color .name .color { font-size: 0.92308rem; }
+.modal.cheatSheet .buttons h5 { margin-bottom: 10px; }
+.modal.cheatSheet .buttons button { margin-bottom: 20px; }
+.modal.cheatSheet .modules h5 { margin: 20px 0 5px; }
+.modal.cheatSheet .modules h5:first-child { margin-top: 0; }
+.modal.cheatSheet .modules .tableExample { width: 300px; float: right; margin-left: 20px; }
+.modal.cheatSheet .modules .tableExample:last-child { margin-left: 0; }
+.modal.cheatSheet .modules .tableExample .fixedTableHeader { width: 300px; height: 100px; display: block; }
+.modal.cheatSheet .modules .tableExample .fixedTableHeader tr th, .modal.cheatSheet .modules .tableExample .fixedTableHeader tr td { width: 100px; }
+.modal.cheatSheet .modules .element { margin-top: 20px; }
+.modal.cheatSheet .modules .element:first-child { margin-top: 0; }
+.modal.cheatSheet .modules i.unit_gold_small_illu { margin-top: 6px; }
+.modal.cheatSheet .modules .filterBar { margin-bottom: 20px; }
+.modal.cheatSheet .modules .paginated { width: 300px; }
+.modal.cheatSheet .modules .contentBoxes:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+.modal.cheatSheet .modules .contentBoxes .contentBox { width: 300px; float: right; margin-left: 20px; }
+.modal.cheatSheet .modules .contentBoxes .contentBox:last-child { margin-left: 0; }
+.modal.cheatSheet .modules .contentBoxes .contentBox .scrollContentOuterWrapper { height: 100px; }
+.modal.cheatSheet .modules .progressbar { margin: 20px 0; }
+.modal.cheatSheet .modules .progressBarContainer { position: relative; width: 100px; }
+.modal.cheatSheet .modules h6 { margin-bottom: 20px; }
+.modal.cheatSheet .modules .clickableContainer { width: 80px; height: 80px; margin-left: 10px; float: right; }
+.modal.cheatSheet .modules .optionContainer, .modal.cheatSheet .modules .optionContainer .clickableContainer { clear: both; margin-top: 10px; z-index: 1; }
+.modal.cheatSheet .modules .contentContainer { float: right; margin-top: -98px; right: 108px; width: 206px; height: 206px; padding-top: 10px; padding-right: 67px; box-sizing: border-box; border: 1px solid #9A9389; }
+.modal.cheatSheet .modules .example { margin-bottom: 20px; }
+.modal.cheatSheet .modules .example:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+.modal.cheatSheet .modules .iconButtons { float: right; margin-left: 20px; }
+.modal.cheatSheet .modules .iconButtons:last-child { margin-left: 0; }
+.modal.cheatSheet .modules .iconButtons:nth-of-type(2):after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+.modal.cheatSheet .modules .iconButtons .iconButton { margin-top: 10px; }
+.modal.cheatSheet .modules .iconButtons .iconButton:first-of-type { margin-top: 0; }
+.modal.cheatSheet .modules .iconButtons .iconButton .symbol_plus_tiny_flat_black, .modal.cheatSheet .modules .iconButtons .iconButton .symbol_minus_tiny_flat_black { margin: 6px 7px; }
+.modal.cheatSheet .modules .truncateExamples .contentBox { margin-bottom: 5px; }
+.modal.cheatSheet .modules .truncateExamples .contentBox.smaller { width: 300px; }
+.modal.cheatSheet .modules .truncateExamples .contentBox.smaller .truncated { max-width: 300px; }
+.modal.cheatSheet .modules .truncateExamples table { width: 430px; }
+.modal.cheatSheet .modules .truncateExamples table .truncated { max-width: 250px; }
+.modal.cheatSheet .modules .formContainer { float: right; width: 300px; margin-left: 20px; }
+.modal.cheatSheet .modules .formContainer:last-child { margin-left: 0; }
+.modal.cheatSheet .modules .entityBox { margin-top: 10px; }
+.modal.cheatSheet .modules .entityBox:first-of-type { margin-top: 0; }
+.modal.cheatSheet .styles h5 { margin: 10px 0; }
+.modal.cheatSheet .styles h5:first-child { margin-top: 0; }
+.modal.cheatSheet .styles .example:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+.modal.cheatSheet .styles .example .separate { width: 44%; float: right; }
+.modal.cheatSheet .styles .example .separate .headerWrapper { text-align: center; }
+.modal.cheatSheet .styles .example .separate h6 { margin-bottom: 10px; margin-top: 20px; }
+.modal.cheatSheet .styles .example .separate h6:first-of-type { margin-top: 0; }
+.modal.cheatSheet .styles .example .inBox { width: 54%; float: left; }
+.modal.cheatSheet .styles .example .inBox .contentBox { margin-bottom: 20px; }
+.modal.cheatSheet .styles .example.example3 .inBox .contentBox { margin-top: 19px; }
+.modal.cheatSheet .styles .example + .horizontalLine { margin-bottom: 20px; }
+.modal.cheatSheet .styles .lineExamples { background-color: #F1F0EE; padding: 20px; }
+.modal.cheatSheet .styles .lineExamples:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+.modal.cheatSheet .styles .lineExamples .lineExample { width: 25%; float: right; margin-left: 5%; }
+.modal.cheatSheet .styles .lineExamples .lineExample .verticalLine { margin-right: 20px; height: 45px; }
+.modal.cheatSheet .styles .contentBoxes:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+.modal.cheatSheet .styles .contentBoxes .example { width: 300px; float: right; margin-left: 20px; }
+.modal.cheatSheet .styles .contentBoxes .example:nth-child(n + 4) { margin-top: 20px; }
+.modal.cheatSheet .styles .arrowWrapper { position: relative; }
+.modal.cheatSheet .icons table td { background-color: #e5e5e5; }
+.modal.cheatSheet .icons table .size { width: 80px; text-align: center; }
+.modal.cheatSheet .icons table .icon { width: 200px; text-align: center; }
+
+.entityBox .cheatItem { background-size: 100%; background-image: "url('x.gif')"; }

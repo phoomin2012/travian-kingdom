@@ -1,0 +1,15 @@
+{
+    "time": 1493943948229,
+    "serialNo": 966,
+    "response": {
+        "top10Attacker": [],
+        "top10Defender": [{
+                "rank": 0,
+                "points": 1,
+                "playerId": 8631,
+                "name": "phoomin009",
+                "kingdomRole": "1"
+            }],
+        "top10Climber": []
+    }
+}

@@ -1,0 +1,688 @@
+{
+    "cache": [{
+            "name": "Collection:Village:kingdom",
+            "data": {
+                "cache": [{
+                        "name": "Village:535511088",
+                        "data": {
+                            "villageId": "535511088",
+                            "playerId": "6677",
+                            "name": "00.Heineken",
+                            "tribeId": "3",
+                            "belongsToKing": "8631",
+                            "belongsToKingdom": "789",
+                            "type": "1",
+                            "population": "196",
+                            "coordinates": {
+                                "x": "48",
+                                "y": "-42"
+                            },
+                            "isMainVillage": true,
+                            "isTown": false,
+                            "treasuresUsable": "0",
+                            "treasures": "0",
+                            "allowTributeCollection": "1",
+                            "protectionGranted": "1",
+                            "tributeCollectorPlayerId": 8631,
+                            "realTributePercent": 0.2,
+                            "production": {
+                                "1": "203",
+                                "2": "240",
+                                "3": "186",
+                                "4": "14"
+                            },
+                            "storage": {
+                                "1": 2045,
+                                "2": 1886,
+                                "3": 2659,
+                                "4": 4750
+                            },
+                            "treasury": {
+                                "1": 0,
+                                "2": 0,
+                                "3": 0,
+                                "4": 0
+                            },
+                            "storageCapacity": {
+                                "1": "6300",
+                                "2": "6300",
+                                "3": "6300",
+                                "4": "5000"
+                            },
+                            "bonusCulturePointProduction": 0.00012152777777778,
+                            "tributesRequiredToFetch": 1260,
+                            "tributes": {
+                                "1": 8,
+                                "2": 10,
+                                "3": 8
+                            },
+                            "tributesCapacity": "6300",
+                            "tributeTreasures": 4,
+                            "tributeProduction": 125,
+                            "tributeProductionDetail": {
+                                "1": 40,
+                                "2": 48,
+                                "3": 37,
+                                "4": 0
+                            },
+                            "tributeTime": "0",
+                            "estimatedWarehouseLevel": 7
+                        }
+                    }, {
+                        "name": "Village:535412785",
+                        "data": {
+                            "villageId": "535412785",
+                            "playerId": "8117",
+                            "name": "Maxi",
+                            "tribeId": "1",
+                            "belongsToKing": "8631",
+                            "belongsToKingdom": "789",
+                            "type": "1",
+                            "population": "158",
+                            "coordinates": {
+                                "x": "49",
+                                "y": "-45"
+                            },
+                            "isMainVillage": true,
+                            "isTown": false,
+                            "treasuresUsable": "0",
+                            "treasures": "0",
+                            "allowTributeCollection": "1",
+                            "protectionGranted": "1",
+                            "tributeCollectorPlayerId": 8631,
+                            "realTributePercent": 0.2,
+                            "production": {
+                                "1": "110",
+                                "2": "124",
+                                "3": "114",
+                                "4": "-59"
+                            },
+                            "storage": {
+                                "1": 527,
+                                "2": 1393,
+                                "3": 1276,
+                                "4": 46
+                            },
+                            "treasury": {
+                                "1": 0,
+                                "2": 0,
+                                "3": 0,
+                                "4": 0
+                            },
+                            "storageCapacity": {
+                                "1": "6300",
+                                "2": "6300",
+                                "3": "6300",
+                                "4": "6300"
+                            },
+                            "bonusCulturePointProduction": 9.9537037037037e-5,
+                            "tributesRequiredToFetch": 1260,
+                            "tributes": {
+                                "1": 7,
+                                "2": 8,
+                                "3": 8
+                            },
+                            "tributesCapacity": "6300",
+                            "tributeTreasures": 14,
+                            "tributeProduction": 68,
+                            "tributeProductionDetail": {
+                                "1": 22,
+                                "2": 24,
+                                "3": 22,
+                                "4": 0
+                            },
+                            "tributeTime": "0",
+                            "estimatedWarehouseLevel": 7
+                        }
+                    }, {
+                        "name": "Village:-17827",
+                        "data": {
+                            "villageId": "-17827",
+                            "playerId": "-2",
+                            "name": "NPC village",
+                            "tribeId": "2",
+                            "belongsToKing": "8631",
+                            "belongsToKingdom": "789",
+                            "type": "6",
+                            "population": "92",
+                            "coordinates": {
+                                "x": "47",
+                                "y": "-43"
+                            },
+                            "isMainVillage": false,
+                            "isTown": false,
+                            "treasuresUsable": "0",
+                            "treasures": "0",
+                            "allowTributeCollection": "1",
+                            "protectionGranted": "0",
+                            "tributeCollectorPlayerId": "8631",
+                            "realTributePercent": 0.2,
+                            "position": "535478319",
+                            "production": {
+                                "1": "132",
+                                "2": "132",
+                                "3": "132",
+                                "4": "106"
+                            },
+                            "storage": {
+                                "1": 771,
+                                "2": 771,
+                                "3": 771,
+                                "4": 767
+                            },
+                            "treasury": {
+                                "1": 0,
+                                "2": 0,
+                                "3": 0,
+                                "4": 0
+                            },
+                            "storageCapacity": {
+                                "1": "800",
+                                "2": "800",
+                                "3": "800",
+                                "4": "800"
+                            },
+                            "bonusCulturePointProduction": 4.1666666666667e-5,
+                            "tributesRequiredToFetch": 160,
+                            "tributes": {
+                                "1": 53,
+                                "2": 63,
+                                "3": 53
+                            },
+                            "tributesCapacity": "800",
+                            "tributeTreasures": 5,
+                            "tributeProduction": 78,
+                            "tributeProductionDetail": {
+                                "1": 26,
+                                "2": 26,
+                                "3": 26,
+                                "4": 0
+                            },
+                            "tributeTime": "0",
+                            "estimatedWarehouseLevel": 0
+                        }
+                    }, {
+                        "name": "Village:535478320",
+                        "data": {
+                            "villageId": "535478320",
+                            "playerId": "0",
+                            "name": "Oasis (48|-43)",
+                            "tribeId": "4",
+                            "belongsToKing": "8631",
+                            "belongsToKingdom": "789",
+                            "type": "21",
+                            "population": "0",
+                            "coordinates": {
+                                "x": "48",
+                                "y": "-43"
+                            },
+                            "isMainVillage": false,
+                            "isTown": false,
+                            "treasuresUsable": "0",
+                            "treasures": "0",
+                            "allowTributeCollection": "1",
+                            "protectionGranted": "0",
+                            "tributeCollectorPlayerId": 8631,
+                            "realTributePercent": 0.2,
+                            "production": {
+                                "1": "0",
+                                "2": "0",
+                                "3": "0",
+                                "4": "0"
+                            },
+                            "storage": {
+                                "1": 0,
+                                "2": 0,
+                                "3": 0,
+                                "4": 0
+                            },
+                            "treasury": {
+                                "1": 0,
+                                "2": 0,
+                                "3": 0,
+                                "4": 0
+                            },
+                            "storageCapacity": {
+                                "1": "0",
+                                "2": "0",
+                                "3": "0",
+                                "4": "0"
+                            },
+                            "bonusCulturePointProduction": 0,
+                            "tributesRequiredToFetch": 0,
+                            "tributes": {
+                                "1": 0,
+                                "2": 0,
+                                "3": 0
+                            },
+                            "tributesCapacity": "0",
+                            "tributeTreasures": 0,
+                            "tributeProduction": 0,
+                            "tributeProductionDetail": {
+                                "1": 0,
+                                "2": 0,
+                                "3": 0,
+                                "4": 0
+                            },
+                            "tributeTime": "0",
+                            "estimatedWarehouseLevel": 0
+                        }
+                    }, {
+                        "name": "Village:535412784",
+                        "data": {
+                            "villageId": "535412784",
+                            "playerId": "0",
+                            "name": "Oasis (48|-45)",
+                            "tribeId": "4",
+                            "belongsToKing": "8631",
+                            "belongsToKingdom": "789",
+                            "type": "20",
+                            "population": "0",
+                            "coordinates": {
+                                "x": "48",
+                                "y": "-45"
+                            },
+                            "isMainVillage": false,
+                            "isTown": false,
+                            "treasuresUsable": "0",
+                            "treasures": "0",
+                            "allowTributeCollection": "1",
+                            "protectionGranted": "0",
+                            "tributeCollectorPlayerId": 8631,
+                            "realTributePercent": 0.2,
+                            "production": {
+                                "1": "0",
+                                "2": "22",
+                                "3": "0",
+                                "4": "0"
+                            },
+                            "storage": {
+                                "1": 0,
+                                "2": 14,
+                                "3": 0,
+                                "4": 0
+                            },
+                            "treasury": {
+                                "1": 0,
+                                "2": 0,
+                                "3": 0,
+                                "4": 0
+                            },
+                            "storageCapacity": {
+                                "1": "1100",
+                                "2": "1100",
+                                "3": "1100",
+                                "4": "1100"
+                            },
+                            "bonusCulturePointProduction": 0,
+                            "tributesRequiredToFetch": 220,
+                            "tributes": {
+                                "1": 0,
+                                "2": 0,
+                                "3": 0
+                            },
+                            "tributesCapacity": "1100",
+                            "tributeTreasures": 0,
+                            "tributeProduction": 4,
+                            "tributeProductionDetail": {
+                                "1": 0,
+                                "2": 4,
+                                "3": 0,
+                                "4": 0
+                            },
+                            "tributeTime": "0",
+                            "estimatedWarehouseLevel": 0
+                        }
+                    }, {
+                        "name": "Village:535445550",
+                        "data": {
+                            "villageId": "535445550",
+                            "playerId": "6998",
+                            "name": "Rishon Lezion",
+                            "tribeId": "1",
+                            "belongsToKing": "8631",
+                            "belongsToKingdom": "789",
+                            "type": "1",
+                            "population": "9",
+                            "coordinates": {
+                                "x": "46",
+                                "y": "-44"
+                            },
+                            "isMainVillage": true,
+                            "isTown": false,
+                            "treasuresUsable": "0",
+                            "treasures": "0",
+                            "allowTributeCollection": "1",
+                            "protectionGranted": "1",
+                            "tributeCollectorPlayerId": 8631,
+                            "realTributePercent": 0.2,
+                            "production": {
+                                "1": "8",
+                                "2": "8",
+                                "3": "8",
+                                "4": "6"
+                            },
+                            "storage": {
+                                "1": 2,
+                                "2": 2,
+                                "3": 2,
+                                "4": 1
+                            },
+                            "treasury": {
+                                "1": 0,
+                                "2": 0,
+                                "3": 0,
+                                "4": 0
+                            },
+                            "storageCapacity": {
+                                "1": "800",
+                                "2": "800",
+                                "3": "800",
+                                "4": "800"
+                            },
+                            "bonusCulturePointProduction": 2.7777777777778e-5,
+                            "tributesRequiredToFetch": 160,
+                            "tributes": {
+                                "1": 0,
+                                "2": 0,
+                                "3": 0
+                            },
+                            "tributesCapacity": "800",
+                            "tributeTreasures": 0,
+                            "tributeProduction": 3,
+                            "tributeProductionDetail": {
+                                "1": 1,
+                                "2": 1,
+                                "3": 1,
+                                "4": 0
+                            },
+                            "tributeTime": "0",
+                            "estimatedWarehouseLevel": 0
+                        }
+                    }, {
+                        "name": "Village:535445554",
+                        "data": {
+                            "villageId": "535445554",
+                            "playerId": "7812",
+                            "name": "YOGal's village",
+                            "tribeId": "3",
+                            "belongsToKing": "8631",
+                            "belongsToKingdom": "789",
+                            "type": "1",
+                            "population": "15",
+                            "coordinates": {
+                                "x": "50",
+                                "y": "-44"
+                            },
+                            "isMainVillage": true,
+                            "isTown": false,
+                            "treasuresUsable": "0",
+                            "treasures": "0",
+                            "allowTributeCollection": "1",
+                            "protectionGranted": "1",
+                            "tributeCollectorPlayerId": 8631,
+                            "realTributePercent": 0.2,
+                            "production": {
+                                "1": "28",
+                                "2": "35",
+                                "3": "28",
+                                "4": "11"
+                            },
+                            "storage": {
+                                "1": 800,
+                                "2": 800,
+                                "3": 800,
+                                "4": 800
+                            },
+                            "treasury": {
+                                "1": 0,
+                                "2": 0,
+                                "3": 0,
+                                "4": 0
+                            },
+                            "storageCapacity": {
+                                "1": "800",
+                                "2": "800",
+                                "3": "800",
+                                "4": "800"
+                            },
+                            "bonusCulturePointProduction": 2.7777777777778e-5,
+                            "tributesRequiredToFetch": 160,
+                            "tributes": {
+                                "1": 32,
+                                "2": 40,
+                                "3": 32
+                            },
+                            "tributesCapacity": "800",
+                            "tributeTreasures": 1,
+                            "tributeProduction": 17,
+                            "tributeProductionDetail": {
+                                "1": 5,
+                                "2": 7,
+                                "3": 5,
+                                "4": 0
+                            },
+                            "tributeTime": "0",
+                            "estimatedWarehouseLevel": 0
+                        }
+                    }, {
+                        "name": "Village:535412783",
+                        "data": {
+                            "villageId": "535412783",
+                            "playerId": "7633",
+                            "name": "zuus village",
+                            "tribeId": "3",
+                            "belongsToKing": "8631",
+                            "belongsToKingdom": "789",
+                            "type": "1",
+                            "population": "65",
+                            "coordinates": {
+                                "x": "47",
+                                "y": "-45"
+                            },
+                            "isMainVillage": true,
+                            "isTown": false,
+                            "treasuresUsable": "0",
+                            "treasures": "0",
+                            "allowTributeCollection": "1",
+                            "protectionGranted": "1",
+                            "tributeCollectorPlayerId": 8631,
+                            "realTributePercent": 0.2,
+                            "production": {
+                                "1": "40",
+                                "2": "40",
+                                "3": "40",
+                                "4": "-18"
+                            },
+                            "storage": {
+                                "1": 987,
+                                "2": 1126,
+                                "3": 1891,
+                                "4": 52
+                            },
+                            "treasury": {
+                                "1": 0,
+                                "2": 0,
+                                "3": 0,
+                                "4": 0
+                            },
+                            "storageCapacity": {
+                                "1": "2300",
+                                "2": "2300",
+                                "3": "2300",
+                                "4": "3100"
+                            },
+                            "bonusCulturePointProduction": 6.0185185185185e-5,
+                            "tributesRequiredToFetch": 460,
+                            "tributes": {
+                                "1": 76,
+                                "2": 76,
+                                "3": 76
+                            },
+                            "tributesCapacity": "2300",
+                            "tributeTreasures": 4,
+                            "tributeProduction": 24,
+                            "tributeProductionDetail": {
+                                "1": 8,
+                                "2": 8,
+                                "3": 8,
+                                "4": 0
+                            },
+                            "tributeTime": "0",
+                            "estimatedWarehouseLevel": 3
+                        }
+                    }, {
+                        "name": "Village:535445552",
+                        "data": {
+                            "villageId": "535445552",
+                            "playerId": "8631",
+                            "name": "phoomin009's village",
+                            "tribeId": "2",
+                            "belongsToKing": "-1",
+                            "belongsToKingdom": "789",
+                            "type": "1",
+                            "population": "13",
+                            "coordinates": {
+                                "x": "48",
+                                "y": "-44"
+                            },
+                            "isMainVillage": true,
+                            "isTown": false,
+                            "treasuresUsable": "100",
+                            "treasures": "0",
+                            "allowTributeCollection": "1",
+                            "protectionGranted": "0",
+                            "tributeCollectorPlayerId": 8631,
+                            "realTributePercent": 0.2,
+                            "supplyBuildings": "13",
+                            "supplyTroops": "8",
+                            "production": {
+                                "1": "20",
+                                "2": "20",
+                                "3": "20",
+                                "4": "14"
+                            },
+                            "storage": {
+                                "1": 65.400000000001,
+                                "2": 100.4,
+                                "3": 140.40000000001,
+                                "4": 535.79888888889
+                            },
+                            "treasury": {
+                                "1": "0",
+                                "2": "0",
+                                "3": "0",
+                                "4": 0
+                            },
+                            "storageCapacity": {
+                                "1": "800",
+                                "2": "800",
+                                "3": "800",
+                                "4": "800"
+                            },
+                            "usedControlPoints": "0",
+                            "availableControlPoints": "0",
+                            "culturePoints": 0.22386574074074,
+                            "celebrationType": "0",
+                            "celebrationEnd": "0",
+                            "culturePointProduction": "19",
+                            "treasureResourceBonus": "0",
+                            "acceptance": 100,
+                            "acceptanceProduction": "0.01666",
+                            "tributes": {
+                                "1": 0,
+                                "2": 0,
+                                "3": 0,
+                                "4": 0
+                            },
+                            "tributesCapacity": "800",
+                            "tributeTreasures": 0,
+                            "tributeProduction": 12,
+                            "tributeTime": "0",
+                            "tributesRequiredToFetch": 160
+                        }
+                    }],
+                "operation": 1
+            }
+        }, {
+            "name": "Collection:Village:own",
+            "data": {
+                "cache": [{
+                        "name": "Village:535445552",
+                        "data": {
+                            "villageId": "535445552",
+                            "playerId": "8631",
+                            "name": "phoomin009's village",
+                            "tribeId": "2",
+                            "belongsToKing": "-1",
+                            "belongsToKingdom": "789",
+                            "type": "1",
+                            "population": "13",
+                            "coordinates": {
+                                "x": "48",
+                                "y": "-44"
+                            },
+                            "isMainVillage": true,
+                            "isTown": false,
+                            "treasuresUsable": "100",
+                            "treasures": "0",
+                            "allowTributeCollection": "1",
+                            "protectionGranted": "0",
+                            "tributeCollectorPlayerId": 8631,
+                            "realTributePercent": 0.2,
+                            "supplyBuildings": "13",
+                            "supplyTroops": "8",
+                            "production": {
+                                "1": "20",
+                                "2": "20",
+                                "3": "20",
+                                "4": "14"
+                            },
+                            "storage": {
+                                "1": 65.400000000001,
+                                "2": 100.4,
+                                "3": 140.40000000001,
+                                "4": 535.79888888889
+                            },
+                            "treasury": {
+                                "1": "0",
+                                "2": "0",
+                                "3": "0",
+                                "4": 0
+                            },
+                            "storageCapacity": {
+                                "1": "800",
+                                "2": "800",
+                                "3": "800",
+                                "4": "800"
+                            },
+                            "usedControlPoints": "0",
+                            "availableControlPoints": "0",
+                            "culturePoints": 0.22386574074074,
+                            "celebrationType": "0",
+                            "celebrationEnd": "0",
+                            "culturePointProduction": "19",
+                            "treasureResourceBonus": "0",
+                            "acceptance": 100,
+                            "acceptanceProduction": "0.01666",
+                            "tributes": {
+                                "1": 0,
+                                "2": 0,
+                                "3": 0,
+                                "4": 0
+                            },
+                            "tributesCapacity": "800",
+                            "tributeTreasures": 0,
+                            "tributeProduction": 12,
+                            "tributeTime": "0",
+                            "tributesRequiredToFetch": 160
+                        }
+                    }],
+                "operation": 1
+            }
+        }],
+    "ignoreSerial": 0,
+    "time": 1493907323735,
+    "serialNo": 353,
+    "response": []
+}

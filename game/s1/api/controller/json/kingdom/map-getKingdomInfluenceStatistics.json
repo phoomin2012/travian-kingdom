@@ -1,0 +1,26 @@
+{
+    "time": 1493908618983,
+    "serialNo": 695,
+    "response": {
+        "535445552": {
+            "villageId": "535445552",
+            "villageName": "PCCT",
+            "population": "20",
+            "influence": 20,
+            "treasureBonus": 1,
+            "size": 2,
+            "level": 0,
+            "currentCells": 13,
+            "nextCells": 21,
+            "playerId": "8631",
+            "players": {
+                "8631": {
+                    "name": "phoomin009",
+                    "cells": 13
+                }
+            },
+            "currentFrom": 0,
+            "currentTo": 100
+        }
+    }
+}

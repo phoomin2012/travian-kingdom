@@ -1,0 +1,169 @@
+{
+    "cache": [{
+            "name": "Collection:Troops:moving:-32295",
+            "data": {
+                "cache": [{
+                        "name": "Troops:7793907",
+                        "data": {
+                            "troopId": 7793907,
+                            "tribeId": "3",
+                            "playerId": "15276",
+                            "playerName": "phoomin009",
+                            "villageId": "-32295",
+                            "villageName": null,
+                            "villageIdLocation": 1,
+                            "villageNameLocation": "",
+                            "playerIdLocation": "-1",
+                            "playerNameLocation": "",
+                            "filter": "",
+                            "villageIdSupply": "-32295",
+                            "status": "transit",
+                            "units": {
+                                "2": 12,
+                                "11": 1
+                            },
+                            "supplyTroops": 12,
+                            "capacity": 540,
+                            "movement": {
+                                "troopId": 7793907,
+                                "villageIdStart": "-32295",
+                                "villageIdTarget": "1",
+                                "playerIdTarget": "-1",
+                                "coordinateID": "0",
+                                "timeStart": "1490872863",
+                                "timeFinish": 1490872868,
+                                "movementType": 3,
+                                "resources": {
+                                    "1": 0,
+                                    "2": 0,
+                                    "3": 0,
+                                    "4": 0
+                                },
+                                "treasures": 0,
+                                "spyTarget": 0,
+                                "catapultTarget1": 0,
+                                "catapultTarget2": 0,
+                                "merchants": 0
+                            }
+                        }
+                    }],
+                "operation": 2
+            }
+        }, {
+            "name": "Collection:Troops:moving:1",
+            "data": {
+                "cache": [{
+                        "name": "Troops:7793907",
+                        "data": {
+                            "troopId": 7793907,
+                            "tribeId": "3",
+                            "playerId": "15276",
+                            "playerName": "phoomin009",
+                            "villageId": "-32295",
+                            "villageName": null,
+                            "villageIdLocation": 1,
+                            "villageNameLocation": "",
+                            "playerIdLocation": "-1",
+                            "playerNameLocation": "",
+                            "filter": "",
+                            "villageIdSupply": "-32295",
+                            "status": "transit",
+                            "units": {
+                                "2": 12,
+                                "11": 1
+                            },
+                            "supplyTroops": 12,
+                            "capacity": 540,
+                            "movement": {
+                                "troopId": 7793907,
+                                "villageIdStart": "-32295",
+                                "villageIdTarget": "1",
+                                "playerIdTarget": "-1",
+                                "coordinateID": "0",
+                                "timeStart": "1490872863",
+                                "timeFinish": 1490872868,
+                                "movementType": 3,
+                                "resources": {
+                                    "1": 0,
+                                    "2": 0,
+                                    "3": 0,
+                                    "4": 0
+                                },
+                                "treasures": 0,
+                                "spyTarget": 0,
+                                "catapultTarget1": 0,
+                                "catapultTarget2": 0,
+                                "merchants": 0
+                            }
+                        }
+                    }],
+                "operation": 2
+            }
+        }, {
+            "name": "Troops:7580647",
+            "data": {
+                "troopId": "7580647",
+                "tribeId": "3",
+                "playerId": "15276",
+                "playerName": null,
+                "villageId": "-32295",
+                "villageName": null,
+                "villageIdLocation": "-32295",
+                "villageNameLocation": "",
+                "playerIdLocation": "0",
+                "playerNameLocation": "",
+                "filter": null,
+                "villageIdSupply": "-32295",
+                "status": "home",
+                "units": {
+                    "1": 5
+                },
+                "supplyTroops": 5,
+                "capacity": 175
+            }
+        }, {
+            "name": "Hero:15276",
+            "data": {
+                "playerId": "15276",
+                "villageId": "-32295",
+                "destVillageId": "1",
+                "destVillageName": "Robber hideout",
+                "destPlayerName": "Robber",
+                "status": 2,
+                "health": 100,
+                "lastHealthTime": "1490872863",
+                "baseRegenerationRate": 15,
+                "regenerationRate": 15,
+                "fightStrength": 320,
+                "fightStrengthPoints": "0",
+                "attBonusPoints": "0",
+                "defBonusPoints": "0",
+                "resBonusPoints": "0",
+                "resBonusType": "0",
+                "freePoints": "0",
+                "speed": 7,
+                "untilTime": 1490872868,
+                "bonuses": [],
+                "maxScrollsPerDay": "0",
+                "scrollsUsedToday": "0",
+                "waterbucketUsedToday": "0",
+                "ointmentsUsedToday": "0",
+                "adventurePointCardUsedToday": "0",
+                "resourceChestsUsedToday": "0",
+                "cropChestsUsedToday": "0",
+                "artworkUsedToday": "0",
+                "isMoving": true,
+                "adventurePoints": "12",
+                "adventurePointTime": "1490878985",
+                "levelUp": "0",
+                "xp": "0",
+                "xpThisLevel": 0,
+                "xpNextLevel": 50,
+                "level": "0"
+            }
+        }],
+    "ignoreSerial": 4,
+    "time": 1490872863255,
+    "serialNo": 636,
+    "response": []
+}

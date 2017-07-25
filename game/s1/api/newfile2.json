@@ -1,0 +1,25 @@
+{
+    "attackType": 3,
+    "attackerTribe": 1,
+    "attackerUnits": {
+        "1": 1
+    },
+    "defenderTribe": [1],
+    "defenderUnits": [{}],
+    "heroOffBonus": ["0.0", 0],
+    "heroDefBonus": [0, "0.0"],
+    "heroItemType": [-1, -1],
+    "heroFightStrength": [400, 400],
+    "attackerResearch": {},
+    "defenderResearch": [{}],
+    "attPopulation": 0,
+    "defPopulation": 0,
+    "catapultTargetLevel": 0,
+    "catapultTargetLevel2": 0,
+    "masonLevel": 0,
+    "wallLevel": 0,
+    "palaceLevel": 0,
+    "moatLevel": 0,
+    "natarBonus": 0,
+    "heroMounted": [1, 1]
+}
