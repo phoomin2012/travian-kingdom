@@ -7,6 +7,8 @@ Files will upload fast as fast I can.
   - [Menu](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#menu)
   - [Feature](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#feature)
   - [Screenshot](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#screenshot)
+  - [Requires](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#requires)
+  - [Installation](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#installation)
   - [Subscribe](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#subscribe)
 
 # Feature
@@ -197,6 +199,25 @@ Files will upload fast as fast I can.
 ![Travian Kingdom Clone Script](https://s23.postimg.org/jlaolluaj/Screen_Shot_2560-05-02_at_09.15.26.png)
 ![Travian Kingdom Clone Script](https://s11.postimg.org/5vs1owv8z/Screen_Shot_2560-05-02_at_09.18.24.png)
 
+# Requires
+  - PHP 5.6+ (with PDO mysql)
+  - Node.JS
+*** IMPORTANT *** This script can't use in web hosting because automatice function run as service
+
+# Installation
+  1. Perpair web server program (very simple use xampp)
+    - Prepair subdomain and point to your server
+    - Config apache vhost for game
+  2. Import database from travian5.sql<br>
+    If you want empty data, you should empty every table except ```global_server_data```<br>
+    If you want to change speed world, you can edit in ```global_server_data``` table too<br>
+  3. Config mysql password in ```index/engine/config.php```
+  4. Start automatice process with command ```php server2/server.php``` and ```node server/app2``` and ```node server_lobby/app```
+  5. Let's enjoy your server
+  
+Please note that this script doesn't finish yet.
+If you found bug please use [Issues](https://github.com/phoomin2012/travian-kingdom-clone/issues) to report and use [Pulls Requests](https://github.com/phoomin2012/travian-kingdom-clone/pulls) to request feature that offical have or fix bug or add new feature to main project.
+ 
 # Subscribe
 ***NOW IS FREE***
 Use **watch** button if you want to know about activities.
