@@ -70,7 +70,7 @@ class Quest {
                 ],
             ]);
         } else {
-            
+
             //Can Adventure
             array_push($r, [
                 'name' => 'QuestGiver:' . $i++,
@@ -81,17 +81,17 @@ class Quest {
                     'questStatus' => '2',
                 ],
             ]);
-            
+
             //Can't adventure
-            /*array_push($r, [
-                'name' => 'QuestGiver:' . $i++,
-                'data' => [
-                    'npcId' => '11',
-                    'questId' => '-1',
-                    'dialog' => '-1',
-                    'questStatus' => '3',
-                ],
-            ]);*/
+            /* array_push($r, [
+              'name' => 'QuestGiver:' . $i++,
+              'data' => [
+              'npcId' => '11',
+              'questId' => '-1',
+              'dialog' => '-1',
+              'questStatus' => '3',
+              ],
+              ]); */
         }
 
         return [
@@ -103,12 +103,12 @@ class Quest {
         ];
     }
 
-    public function get($giver = "") {
+    public function get($giver = "", $uid = null) {
         global $engine;
         $r = [];
+        $uid == null ? $uid = $_SESSION[$engine->server->prefix . 'uid'] : '';
 
         if ($giver <= 12 && $giver >= -1) {
-            $uid = $_SESSION[$engine->server->prefix . 'uid'];
             if ($giver == -1) {
                 $r = array_merge($r, $this->daliy($uid));
             } else {
@@ -116,18 +116,18 @@ class Quest {
                 if ($tutorial < 100) {
                     $r = array_merge($r, $this->tutorial($uid), $this->normal($uid), $this->heroAdventure($uid), $this->daliy($uid));
                 } else {
-                    $r = array_merge($r, $this->heroAdventure($giver));
+                    $r = array_merge($r, $this->heroAdventure($uid));
                 }
             }
         } else {
-            $r = array_merge($r, $this->tutorial($giver), $this->normal($giver), $this->heroAdventure($giver), $this->daliy($giver));
+            $r = array_merge($r, $this->tutorial($uid), $this->normal($uid), $this->heroAdventure($uid), $this->daliy($uid));
         }
         return [
             "name" => "Collection:Quest:" . (($giver <= 12) ? $giver : ''),
             "data" => [
                 "operation" => 1,
                 "cache" => $r,
-            ]
+            ],
         ];
     }
 
@@ -364,9 +364,11 @@ class Quest {
         return $r;
     }
 
-    private function heroAdventure($uid = null) {
+    private function heroAdventure($uid) {
         global $engine;
         $player = $engine->account->getById($uid);
+        $hero = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `owner`=?;", [$uid])->fetch(PDO::FETCH_ASSOC);
+
         $r = [
             [
                 'name' => 'Quest:991',
@@ -374,7 +376,7 @@ class Quest {
                     'id' => 991,
                     'questGiver' => 11,
                     'data' => 1,
-                    'progress' => 626,
+                    'progress' => $hero['advShort'],
                     'finishedSteps' => 0,
                     'finalStep' => 1,
                     'rewards' => [],
@@ -387,7 +389,7 @@ class Quest {
                     'id' => 992,
                     'questGiver' => 11,
                     'data' => 2,
-                    'progress' => 3066,
+                    'progress' => $hero['advLong'],
                     'finishedSteps' => 0,
                     'finalStep' => 1,
                     'rewards' => [],

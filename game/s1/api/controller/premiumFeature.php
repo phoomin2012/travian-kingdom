@@ -81,7 +81,7 @@ if ($data['action'] == "bookFeature") {
             "time" => round(microtime(true) * 1000),
         ]);
     } elseif ($data['params']['featureName'] == "plusAccount") {
-        $engine->account->buyPremium(0,$data['params']['params']['price'],$data['params']['params']['bookGameRound']);
+        $engine->account->buyPremium(0, $data['params']['params']['price'], $data['params']['params']['bookGameRound']);
         echo json_encode([
             "cache" => [
                 $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
@@ -99,7 +99,7 @@ if ($data['action'] == "bookFeature") {
             "time" => round(microtime(true) * 1000),
         ]);
     } elseif ($data['params']['featureName'] == "productionBonus") {
-        $engine->account->buyPremium(1,$data['params']['params']['price'],$data['params']['params']['bookGameRound']);
+        $engine->account->buyPremium(1, $data['params']['params']['price'], $data['params']['params']['bookGameRound']);
         echo json_encode([
             "cache" => [
                 $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
@@ -117,7 +117,7 @@ if ($data['action'] == "bookFeature") {
             "time" => round(microtime(true) * 1000),
         ]);
     } elseif ($data['params']['featureName'] == "cropProductionBonus") {
-        $engine->account->buyPremium(2,$data['params']['params']['price'],$data['params']['params']['bookGameRound']);
+        $engine->account->buyPremium(2, $data['params']['params']['price'], $data['params']['params']['bookGameRound']);
         echo json_encode([
             "cache" => [
                 $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
@@ -134,6 +134,24 @@ if ($data['action'] == "bookFeature") {
             "serialNo" => $engine->session->serialNo(),
             "time" => round(microtime(true) * 1000),
         ]);
+    } elseif ($data['params']['featureName'] == "cardgameSingle") {
+        echo json_encode([
+            "response" => [
+                "type" => "CardgameSingle",
+                "result" => $engine->account->gameCard($data['params']),
+            ],
+            "serialNo" => $engine->session->serialNo(),
+            "time" => round(microtime(true) * 1000),
+        ]);
+    } elseif ($data['params']['featureName'] == "cardgame4of5") {
+        echo json_encode([
+            "response" => [
+                "type" => "Cardgame4of5",
+                "result" => $engine->account->gameCard($data['params']),
+            ],
+            "serialNo" => $engine->session->serialNo(),
+            "time" => round(microtime(true) * 1000),
+        ]);
     } else {
         echo json_encode([
             "cache" => [],
@@ -143,14 +161,14 @@ if ($data['action'] == "bookFeature") {
             "time" => round(microtime(true) * 1000),
         ]);
     }
-}elseif ($data['action'] == "saveAutoExtendFlags") {
+} elseif ($data['action'] == "saveAutoExtendFlags") {
     query("UPDATE `" . $engine->server->prefix . "user` SET `autoExtend`=? WHERE `uid`=?;", [$data['params']['autoExtendFlags'], $engine->session->data->uid]);
     echo json_encode([
-            "response" => [
-                "data" => true,
-            ],
-            "ignoreSerial" => 2,
-            "serialNo" => $engine->session->serialNo(),
-            "time" => round(microtime(true) * 1000),
-        ]);
+        "response" => [
+            "data" => true,
+        ],
+        "ignoreSerial" => 2,
+        "serialNo" => $engine->session->serialNo(),
+        "time" => round(microtime(true) * 1000),
+    ]);
 }

@@ -278,6 +278,43 @@ class Account {
         exit();
     }
 
-}
+    public function gameCard() {
+        global $engine;
 
-?>
+
+        $r = [
+            1 => [
+                'rewardTypeId' => 7,
+                'rewardAmount' => 1,
+            ],
+            [
+                'rewardTypeId' => 11,
+                'rewardAmount' => 1,
+            ],
+            [
+                'rewardTypeId' => 13,
+                'rewardAmount' => 1,
+            ],
+            [
+                'rewardTypeId' => 10,
+                'rewardAmount' => 1,
+            ],
+            [
+                'rewardTypeId' => 20,
+                'rewardAmount' => 1,
+            ]
+        ];
+        return $r;
+    }
+    
+    public function selectCard($params){
+        global $engine;
+    }
+    
+    public function voucher(){
+        global $engine;
+        
+        
+    }
+
+}

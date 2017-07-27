@@ -12,25 +12,25 @@ if ($data['action'] == "getMarkers") {
     echo json_encode($return);
 } elseif ($data['action'] == "checkTarget") {
     $r = $engine->unit->checkTarget($data['params']['destVillageId'], $data['params']['villageId'], $data['params']['movementType'], $data['params']['heroPresent'], $data['params']['redeployHero'], true);
-    echo json_encode(array(
+    echo json_encode([
         "response" => $r,
         "serialNo" => $engine->session->serialNo(),
         "time" => round(microtime(true) * 1000),
-    ));
+    ]);
 } elseif ($data['action'] == "send") {
     if ($engine->session->data->quest == 1) {
         
     } else {
         $engine->move->send($data['params']['villageId'], $data['params']['destVillageId'], $data['params']['movementType'], $data['params']['spyMission'], $data['params']['redeployHero'], $data['params']['units']);
-        echo json_encode(array(
-            "response" => array(),
-            "cache" => array(
+        echo json_encode([
+            "response" => [],
+            "cache" => [
                 $engine->unit->getStay($data['params']['villageId']),
                 $engine->move->get($data['params']['villageId']),
-            ),
+            ],
             "serialNo" => $engine->session->serialNo(),
             "time" => round(microtime(true) * 1000),
-        ));
+        ]);
     }
 } elseif ($data['action'] == "abortTroopMovement") {
     $village = $engine->move->abort($data['params']['troopId']);

@@ -63,8 +63,10 @@ if ($data['action'] == "getValuePoints") {
         "serialNo" => $engine->session->serialNo(),
         "time" => round(microtime(true) * 1000),
     ]);
-} elseif ($data['action'] == "setLastInventoryView") {
+} elseif ($data['action'] == "revive") {
+    $cache = $engine->hero->revive($_SESSION[$engine->server->prefix.'uid'],$data['params']['villageId']);
     echo json_encode([
+        "cache" => $cache['cache'],
         "response" => [],
         "serialNo" => $engine->session->serialNo(),
         "time" => round(microtime(true) * 1000),

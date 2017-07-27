@@ -225,4 +225,12 @@ if ($data['action'] == "ping") {
         "serialNo" => $engine->session->serialNo(),
         "time" => round(microtime(true) * 1000),
     ));
+} elseif ($data['action'] == "getCardgameResult") {
+    echo json_encode(array(
+        "response" => [
+            "result" => null,
+        ],
+        "serialNo" => $engine->session->serialNo(),
+        "time" => round(microtime(true) * 1000),
+    ));
 }

@@ -43,23 +43,6 @@ if ($data['action'] == "get") {
                     unset($r);
                     break;
                 }
-            case "Voucher": {
-                    $r = array(
-                        'name' => 'Voucher:' . $action[1],
-                        'data' => array(
-                            "playerId" => $_SESSION[$engine->server->prefix . 'uid'],
-                            "hasVouchers" => array(
-                                "NPCTrader" => 0,
-                                "cardgameSingle" => 1,
-                                "finishNow" => 0,
-                                "traderArriveInstantly" => 0,
-                            )
-                        ),
-                    );
-                    array_push($return, $r);
-                    unset($r);
-                    break;
-                }
             case "Merchants": {
                     $r = array(
                         'name' => 'Merchants:' . $action[1],
@@ -149,12 +132,12 @@ if ($data['action'] == "get") {
                         "name" => "CelebrationQueue:" . $action[1],
                         "data" => [
                             "queues" => [
-                                24=> [],
-                                33=> [],
+                                24 => [],
+                                33 => [],
                             ],
                             "lastFinished" => [
-                                24=> time(),
-                                33=> time(),
+                                24 => time(),
+                                33 => time(),
                             ]
                         ],
                     );
@@ -228,13 +211,30 @@ if ($data['action'] == "get") {
                     unset($r);
                     break;
                 }
+            case "Voucher": {
+                    $r = array(
+                        'name' => 'Voucher:' . $action[1],
+                        'data' => array(
+                            "playerId" => $_SESSION[$engine->server->prefix . 'uid'],
+                            "hasVouchers" => array(
+                                "NPCTrader" => 0,
+                                "cardgameSingle" => 1,
+                                "finishNow" => 0,
+                                "traderArriveInstantly" => 0,
+                            )
+                        ),
+                    );
+                    array_push($return, $r);
+                    unset($r);
+                    break;
+                }
             case "CardgameRolls": {
                     $r = array(
                         'name' => 'CardgameRolls:' . $action[1],
                         'data' => array(
                             'playerId' => $action[1],
-                            'hasDailyRoll' => 0,
-                            'freeRolls' => 0,
+                            'hasDailyRoll' => 1,
+                            'freeRolls' => 1,
                         )
                     );
                     array_push($return, $r);

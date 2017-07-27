@@ -3577,7 +3577,7 @@ function Oa(a, c, b, g, m, l) {
     b.lineTo(25 * e, 26 * e);
     b.lineTo(12 * e, 34 * e);
     b.lineTo(25 * e, 42 * e);
-    b.closePath();
+    console.log(a.color);
     a.capital ? (b.strokeStyle = "rgba(" + a.color.colorRGBValues + ",0.9)", b.fillStyle = "rgba(" + a.color.colorRGBValues + ",0.5)") : (b.strokeStyle = "rgba(" + a.color.colorRGBValues + ",0.8)", b.fillStyle = "rgba(" + a.color.colorRGBValues + ",0.2)");
     b.fill();
     b.stroke()

@@ -36,8 +36,10 @@ include_once(dirname(__FILE__) . "/auto.php");
 include_once(dirname(__FILE__) . "/quest.php");
 include_once(dirname(__FILE__) . "/kingdom.php");
 include_once(dirname(__FILE__) . "/celebrate.php");
+include_once(dirname(__FILE__) . "/auction.php");
 
 include_once(dirname(__FILE__) . "/data/buidata.php");
+include_once(dirname(__FILE__) . "/data/hero_full.php");
 include_once(dirname(__FILE__) . "/data/unitdata.php");
 include_once(dirname(__FILE__) . "/data/resdata.php");
 include_once(dirname(__FILE__) . "/data/cpdata.php");
@@ -69,6 +71,7 @@ $engine = (object) array(
             "notification" => new Notification(),
             "tech" => new Technology(),
             "move" => new Movement(),
+            "auction" => new Auction(),
             "data" => (object) array(
                 "building" => new BuildingData(),
             ),

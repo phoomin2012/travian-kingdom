@@ -1,6 +1,32 @@
 <?php
 
 class Movement {
+    /*
+      Troops.MOVEMENT_TYPE_ATTACK = 3;
+      Troops.MOVEMENT_TYPE_RAID = 4;
+      Troops.MOVEMENT_TYPE_SUPPORT = 5;
+      Troops.MOVEMENT_TYPE_SPY = 6;
+      Troops.MOVEMENT_TYPE_TRANSPORT = 7;
+      Troops.MOVEMENT_TYPE_RETURN = 9;
+      Troops.MOVEMENT_TYPE_SETTLE = 10;
+      Troops.MOVEMENT_TYPE_TRIBUTE_COLLECT = 12;
+      Troops.MOVEMENT_TYPE_ADVENTURE = 20;
+      Troops.MOVEMENT_TYPE_RETURN_ADVENTURE = 27;
+      Troops.MOVEMENT_TYPE_TRANSPORT_RETURN = 33;
+      Troops.MOVEMENT_TYPE_REGENERATION = 36;
+      Troops.MOVEMENT_TYPE_SIEGE = 47;
+      Troops.MOVEMENT_TYPE_TREASURE_RESOURCES = 50;
+
+      Troops.TYPE_RAM = 7;
+      Troops.TYPE_CATAPULT = 8;
+      Troops.TYPE_LEADER = 9;
+      Troops.TYPE_SETTLER = 10;
+      Troops.TYPE_HERO = 11;
+
+      Troops.TYPE_TRAPS = 79;
+
+      Troops.SECOND_TARGET_CATAPULTS = 20;
+     */
 
     public function get($wid = null) {
         global $engine;
@@ -173,12 +199,19 @@ class Movement {
 
         $p = $engine->account->getByVillage($from);
         $dist = $engine->world->getDistance($from, $to);
+
+        // Calculate speed
         $speeds = array();
         for ($i = 1; $i <= 10; $i++) {
+            if (!isset($unit[$i])) {
+                $unit[$i] = 0;
+            }
             if ($unit[$i] > 0) {
                 array_push($speeds, UnitData::get(($p['tribe'] - 1) * 10 + $i, 'speed') * $engine->server->speed_unit);
             }
         }
+
+        // Decrease troops from village
         $engine->unit->removeUnit($from, '1', $unit[1]);
         $engine->unit->removeUnit($from, '2', $unit[2]);
         $engine->unit->removeUnit($from, '3', $unit[3]);
@@ -192,16 +225,25 @@ class Movement {
         $engine->unit->removeUnit($from, '11', $unit[11]);
         $tid = $engine->unit->createUnit($from, $unit);
 
-        $start = time();
-        $end = $start + $dist / min($speeds) * 3600;
+        // Set time
+        if ($type == 20) {
+            $start = time();
+            $end = $start + $to;
+            $to = 20;
+        } else {
+            $start = time();
+            $end = $start + $dist / min($speeds) * 3600;
+        }
 
+        // Edit time for tutorial quest
         if ($p['tutorial'] == 2) {
             $to = 536887296;
             $engine->account->edit('tutorial', 3, $p['uid']);
-            $engine->auto->emitCache($p['uid'], $engine->quest->get($p['uid']));
+            $engine->auto->emitCache($p['uid'], $engine->quest->get('',$p['uid']));
             $end = $start + 5;
         }
 
+        // Create new movement
         $p = $engine->account->getByVillage($from, 'uid');
         $params = [$from, $p, $to, $type, $spy, $rdhero, $start, $end, $tid];
         query("INSERT INTO `" . $engine->server->prefix . "troop_move` (`from`,`owner`,`to`,`type`,`spy`,`redeployHero`,`start`,`end`,`unit`) VALUES (?,?,?,?,?,?,?,?,?);", $params);
@@ -214,7 +256,7 @@ class Movement {
             $pt = $engine->account->getByVillage($to, 'uid');
             $ptu = $engine->account->getByVillage($to, 'username');
             $engine->auto->emitCache($pt, $this->get($to));
-            if ($type == 3 || $type == 4) {
+            if ($type == 3 || $type == 4 || $type == 47) {
                 $engine->auto->emitEvent($pt, array(
                     "name" => "flashNotification",
                     "data" => [
@@ -246,17 +288,35 @@ class Movement {
 
     public function reinforcement($data) {
         global $engine;
-        $unit = query("SELECT * FROM `" . $engine->server->prefix . "units` WHERE `id`=?", array($data['unit']))->fetch();
 
-        for ($i = 1; $i <= 10; $i++)
-            $engine->unit->addUnit($data['to'], $i, $unit['u' . $i], $unit['wid']);
-
-        query("DELETE FROM `" . $engine->server->prefix . "units` WHERE `id`=?", array($data['unit']));
-        query("DELETE FROM `" . $engine->server->prefix . "troop_move` WHERE `id`=?", array($data['id']));
-
-        // Send Data Back
+        // Prepare data
         $p = $engine->account->getByVillage($data['from'], 'uid');
         $pt = $engine->account->getByVillage($data['to'], 'uid');
+        $unit = query("SELECT * FROM `{$engine->server->prefix}units` WHERE `id`=?", array($data['unit']))->fetch();
+
+        // Add troops to village
+        for ($i = 1; $i <= 11; $i++) {
+            $engine->unit->addUnit($data['to'], $i, $unit['u' . $i], $unit['wid']);
+            if ($i == 11) {
+                if ($unit['u' . $i] > 0) {
+                    query("UPDATE `{$engine->server->prefix}hero` SET `move`=? WHERE `owner`=?;", ['', $pt]);
+                    $engine->auto->emitCache($pt, $engine->hero->get($pt));
+                }
+            }
+        }
+        // If have resource
+        $res = json_decode($data['data'], true);
+        if ($res) {
+            $engine->auto->procRes($data['to']);
+            query("UPDATE `{$engine->server->prefix}village` SET `wood`=`wood`+?,`clay`=`clay`+?,`iron`=`iron`+?,`crop`=`crop`+? WHERE `wid`=?", array($res[1], $res[2], $res[3], $res[4], $data['to']));
+            $engine->auto->emitCache($pt, $engine->village->get($data['to']));
+        }
+
+        // Remove movement
+        query("DELETE FROM `{$engine->server->prefix}units` WHERE `id`=?", array($data['unit']));
+        query("DELETE FROM `{$engine->server->prefix}troop_move` WHERE `id`=?", array($data['id']));
+
+        // Send Data Back
         if ($p != null) {
             $engine->auto->emitCache($p, $this->get($data['from']));
         }
@@ -265,6 +325,7 @@ class Movement {
             $engine->auto->emitCache($pt, $engine->unit->getStay($data['to']));
         }
 
+        // Send notifications
         if ($data['type'] != 9) {
             if ($p != null) {
                 $engine->auto->emitEvent($p, array(
@@ -295,7 +356,7 @@ class Movement {
         if ($data['owner'] == "-1" && $data['data']['tutorial'] == true) {
             $uid = $engine->account->getByVillage($data['to'], 'uid');
             $engine->account->edit('tutorial', 12, $uid);
-            $engine->auto->emitCache($uid, $engine->quest->get($uid));
+            $engine->auto->emitCache($uid, $engine->quest->get('',$uid));
             query("DELETE FROM `" . $engine->server->prefix . "units` WHERE `id`=?", array($data['unit']));
             query("DELETE FROM `" . $engine->server->prefix . "troop_move` WHERE `id`=?", array($data['id']));
         } else {
@@ -401,6 +462,89 @@ class Movement {
         $engine->auto->emitCache($p, $this->get($data['from']));
         $engine->auto->emitCache($pt, $this->get($data['to']));
         $engine->auto->emitCache($pt, $engine->unit->getStay($data['to']));
+    }
+
+    public function adventure($data) {
+        global $engine;
+        // Prepare data
+        $pt = $engine->account->getByVillage($data['from']);
+        $vt = $engine->village->get($data['from'], false);
+        $duration = $data['end'] - $data['start'];
+        $long = $duration >= $engine->hero->adv_long[0] ? true : false;
+        $hero = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `owner`=?;", [$pt['uid']])->fetch(PDO::FETCH_ASSOC);
+
+        // Calculate health point
+        $hp = rand(8, 19) * ($long ? 2 : 1);
+        $new_hp = $hero['health'] - $hp;
+        $dead = $new_hp <= 0 ? true : false;
+
+        // Calculate XP & cliam reward
+        $res = null;
+        if ($dead) {
+            $rewards = [];
+        } else {
+            $rewards = $engine->hero->randomReward($hero, $long);
+            foreach ($rewards as $reward) {
+                if ($reward['type'] == 3) {
+                    $res = $reward['amount'];
+                } else {
+                    
+                }
+            }
+            $engine->auto->emitCache($pt['uid'], $engine->item->getAll($pt['uid'], true));
+        }
+        $xp = rand(10, 30) * ($long ? 2 : 1) * (count($rewards) == 0 ? 2.25 : 1);
+        $xp = round($xp);
+
+        // Save attributes
+        if ($new_hp <= 0) {
+            query("UPDATE `{$engine->server->prefix}hero` SET `useAdvPoint`=`useAdvPoint`+?,`health`=?,`xp`=`xp`+?,`dead`=?,`move`=?  WHERE `owner`=?", [$long ? 2 : 1, 0, $xp, 1, 0, $pt['uid']]);
+        } else {
+            query("UPDATE `{$engine->server->prefix}hero` SET `useAdvPoint`=`useAdvPoint`+?,`health`=?,`xp`=`xp`+?  WHERE `owner`=?", [$long ? 2 : 1, $new_hp, $xp, $pt['uid']]);
+        }
+
+        // New adventure duration
+        $short = rand($engine->hero->adv_short[0], $engine->hero->adv_short[1]);
+        $long = rand($engine->hero->adv_long[0], $engine->hero->adv_long[1]);
+        query("UPDATE `{$engine->server->prefix}hero` SET `advShort`=?,`advLong`=?  WHERE `owner`=?", [$short, $long, $pt['uid']]);
+
+        // Check for level up
+        $engine->hero->checkLevelUp($pt['uid']);
+
+        if (!$dead) {
+            // Return hero to home village
+            query("UPDATE `{$engine->server->prefix}troop_move` SET `from`=?,`to`=?,`start`=?,`end`=?,`type`=?,`data`=?  WHERE `id`=?", [$data['to'], $data['from'], time(), time() + $duration, 27, ($res !== null) ? json_encode($res) : '', $data['id']]);
+        } else {
+            // Remove movement
+            query("DELETE FROM `{$engine->server->prefix}troop_move` WHERE `id`=?;", [$data['id']]);
+        }
+
+        // Prepare data & create new report
+        $source = [
+            'troopId' => $data['unit'],
+            'tribeId' => $pt['tribe'],
+            'playerId' => $pt['uid'],
+            'playerName' => $pt['username'],
+            'villageId' => $vt['villageId'],
+            'villageName' => $vt['name'],
+        ];
+        $target = [];
+        $detail = [
+            'neededRights' => 0,
+            'xp' => $xp,
+            'hp' => $hp,
+            'won' => $dead ? false : true,
+            'loot' => $rewards,
+        ];
+        $modules = ['attacker' => [], 'defender' => [], 'support' => [], 'sum' => []];
+        $reportId = $engine->report->add(3, $pt['uid'], $source, $target, $detail, $modules);
+        $engine->notification->add($pt['uid'], 21, $reportId, 'movement_adventure_medium_flat_black');
+
+        // Send Data Back
+        $engine->auto->emitCache($pt['uid'], $this->get($vt['villageId']));
+        $engine->auto->emitCache($pt['uid'], $engine->unit->getStay($vt['villageId']));
+        $engine->auto->emitCache($pt['uid'], $engine->hero->get($pt['uid']));
+        $engine->auto->emitCache($pt['uid'], $engine->quest->get('',$pt['uid']));
     }
 
     public function settle($data) {

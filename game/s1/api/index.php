@@ -34,4 +34,6 @@ if ($data['controller'] == "login") {
     include_once dirname(__FILE__) . '/controller/trade.php';
 } elseif ($data['controller'] == "kingdom") {
     include_once dirname(__FILE__) . '/controller/kingdom.php';
+} elseif ($data['controller'] == "auctions") {
+    include_once dirname(__FILE__) . '/controller/auction.php';
 }

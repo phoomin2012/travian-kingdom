@@ -275,20 +275,20 @@ if ($data['action'] == "dialogAction") {
         if ($data['params']['command'] == "activate") {
             $engine->account->edit('tutorial', 23, $_SESSION[$engine->server->prefix . 'uid']);
 
-            echo json_encode(array(
+            echo json_encode([
                 "response" => [
                     $engine->quest->giver(),
                     $engine->quest->get(),
                 ],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
-            ));
+            ]);
             $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->quest->get());
             $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']));
-        }elseif ($data['params']['command'] == "finish") {
+        } elseif ($data['params']['command'] == "finish") {
             $engine->account->edit('tutorial', time(), $_SESSION[$engine->server->prefix . 'uid']);
 
-            echo json_encode(array(
+            echo json_encode([
                 "response" => [
                     $engine->quest->giver(),
                     $engine->quest->get(),
@@ -298,9 +298,40 @@ if ($data['action'] == "dialogAction") {
                 ],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
-            ));
+            ]);
             $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']));
         }
+    } elseif ($data['params']['questId'] == "991") {
+        $engine->hero->sendAdventure();
+        $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'],$engine->move->get($_COOKIE['village']));
+        $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'],$engine->unit->getStay($_COOKIE['village']));
+        $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'],$engine->hero->get($_SESSION[$engine->server->prefix . 'uid']));
+        echo json_encode([
+            "cache" => [
+                $engine->quest->giver(),
+                $engine->quest->get(),
+                $engine->hero->get(),
+                $engine->unit->getStay($_COOKIE['village']),
+                $engine->move->get($_COOKIE['village']),
+            ],
+            "response" => [],
+            "serialNo" => $engine->session->serialNo(),
+            "time" => round(microtime(true) * 1000),
+        ]);
+    } elseif ($data['params']['questId'] == "992") {
+        $engine->hero->sendAdventure(false);
+        echo json_encode([
+            "cache" => [
+                $engine->quest->giver(),
+                $engine->quest->get(),
+                $engine->hero->get(),
+                $engine->unit->getStay($_COOKIE['village']),
+                $engine->move->get($_COOKIE['village']),
+            ],
+            "response" => [],
+            "serialNo" => $engine->session->serialNo(),
+            "time" => round(microtime(true) * 1000),
+        ]);
     }
 } elseif ($data['action'] == "getPuzzle") {
     echo json_encode(array(

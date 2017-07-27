@@ -82,7 +82,7 @@ class Auto {
                 $bD = BuildingData::get($b['type'], $level);
                 query("UPDATE `" . $engine->server->prefix . "village` SET `pop`=`pop`+?,`cp`=`cp`+? WHERE `wid`=?;", array($bD['pop'], $bD['cp'], $b['wid']));
                 $engine->world->calInf($b['wid']);
-                
+
                 if ($b['type'] == "10") {
                     $max = $engine->village->getVillageField($b['wid'], "maxstore");
                     if ($level == '1' && $max == $engine->server->base_storage) {
@@ -273,9 +273,9 @@ class Auto {
     public function procRes($wid = null) {
         global $engine;
         if ($wid === null) {
-            $data = query("SELECT * FROM `{$engine->server->prefix}village`")->fetchAll();
+            $data = query("SELECT * FROM `{$engine->server->prefix}village`")->fetchAll(PDO::FETCH_ASSOC);
         } else {
-            $data = query("SELECT * FROM `{$engine->server->prefix}village` WHERE `wid`=?", [$wid])->fetchAll();
+            $data = query("SELECT * FROM `{$engine->server->prefix}village` WHERE `wid`=?", [$wid])->fetchAll(PDO::FETCH_ASSOC);
         }
         for ($i = 0; $i < count($data); $i += 1) {
             $data[$i]['wood'] = $data[$i]['wood'] + (($engine->village->getProc($data[$i]['wid'], 1) / 3600) * (microtime(true) - $data[$i]['lastupdate']));
@@ -284,18 +284,23 @@ class Auto {
             $data[$i]['crop'] = $data[$i]['crop'] + ((($engine->village->getProc($data[$i]['wid'], 4) - $data[$i]['pop']) / 3600) * (microtime(true) - $data[$i]['lastupdate']));
             $cp = (($engine->account->getCPproduce($engine->account->getByVillage($data[$i]['wid'], 'uid')) / 86400) * (microtime(true) - $data[$i]['lastupdate']));
             $date[$i]['lastupdate'] = microtime(true);
-            $p = $engine->account->getByVillage($data[$i]['owner']);
-            if ($data[$i]['wood'] >= $data[$i]['maxstore'] * (($p['plus'] != 0) ? 1.25 : 1)) {
-                $data[$i]['wood'] = $data[$i]['maxstore'] * (($p['plus'] != 0) ? 1.25 : 1);
+
+            // Check travian plus & increase 25% capacity
+            $p = $engine->account->getById($data[$i]['owner']);
+            $data[$i]['maxstore'] = $data[$i]['maxstore'] * ($p['plus'] == 0 ? 1 : 1.25);
+            $data[$i]['maxcrop'] = $data[$i]['maxcrop'] * ($p['plus'] == 0 ? 1 : 1.25);
+
+            if ($data[$i]['wood'] >= $data[$i]['maxstore']) {
+                $data[$i]['wood'] = $data[$i]['maxstore'];
             }
-            if ($data[$i]['clay'] >= $data[$i]['maxstore'] * (($p['plus'] != 0) ? 1.25 : 1)) {
-                $data[$i]['clay'] = $data[$i]['maxstore'] * (($p['plus'] != 0) ? 1.25 : 1);
+            if ($data[$i]['clay'] >= $data[$i]['maxstore']) {
+                $data[$i]['clay'] = $data[$i]['maxstore'];
             }
-            if ($data[$i]['iron'] >= $data[$i]['maxstore'] * (($p['plus'] != 0) ? 1.25 : 1)) {
-                $data[$i]['iron'] = $data[$i]['maxstore'] * (($p['plus'] != 0) ? 1.25 : 1);
+            if ($data[$i]['iron'] >= $data[$i]['maxstore']) {
+                $data[$i]['iron'] = $data[$i]['maxstore'];
             }
-            if ($data[$i]['crop'] >= $data[$i]['maxcrop'] * (($p['plus'] != 0) ? 1.25 : 1)) {
-                $data[$i]['crop'] = $data[$i]['maxcrop'] * (($p['plus'] != 0) ? 1.25 : 1);
+            if ($data[$i]['crop'] >= $data[$i]['maxcrop']) {
+                $data[$i]['crop'] = $data[$i]['maxcrop'];
             }
 
             query("UPDATE `{$engine->server->prefix}user` SET `cp`=`cp`+? WHERE `uid`=?", [$cp, $data[$i]['owner']]);
@@ -411,6 +416,10 @@ class Auto {
                 $engine->move->reinforcement($m[$i]);
             } elseif ($m[$i]['type'] == "10") {
                 $engine->move->settle($m[$i]);
+            } elseif ($m[$i]['type'] == "20") {
+                $engine->move->adventure($m[$i]);
+            } elseif ($m[$i]['type'] == "27") {
+                $engine->move->reinforcement($m[$i]);
             } elseif ($m[$i]['type'] == "33") {
                 $engine->move->reinforcement($m[$i]);
             }
@@ -427,7 +436,7 @@ class Auto {
             query("UPDATE `{$engine->server->prefix}field` SET `type`=? WHERE `location`=? AND `wid`=?;", [27, $l, $v['wid']]);
             query("UPDATE `{$engine->server->prefix}village` SET `area`=? WHERE `wid`=?;", [-1, $v['wid']]);
             $engine->world->calInf($b['wid']);
-            
+
             $this->emitCache($v['owner'], $engine->building->getBuilding(["wid" => $v['owner'], "location" => $l]));
             $this->emitCache($v['owner'], $engine->building->getBuildings($v['wid']));
             $this->emitCache($v['owner'], $engine->village->get($v['wid']));
@@ -448,9 +457,33 @@ class Auto {
         $hs = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `advNext`<=?", [time()])->fetchAll(PDO::FETCH_ASSOC);
         foreach ($hs as $h) {
 
-            $next = time() + 86400 / $engine->server->speed_world;
+            $next = time() + (min($h['advPoint'] * 600,86400)) / $engine->server->speed_world;
 
             query("UPDATE `{$engine->server->prefix}hero` SET `advPoint`=`advPoint`+1,`advNext`=? WHERE `id`=?;", [$next, $h['id']]);
+            $this->emitCache($h['owner'], $engine->hero->get($h['owner']));
+        }
+    }
+
+    public function healthHero() {
+        global $engine;
+
+        $hs = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `dead`=?;",[0])->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($hs as $h) {
+            $hp = $h['health'];
+            $hp = $hp + (($h['regen'] * $engine->server->speed_world / 86400) * (microtime(true) - $h['lastupdate']));
+            ($hp > 100) ? $hp = 100 : '';
+            query("UPDATE `{$engine->server->prefix}hero` SET `health`=?,`lastupdate`=? WHERE `id`=?;", [$hp, microtime(true), $h['id']]);
+        }
+    }
+    
+    public function reviveHero(){
+        global $engine;
+        
+        $hs = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `revive`<=? AND `revive`<>?", [time(),0])->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($hs as $h) {
+            $engine->unit->addUnit($h['village'], 11, 1, $h['village']);
+            $engine->auto->emitCache($pt, $engine->unit->getStay($h['village']));
+            query("UPDATE `{$engine->server->prefix}hero` SET `revive`=?,`health`=?,`dead`=? WHERE `id`=?;", [0,100,0, $h['id']]);
             $this->emitCache($h['owner'], $engine->hero->get($h['owner']));
         }
     }
@@ -465,6 +498,8 @@ class Auto {
         $this->movement();
         $this->procTreasuryTransformations();
         $this->procAdventurePoint();
+        $this->healthHero();
+        $this->reviveHero();
 
         $this->freeSilver();
 
