@@ -209,8 +209,8 @@ Files will upload fast as fast I can.
     - Prepair subdomain and point to your server
     - Config apache vhost for game
     
-    Example vhost config for apache (OSX with xampp)
-    ```
+Example vhost config for apache (OSX with xampp)
+```
 <VirtualHost *:80>
     # Index
     ServerAdmin t5.phumin.in.th
@@ -263,7 +263,7 @@ Files will upload fast as fast I can.
     ErrorLog "logs/ks1.t5th.ph-error_log"
     CustomLog "logs/ks1.t5th.ph-access_log" common
 </VirtualHost>
-    ```
+```
   2. Import database from travian5.sql<br>
     If you want empty data, you should empty every table except ```global_server_data```<br>
     If you want to change speed world, you can edit in ```global_server_data``` table too<br>
