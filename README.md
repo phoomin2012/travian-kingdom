@@ -202,6 +202,7 @@ Files will upload fast as fast I can.
 # Requires
   - PHP 5.6+ (with PDO mysql)
   - Node.JS
+  
 *** IMPORTANT *** This script can't use in web hosting because automatice function run as service
 
 # Installation
