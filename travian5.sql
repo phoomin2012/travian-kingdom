@@ -108,7 +108,7 @@ CREATE TABLE `global_server_data` (
 --
 
 INSERT INTO `global_server_data` (`sid`, `name`, `tag`, `folder`, `prefix`, `speed_world`, `speed_unit`, `multiple_hero_item`, `multiple_hero_resouce`, `multiple_hero_speed`, `multiple_hero_power`, `multiple_storage`, `base_storage`, `plus_time`, `protection`, `start`, `natar`, `wwvillage`, `peace`, `genmap`, `maintenance`, `recommended`) VALUES
-(1, 'Developing', 'server1', 'http://ks1.t5.phumin.in.th', 's1_', 100, 100, 1, 1, 1, 1, 1, 800, '86400*7', '86400*7', '1490014800', 1, 1, '0', '2', 0, 1);
+(1, 'Developing', 'server1', 'http://ks1.t5.k', 's1_', 100, 100, 1, 1, 1, 1, 1, 800, '86400*7', '86400*7', '1490014800', 1, 1, '0', '2', 0, 1);
 
 -- --------------------------------------------------------
 
