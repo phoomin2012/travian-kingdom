@@ -4,12 +4,12 @@ If you want to support, you can donate us by Paypal. https://paypal.me/PhuminSho
 Files will upload fast as fast I can.
 
 # Menu
-  - [Menu](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#menu)
-  - [Feature](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#feature)
-  - [Screenshot](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#screenshot)
-  - [Requires](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#requires)
-  - [Installation](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#installation)
-  - [Subscribe](https://github.com/phoomin2012/travian-kingdom-clone/blob/master/README.md#subscribe)
+  - [Menu](#menu)
+  - [Feature](#feature)
+  - [Screenshot](#screenshot)
+  - [Requires](#requires)
+  - [Installation](#installation)
+  - [Subscribe](#subscribe)
 
 # Feature
 - Index
