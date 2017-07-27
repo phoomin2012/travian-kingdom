@@ -264,6 +264,17 @@ Example vhost config for apache (OSX with xampp)
     CustomLog "logs/ks1.t5th.ph-access_log" common
 </VirtualHost>
 ```
+Example hosts file
+```
+# Travian Kingdom
+127.0.0.1       t5th.ph
+127.0.0.1       kingdoms.t5th.ph
+127.0.0.1       mellon.t5th.ph
+127.0.0.1       lobby.t5th.ph
+127.0.0.1       cdn.t5th.ph
+127.0.0.1       ks1.t5th.ph
+```
+
   2. Import database from travian5.sql<br>
     If you want empty data, you should empty every table except ```global_server_data```<br>
     If you want to change speed world, you can edit in ```global_server_data``` table too<br>
@@ -272,7 +283,8 @@ Example vhost config for apache (OSX with xampp)
   5. Let's enjoy your server
   
   **To generate world**<br>
-  go to sub domain that game avaliable. go to api folder and go to debug.php?a=createWorld
+  go to sub domain that game avaliable. go to api folder and go to debug.php?a=createWorld<br>
+  for example `ks1.t5th.ph/api/debug.php?a=createWorld`
   
 Please note that this script doesn't finish yet.
 If you found bug please use [Issues](https://github.com/phoomin2012/travian-kingdom-clone/issues) to report and use [Pulls Requests](https://github.com/phoomin2012/travian-kingdom-clone/pulls) to request feature that offical have or fix bug or add new feature to main project.
