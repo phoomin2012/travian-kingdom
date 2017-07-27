@@ -208,6 +208,62 @@ Files will upload fast as fast I can.
   1. Perpair web server program (very simple use xampp)
     - Prepair subdomain and point to your server
     - Config apache vhost for game
+    
+    Example vhost config for apache (OSX with xampp)
+    ```
+<VirtualHost *:80>
+    # Index
+    ServerAdmin t5.phumin.in.th
+    ServerName t5.phumin.in.th
+    DocumentRoot "/Applications/XAMPP/xamppfiles/htdocs/travian5"
+    ErrorLog "logs/t5th.ph-error_log"
+    CustomLog "logs/t5th.ph-access_log" common
+</VirtualHost>
+<VirtualHost *:80>
+    # Index
+    ServerAdmin kingdoms.t5.phumin.in.th
+    ServerName kingdoms.t5.phumin.in.th
+    DocumentRoot "/Applications/XAMPP/xamppfiles/htdocs/travian5/index"
+    ErrorLog "logs/kingdoms.t5th.ph-error_log"
+    CustomLog "logs/kingdoms.t5th.ph-access_log" common
+</VirtualHost>
+<VirtualHost *:80>
+    # Mellon service (Account service)
+    ServerAdmin mellon.t5.phumin.in.th
+    ServerName mellon.t5.phumin.in.th
+    DocumentRoot "/Applications/XAMPP/xamppfiles/htdocs/travian5/mellon"
+    ErrorLog "logs/mellon.t5th.ph-error_log"
+    CustomLog "logs/mellon.t5th.ph-access_log" common
+    Header set Access-Control-Allow-Origin "*"
+
+    AllowEncodedSlashes on
+</VirtualHost>
+<VirtualHost *:80>
+    # CDN
+    ServerAdmin cdn.t5.phumin.in.th
+    ServerName cdn.t5.phumin.in.th
+    DocumentRoot "/Applications/XAMPP/xamppfiles/htdocs/travian5/cdn"
+    ErrorLog "logs/cdn.t5th.ph-error_log"
+    CustomLog "logs/cdn.t5th.ph-access_log" common
+    Header set Access-Control-Allow-Origin "*"
+</VirtualHost>
+<VirtualHost *:80>
+    # Lobby
+    ServerAdmin lobby.t5.phumin.in.th
+    ServerName lobby.t5.phumin.in.th
+    DocumentRoot "/Applications/XAMPP/xamppfiles/htdocs/travian5/lobby"
+    ErrorLog "logs/lobby.t5th.ph-error_log"
+    CustomLog "logs/lobby.t5th.ph-access_log" common
+</VirtualHost>
+<VirtualHost *:80>
+    # Game
+    ServerAdmin ks1.t5.phumin.in.th
+    ServerName ks1.t5.phumin.in.th
+    DocumentRoot "/Applications/XAMPP/xamppfiles/htdocs/travian5/game/s1"
+    ErrorLog "logs/ks1.t5th.ph-error_log"
+    CustomLog "logs/ks1.t5th.ph-access_log" common
+</VirtualHost>
+    ```
   2. Import database from travian5.sql<br>
     If you want empty data, you should empty every table except ```global_server_data```<br>
     If you want to change speed world, you can edit in ```global_server_data``` table too<br>
