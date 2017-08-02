@@ -59,6 +59,7 @@ Files will upload fast as fast I can.
   - Hero
     - [x] Adventure (generate item with no effect)
     - [ ] Attack
+    - [ ] Reinforcement
     - [x] Inventory
     - [x] Attributes
     - [x] Change hero face
@@ -80,7 +81,7 @@ Files will upload fast as fast I can.
     - [ ] Spy report
     - [ ] Defense report
     - [ ] Reinforces report
-    - [ ] Advanture report
+    - [x] Advanture report
     - [ ] Trade report
     - [ ] Reinforces arrived report
     - [ ] Animal caught repor
@@ -112,7 +113,7 @@ Files will upload fast as fast I can.
       - [ ] Defender
       - [ ] Top 10
       - [ ] Search
-    - [ ] World
+    - [x] World
   - Quest
     - [x] Tutorial gameplay
     - [ ] Tutorial governer
@@ -214,35 +215,35 @@ Example vhost config for apache (OSX with xampp)
 ```
 <VirtualHost *:80>
     # Index
-    ServerAdmin t5.k
-    ServerName t5.k
+    ServerAdmin t5.ph
+    ServerName t5.ph
     DocumentRoot "/Applications/XAMPP/xamppfiles/htdocs/travian5"
-    ErrorLog "logs/t5.k-error_log"
-    CustomLog "logs/t5.k-access_log" common
+    ErrorLog "logs/t5.ph-error_log"
+    CustomLog "logs/t5.ph-access_log" common
 </VirtualHost>
 <VirtualHost *:80>
     # Index
-    ServerAdmin kingdoms.t5.k
-    ServerName kingdoms.t5.k
+    ServerAdmin kingdoms.t5.ph
+    ServerName kingdoms.t5.ph
     DocumentRoot "/Applications/XAMPP/xamppfiles/htdocs/travian5/index"
-    ErrorLog "logs/kingdoms.t5.k-error_log"
-    CustomLog "logs/kingdoms.t5.k-access_log" common
+    ErrorLog "logs/kingdoms.t5.ph-error_log"
+    CustomLog "logs/kingdoms.t5.ph-access_log" common
 </VirtualHost>
 <VirtualHost *:80>
     # Mellon service (Account service)
-    ServerAdmin mellon.t5.k
-    ServerName mellon.t5.k
+    ServerAdmin mellon.t5.ph
+    ServerName mellon.t5.ph
     DocumentRoot "/Applications/XAMPP/xamppfiles/htdocs/travian5/mellon"
-    ErrorLog "logs/mellon.t5.k-error_log"
-    CustomLog "logs/mellon.t5.k-access_log" common
+    ErrorLog "logs/mellon.t5.ph-error_log"
+    CustomLog "logs/mellon.t5.ph-access_log" common
     Header set Access-Control-Allow-Origin "*"
 
     AllowEncodedSlashes on
 </VirtualHost>
 <VirtualHost *:80>
     # CDN
-    ServerAdmin cdn.t5.k
-    ServerName cdn.t5.k
+    ServerAdmin cdn.t5.ph
+    ServerName cdn.t5.ph
     DocumentRoot "/Applications/XAMPP/xamppfiles/htdocs/travian5/cdn"
     ErrorLog "logs/cdn.t5th.ph-error_log"
     CustomLog "logs/cdn.t5th.ph-access_log" common
@@ -250,30 +251,30 @@ Example vhost config for apache (OSX with xampp)
 </VirtualHost>
 <VirtualHost *:80>
     # Lobby
-    ServerAdmin lobby.t5.k
-    ServerName lobby.t5.k
+    ServerAdmin lobby.t5.ph
+    ServerName lobby.t5.ph
     DocumentRoot "/Applications/XAMPP/xamppfiles/htdocs/travian5/lobby"
-    ErrorLog "logs/lobby.t5.k-error_log"
-    CustomLog "logs/lobby.t5.k-access_log" common
+    ErrorLog "logs/lobby.t5.ph-error_log"
+    CustomLog "logs/lobby.t5.ph-access_log" common
 </VirtualHost>
 <VirtualHost *:80>
     # Game
-    ServerAdmin ks1.t5.k
-    ServerName ks1.t5.k
+    ServerAdmin ks1.t5.ph
+    ServerName ks1.t5.ph
     DocumentRoot "/Applications/XAMPP/xamppfiles/htdocs/travian5/game/s1"
-    ErrorLog "logs/ks1.t5.k-error_log"
-    CustomLog "logs/ks1.t5.k-access_log" common
+    ErrorLog "logs/ks1.t5.ph-error_log"
+    CustomLog "logs/ks1.t5.ph-access_log" common
 </VirtualHost>
 ```
 Example hosts file
 ```
 # Travian Kingdom
-127.0.0.1       t5.k
-127.0.0.1       kingdoms.t5.k
-127.0.0.1       mellon.t5.k
-127.0.0.1       lobby.t5.k
-127.0.0.1       cdn.t5.k
-127.0.0.1       ks1.t5.k
+127.0.0.1       t5.ph
+127.0.0.1       kingdoms.t5.ph
+127.0.0.1       mellon.t5.ph
+127.0.0.1       lobby.t5.ph
+127.0.0.1       cdn.t5.ph
+127.0.0.1       ks1.t5.ph
 ```
 
   2. Import database from travian5.sql<br>
@@ -285,7 +286,7 @@ Example hosts file
   
   **To generate world**<br>
   go to sub domain that game avaliable. go to api folder and go to debug.php?a=createWorld<br>
-  for example `ks1.t5.k/api/debug.php?a=createWorld`
+  for example `ks1.t5.ph/api/debug.php?a=createWorld`
   
 Please note that this script doesn't finish yet.
 If you found bug please use [Issues](https://github.com/phoomin2012/travian-kingdom-clone/issues) to report and use [Pulls Requests](https://github.com/phoomin2012/travian-kingdom-clone/pulls) to request feature that offical have or fix bug or add new feature to main project.

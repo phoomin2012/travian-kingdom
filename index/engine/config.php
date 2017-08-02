@@ -8,11 +8,11 @@ define('SQL_DATB', 'travian5_new');
 
 if (isset($_SERVER['SERVER_ADDR'])) {
     if ($_SERVER['SERVER_ADDR'] == "::1" || $_SERVER['SERVER_ADDR'] == "localhost" || $_SERVER['SERVER_ADDR'] == "127.0.0.1") {
-        $index_url = "http://kingdoms.t5th.ph/";
-        $mellon_url = "http://mellon.t5th.ph/";
-        $cdn_url = "http://cdn.t5th.ph/";
-        $lobby_url = "http://lobby.t5th.ph/";
-        $domain = "t5th.ph";
+        $index_url = "http://kingdoms.t5.ph/";
+        $mellon_url = "http://mellon.t5.ph/";
+        $cdn_url = "http://cdn.t5.ph/";
+        $lobby_url = "http://lobby.t5.ph/";
+        $domain = "t5.ph";
         $game_dir = "";
         
         /*$index_url = "http://localhost/travian5/index/";
@@ -22,11 +22,11 @@ if (isset($_SERVER['SERVER_ADDR'])) {
         $domain = "localhost";
         $game_dir = "travian5/game/";*/
     } else {
-        $index_url = "http://kingdoms.t5.phumin.in.th/";
-        $mellon_url = "http://mellon.t5.phumin.in.th/";
-        $cdn_url = "http://cdn.t5.phumin.in.th/";
-        $lobby_url = "http://lobby.t5.phumin.in.th/";
-        $domain = "t5.phumin.in.th";
+        $index_url = "http://kingdoms.t5.ph/";
+        $mellon_url = "http://mellon.t5.ph/";
+        $cdn_url = "http://cdn.t5.ph/";
+        $lobby_url = "http://lobby.t5.ph/";
+        $domain = "t5.ph";
         $game_dir = "";
     }
 }
