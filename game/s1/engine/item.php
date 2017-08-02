@@ -343,7 +343,7 @@ class Item {
         }
 
         $have = query("SELECT * FROM `{$engine->server->prefix}hero_item` WHERE `owner`=? AND `type`=?;", [$owner, $type])->rowCount();
-        if ($have == 1 && $this->getSlot($item['type']) > 0) {
+        if ($have == 1 && $this->getSlot($type) > 0) {
             query("UPDATE `{$engine->server->prefix}hero_item` SET `amount`=? WHERE `owner`=? AND `type`=?;", [$amount, $owner, $type]);
         } else {
             $params = [$owner, $type, $amount, $slot, 1, 1, "[]", "[]", time()];

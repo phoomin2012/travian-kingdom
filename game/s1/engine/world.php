@@ -1036,6 +1036,7 @@ class World {
                 }
                 $infPoint = $now_village['pop'];
             } else {
+                $infSize = 0;
                 $infPoint = 0;
             }
 
