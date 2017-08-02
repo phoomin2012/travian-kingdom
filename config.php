@@ -5,6 +5,7 @@ define('SQL_HOST', '127.0.0.1');
 define('SQL_USER', 'root');
 define('SQL_PASS', '');
 define('SQL_DATB', 'travian5_new');
+define('LANGUAGE', 'en');
 
 if (isset($_SERVER['SERVER_ADDR'])) {
     if ($_SERVER['SERVER_ADDR'] == "::1" || $_SERVER['SERVER_ADDR'] == "localhost" || $_SERVER['SERVER_ADDR'] == "127.0.0.1") {

@@ -4197,8 +4197,8 @@ header('Access-Control-Allow-Origin: *');
             fileLoader.addScript('<?php echo $mellon_url; ?>tk/fenster-js.js', function () {}, 'js');
             fileLoader.addScript('<?php echo $mellon_url; ?>tk/sdk-js.js', function () {}, 'js');
             fileLoader.addScript('<?php echo $cdn_url . $apiversion; ?>/js/quests_version2.js?h=2c0ce034fb6e25a659446203e61ea077');
-            fileLoader.addScript('<?php echo $cdn_url . $apiversion; ?>/lang/th.js?h=0.66.9', function () {}, 'js');
-            fileLoader.addScript('<?php echo $cdn_url . $apiversion; ?>/lang/th_quests_version2.js?h=0.66.9', function () {}, 'js');
+            fileLoader.addScript('<?php echo $cdn_url . $apiversion; ?>/lang/<?php echo LANGUAGE;?>.js?h=0.66.9', function () {}, 'js');
+            fileLoader.addScript('<?php echo $cdn_url . $apiversion; ?>/lang/<?php echo LANGUAGE;?>_quests_version2.js?h=0.66.9', function () {}, 'js');
             fileLoader.addScript('<?php echo $cdn_url . $apiversion; ?>/layout/css/ltr.css?h=2c0ce034fb6e25a659446203e61ea077')
         </script>
 

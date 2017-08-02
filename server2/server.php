@@ -1,5 +1,6 @@
 <?php
 $ignoreLoad = true;
+$_SERVER['HTTP_HOST'] = 'game_service';
 include __DIR__ . '/../game/s1/engine/engine.php';
 
 $interval = 0.5;

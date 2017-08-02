@@ -194,7 +194,7 @@ class Building {
             $max = 0;
         }
         if ($level == 0 && $location > 18 && $location != 41) {
-            $level = $level + 1;
+            $level = $level - 1;
         }
         $upgrade = BuildingData::get($type, $level + 1);
         $return['data']['upgradeCosts'] = array(1 => $upgrade['wood'], 2 => $upgrade['clay'], 3 => $upgrade['iron'], 4 => $upgrade['crop']);
@@ -216,7 +216,7 @@ class Building {
             $return['data']['effect'][0] = $upgrade['effect'];
         }
         //End
-
+        
         for ($i2 = $level; $i2 <= (($level + 7 > $max) ? $max : $level + 7); $i2++) {
             $upgrade = BuildingData::get($type, $i2 + 1);
             if ($upgrade) {
