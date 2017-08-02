@@ -41,7 +41,12 @@ set_error_handler('myErrorHandler');
 register_shutdown_function('fatalErrorShutdownHandler');
 
 function myErrorHandler($code, $message, $file, $line) {
-    query("INSERT INTO `error_php` (`host`,`code`,`message`,`file`,`line`) VALUES (?,?,?,?,?);", [$_SERVER['HTTP_HOST'], $code, $message, $file, $line]);
+    $row = query("SELECT * FROM `error_php` WHERE `host`=? AND `code`=? AND `message`=? AND `file`=? AND `line`=?;",[$_SERVER['HTTP_HOST'], $code, $message, $file, $line])->fetchAll(PDO::FETCH_ASSOC);
+    if(count($row) == 0){
+        query("INSERT INTO `error_php` (`host`,`code`,`message`,`file`,`line`) VALUES (?,?,?,?,?);", [$_SERVER['HTTP_HOST'], $code, $message, $file, $line]);
+    }else{
+        query("UPDATE `error_php` SET `count`=`count`+1 WHERE `id`=?;",[$row[0]['id']]);
+    }
 }
 
 function fatalErrorShutdownHandler() {

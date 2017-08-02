@@ -377,6 +377,7 @@ class Building {
         if ($wid == 0) {
             $wid = $engine->village->select;
         }
+        $owner = $engine->account->getByVillage($wid);
         $field = query("SELECT * FROM `{$engine->server->prefix}field` WHERE `wid`=? AND `location`=?", array($wid, $location))->fetch(PDO::FETCH_ASSOC);
         if ($type == 0) {
             $type = $field['type'];
@@ -385,7 +386,7 @@ class Building {
             $type = 16;
         }
         if ($location == 33) {
-            $type = 30 + $engine->session->data->tribe;
+            $type = 30 + $owner['tribe'];
         }
         if ($field['rubble'] == 1 && ($type != 31 && $type != 32 && $type != 33)) {
             $queuetype = 5;
