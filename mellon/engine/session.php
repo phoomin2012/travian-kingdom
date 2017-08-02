@@ -1,7 +1,7 @@
 <?php
 
 @session_start();
-include_once(dirname(__FILE__) . "/../../index/engine/config.php");
+include_once(dirname(__FILE__) . "/../../config.php");
 include_once(dirname(__FILE__) . "/account.php");
 include_once(dirname(__FILE__) . "/database.php");
 include_once(dirname(__FILE__) . "/page.php");

@@ -7,9 +7,8 @@
  * Copy Rigth © Phumin Chanthalert.
  */
 @session_start();
-ini_set('display_errors', 'On');
 define('SERVER_TAG', 'server1');
-include_once(dirname(__FILE__) . "/../../../index/engine/config.php");
+include_once(dirname(__FILE__) . "/../../../config.php");
 include_once(dirname(__FILE__) . "/building.php");
 include_once(dirname(__FILE__) . "/village.php");
 include_once(dirname(__FILE__) . "/account.php");

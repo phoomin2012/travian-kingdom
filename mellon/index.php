@@ -1,7 +1,7 @@
 <?php
 
 header('Access-Control-Allow-Origin: *');
-include_once dirname(__FILE__) . '/../index/engine/config.php';
+include_once dirname(__FILE__) . '/../config.php';
 include_once dirname(__FILE__) . '/engine/session.php';
 
 $page = new Page();

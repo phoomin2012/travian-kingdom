@@ -280,7 +280,7 @@ Example hosts file
   2. Import database from travian5.sql<br>
     If you want empty data, you should empty every table except ```global_server_data```<br>
     If you want to change speed world, you can edit in ```global_server_data``` table too<br>
-  3. Config mysql password in ```index/engine/config.php```
+  3. Config mysql password in ```/config.php```
   4. Start automatice process with command ```php server2/server.php``` and ```node server/app2``` and ```node server_lobby/app``` (don't forget to install nodejs module with ```npm install``` before run)
   5. Let's enjoy your server
   

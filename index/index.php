@@ -1,5 +1,5 @@
 <?php
-include_once dirname(__FILE__) . "/engine/config.php";
+include_once __DIR__ . "/../config.php";
 ?>
 <!DOCTYPE html>
 <html class="desktop ">
@@ -79,9 +79,9 @@ include_once dirname(__FILE__) . "/engine/config.php";
 
         <!-- mellon -->
         <link rel="dns-prefetch" href="https://mellon-t5.traviangames.com">
-        <link rel="stylesheet" href="<?php echo $mellon_url;?>tk/fenster-css.css" />
-        <script src="<?php echo $mellon_url;?>tk/fenster-js.js" type="text/javascript"></script>
-        <script src="<?php echo $mellon_url;?>tk/sdk-js.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="<?php echo $mellon_url; ?>tk/fenster-css.css" />
+        <script src="<?php echo $mellon_url; ?>tk/fenster-js.js" type="text/javascript"></script>
+        <script src="<?php echo $mellon_url; ?>tk/sdk-js.js" type="text/javascript"></script>
         <script type="text/javascript">
             var mellonStyles = {
                 default: '<?php echo $cdn_url; ?>startpage/live/css/ltr/mellonDialogue.css?c1a17c184e69463ac3690af497880e83',
@@ -91,7 +91,7 @@ include_once dirname(__FILE__) . "/engine/config.php";
                     'C': '<?php echo $cdn_url; ?>startpage/live/css/ltr/mellonDialogueSignupC.css?975c395df6a5b0ce0a003b529ca1f80c'
                 }
             };
-            var mellonUrl = new MellonUrl('<?php echo $mellon_url;?>');
+            var mellonUrl = new MellonUrl('<?php echo $mellon_url; ?>');
             var mellonConfig = {
                 url: mellonUrl.getBase(),
                 application: {
@@ -115,7 +115,7 @@ include_once dirname(__FILE__) . "/engine/config.php";
             Startpage['lang'] = 'com';
             Startpage['direction'] = 'ltr';
             Startpage['deviceType'] = 'desktop';
-            Startpage['config'] = {lobbyUrl: '<?php echo $lobby_url;?>'};
+            Startpage['config'] = {lobbyUrl: '<?php echo $lobby_url; ?>'};
             setHeaderVersion('4');
             setSignUpVersion('0');
             window.loggedIn = false;
