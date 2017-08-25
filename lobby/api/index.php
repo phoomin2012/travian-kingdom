@@ -33,6 +33,10 @@ if ($data['controller'] == "cache") {
                         array_push($json['cache'], $engine->session->get());
                     }
                     break;
+                case "GameWorld": {
+                        array_push($json['cache'], $engine->session->get());
+                    }
+                    break;
                 case "Player": {
                         array_push($json['cache'], $engine->account->get());
                     }

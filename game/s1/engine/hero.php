@@ -17,10 +17,10 @@ class Hero {
       Hero.STATUS_REVIVING = 8;
      */
 
-    public function get($id=null, $head = true) {
+    public function get($id = null, $head = true) {
         global $engine, $_hero_levels, $_hero_t1, $_hero_t2, $_hero_t3;
-        
-        $id === null ? $id = $_SESSION[$engine->server->prefix.'uid'] : '';
+
+        $id === null ? $id = $_SESSION[$engine->server->prefix . 'uid'] : '';
 
         $hero = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `owner`=?;", [$id])->fetch(PDO::FETCH_ASSOC);
         $status = 0;
@@ -210,6 +210,16 @@ class Hero {
         ];
 
         return $r;
+    }
+
+    public function isHome($uid = null) {
+        global $engine;
+        $uid === null ? $uid = $_SESSION[$engine->server->prefix . 'uid'] : '';
+        $hero = $this->get($uid, false);
+        if ($hero['move'] == '')
+            return true;
+        else
+            return false;
     }
 
     public function checkLevelUp($uid, $send = true) {

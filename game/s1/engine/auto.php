@@ -435,7 +435,7 @@ class Auto {
 
             query("UPDATE `{$engine->server->prefix}field` SET `type`=? WHERE `location`=? AND `wid`=?;", [27, $l, $v['wid']]);
             query("UPDATE `{$engine->server->prefix}village` SET `area`=? WHERE `wid`=?;", [-1, $v['wid']]);
-            $engine->world->calInf($b['wid']);
+            $engine->world->calInf($v['wid']);
 
             $this->emitCache($v['owner'], $engine->building->getBuilding(["wid" => $v['owner'], "location" => $l]));
             $this->emitCache($v['owner'], $engine->building->getBuildings($v['wid']));

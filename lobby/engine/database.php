@@ -30,13 +30,16 @@ class Database {
                 "daysSinceStart" => round((time() - $s[$i]['start']) / 86400),
                 "speedGame" => $s[$i]['speed_world'],
                 "speedTroops" => $s[$i]['speed_unit'],
-                "specialRules" => ["none"],
+                "specialRules" => ["nightPeace"], //"cropDiet"
                 "canTransferMoney" => 1,
                 "tribes" => [
                     "1" => query("SELECT * FROM `" . $s[$i]['prefix'] . "user` WHERE `tribe`=?",[1])->rowCount(),
                     "2" => query("SELECT * FROM `" . $s[$i]['prefix'] . "user` WHERE `tribe`=?",[2])->rowCount(),
                     "3" => query("SELECT * FROM `" . $s[$i]['prefix'] . "user` WHERE `tribe`=?",[3])->rowCount(),
-                ]
+                ],
+                "wwIsActivated" => 0,
+                "currentWWLevel" => 0,
+                "maxWWLevel" => 100,
             ];
         }
         return $r;

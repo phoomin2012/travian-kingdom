@@ -29,7 +29,7 @@ class Quest {
         $player = $engine->account->getById($uid);
         $i = 0;
         $r = [];
-        $t = $_SESSION[$engine->server->prefix . 'tutorial'];
+        $t = $player['tutorial'];
         if ($t <= 256) {
             array_push($r, [
                 'name' => 'QuestGiver:' . $i++,
@@ -71,27 +71,30 @@ class Quest {
             ]);
         } else {
 
-            //Can Adventure
-            array_push($r, [
-                'name' => 'QuestGiver:' . $i++,
-                'data' => [
-                    'npcId' => '11',
-                    'questId' => '991',
-                    'dialog' => '1',
-                    'questStatus' => '2',
-                ],
-            ]);
 
-            //Can't adventure
-            /* array_push($r, [
-              'name' => 'QuestGiver:' . $i++,
-              'data' => [
-              'npcId' => '11',
-              'questId' => '-1',
-              'dialog' => '-1',
-              'questStatus' => '3',
-              ],
-              ]); */
+            if ($engine->hero->isHome()) {
+                //Can Adventure
+                array_push($r, [
+                    'name' => 'QuestGiver:' . $i++,
+                    'data' => [
+                        'npcId' => '11',
+                        'questId' => '991',
+                        'dialog' => '1',
+                        'questStatus' => '2',
+                    ],
+                ]);
+            } else {
+                //Can't adventure
+                array_push($r, [
+                    'name' => 'QuestGiver:' . $i++,
+                    'data' => [
+                        'npcId' => '11',
+                        'questId' => '-1',
+                        'dialog' => '-1',
+                        'questStatus' => '3',
+                    ],
+                ]);
+            }
         }
 
         return [
