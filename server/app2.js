@@ -1,7 +1,7 @@
 /**************************/
 /*        Library         */
 /**************************/
-
+var async = require("async");
 var mysql = require('mysql');
 var express = require('express');
 var app = express();
@@ -60,6 +60,7 @@ Travian.player = {
         query("UPDATE `" + config.prefix + "user` SET `online`=? WHERE `uid`=?", [0, Travian.player.index[socket.id]]);
     }
 };
+
 Travian.world = {
     id2xy: function (a) {
         return 0 > a || null === a ? {x: 0, y: 0} : {x: a % 32768 - 16384, y: Math.floor(a / 32768) - 16384}
@@ -68,6 +69,102 @@ Travian.world = {
         return a + 16384 + 32768 * (c + 16384)
     }
 };
+
+Travian.chat = {
+    openRoom: function (type, from, to, line) {
+        var timestamp = (new Date()).getTime();
+        var roomId = `${type}.${from}.${to}`;
+        query("INSERT INTO `" + config.prefix + "chat_room` (`roomId`,`type`,`from`,`to`,`time`,`line`) VALUES (?,?,?,?,?,?);", [roomId, type, from, to, timestamp], (err) => {
+            console.log(err);
+        });
+    },
+    addLine: function (room, from, text) {
+        var timestamp = (new Date()).getTime();
+        query("INSERT INTO `" + config.prefix + "chat_line` (`room`,`from`,`text`,`time`) VALUES (?,?,?,?);", [room, from, text, timestamp], (err) => {
+            console.log(err);
+        });
+    },
+    getLine: function (room, from, socket) {
+        query("SELECT * FROM `" + config.prefix + "chat_line` WHERE `room`=?;", [room], (err_r, res_l) => {
+            var r = [];
+            async.each(res_l, function (item, callback) {
+                query("SELECT * FROM `" + config.prefix + "user` WHERE `uid`=?;", [item.from], (err_u, res_u) => {
+                    r.push({
+                        name: "ChatLine:" + item.time,
+                        data: {
+                            _id: item.id + item.room + item.time,
+                            id: item.id,
+                            roomId: item.room,
+                            isFirst: true,
+                            playerId: item.from,
+                            playerName: res_u[0].username,
+                            text: item.text,
+                            timestamp: item.time
+                        }
+                    });
+                    callback();
+                });
+            }, function (err) {
+                r = {
+                    cache: [
+                        {
+                            name: 'Collection:ChatLine:' + room,
+                            data: {
+                                operation: 1,
+                                cache: r,
+                            }
+                        }
+                    ]
+                };
+                socket.emit('chatCache', r);
+            });
+        });
+    },
+    getInbox: function (from, socket) {
+        query("SELECT * FROM `" + config.prefix + "chat_room` WHERE `from`=? OR `to`=?;", [from, from], (err_r, res_r) => {
+            var r = [];
+            async.each(res_r, function (item, callback) {
+                query("SELECT * FROM `" + config.prefix + "user` WHERE `uid`=?;", [item.from], (err_u, res_u) => {
+                    r.push({
+                        name: 'Collection:ChatInbox:',
+                        data: {
+                            operation: 1,
+                            cache: [
+                                {
+                                    name: "ChatInbox:" + item.roomId,
+                                    data: {
+                                        _id: "ChatInbox:" + item.roomId,
+                                        roomId: item.roomId,
+                                        group: "",
+                                        line: item.line,
+                                        linePlayerId: item.from,
+                                        linePlayerName: res_u[0].username,
+                                        myPlayerId: Travian.player.index[socket.id],
+                                        unread: 0,
+                                        closed: false,
+                                        closeBy: 0,
+                                        ignoreUntil: 0,
+                                        lastOtherRead: 1488297885932,
+                                        lastOwnRead: 1488298916122,
+                                        lastTimestamp: 1488298915535,
+                                        timestamp: 1488298915535,
+                                        playersRead: {},
+                                    }
+                                },
+                            ],
+                        }
+                    });
+                    callback();
+                });
+            }, function (err) {
+                r = {
+                    cache: r,
+                };
+                socket.emit('chatCache', r);
+            });
+        });
+    }
+}
 
 function query($sql, $params, $callback) {
     if (typeof $callback == "undefined") {
@@ -113,7 +210,7 @@ io.on('connect', function (socket) {
         Travian.player.join(data.playerId, socket);
     });
     socket.on('*', function (data) {
-        logs(data.data[0], data.data[1], typeof data.data[2], data.data[2]);
+        logs(data);
     });
 
     socket.on('disconnect', function () {
@@ -140,29 +237,45 @@ io.on('connect', function (socket) {
          });*/
     });
 
+    socket.on('chat', function (action, data) {
+        if (action == 'sendPrivMessage') {
+            query("SELECT * FROM `" + config.prefix + "chat_room` WHERE `from`=? OR `to`=?;", [data.uid, data.uid], (err_r, res_r) => {
+                console.log(err_r, res_r)
+                if (res_r.length == 0) {
+                    Travian.chat.openRoom(1, Travian.player.index[socket.id], data.uid, data.text);
+                    Travian.chat.addLine(`1.${Travian.player.index[socket.id]}.${data.uid}`, Travian.player.index[socket.id], data.text);
+                    Travian.chat.getInbox(Travian.player.index[socket.id], socket);
+                    Travian.chat.getLine(data.roomId, Travian.player.index[socket.id], socket);
+                } else {
+                    Travian.chat.addLine(`1.${res_r[0]['from']}.${res_r[0]['to']}`, Travian.player.index[socket.id], data.text);
+                    Travian.chat.getLine(data.roomId, Travian.player.index[socket.id], socket);
+                }
+            });
+        } else if (action == 'sendMessage') {
+            Travian.chat.addLine(data.roomId, Travian.player.index[socket.id], data.text);
+            Travian.chat.getLine(data.roomId, Travian.player.index[socket.id], socket);
+        }
+    });
+
     socket.on('chatCache', function (data, callback_ac) {
         data.forEach(function (v, i) {
             var c_args = v.split(':');
             var controller = c_args[1];
             if (c_args[0] == "ChatUser") {
-                query("SELECT * FROM `" + config.prefix + "user` WHERE `uid`=?", [c_args[1]], function (err_ap, res_ap) {
+                query("SELECT * FROM `" + config.prefix + "user` WHERE `uid`=?;", [c_args[1]], function (err_ap, res_ap) {
                     socket.emit('chatCache', {
                         cache: [
                             {
                                 name: 'ChatUser:' + c_args[1],
                                 data: {
-                                    operation: 1,
-                                    cache: [
-                                        {
-                                            playerId: res_ap[0].uid,
-                                            name: res_ap[0].username,
-                                            online: 0,
-                                            status: -1,
-                                            kingStatus: "0",
-                                            kingdomId: "0",
-                                            kingdomRole: "0"
-                                        }
-                                    ],
+                                    playerId: res_ap[0].uid,
+                                    name: res_ap[0].username,
+                                    online: false,
+                                    status: -1,
+                                    kingStatus: "0",
+                                    kingdomId: "0",
+                                    kingdomRole: "0",
+                                    lastClick: "2",
                                 }
                             }
                         ]
@@ -170,18 +283,14 @@ io.on('connect', function (socket) {
                     callback_ac({
                         name: 'ChatUser:' + c_args[1],
                         data: {
-                            operation: 1,
-                            cache: [
-                                {
-                                    playerId: res_ap[0].uid,
-                                    name: res_ap[0].username,
-                                    online: 0,
-                                    status: -1,
-                                    kingStatus: "0",
-                                    kingdomId: "0",
-                                    kingdomRole: "0"
-                                }
-                            ],
+                            playerId: res_ap[0].uid,
+                            name: res_ap[0].username,
+                            online: false,
+                            status: -1,
+                            kingStatus: "0",
+                            kingdomId: "0",
+                            kingdomRole: "0",
+                            lastClick: "2",
                         }
                     });
                 });
@@ -193,19 +302,19 @@ io.on('connect', function (socket) {
                             data: {
                                 operation: 1,
                                 cache: [
-                                    /*{
-                                     name: "ChatLine:1488810372670",
-                                     data: {
-                                     _id: "58bd71841a4576411962ecfc",
-                                     id: "210603",
-                                     roomId: "1.101.104",
-                                     isFirst: true,
-                                     playerId: 101,
-                                     playerName: "phoomin009",
-                                     text: "Hello",
-                                     timestamp: 1488810372670
-                                     }
-                                     }*/
+                                    {
+                                        name: "ChatLine:1488810372670",
+                                        data: {
+                                            _id: "58bd71841a4576411962ecfc",
+                                            id: "210603",
+                                            roomId: "1.101.102",
+                                            isFirst: true,
+                                            playerId: 101,
+                                            playerName: "phoomin009",
+                                            text: "Hello",
+                                            timestamp: 1488810372670
+                                        }
+                                    }
                                 ],
                             }
                         }
@@ -249,65 +358,9 @@ io.on('connect', function (socket) {
                         ]
                     });
                 } else if (controller == "ChatInbox") {
-                    socket.emit('chatCache', {
-                        cache: [
-                            {
-                                name: 'Collection:ChatInbox:',
-                                data: {
-                                    operation: 1,
-                                    cache: [
-                                        /*{
-                                         name: "ChatInbox:1.101.104",
-                                         data: {
-                                         _id: controller + ":1.101.104",
-                                         roomId: "1.101.104",
-                                         group: "",
-                                         line: "ถ้ายังไงก็ติดต่อผมได้นะครับ เล่นไอดีนี้จนจบเซิฟแน่นอน",
-                                         linePlayerId: "101",
-                                         linePlayerName: "phoomin009",
-                                         myPlayerId: "101",
-                                         unread: 0,
-                                         closed: true,
-                                         closeBy: 0,
-                                         ignoreUntil: 0,
-                                         lastOtherRead: 1488297885932,
-                                         lastOwnRead: 1488298916122,
-                                         lastTimestamp: 1488298915535,
-                                         timestamp: 1488298915535,
-                                         playersRead: {},
-                                         }
-                                         },*/
-                                    ],
-                                }
-                            }
-                        ]
-                    });
+                    Travian.chat.getInbox(Travian.player.index[socket.id], socket);
                 } else if (controller == "ChatLine") {
-                    socket.emit('chatCache', {
-                        cache: [
-                            {
-                                name: 'Collection:ChatLine:' + c_args[2],
-                                data: {
-                                    operation: 1,
-                                    cache: [
-                                        /*{
-                                         name: "ChatLine:1488810372670",
-                                         data: {
-                                         _id: "58bd71841a4576411962ecfc",
-                                         id: "210603",
-                                         roomId: "1.101.104",
-                                         isFirst: true,
-                                         playerId: 101,
-                                         playerName: "phoomin009",
-                                         text: "Hello",
-                                         timestamp: 1488810372670
-                                         }
-                                         }*/
-                                    ],
-                                }
-                            }
-                        ]
-                    });
+                    Travian.chat.getLine(c_args[2], Travian.player.index[socket.id], socket);
                 }
             }
         });
@@ -467,6 +520,21 @@ io.on('connect', function (socket) {
                     callback_ns($return);
                 });
             }
+        }
+    });
+    socket.on('prestigeService', function (data, callback_ns) {
+        if (data.type == "askForPrestige") {
+            query("SELECT * FROM `" + config.prefix + "user` WHERE `uid`=?", [data.query[0]], function (err_ap, res_au) {
+                query("SELECT * FROM `global_user` WHERE `email`=?", [res_au[0]['email']], function (err_ap, res_gu) {
+                    $return = {
+                        id: data.query[0],
+                        outdated: false,
+                        prestige: res_gu[0]['prestige'],
+                    };
+                    callback_ns([$return]);
+                    socket.emit($return);
+                });
+            });
         }
     });
 });

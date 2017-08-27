@@ -13,6 +13,71 @@ class Account {
     public $plus_time = 86400 * 5;
     public $resBonus_time = 86400 * 5;
     public $cropBonus_time = 86400 * 5;
+    public $prestige_data = [
+        "25" => [
+            "bronze" => 1,
+            "silver" => 0,
+            "gold" => 0
+        ],
+        "50" => [
+            "bronze" => 2,
+            "silver" => 0,
+            "gold" => 0
+        ],
+        "100" => [
+            "bronze" => 3,
+            "silver" => 0,
+            "gold" => 0
+        ],
+        "200" => [
+            "bronze" => 3,
+            "silver" => 1,
+            "gold" => 0
+        ],
+        "300" => [
+            "bronze" => 3,
+            "silver" => 2,
+            "gold" => 0
+        ],
+        "400" => [
+            "bronze" => 0,
+            "silver" => 3,
+            "gold" => 0
+        ],
+        "500" => [
+            "bronze" => 0,
+            "silver" => 3,
+            "gold" => 1
+        ],
+        "750" => [
+            "bronze" => 0,
+            "silver" => 3,
+            "gold" => 2
+        ],
+        "1000" => [
+            "bronze" => 0,
+            "silver" => 0,
+            "gold" => 3
+        ],
+        "2000" => [
+            "bronzeBadge" => 1,
+            "bronze" => 0,
+            "silver" => 0,
+            "gold" => 0
+        ],
+        "5000" => [
+            "silverBadge" => 1,
+            "bronze" => 0,
+            "silver" => 0,
+            "gold" => 0
+        ],
+        "10000" => [
+            "goldBadge" => 1,
+            "bronze" => 0,
+            "silver" => 0,
+            "gold" => 0
+        ]
+    ];
 
     public function FPLogin() {
         global $engine;
@@ -86,9 +151,9 @@ class Account {
 
         $p = query("SELECT * FROM `" . $engine->server->prefix . "user` WHERE `uid`=?", array($id))->fetch(PDO::FETCH_ASSOC);
         $k = $engine->kingdom->getData($p['kingdom']);
-        $r = array(
+        $r = [
             'name' => 'Player:' . $id,
-            'data' => array(
+            'data' => [
                 'playerId' => $id,
                 'name' => $p['username'] == null ? "" : $p['username'],
                 'tribeId' => $p['tribe'],
@@ -105,11 +170,7 @@ class Account {
                 'villages' => $engine->village->getAll($p['uid'], false),
                 'population' => $engine->village->getAllPop($p['uid']),
                 'level' => 0,
-                'stars' => array(
-                    'bronze' => 3,
-                    'gold' => 0,
-                    'silver' => 1,
-                ),
+                'stars' => $this->getPrestige(null, true),
                 'prestige' => 266,
                 'nextLevelPrestige' => 300,
                 'hasNoobProtection' => false,
@@ -139,8 +200,8 @@ class Account {
                 'questVersion' => '2',
                 'avatarIdentifier' => '1',
                 'active' => "1",
-            ),
-        );
+            ],
+        ];
 
         if ($p['quest'] == 0) {
             
@@ -184,8 +245,20 @@ class Account {
         return $cpp;
     }
 
-    public function getPrestige() {
+    public function getPrestige($uid = null, $onlystar = false) {
         global $engine;
+
+        $uid === null ? $uid = $_SESSION[$engine->server->prefix . 'uid'] : 0;
+        $email = $this->getById($uid, 'email');
+        $gu = query("SELECT * FROM `global_user` WHERE `email`=?;", [$email])->fetch(PDO::FETCH_ASSOC);
+        $prestige = $gu['prestige'];
+
+        foreach ($this->prestige_data as $pr => $s) {
+            if ($prestige >= $pr)
+                $star = $s;
+            else
+                break;
+        }
 
         $r = array(
             'gameworldPrestige' => 6,
@@ -193,11 +266,7 @@ class Account {
             'nextLevelGlobalPrestige' => 300,
             'remainingDays' => 5,
             'weekPrestigeAmount' => 7,
-            'prestigeStars' => array(
-                'bronze' => 3,
-                'gold' => 0,
-                'silver' => 1,
-            ),
+            'prestigeStars' => $star,
             'rankings' => array(
                 array(
                     'achievedValue' => 1266,
@@ -234,7 +303,10 @@ class Account {
                 )
             ),
         );
-        return $r;
+        if ($onlystar)
+            return $star;
+        else
+            return $r;
     }
 
     public function buyPremium($type, $price, $lifttime = false) {
@@ -306,15 +378,13 @@ class Account {
         ];
         return $r;
     }
-    
-    public function selectCard($params){
+
+    public function selectCard($params) {
         global $engine;
     }
-    
-    public function voucher(){
+
+    public function voucher() {
         global $engine;
-        
-        
     }
 
 }
