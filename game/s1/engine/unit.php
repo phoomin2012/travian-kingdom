@@ -726,8 +726,6 @@ class Unit {
             ]);
         }
 
-        var_dump($defender);
-
         $battleResult = $engine->battle->calculateBattle(3, $attacker, $defender);
 
         $source = [
@@ -786,15 +784,29 @@ class Unit {
         }
         if ($data['owner'] > 100) {
             $id = $engine->report->add(4, $pa['uid'], $source, $target, $detail, $modules);
+            // Attacker
+            if ($detail['final']['attacker']['loss'] == $detail['final']['attacker']['sum']) {
+                $engine->notification->add($pa['uid'], 1, $id, 'movement_attack_medium_flat_negative');
+            } elseif ($detail['final']['attacker']['loss'] == 0) {
+                $engine->notification->add($pa['uid'], 1, $id, 'movement_attack_medium_flat_positive');
+            } else {
+                $engine->notification->add($pa['uid'], 1, $id, 'movement_attack_medium_flat_uncertain');
+            }
+            // Denfender
+            if ($detail['final']['defender']['loss'] == $detail['final']['defender']['sum']) {
+                $engine->notification->add($pd['uid'], 1, $id, 'movement_defender_medium_flat_negative');
+            } elseif ($detail['final']['defender']['sum'] == 0) {
+                $engine->notification->add($pd['uid'], 1, $id, 'movement_defender_medium_flat_neutral');
+            } elseif ($detail['final']['defender']['loss'] == 0) {
+                $engine->notification->add($pd['uid'], 1, $id, 'movement_defender_medium_flat_positive');
+            } else {
+                $engine->notification->add($pd['uid'], 1, $id, 'movement_defender_medium_flat_uncertain');
+            }
         }
 
         if ($pa['tutorial'] == 3) {
             $engine->account->edit('tutorial', 4, $pa['uid']);
             $engine->auto->emitCache($pa['uid'], $engine->quest->get($pa['uid']));
-        } else {
-            if ($data['owner'] > 100) {
-                $engine->notification->add($pa['uid'], 1, $id, 'movement_attack_medium_flat_positive');
-            }
         }
     }
 

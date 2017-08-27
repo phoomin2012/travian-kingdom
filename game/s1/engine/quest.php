@@ -109,7 +109,7 @@ class Quest {
     public function get($giver = "", $uid = null) {
         global $engine;
         $r = [];
-        $uid == null ? $uid = $_SESSION[$engine->server->prefix . 'uid'] : '';
+        $uid == null ? $uid = (isset($_SESSION[$engine->server->prefix . 'uid']) ? $_SESSION[$engine->server->prefix . 'uid'] : $giver) : '';
 
         if ($giver <= 12 && $giver >= -1) {
             if ($giver == -1) {

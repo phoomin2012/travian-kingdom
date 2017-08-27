@@ -5482,6 +5482,7 @@
                 }
             } else
                 p = t / r, a > 0 && (m = p - c, p = c);
+            console.log(m,t,r,t/r,p,c);
             return o.default.createElement("div", {
                 className: "game-world-progress"
             }, o.default.createElement(u.ProgressBar, null, o.default.createElement(u.ProgressBar, {

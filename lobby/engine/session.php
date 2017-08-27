@@ -9,6 +9,7 @@ include_once(dirname(__FILE__) . "/cache.php");
 include_once(dirname(__FILE__) . "/notification.php");
 include_once(dirname(__FILE__) . "/prestige.php");
 include_once(dirname(__FILE__) . "/database.php");
+include_once(dirname(__FILE__) . "/server.php");
 include_once(dirname(__FILE__) . "/essentials.php");
 
 class Session {
@@ -73,6 +74,7 @@ $engine = (object) array(
             "noti" => new Notification(),
             "achv" => new Achievement(),
             "prestige" => new Prestige(),
+    "server" => new Server(),
 );
 $engine->sql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $engine->sql->exec("SET CHARACTER SET utf8");

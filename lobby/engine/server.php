@@ -1,41 +1,25 @@
 <?php
 
-class Database {
+class Server {
 
     function listServer($full = false) {
         global $engine;
-        $s = query("SELECT * FROM `global_server_data`")->fetchAll(PDO::FETCH_ASSOC);
-        $r = array();
-        for ($i = 0; $i < count($s); $i++) {
-            $r[$i] = $this->getInfo($s[$i]);
+        $ss = query("SELECT * FROM `global_server_data`")->fetchAll(PDO::FETCH_ASSOC);
+        $r = [];
+        foreach ($ss as $s) {
+            $sdq = query("SELECT * FROM `{$s['prefix']}user` WHERE `email`=?;", [$_SESSION['lobby_email']]);
+            if ($sdq->rowCount() == 0) {
+                $r[] = $this->getInfo($s);
+            }
         }
         return $r;
-    }
-
-    public function msid($email = "abcdefghijklmnopqrstuvwxyz") {
-        $token = rand(0, 1000);
-        $token = $token . $email . rand(1000, 10000);
-        $token = hash('adler32', $token);
-        $token = time() . $token;
-        $token = hash('crc32b', $token);
-        $token = $token . hash('crc32', $token);
-
-        $q = query("SELECT * FROM `global_msid` WHERE `email`=? AND `ip`=?", array($email, $_SERVER['REMOTE_ADDR']));
-        if ($q->rowCount() == 1) {
-            $t = $q->fetch(PDO::FETCH_ASSOC);
-            $token = $t['token'];
-        } else {
-            query("DELETE FROM `global_msid` WHERE `email`=? AND `ip`=?", array($email, $_SERVER['REMOTE_ADDR']));
-            query("INSERT INTO `global_msid` (`token`,`email`,`ip`) VALUES (?,?,?);", array($token, $email, $_SERVER['REMOTE_ADDR']));
-        }
-        return $token;
     }
 
     public function getInfo($world) {
         global $engine;
 
         if (!is_array($world)) {
-            $world = query("SELECT * FROM `global_server_data` WHERE `sid`=?;",[$world])->fetch(PDO::FETCH_ASSOC);
+            $world = query("SELECT * FROM `global_server_data` WHERE `sid`=?;", [$world])->fetch(PDO::FETCH_ASSOC);
         }
         $r = [
             "consumersId" => $world['sid'],
@@ -57,9 +41,9 @@ class Database {
             "blacklisted" => 0,
             "baseUrl" => "",
             "daysSinceStart" => round((time() - $world['start']) / 86400),
-            "speedGame" => $world['speed_world'],
-            "speedTroops" => $world['speed_unit'],
-            "specialRules" => ["nightPeace"], //"cropDiet"
+            "speedGame" => 1,//$world['speed_world'],
+            "speedTroops" => 1,//$world['speed_unit'],
+            "specialRules" => ["none"], //"none","cropDiet","nightPeace"
             "canTransferMoney" => 1,
             "tribes" => [
                 "1" => query("SELECT * FROM `" . $world['prefix'] . "user` WHERE `tribe`=?", [1])->rowCount(),
@@ -76,6 +60,10 @@ class Database {
     public function getServerInfo($world) {
         global $engine;
         return query("SELECT * FROM `global_server_data` WHERE `sid`=?;", array($world))->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function sittler($world) {
+        global $engine;
     }
 
 }

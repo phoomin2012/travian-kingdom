@@ -2,23 +2,29 @@
 
 class Prestige {
 
-    public function get() {
+    public function get($uid) {
         global $engine;
-
-        return [
-            "name" => "PrestigeDetails:".$_SESSION['lobby_uid'],
+        $uid === null ? $uid = $_SESSION['lobby_uid'] : 0;
+        
+        $r = [
+            "name" => "PrestigeDetails:{$uid}",
             "data" => [
-                "globalPrestige" => 409,
-                "level" => 6,
+                "achievementPrestige" => 3,
+                "activeGameWorldsPrestige" => 1,
+                "currentLevelPrestigePoints" => 3,
+                "finishedGameWorldsPrestige" => 0,
+                "globalPrestige" => 3,
+                "level" => 1,
+                "levelProgressPercentage" => 30,
+                "nextLevel" => 2,
+                "nextLevelPrestigePoints" => 10,
                 "stars" => [
-                    "silver" => 3
-                ],
-                "finishedGameWorldsPrestige" => "174",
-                "activeGameWorldsPrestige" => "55",
-                "nextLevelPrestigePoints" => 500,
-                "currentLevelPrestigePoints" => 400
+                    "bronze" => 3,
+                    "silver" => 2,
+                ]
             ]
         ];
+        return $r;
     }
 
 }

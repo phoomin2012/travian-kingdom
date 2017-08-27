@@ -22,7 +22,7 @@ if ($_GET['token'] == md5($_GET['msid'])) {
 
         $numUser = query("SELECT * FROM `" . $engine->server->prefix . "user`")->rowCount();
         $uid = $numUser + 101;
-        query("INSERT INTO `" . $engine->server->prefix . "user` (`uid`,`email`,`gold`,`silver`,`avatar`) VALUES (?,?,?,?,?);", array($uid, $_SESSION['mellon_email'], $engine->account->start_gold, 0, $aid));
+        query("INSERT INTO `" . $engine->server->prefix . "user` (`uid`,`email`,`gold`,`silver`,`avatar`,`lastLogin`) VALUES (?,?,?,?,?,?);", array($uid, $_SESSION['mellon_email'], $engine->account->start_gold, 0, $aid, time()));
         $_SESSION[$engine->server->prefix . 'uid'] = $uid;
         $_SESSION[$engine->server->prefix . 'tribe'] = 0;
         $_SESSION[$engine->server->prefix . 'gold'] = $engine->account->start_gold;

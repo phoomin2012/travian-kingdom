@@ -134,7 +134,8 @@ include_once __DIR__.'/lang/en.php';
                                     "tr": "tr_TR",
                                     "uk": "uk_UA",
                                     "us": "en_US",
-                                    "ua": "uk_UA"
+                                    "ua": "uk_UA",
+                                    "th": "th_TH",
                             },
                             "mellon": {
                             "url": "<?php echo $mellon_url; ?>",
@@ -153,7 +154,7 @@ include_once __DIR__.'/lang/en.php';
                     }
             };
             window.__INITIAL_STATE__.config.countries = {
-            "asia": ["tr"],
+            "asia": ["tr","th"],
                     "europe": ["en", "gb", "us", "ru", "dk", "no", "se", "fi", "nl", "fr", "pt", "de", "it", "es", "pl", "cz", "hu"],
                     "middle_east": ["ae"]
             };

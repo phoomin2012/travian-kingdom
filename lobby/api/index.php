@@ -34,7 +34,10 @@ if ($data['controller'] == "cache") {
                     }
                     break;
                 case "GameWorld": {
-                        array_push($json['cache'], $engine->session->get());
+                        array_push($json['cache'], [
+                            'name' => 'GameWorld:' . $action[1],
+                            'data' => $engine->server->getInfo($action[1])
+                        ]);
                     }
                     break;
                 case "Player": {
@@ -90,16 +93,16 @@ if ($data['controller'] == "cache") {
     } elseif ($data['action'] == "getCountries") {
         $json['serialNo'] = 1041;
         $json['response'] = array(
-            "asia" => array("tr"),
+            "asia" => array("tr", "th"),
             "europe" => array("dk", "no", "se", "fi", "fr", "nl", "de", "it", "hu", "en", "gb", "us", "ru", "cz", "pl"),
             "middle_east" => array("ae")
         );
     } elseif ($data['action'] == "getAccountDetails") {
         $json['serialNo'] = 1154;
-        $json['response'] = array(
+        $json['response'] = [
             "accountType" => "Account",
-            "duals" => array(),
-            "sitters" => array(),
+            "duals" => [],
+            "sitters" => [],
             "email" => $_SESSION['mellon_email'],
             "facebookId" => null,
             "googleId" => null,
@@ -108,67 +111,30 @@ if ($data['controller'] == "cache") {
             "isActivated" => true,
             "isInstant" => false,
             "newEmail" => null,
-            "dwhData" => array(
-                "customerGroup" => array(
+            "customerGroup" => [
+                "key" => 3,
+                "name" => "Workers"
+            ],
+            "dwhData" => [
+                "customerGroup" => [
                     "key" => 3,
                     "name" => "Workers"
-                )
-            ),
-            "newsletter" => array(
-                array(
+                ]
+            ],
+            "newsletter" => [
+                [
                     "newsletterId" => 4,
                     "newsletterName" => "Travian Games",
                     "newsletterTerms" => "",
                     "subscribed" => false,
-                )
-            )
-        );
-    } elseif ($data['action'] == "getLastPlayedAvatars") {
+                ]
+            ]
+        ];
+    } elseif ($data['action'] == "getAvatarData") {
         $json['serialNo'] = 1043;
-        $json['response'] = array(
-            array(
-                "avatarIdentifier" => "2456530",
-                "gameworldId" => "412",
-                "id" => "2456530",
-                "lastLogin" => "1455454831"
-            ),
-        );
-        $json['cache'] = array(
-            array(
-                "name" => "AvatarInformation:2456530",
-                "data" => array(
-                    "avatarIdentifier" => "2456530",
-                    "buildingQueue" => 0,
-                    "buildingQueueMaster" => 0,
-                    "incomingAttacks" => 0,
-                    "lastClick" => "1455455250",
-                    "lastLogin" => "1455455250",
-                    "population" => "0",
-                    "ranking" => 1,
-                    "signupTime" => "1455419457",
-                    "spawnedOnMap" => "0",
-                    "userAccountIdentifier" => "52219",
-                    "villages" => 0
-                )
-            ),
-            array(
-                "name" => "AvatarInformation:1533802",
-                "data" => array(
-                    "avatarIdentifier" => "1533802",
-                    "buildingQueue" => "0",
-                    "buildingQueueMaster" => "0",
-                    "incomingAttacks" => "0",
-                    "lastClick" => "-",
-                    "lastLogin" => "-",
-                    "population" => "-",
-                    "ranking" => "331",
-                    "signupTime" => "-",
-                    "spawnedOnMap" => "-",
-                    "userAccountIdentifier" => "52219",
-                    "villages" => "-"
-                )
-            ),
-        );
+        $json['response'] = [
+            ["id" => "1533802"]
+        ];
     } elseif ($data['action'] == "getAll") {
         $json['serialNo'] = 1033;
         $json['response'] = [];
@@ -177,12 +143,12 @@ if ($data['controller'] == "cache") {
             "data" => [],
         ];
         $json['cache'] = [
-            $engine->session->get(),
             $engine->account->get(),
-            $engine->avatar->getImage(),
+            $engine->session->get(),
             $engine->prestige->get(),
             $engine->achv->get(),
             $engine->noti->get(),
+            $engine->avatar->getImage(),
         ];
         $json['cache'] = array_merge($json['cache'], $engine->avatar->getAll());
     }
@@ -195,7 +161,7 @@ if ($data['controller'] == "cache") {
         $json['response'] = [
             "cluster" => ["en", "gb", "us"],
             "other" => [],
-            "recommended" => $engine->database->listServer(true)
+            "recommended" => $engine->server->listServer(true)
         ];
         $json['serialNo'] = 1172;
     }

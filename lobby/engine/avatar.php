@@ -11,16 +11,18 @@ class Avatar {
             "data" => [
                 "avatarIdentifier" => $data['avatarId'],
                 "userAccountIdentifier" => $data['userId'],
-                "signupTime" => "1",
-                "population" => "12",
+                "population" => "1200",
+                "ranking" => 1,
                 "villages" => 1,
-                "lastLogin" => "1492049152",
-                "lastClick" => "1492049152",
-                "ranking" => 0,
+                "lastLogin" => $data['login'],
+                "lastClick" => $data['login'],
                 "buildingQueue" => 0,
                 "buildingQueueMaster" => 0,
                 "incomingAttacks" => 0,
-                "spawnedOnMap" => "1488165259"
+                "nextIncomingAttack" => 0,
+                "signupTime" => "1",
+                "deletionTime" => "0",
+                "spawnedOnMap" => $data['spawn']
             ],
         ];
     }
@@ -31,44 +33,56 @@ class Avatar {
         $servers = query("SELECT `sid`,`prefix` FROM `global_server_data`")->fetchAll(PDO::FETCH_ASSOC);
         $avatar = [];
         $collection = [];
+        $r = [];
 
         foreach ($servers as $s) {
             $sdq = query("SELECT * FROM `{$s['prefix']}user` WHERE `email`=?;", [$_SESSION['lobby_email']]);
             if ($sdq->rowCount() == 1) {
                 $sd = $sdq->fetch(PDO::FETCH_ASSOC);
+                $avatar = "3416714";
                 $data = [
-                    "avatarId" => "3416714",
+                    "avatarId" => $avatar,
                     "userId" => $_SESSION['lobby_uid'],
+                    "spawn" => $sd['spawn'],
+                    "login" => $sd['lastLogin'],
+                    
                 ];
 
-                array_push($avatar, $this->get($data));
+                array_push($r, $this->get($data));
                 array_push($collection, [
-                    "userAccountIdentifier" => $_SESSION['lobby_uid'],
-                    "avatarIdentifier" => "3416714",
-                    "avatarName" => $sd['username'],
-                    "consumersId" => $sd['uid'],
-                    "worldName" => "COM3",
-                    "country" => "en",
-                    "accountName" => $sd['username'],
-                    "isBanned" => false,
-                    "isSuspended" => false,
-                    "limitation" => "0",
-                    "banReason" => "0",
-                    "banPaymentProvider" => ""
+                    "name" => "Avatar:$avatar",
+                    "data" => [
+                        "consumersId" => 1,
+                        "userAccountIdentifier" => $_SESSION['lobby_uid'],
+                        "avatarIdentifier" => $avatar,
+                        "avatarName" => $sd['username'],
+                        'accountName' => $sd['username'],
+                        "worldName" => "COM3",
+                        "country" => "en",
+                        "accountName" => $sd['username'],
+                        "isBanned" => false,
+                        "isSuspended" => false,
+                        "limitation" => "0",
+                        "suspensionTime" => "0",
+                        "banReason" => "0",
+                        "banPaymentProvider" => ""
+                    ],
                 ]);
             }
         }
-
-
-        return [
-            [
-                "name" => "Collection:Avatar:",
-                "data" => [
-                    "operation" => 1,
-                    "cache" => [],
-                ]
+        $r[] = [
+            "name" => "Collection:Avatar:",
+            "data" => [
+                "operation" => 1,
+                "cache" => $collection,
             ]
         ];
+        return $r;
+        /* if (!$avatar) {
+          return $r;
+          } else {
+          return $avatar;
+          } */
     }
 
     public function getImage() {

@@ -8,6 +8,7 @@
  */
 @session_start();
 define('SERVER_TAG', 'server1');
+date_default_timezone_set('Asia/Bangkok');
 include_once(dirname(__FILE__) . "/../../../config.php");
 include_once(dirname(__FILE__) . "/building.php");
 include_once(dirname(__FILE__) . "/village.php");

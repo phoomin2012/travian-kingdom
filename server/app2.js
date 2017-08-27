@@ -11,7 +11,6 @@ var server = app.listen(process.env.PORT, function () {
 });
 var io = require('socket.io')(server, {path: '/chat'});
 var middleware = require('socketio-wildcard')();
-var buildData = require("./data/builddata");
 
 io.use(middleware);
 config = {
@@ -86,15 +85,16 @@ function query($sql, $params, $callback) {
 /**************************/
 
 setInterval(function () {
-    query("SELECT * FROM `" + config.prefix + "nodejs`", [], function (err_n, res_n) {
+    query("SELECT * FROM `" + config.prefix + "nodejs` WHERE `sent`<>1", [], function (err_n, res_n) {
         for (var c in res_n) {
             if (res_n[c].uid != "") {
                 Travian.socket.send(res_n[c].uid, JSON.parse(res_n[c].data));
             } else {
                 Travian.socket.sendAll(JSON.parse(res_n[c].data));
             }
+            //query("UPDATE FROM `" + config.prefix + "nodejs` SET `sent`=1 WHERE `id`=?", [res_n[c].id]);
             query("DELETE FROM `" + config.prefix + "nodejs` WHERE `id`=?", [res_n[c].id]);
-            config.debug ? console.log('Send node...') : '';
+            config.debug ? console.log('Send node with delete data...') : '';
         }
     });
 }, 250);

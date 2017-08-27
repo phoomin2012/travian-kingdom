@@ -2,7 +2,7 @@
 
 class Auto {
 
-    var $last = array('pong' => 0, 'freeSilver' => 0);
+    var $last = ['pong' => 0, 'freeSilver' => 0, 'hpHero'];
 
     public function emitEvent($uid = null, $data = []) {
         global $engine;
@@ -19,7 +19,7 @@ class Auto {
                     "serial" => $engine->session->serialNo($user['uid']),
                     "ts" => time() * 1000,
                 );
-                query("INSERT INTO `" . $engine->server->prefix . "nodejs` (`uid`,`data`) VALUES (?,?)", array($user['uid'], json_encode($r)));
+                query("INSERT INTO `{$engine->server->prefix}nodejs` (`uid`,`data`) VALUES (?,?)", array($user['uid'], json_encode($r)));
             }
         } else {
             $r = array(
@@ -28,7 +28,7 @@ class Auto {
                 "serial" => $engine->session->serialNo($uid),
                 "ts" => time() * 1000,
             );
-            query("INSERT INTO `" . $engine->server->prefix . "nodejs` (`uid`,`data`) VALUES (?,?)", array($uid, json_encode($r)));
+            query("INSERT INTO `{$engine->server->prefix}nodejs` (`uid`,`data`) VALUES (?,?)", array($uid, json_encode($r)));
         }
     }
 
@@ -49,7 +49,7 @@ class Auto {
                     "serialNo" => $serial,
                     "ts" => time() * 1000,
                 );
-                query("INSERT INTO `" . $engine->server->prefix . "nodejs` (`uid`,`data`) VALUES (?,?)", array($user['uid'], json_encode($r)));
+                query("INSERT INTO `{$engine->server->prefix}nodejs` (`uid`,`data`) VALUES (?,?)", array($user['uid'], json_encode($r)));
             }
         } else {
             $serial = $engine->session->serialNo($uid);
@@ -60,7 +60,7 @@ class Auto {
                 "serialNo" => $serial,
                 "ts" => time() * 1000,
             );
-            query("INSERT INTO `" . $engine->server->prefix . "nodejs` (`uid`,`data`) VALUES (?,?)", array($uid, json_encode($r)));
+            query("INSERT INTO `{$engine->server->prefix}nodejs` (`uid`,`data`) VALUES (?,?)", array($uid, json_encode($r)));
         }
     }
 
@@ -82,8 +82,11 @@ class Auto {
                 $bD = BuildingData::get($b['type'], $level);
                 query("UPDATE `" . $engine->server->prefix . "village` SET `pop`=`pop`+?,`cp`=`cp`+? WHERE `wid`=?;", array($bD['pop'], $bD['cp'], $b['wid']));
                 $engine->world->calInf($b['wid']);
+                
+                $v = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?", array($b['wid']))->fetch();
+                $p = query("SELECT * FROM `" . $engine->server->prefix . "user` WHERE `uid`=?", array($v['owner']))->fetch();
 
-                if ($b['type'] == "10") {
+                if ($b['type'] == 10) { //Warehouse
                     $max = $engine->village->getVillageField($b['wid'], "maxstore");
                     if ($level == '1' && $max == $engine->server->base_storage) {
                         $max -= $engine->server->base_storage;
@@ -92,7 +95,7 @@ class Auto {
                         $max -= BuildingData::get(10, $level - 1)['effect'] * $engine->server->multiple_storage;
                     $max += BuildingData::get(10, $level)['effect'] * $engine->server->multiple_storage;
                     $engine->village->setVillageField($b['wid'], "maxstore", $max);
-                }elseif ($b['type'] == "11") {
+                }elseif ($b['type'] == 11) { //Granary
                     $max = $engine->village->getVillageField($b['wid'], "maxcrop");
                     if ($level == '1' && $max == $engine->server->base_storage) {
                         $max -= $engine->server->base_storage;
@@ -101,13 +104,13 @@ class Auto {
                         $max -= BuildingData::get(11, $level - 1)['effect'] * $engine->server->multiple_storage;
                     $max += BuildingData::get(11, $level)['effect'] * $engine->server->multiple_storage;
                     $engine->village->setVillageField($b['wid'], "maxcrop", $max);
-                }elseif ($b['type'] == "25") {
+                }elseif ($b['type'] == 25) { //Residence
                     if ($level == 10) {
                         $engine->village->setVillageField($b['wid'], "settler", 3);
                     } elseif ($level == 20) {
                         $engine->village->setVillageField($b['wid'], "settler", 6);
                     }
-                } elseif ($b['type'] == "26") {
+                } elseif ($b['type'] == 26) { //Palance
                     if ($level == 10) {
                         $engine->village->setVillageField($b['wid'], "settler", 3);
                     } elseif ($level == 15) {
@@ -115,10 +118,12 @@ class Auto {
                     } elseif ($level == 20) {
                         $engine->village->setVillageField($b['wid'], "settler", 9);
                     }
+                } elseif ($b['type'] == 17) { //Market
+                    $this->emitCache($p['uid'], [
+                        "name" => "Merchants:{$b['wid']}",
+                        "data" => $engine->market->get($b['wid']),
+                    ]);
                 }
-
-                $v = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?", array($b['wid']))->fetch();
-                $p = query("SELECT * FROM `" . $engine->server->prefix . "user` WHERE `uid`=?", array($v['owner']))->fetch();
 
                 if ($p['tutorial'] == 6) {
                     if ($b['location'] == "33") {
@@ -457,7 +462,7 @@ class Auto {
         $hs = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `advNext`<=?", [time()])->fetchAll(PDO::FETCH_ASSOC);
         foreach ($hs as $h) {
 
-            $next = time() + (min($h['advPoint'] * 600,86400)) / $engine->server->speed_world;
+            $next = time() + (min($h['advPoint'] * 600, 86400)) / $engine->server->speed_world;
 
             query("UPDATE `{$engine->server->prefix}hero` SET `advPoint`=`advPoint`+1,`advNext`=? WHERE `id`=?;", [$next, $h['id']]);
             $this->emitCache($h['owner'], $engine->hero->get($h['owner']));
@@ -467,23 +472,31 @@ class Auto {
     public function healthHero() {
         global $engine;
 
-        $hs = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `dead`=?;",[0])->fetchAll(PDO::FETCH_ASSOC);
+        $hs = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `dead`=?;", [0])->fetchAll(PDO::FETCH_ASSOC);
         foreach ($hs as $h) {
             $hp = $h['health'];
             $hp = $hp + (($h['regen'] * $engine->server->speed_world / 86400) * (microtime(true) - $h['lastupdate']));
             ($hp > 100) ? $hp = 100 : '';
             query("UPDATE `{$engine->server->prefix}hero` SET `health`=?,`lastupdate`=? WHERE `id`=?;", [$hp, microtime(true), $h['id']]);
+            if ($engine->server->speed_world >= 100)
+                $timer = 10;
+            else
+                $timer = 120;
+            if ($this->last['hpHero'] + $timer < time()) {
+                $this->last['hpHero'] = time();
+                $this->emitCache($h['owner'], $engine->hero->get($h['owner']));
+            }
         }
     }
-    
-    public function reviveHero(){
+
+    public function reviveHero() {
         global $engine;
-        
-        $hs = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `revive`<=? AND `revive`<>?", [time(),0])->fetchAll(PDO::FETCH_ASSOC);
+
+        $hs = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `revive`<=? AND `revive`<>?", [time(), 0])->fetchAll(PDO::FETCH_ASSOC);
         foreach ($hs as $h) {
             $engine->unit->addUnit($h['village'], 11, 1, $h['village']);
-            $engine->auto->emitCache($pt, $engine->unit->getStay($h['village']));
-            query("UPDATE `{$engine->server->prefix}hero` SET `revive`=?,`health`=?,`dead`=? WHERE `id`=?;", [0,100,0, $h['id']]);
+            $engine->auto->emitCache($h['owner'], $engine->unit->getStay($h['village']));
+            query("UPDATE `{$engine->server->prefix}hero` SET `revive`=?,`health`=?,`dead`=? WHERE `id`=?;", [0, 100, 0, $h['id']]);
             $this->emitCache($h['owner'], $engine->hero->get($h['owner']));
         }
     }

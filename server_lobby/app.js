@@ -14,7 +14,7 @@ var middleware = require('socketio-wildcard')();
 
 io.use(middleware);
 config = {
-    prefix: 's1_',
+    prefix: 'global_',
     debug: true,
 }
 
@@ -51,13 +51,13 @@ Travian.player = {
     index: {},
     join: function (uid, socket) {
         Travian.player.index[socket.id] = uid;
-        query("UPDATE `" + config.prefix + "user` SET `online`=? WHERE `uid`=?", [1, Travian.player.index[socket.id]]);
+        //query("UPDATE `" + config.prefix + "user` SET `online`=? WHERE `uid`=?", [1, Travian.player.index[socket.id]]);
         Travian.socket.clients[uid] = {
             socket: socket
         };
     },
     left: function (socket) {
-        query("UPDATE `" + config.prefix + "user` SET `online`=? WHERE `uid`=?", [0, Travian.player.index[socket.id]]);
+        //query("UPDATE `" + config.prefix + "user` SET `online`=? WHERE `uid`=?", [0, Travian.player.index[socket.id]]);
     }
 };
 
@@ -76,7 +76,7 @@ function query($sql, $params, $callback) {
 /*          Start         */
 /**************************/
 
-setInterval(function () {
+/*setInterval(function () {
     query("SELECT * FROM `" + config.prefix + "nodejs`", [], function (err_n, res_n) {
         for (var c in res_n) {
             if (res_n[c].uid != "") {
@@ -88,7 +88,7 @@ setInterval(function () {
             config.debug ? console.log('Send node...') : '';
         }
     });
-}, 250);
+}, 250);*/
 
 function logs(msg) {
     var argumentsArray = [].slice.apply(arguments);
