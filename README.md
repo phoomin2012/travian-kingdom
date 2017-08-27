@@ -1,7 +1,7 @@
 # Travian Kingdom Clone Script
-This project is clone Travian Kingdom game. Now, **not finish** yet.
-If you want to support, you can donate us by Paypal. https://paypal.me/PhuminShop (Every donation will be list in credit file)
-Files will upload fast as fast I can.
+This project is clone Travian Kingdom game. Now, **not finish** yet.<br>
+If you want to support, you can donate us by Paypal. https://paypal.me/PhuminShop<br>
+Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
 
 # Menu
   - [Menu](#menu)
@@ -292,7 +292,8 @@ Please note that this script doesn't finish yet.
 If you found bug please use [Issues](https://github.com/phoomin2012/travian-kingdom-clone/issues) to report and use [Pulls Requests](https://github.com/phoomin2012/travian-kingdom-clone/pulls) to request feature that offical have or fix bug or add new feature to main project.
  
 # Subscribe
-***NOW IS FREE***
-Use **watch** button if you want to know about activities.
-If you **like** this project, please give **star**.
+***NOW IS FREE***<br>
+Use **watch** button if you want to know about activities.<br>
+If you **like** this project, please give **star**.<br>
+NOT recommend to fork.<br>
 ***THANKS***
