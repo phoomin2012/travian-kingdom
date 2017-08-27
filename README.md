@@ -191,6 +191,19 @@ Files will upload fast as fast I can.
     - [ ] Create a new note
     - [ ] Edit note
     - [ ] Delete note
+  - Chat
+    - [ ] Join global room
+    - [ ] Join kingdom room
+    - [ ] Join society room
+    - [x] Create new conversation (Private)
+    - [ ] Create new conversation (Kingdom)
+    - [ ] Create new conversation (Society)
+    - [x] Send message (Private)
+    - [ ] Send message (Kingdom)
+    - [ ] Send message (Society)
+    - [ ] Send message (Global room)
+    - [ ] Send message (Kingdom room)
+    - [ ] Send message (Society room)
   
 # Screenshot
 ![Travian Kingdom Clone Script](https://s22.postimg.org/w82ihh4xt/Screen_Shot_2560-05-02_at_08.46.30.png)
