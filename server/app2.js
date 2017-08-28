@@ -11,7 +11,6 @@ var server = app.listen(process.env.PORT, function () {
 });
 var io = require('socket.io')(server, {path: '/chat'});
 var middleware = require('socketio-wildcard')();
-
 io.use(middleware);
 config = {
     prefix: 's1_',
@@ -31,6 +30,13 @@ setTimeout(function () {
 /**************************/
 /*         Engine         */
 /**************************/
+
+// operation
+//  1 = REPLACE
+//  2 = ADD
+//  3 = REMOVE
+//  4 = INNER UPDATE
+//  5 = ADD OR REPLACE
 
 var Travian = {}
 Travian.socket = {
@@ -60,7 +66,6 @@ Travian.player = {
         query("UPDATE `" + config.prefix + "user` SET `online`=? WHERE `uid`=?", [0, Travian.player.index[socket.id]]);
     }
 };
-
 Travian.world = {
     id2xy: function (a) {
         return 0 > a || null === a ? {x: 0, y: 0} : {x: a % 32768 - 16384, y: Math.floor(a / 32768) - 16384}
@@ -69,8 +74,62 @@ Travian.world = {
         return a + 16384 + 32768 * (c + 16384)
     }
 };
-
+Travian.user = {
+    get: function (uid) {
+        var rr = [];
+        async.parallel((callback) => {
+            query("SELECT * FROM `" + config.prefix + "user` WHERE `uid`=?;", [uid], (err_u, res_u) => {
+                rr = res_u[0];
+                callback();
+            });
+        }, () => {
+        });
+        return rr;
+    }
+};
 Travian.chat = {
+    formRoom: function (data, uid) {
+        var user = Travian.user.get(data.from);
+        var form = {
+            name: "ChatInbox:" + data.roomId,
+            data: {
+                _id: "ChatInbox:" + data.roomId,
+                roomId: data.roomId,
+                group: "",
+                line: data.line,
+                linePlayerId: data.from,
+                linePlayerName: user.username,
+                myPlayerId: uid,
+                unread: 0,
+                closed: false,
+                closeBy: 0,
+                ignoreUntil: 0,
+                lastOtherRead: 1488297885932,
+                lastOwnRead: 1488298916122,
+                lastTimestamp: 1488298915535,
+                timestamp: 1488298915535,
+                playersRead: {},
+            }
+        };
+        return form;
+    },
+    formLine: function (data) {
+        var user = Travian.user.get(data.from);
+        var form = {
+            name: "ChatLine:" + data.time,
+            data: {
+                _id: data.id + data.room + data.time,
+                id: data.id,
+                roomId: data.room,
+                isFirst: true,
+                playerId: data.from,
+                playerName: user.username,
+                text: data.text,
+                timestamp: data.time
+            }
+        };
+        return form;
+    },
     openRoom: function (type, from, to, line) {
         var timestamp = (new Date()).getTime();
         var roomId = `${type}.${from}.${to}`;
@@ -78,33 +137,57 @@ Travian.chat = {
             console.log(err);
         });
     },
-    addLine: function (room, from, text) {
-        var timestamp = (new Date()).getTime();
-        query("INSERT INTO `" + config.prefix + "chat_line` (`room`,`from`,`text`,`time`) VALUES (?,?,?,?);", [room, from, text, timestamp], (err) => {
-            console.log(err);
-        });
-    },
-    getLine: function (room, from, socket) {
-        query("SELECT * FROM `" + config.prefix + "chat_line` WHERE `room`=?;", [room], (err_r, res_l) => {
-            var r = [];
-            async.each(res_l, function (item, callback) {
-                query("SELECT * FROM `" + config.prefix + "user` WHERE `uid`=?;", [item.from], (err_u, res_u) => {
-                    r.push({
-                        name: "ChatLine:" + item.time,
-                        data: {
-                            _id: item.id + item.room + item.time,
-                            id: item.id,
-                            roomId: item.room,
-                            isFirst: true,
-                            playerId: item.from,
-                            playerName: res_u[0].username,
-                            text: item.text,
-                            timestamp: item.time
-                        }
-                    });
+    getRoom: function (roomId, cb) {
+        var room = [];
+        async.parallel([
+            (callback) => {
+                query("SELECT * FROM `" + config.prefix + "chat_room` WHERE `roomId`=?;", [roomId], (err, r) => {
+                    room = r[0];
                     callback();
                 });
-            }, function (err) {
+            }
+        ], () => {
+            cb(room);
+        });
+    },
+    getLine: function (id, cb) {
+        var rl = [];
+        async.parallel([
+            (callback) => {
+                query("SELECT * FROM `" + config.prefix + "chat_line` WHERE `id`=?;", [id], (err, r) => {
+                    rl = r[0];
+                    callback();
+                });
+            }
+        ], () => {
+            cb(rl);
+        });
+    },
+    addLine: function (room, from, text, cb) {
+        var lineId = false;
+        async.parallel([
+            function (callback) {
+                var timestamp = (new Date()).getTime();
+                query("INSERT INTO `" + config.prefix + "chat_line` SET ?", {room: room, from: from, text: text, time: timestamp}, (err, res) => {
+                    console.log(`Last add ${res.insertId}`);
+                    lineId = res.insertId;
+                    callback();
+                });
+            }
+        ], () => {
+            typeof cb == "function" ? cb(lineId) : false;
+        });
+        return lineId;
+    },
+    getAllLine: function (room, from, socket, line) {
+        query("SELECT * FROM `" + config.prefix + "chat_line` WHERE `room`=?;", [room], (err_r, res_l) => {
+            var r = [];
+            async.each(res_l, (item, callback) => {
+                query("SELECT * FROM `" + config.prefix + "user` WHERE `uid`=?;", [item.from], (err_u, res_u) => {
+                    r.push(Travian.chat.formLine(item));
+                    callback();
+                });
+            }, (err) => {
                 r = {
                     cache: [
                         {
@@ -123,47 +206,94 @@ Travian.chat = {
     getInbox: function (from, socket) {
         query("SELECT * FROM `" + config.prefix + "chat_room` WHERE `from`=? OR `to`=?;", [from, from], (err_r, res_r) => {
             var r = [];
-            async.each(res_r, function (item, callback) {
+            async.each(res_r, (item, callback) => {
                 query("SELECT * FROM `" + config.prefix + "user` WHERE `uid`=?;", [item.from], (err_u, res_u) => {
-                    r.push({
-                        name: 'Collection:ChatInbox:',
-                        data: {
-                            operation: 1,
-                            cache: [
-                                {
-                                    name: "ChatInbox:" + item.roomId,
-                                    data: {
-                                        _id: "ChatInbox:" + item.roomId,
-                                        roomId: item.roomId,
-                                        group: "",
-                                        line: item.line,
-                                        linePlayerId: item.from,
-                                        linePlayerName: res_u[0].username,
-                                        myPlayerId: Travian.player.index[socket.id],
-                                        unread: 0,
-                                        closed: false,
-                                        closeBy: 0,
-                                        ignoreUntil: 0,
-                                        lastOtherRead: 1488297885932,
-                                        lastOwnRead: 1488298916122,
-                                        lastTimestamp: 1488298915535,
-                                        timestamp: 1488298915535,
-                                        playersRead: {},
-                                    }
-                                },
-                            ],
-                        }
-                    });
+                    r.push(Travian.chat.formRoom(item, Travian.player.index[socket.id]));
                     callback();
                 });
-            }, function (err) {
+            }, (err) => {
                 r = {
-                    cache: r,
+                    cache: [
+                        {
+                            name: 'Collection:ChatInbox:',
+                            data: {
+                                operation: 1,
+                                cache: r,
+                            },
+                        }
+                    ]
                 };
                 socket.emit('chatCache', r);
             });
         });
-    }
+    },
+    sendNotifLine: function (uid, data) {
+        if (typeof Travian.socket.clients[uid] != "undefined") {
+            if (typeof Travian.socket.clients[uid].socket == "object") {
+                if (typeof data != "object") {
+                    Travian.chat.getLine(data, (Ldata) => {
+                        Travian.socket.clients[uid].socket.emit('chatCache', {
+                            cache: [
+                                {
+                                    name: 'Collection:ChatLine:' + Ldata.room,
+                                    data: {
+                                        operation: 5,
+                                        cache: [
+                                            Travian.chat.formLine(Ldata)
+                                        ],
+                                    }
+                                }
+                            ]
+                        });
+                        var user = Travian.user.get(Ldata.from)
+                        Travian.socket.clients[uid].socket.emit('message', {
+                            name: 'Collection:Notifications:',
+                            data: {
+                                operation: 1,
+                                cache: [
+                                    {
+                                        type: 'chatNotification',
+                                        roomId: Ldata.roomId,
+                                        playerId: user.uid,
+                                        playerName: user.username,
+                                    }
+                                ],
+                            }
+                        });
+                    });
+                } else {
+                    Travian.socket.clients[uid].socket.emit('chatCache', {
+                        cache: [
+                            {
+                                name: 'Collection:ChatLine:' + data.room,
+                                data: {
+                                    operation: 5,
+                                    cache: [
+                                        Travian.chat.formLine(data)
+                                    ],
+                                }
+                            }
+                        ]
+                    });
+                    var user = Travian.user.get(data.from)
+                    Travian.socket.clients[uid].socket.emit('message', {
+                        name: 'Collection:Notifications:',
+                        data: {
+                            operation: 1,
+                            cache: [
+                                {
+                                    type: 'chatNotification',
+                                    roomId: data.roomId,
+                                    playerId: user.uid,
+                                    playerName: user.username,
+                                }
+                            ],
+                        }
+                    });
+                }
+            }
+        }
+    },
 }
 
 function query($sql, $params, $callback) {
@@ -189,13 +319,12 @@ setInterval(function () {
             } else {
                 Travian.socket.sendAll(JSON.parse(res_n[c].data));
             }
-            //query("UPDATE FROM `" + config.prefix + "nodejs` SET `sent`=1 WHERE `id`=?", [res_n[c].id]);
+//query("UPDATE FROM `" + config.prefix + "nodejs` SET `sent`=1 WHERE `id`=?", [res_n[c].id]);
             query("DELETE FROM `" + config.prefix + "nodejs` WHERE `id`=?", [res_n[c].id]);
             config.debug ? console.log('Send node with delete data...') : '';
         }
     });
 }, 250);
-
 function logs(msg) {
     var argumentsArray = [].slice.apply(arguments);
     console.log("=============================================");
@@ -212,11 +341,9 @@ io.on('connect', function (socket) {
     socket.on('*', function (data) {
         logs(data);
     });
-
     socket.on('disconnect', function () {
         Travian.player.left(socket);
     });
-
     socket.on('missedPackets', function (data) {
         /*query("UPDATE `" + config.prefix + "user` SET `serial`=? WHERE `uid`=?", [data.to + 1, Travian.player.index[socket.id]], function () {
          socket.emit('message', {
@@ -236,27 +363,46 @@ io.on('connect', function (socket) {
          });
          });*/
     });
-
     socket.on('chat', function (action, data) {
         if (action == 'sendPrivMessage') {
             query("SELECT * FROM `" + config.prefix + "chat_room` WHERE `from`=? OR `to`=?;", [data.uid, data.uid], (err_r, res_r) => {
                 console.log(err_r, res_r)
                 if (res_r.length == 0) {
                     Travian.chat.openRoom(1, Travian.player.index[socket.id], data.uid, data.text);
-                    Travian.chat.addLine(`1.${Travian.player.index[socket.id]}.${data.uid}`, Travian.player.index[socket.id], data.text);
-                    Travian.chat.getInbox(Travian.player.index[socket.id], socket);
-                    Travian.chat.getLine(data.roomId, Travian.player.index[socket.id], socket);
+                    Travian.chat.addLine(`1.${Travian.player.index[socket.id]}.${data.uid}`, Travian.player.index[socket.id], data.text, (id) => {
+                        Travian.chat.getInbox(Travian.player.index[socket.id], socket);
+                        Travian.chat.getAllLine(data.roomId, Travian.player.index[socket.id], socket);
+                    });
                 } else {
-                    Travian.chat.addLine(`1.${res_r[0]['from']}.${res_r[0]['to']}`, Travian.player.index[socket.id], data.text);
-                    Travian.chat.getLine(data.roomId, Travian.player.index[socket.id], socket);
+                    Travian.chat.addLine(`1.${res_r[0]['from']}.${res_r[0]['to']}`, Travian.player.index[socket.id], data.text, (id) => {
+                        Travian.chat.sendNotifLine(res_r[0]['from'], id);
+                        Travian.chat.sendNotifLine(res_r[0]['to'], id);
+                    });
                 }
             });
         } else if (action == 'sendMessage') {
-            Travian.chat.addLine(data.roomId, Travian.player.index[socket.id], data.text);
-            Travian.chat.getLine(data.roomId, Travian.player.index[socket.id], socket);
+            if (typeof data.roomId == "object") {
+                data.roomId.forEach((room) => {
+                    console.log('Add line to ', room, '(m) ,message : ', data.text)
+                    Travian.chat.addLine(room, Travian.player.index[socket.id], data.text, (id) => {
+                        Travian.chat.getRoom(room, (roomData) => {
+                            Travian.chat.sendNotifLine(roomData.from, id);
+                            Travian.chat.sendNotifLine(roomData.to, id);
+                        });
+                    });
+                });
+            } else {
+                console.log('Add line to ', data.roomId, '(1) ,message : ', data.text)
+                Travian.chat.addLine(data.roomId, Travian.player.index[socket.id], data.text, (id) => {
+                    Travian.chat.getRoom(room, (roomData) => {
+                        console.log(roomData)
+                        Travian.chat.sendNotifLine(roomData.from, id);
+                        Travian.chat.sendNotifLine(roomData.to, id);
+                    });
+                });
+            }
         }
     });
-
     socket.on('chatCache', function (data, callback_ac) {
         data.forEach(function (v, i) {
             var c_args = v.split(':');
@@ -360,12 +506,13 @@ io.on('connect', function (socket) {
                 } else if (controller == "ChatInbox") {
                     Travian.chat.getInbox(Travian.player.index[socket.id], socket);
                 } else if (controller == "ChatLine") {
-                    Travian.chat.getLine(c_args[2], Travian.player.index[socket.id], socket);
+                    Travian.chat.getAllLine(c_args[2], Travian.player.index[socket.id], socket);
+                } else if (controller == "chatNotification") {
+
                 }
             }
         });
     });
-
     socket.on('autocomplete', function (data, callback_ac) {
         if (data.type[0] == "player") {
             query("SELECT * FROM `" + config.prefix + "user`  WHERE LOCATE(?, `username`) > 0 ORDER BY LOCATE(?, `username`), `username` LIMIT 10", [data.string, data.string], function (err_ac, res_ac) {

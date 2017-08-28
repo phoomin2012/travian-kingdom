@@ -186,7 +186,7 @@ if ($data['action'] == "ping") {
 } elseif ($data['action'] == "getOpenChatWindows") {
     echo json_encode(array(
         "response" => [
-            ["1.101.102"]
+            ["1.102.101"]
         ],
         "serialNo" => $engine->session->serialNo(),
         "time" => round(microtime(true) * 1000),
