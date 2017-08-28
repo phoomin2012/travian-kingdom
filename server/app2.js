@@ -75,14 +75,17 @@ Travian.world = {
     }
 };
 Travian.user = {
-    get: function (uid) {
+    get: function (uid, cb) {
         var rr = [];
-        async.parallel((callback) => {
-            query("SELECT * FROM `" + config.prefix + "user` WHERE `uid`=?;", [uid], (err_u, res_u) => {
-                rr = res_u[0];
-                callback();
-            });
-        }, () => {
+        async.parallel([
+            (callback) => {
+                query("SELECT * FROM `" + config.prefix + "user` WHERE `uid`=?;", [uid], (err_u, res_u) => {
+                    rr = res_u[0];
+                    callback();
+                });
+            }
+        ], () => {
+            typeof cb == "function" ? cb(rr) : false;
         });
         return rr;
     }
@@ -245,20 +248,27 @@ Travian.chat = {
                                 }
                             ]
                         });
-                        var user = Travian.user.get(Ldata.from)
-                        Travian.socket.clients[uid].socket.emit('message', {
-                            name: 'Collection:Notifications:',
-                            data: {
-                                operation: 1,
-                                cache: [
-                                    {
-                                        type: 'chatNotification',
-                                        roomId: Ldata.roomId,
-                                        playerId: user.uid,
-                                        playerName: user.username,
-                                    }
-                                ],
-                            }
+                        Travian.user.get(Ldata.from, (user) => {
+                            Travian.socket.clients[uid].socket.emit('message', {
+                                name: 'Collection:Notifications:',
+                                data: {
+                                    operation: 1,
+                                    cache: [
+                                        {
+                                            name: 'Notifications:1',
+                                            data: {
+                                                id: '1',
+                                                type: 'chatNotification',
+                                                roomId: Ldata.room,
+                                                playerId: user.uid,
+                                                playerName: user.username,
+                                                text: Ldata.text,
+                                                timestamp: Ldata.time,
+                                            }
+                                        }
+                                    ],
+                                }
+                            });
                         });
                     });
                 } else {
@@ -275,20 +285,27 @@ Travian.chat = {
                             }
                         ]
                     });
-                    var user = Travian.user.get(data.from)
-                    Travian.socket.clients[uid].socket.emit('message', {
-                        name: 'Collection:Notifications:',
-                        data: {
-                            operation: 1,
-                            cache: [
-                                {
-                                    type: 'chatNotification',
-                                    roomId: data.roomId,
-                                    playerId: user.uid,
-                                    playerName: user.username,
-                                }
-                            ],
-                        }
+                    Travian.user.get(data.from, (user) => {
+                        Travian.socket.clients[uid].socket.emit('message', {
+                            name: 'Collection:Notifications:',
+                            data: {
+                                operation: 1,
+                                cache: [
+                                    {
+                                        name: 'Notifications:1',
+                                        data: {
+                                            id: '1',
+                                            type: 'chatNotification',
+                                            roomId: data.room,
+                                            playerId: user.uid,
+                                            playerName: user.username,
+                                            text: data.text,
+                                            timestamp: data.time,
+                                        }
+                                    }
+                                ],
+                            }
+                        });
                     });
                 }
             }
