@@ -13,21 +13,21 @@ class Auto {
             }
             $online = query("SELECT * FROM `{$engine->server->prefix}user` WHERE `online`=?", [1])->fetchAll(PDO::FETCH_ASSOC);
             foreach ($online as $user) {
-                $r = array(
-                    "event" => array($data),
-                    "response" => array(),
+                $r = [
+                    "event" => [$data],
+                    "response" => [],
                     "serial" => $engine->session->serialNo($user['uid']),
                     "ts" => time() * 1000,
-                );
+                ];
                 query("INSERT INTO `{$engine->server->prefix}nodejs` (`uid`,`data`) VALUES (?,?)", array($user['uid'], json_encode($r)));
             }
         } else {
-            $r = array(
-                "event" => array($data),
-                "response" => array(),
+            $r = [
+                "event" => [$data],
+                "response" => [],
                 "serial" => $engine->session->serialNo($uid),
                 "ts" => time() * 1000,
-            );
+            ];
             query("INSERT INTO `{$engine->server->prefix}nodejs` (`uid`,`data`) VALUES (?,?)", array($uid, json_encode($r)));
         }
     }
@@ -42,24 +42,24 @@ class Auto {
             $online = query("SELECT * FROM `{$engine->server->prefix}user` WHERE `online`=?", [1])->fetchAll(PDO::FETCH_ASSOC);
             foreach ($online as $user) {
                 $serial = $engine->session->serialNo($user['uid']);
-                $r = array(
-                    "cache" => array($data),
-                    "response" => array(),
+                $r = [
+                    "cache" => [$data],
+                    "response" => [],
                     "serial" => $serial,
                     "serialNo" => $serial,
                     "ts" => time() * 1000,
-                );
+                ];
                 query("INSERT INTO `{$engine->server->prefix}nodejs` (`uid`,`data`) VALUES (?,?)", array($user['uid'], json_encode($r)));
             }
         } else {
             $serial = $engine->session->serialNo($uid);
-            $r = array(
-                "cache" => array($data),
-                "response" => array(),
+            $r = [
+                "cache" => [$data],
+                "response" => [],
                 "serial" => $serial,
                 "serialNo" => $serial,
                 "ts" => time() * 1000,
-            );
+            ];
             query("INSERT INTO `{$engine->server->prefix}nodejs` (`uid`,`data`) VALUES (?,?)", array($uid, json_encode($r)));
         }
     }

@@ -88,49 +88,74 @@ Travian.user = {
             typeof cb == "function" ? cb(rr) : false;
         });
         return rr;
+    },
+    serial: function (uid, cb) {
+        async.parallel([
+            (callback) => {
+                query("SELECT * FROM `" + config.prefix + "user` WHERE `uid`=?;", [uid], (err_u, res_u) => {
+                    callback(null, res_u[0]);
+                    query("UPDATE `" + config.prefix + "user` SET `serial`=`serial`+1 WHERE `uid`=?;", [uid]);
+                });
+            }
+        ], (err, res) => {
+            typeof cb == "function" ? cb(res[0].serial) : false;
+        });
     }
 };
+//
+//["chatCache",{"cache":[{"name":"Collection:ChatInbox:","data":{"cache":[{"name":"ChatInbox:1.9327.2386","data":{"_id":"9327:1.9327.2386","roomId":"1.9327.2386","myPlayerId":"9327","group":"","linePlayerId":"2386","linePlayerName":"phoomin009","line":"tesst","timestamp":1503994474624,"lastTimestamp":1503994474624,"unread":1,"lastOwnRead":1503994417728,"lastOtherRead":1503994120634,"playersRead":{},"closed":false,"closedBy":0,"ignoreUntil":0}}],"operation":5}}]}]
+//["chatCache",{"cache":[{"name":"Collection:ChatInbox:","data":{"cache":[{"name":"ChatInbox:1.9327.2386","data":{"_id":"9327:1.9327.2386","roomId":"1.9327.2386","myPlayerId":"9327","group":"","linePlayerId":"2386","linePlayerName":"phoomin009","line":"test","timestamp":1503994487090,"lastTimestamp":1503994487090,"unread":1,"lastOwnRead":1503994475506,"lastOtherRead":1503994475507,"playersRead":{},"closed":false,"closedBy":0,"ignoreUntil":0}}],"operation":5}}]}]
+//
+//["chatCache",{"cache":[{"name":"ChatInbox:1.9327.2386","data":{"_id":"9327:1.9327.2386","roomId":"1.9327.2386","myPlayerId":"9327","group":"","linePlayerId":"2386","linePlayerName":"phoomin009","line":"tesst","timestamp":1503994474624,"lastTimestamp":1503994474624,"unread":0,"lastOwnRead":1503994475506,"lastOtherRead":1503994475507,"playersRead":{},"closed":false,"closedBy":0,"ignoreUntil":0}}]}]
+//["chatCache",{"cache":[{"name":"ChatInbox:1.9327.2386","data":{"_id":"9327:1.9327.2386","roomId":"1.9327.2386","myPlayerId":"9327","group":"","linePlayerId":"2386","linePlayerName":"phoomin009","line":"test","timestamp":1503994487090,"lastTimestamp":1503994487090,"unread":1,"lastOwnRead":1503994475506,"lastOtherRead":1503994487654,"playersRead":{},"closed":false,"closedBy":0,"ignoreUntil":0}}]}]
 Travian.chat = {
-    formRoom: function (data, uid) {
-        var user = Travian.user.get(data.from);
-        var form = {
-            name: "ChatInbox:" + data.roomId,
-            data: {
-                _id: "ChatInbox:" + data.roomId,
-                roomId: data.roomId,
-                group: "",
-                line: data.line,
-                linePlayerId: data.from,
-                linePlayerName: user.username,
-                myPlayerId: uid,
-                unread: 0,
-                closed: false,
-                closeBy: 0,
-                ignoreUntil: 0,
-                lastOtherRead: 1488297885932,
-                lastOwnRead: 1488298916122,
-                lastTimestamp: 1488298915535,
-                timestamp: 1488298915535,
-                playersRead: {},
-            }
-        };
+    unread: 0,
+    formRoom: function (data, uid, cb) {
+        var form = {};
+        Travian.user.get(data.from, (user) => {
+            form = {
+                name: "ChatInbox:" + data.roomId,
+                data: {
+                    _id: uid + ":" + data.roomId,
+                    roomId: data.roomId,
+                    group: "",
+                    line: data.line,
+                    linePlayerId: data.from,
+                    linePlayerName: user.username,
+                    myPlayerId: uid,
+                    unread: Travian.chat.unread++,
+                    closed: false,
+                    closeBy: 0,
+                    ignoreUntil: 0,
+                    lastOtherRead: (new Date).getTime(),
+                    lastOwnRead: 0,
+                    lastTimestamp: (new Date).getTime(),
+                    timestamp: (new Date).getTime(),
+                    playersRead: {},
+                }
+            };
+            typeof cb == "function" ? cb(form) : false;
+        });
         return form;
     },
-    formLine: function (data) {
-        var user = Travian.user.get(data.from);
-        var form = {
-            name: "ChatLine:" + data.time,
-            data: {
-                _id: data.id + data.room + data.time,
-                id: data.id,
-                roomId: data.room,
-                isFirst: true,
-                playerId: data.from,
-                playerName: user.username,
-                text: data.text,
-                timestamp: data.time
-            }
-        };
+    formLine: function (data, cb) {
+        var form = {};
+        Travian.user.get(data.from, (user) => {
+            form = {
+                name: "ChatLine:" + data.time,
+                data: {
+                    _id: data.id + data.room + data.time,
+                    id: data.id,
+                    roomId: data.room,
+                    isFirst: true,
+                    playerId: data.from,
+                    playerName: user.username,
+                    text: data.text,
+                    timestamp: data.time
+                }
+            };
+            typeof cb == "function" ? cb(form) : false;
+        });
         return form;
     },
     openRoom: function (type, from, to, line) {
@@ -182,13 +207,15 @@ Travian.chat = {
         });
         return lineId;
     },
-    getAllLine: function (room, from, socket, line) {
+    getAllLine: async function (room, from, socket, line) {
         query("SELECT * FROM `" + config.prefix + "chat_line` WHERE `room`=?;", [room], (err_r, res_l) => {
             var r = [];
             async.each(res_l, (item, callback) => {
                 query("SELECT * FROM `" + config.prefix + "user` WHERE `uid`=?;", [item.from], (err_u, res_u) => {
-                    r.push(Travian.chat.formLine(item));
-                    callback();
+                    Travian.chat.formLine(item, (form) => {
+                        r.push(form);
+                        callback();
+                    });
                 });
             }, (err) => {
                 r = {
@@ -211,8 +238,11 @@ Travian.chat = {
             var r = [];
             async.each(res_r, (item, callback) => {
                 query("SELECT * FROM `" + config.prefix + "user` WHERE `uid`=?;", [item.from], (err_u, res_u) => {
-                    r.push(Travian.chat.formRoom(item, Travian.player.index[socket.id]));
-                    callback();
+                    Travian.chat.formRoom(item, Travian.player.index[socket.id], (form) => {
+                        r.push(form);
+                        callback();
+                    });
+
                 });
             }, (err) => {
                 r = {
@@ -235,6 +265,42 @@ Travian.chat = {
             if (typeof Travian.socket.clients[uid].socket == "object") {
                 if (typeof data != "object") {
                     Travian.chat.getLine(data, (Ldata) => {
+                        Travian.chat.getRoom(Ldata.room, (Rdata) => {
+                            Travian.chat.formRoom(Rdata, uid, (form) => {
+                                Travian.socket.clients[uid].socket.emit('chatCache', {
+                                    cache: [
+                                        {
+                                            name: 'Collection:ChatInbox:' + Ldata.room,
+                                            data: {
+                                                operation: 5,
+                                                cache: [
+                                                    form
+                                                ],
+                                            },
+                                        }
+                                    ]
+                                });
+                            })
+                            Travian.chat.formLine(Ldata, (form) => {
+                                Travian.socket.clients[uid].socket.emit('chatCache', {
+                                    cache: [
+                                        {
+                                            name: 'Collection:ChatLine:' + Ldata.room,
+                                            data: {
+                                                operation: 5,
+                                                cache: [
+                                                    form
+                                                ],
+                                            }
+                                        }
+                                    ]
+                                });
+                            });
+                        });
+                    });
+                } else {
+                    var Ldata = data;
+                    Travian.chat.formLine(Ldata, (form) => {
                         Travian.socket.clients[uid].socket.emit('chatCache', {
                             cache: [
                                 {
@@ -242,69 +308,11 @@ Travian.chat = {
                                     data: {
                                         operation: 5,
                                         cache: [
-                                            Travian.chat.formLine(Ldata)
+                                            form
                                         ],
                                     }
                                 }
                             ]
-                        });
-                        Travian.user.get(Ldata.from, (user) => {
-                            Travian.socket.clients[uid].socket.emit('message', {
-                                name: 'Collection:Notifications:',
-                                data: {
-                                    operation: 1,
-                                    cache: [
-                                        {
-                                            name: 'Notifications:1',
-                                            data: {
-                                                id: '1',
-                                                type: 'chatNotification',
-                                                roomId: Ldata.room,
-                                                playerId: user.uid,
-                                                playerName: user.username,
-                                                text: Ldata.text,
-                                                timestamp: Ldata.time,
-                                            }
-                                        }
-                                    ],
-                                }
-                            });
-                        });
-                    });
-                } else {
-                    Travian.socket.clients[uid].socket.emit('chatCache', {
-                        cache: [
-                            {
-                                name: 'Collection:ChatLine:' + data.room,
-                                data: {
-                                    operation: 5,
-                                    cache: [
-                                        Travian.chat.formLine(data)
-                                    ],
-                                }
-                            }
-                        ]
-                    });
-                    Travian.user.get(data.from, (user) => {
-                        Travian.socket.clients[uid].socket.emit('message', {
-                            name: 'Collection:Notifications:',
-                            data: {
-                                operation: 1,
-                                cache: [
-                                    {
-                                        name: 'Notifications:1',
-                                        data: {
-                                            id: '1',
-                                            type: 'chatNotification',
-                                            roomId: data.room,
-                                            playerId: user.uid,
-                                            playerName: user.username,
-                                            text: data.text,
-                                            timestamp: data.time,
-                                        }
-                                    }
-                                ],
-                            }
                         });
                     });
                 }

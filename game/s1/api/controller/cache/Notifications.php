@@ -127,3 +127,5 @@ if ($action[2] == "") {
         );
     }
 }
+
+//["message",{"response":[],"cache":[{"name":"Collection:Notifications:inGameHelp","data":{"cache":[{"name":"Notifications:Kingdom_MapAndDetailView","data":""}],"operation":3}}]

@@ -207,6 +207,7 @@ Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
     - [ ] Send message (Kingdom room)
     - [ ] Send message (Society room)
     - [ ] Mark as read
+    - [ ] Show notification
   
 # Screenshot
 ![Travian Kingdom Clone Script](https://s22.postimg.org/w82ihh4xt/Screen_Shot_2560-05-02_at_08.46.30.png)
