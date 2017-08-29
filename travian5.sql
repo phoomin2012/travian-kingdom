@@ -1,13 +1,44 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Aug 29, 2017 at 05:41 PM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 5.6.31
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `travian5_new`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `error_nodejs`
+--
 
 CREATE TABLE `error_nodejs` (
   `id` int(11) NOT NULL,
   `host` varchar(255) NOT NULL,
   `error` longtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `error_php`
+--
 
 CREATE TABLE `error_php` (
   `id` int(11) NOT NULL,
@@ -16,8 +47,60 @@ CREATE TABLE `error_php` (
   `message` text NOT NULL,
   `file` text NOT NULL,
   `line` varchar(255) NOT NULL,
-  `count` int(11) NOT NULL
+  `count` int(11) NOT NULL,
+  `last` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `error_php`
+--
+
+INSERT INTO `error_php` (`id`, `host`, `code`, `message`, `file`, `line`, `count`, `last`) VALUES
+(1, 'ks1.t5.ph', '8', 'Undefined variable: location', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/building.php', '300', 1, '2017-08-27 01:57:39'),
+(2, 'ks1.t5.ph', '8', 'Undefined index: collection', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/api/controller/report.php', '5', 3, '2017-08-27 02:02:12'),
+(3, 'game_service', '8', 'Undefined index: hpHero', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/auto.php', '480', 1, '2017-08-27 02:43:50'),
+(4, 'game_service', '8', 'Undefined index: hpHero', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/auto.php', '485', 28, '2017-08-29 13:31:11'),
+(5, 'game_service', '8', 'Undefined variable: p', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/auto.php', '119', 1, '2017-08-27 02:48:28'),
+(6, 'ks1.t5.ph', '8', 'Undefined index: type', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/api/controller/player.php', '207', 2, '2017-08-27 02:58:13'),
+(7, 'ks1.t5.ph', '8', 'Undefined index: s1_uid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/village.php', '134', 32, '2017-08-29 14:59:58'),
+(8, 'ks1.t5.ph', '8', 'Undefined index: s1_uid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/session.php', '51', 27, '2017-08-29 02:03:49'),
+(9, 'ks1.t5.ph', '8', 'Undefined index: s1_uid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/world.php', '603', 9, '2017-08-27 04:14:57'),
+(10, 'ks1.t5.ph', '8', 'Undefined index: s1_uid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/world.php', '789', 9, '2017-08-27 04:14:57'),
+(11, 'ks1.t5.ph', '8', 'Undefined index: s1_tribe', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/world.php', '791', 9, '2017-08-27 04:14:57'),
+(12, 'ks1.t5.ph', '8', 'Undefined index: s1_uid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/village.php', '19', 14, '2017-08-29 02:03:49'),
+(13, 'ks1.t5.ph', '8', 'Undefined index: s1_uid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/cache.php', '47', 7, '2017-08-29 02:03:49'),
+(14, 'ks1.t5.ph', '8', 'Undefined index: s1_uid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/cache.php', '49', 7, '2017-08-29 02:03:49'),
+(15, 'ks1.t5.ph', '8', 'Undefined index: s1_uid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/setting.php', '7', 7, '2017-08-29 02:03:49'),
+(16, 'ks1.t5.ph', '8', 'Undefined index: TabNotifications', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/setting.php', '12', 7, '2017-08-29 02:03:49'),
+(17, 'ks1.t5.ph', '8', 'Undefined index: HelpNotifications', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/setting.php', '19', 7, '2017-08-29 02:03:49'),
+(18, 'ks1.t5.ph', '8', 'Undefined index: s1_avatar', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/cache.php', '56', 7, '2017-08-29 02:03:49'),
+(19, 'ks1.t5.ph', '8', 'Undefined index: s1_uid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/cache.php', '57', 7, '2017-08-29 02:03:49'),
+(20, 'mellon.t5.ph', '8', 'Undefined index: mellon_msid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/mellon/template/logout.php', '37', 4, '2017-08-29 10:00:01'),
+(21, 'mellon.t5.ph', '8', 'Undefined index: mellon_msid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/mellon/template/logout.php', '47', 4, '2017-08-29 10:00:01'),
+(22, 'mellon.t5.ph', '8', 'Undefined index: mellon_msid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/mellon/template/logout.php', '77', 4, '2017-08-29 10:00:01'),
+(23, 'mellon.t5.ph', '8', 'Undefined index: mellon_msid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/mellon/template/logout.php', '95', 4, '2017-08-29 10:00:01'),
+(24, 'mellon.t5.ph', '8', 'Undefined index: mellon_msid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/mellon/template/login.php', '38', 5, '2017-08-29 10:00:13'),
+(25, 'mellon.t5.ph', '8', 'Undefined index: mellon_msid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/mellon/template/login.php', '48', 5, '2017-08-29 10:00:13'),
+(26, 'mellon.t5.ph', '8', 'Undefined index: mellon_msid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/mellon/template/login.php', '79', 5, '2017-08-29 10:00:13'),
+(27, 'mellon.t5.ph', '8', 'Undefined index: mellon_msid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/mellon/template/login.php', '86', 5, '2017-08-29 10:00:13'),
+(28, 'mellon.t5.ph', '8', 'Undefined index: mellon_msid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/mellon/template/login.php', '104', 5, '2017-08-29 10:00:13'),
+(29, 'mellon.t5.ph', '8', 'Undefined index: mellon_msid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/mellon/template/login.php', '109', 5, '2017-08-29 10:00:13'),
+(30, 'lobby.t5.ph', '2', 'Missing argument 1 for Prestige::get(), called in /Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/lobby/api/index.php on line 148 and defined', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/lobby/engine/prestige.php', '5', 7, '2017-08-29 10:00:25'),
+(31, 'lobby.t5.ph', '8', 'Undefined variable: uid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/lobby/engine/prestige.php', '7', 7, '2017-08-29 10:00:25'),
+(32, 'ks1.t5.ph', '1', 'Cannot use object of type PDOStatement as array', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/account.php', '254', 2, '2017-08-28 00:07:31'),
+(33, 'ks1.t5.ph', '8', 'Undefined variable: star', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/account.php', '269', 2402, '2017-08-29 16:20:16'),
+(34, 'ks1.t5.ph', '8', 'Undefined variable: star', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/account.php', '307', 2402, '2017-08-29 16:20:16'),
+(35, 'game_service', '8', 'Undefined index: s1_uid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/account.php', '251', 32, '2017-08-29 13:32:12'),
+(36, 'game_service', '8', 'Undefined variable: star', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/account.php', '269', 32, '2017-08-29 13:32:12'),
+(37, 'game_service', '8', 'Undefined variable: star', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/account.php', '307', 32, '2017-08-29 13:32:12'),
+(38, 'ks1.t5.ph', '8', 'Undefined index: s1_uid', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/account.php', '251', 2, '2017-08-29 02:03:49'),
+(39, 'ks1.t5.ph', '8', 'Undefined variable: kD', '/Applications/XAMPP/xamppfiles/htdocs/travian-kingdom/game/s1/engine/world.php', '675', 1454, '2017-08-29 15:18:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `global_avatar`
+--
 
 CREATE TABLE `global_avatar` (
   `id` int(11) NOT NULL,
@@ -33,10 +116,20 @@ CREATE TABLE `global_avatar` (
   `nose` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `global_avatar`
+--
+
 INSERT INTO `global_avatar` (`id`, `email`, `gender`, `hairColor`, `beard`, `ear`, `eye`, `eyebrow`, `hair`, `mouth`, `nose`) VALUES
 (1, 'phoomin009@gmail.com', 0, 4, 7, 7, 10, 4, 9, 3, 8),
 (2, 'phoomin009@gmail.com', 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (3, 'phoomin001@gmail.com', 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `global_msid`
+--
 
 CREATE TABLE `global_msid` (
   `id` int(11) NOT NULL,
@@ -45,9 +138,19 @@ CREATE TABLE `global_msid` (
   `ip` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `global_msid`
+--
+
 INSERT INTO `global_msid` (`id`, `email`, `token`, `ip`) VALUES
 (1, 'phoomin009@gmail.com', '0279bab3d5064310', '127.0.0.1'),
 (2, 'phoomin001@gmail.com', '5268fcc77e7cd8cd', '127.0.0.1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `global_server_data`
+--
 
 CREATE TABLE `global_server_data` (
   `sid` int(11) NOT NULL,
@@ -74,20 +177,42 @@ CREATE TABLE `global_server_data` (
   `recommended` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `global_server_data`
+--
+
 INSERT INTO `global_server_data` (`sid`, `name`, `tag`, `folder`, `prefix`, `speed_world`, `speed_unit`, `multiple_hero_item`, `multiple_hero_resouce`, `multiple_hero_speed`, `multiple_hero_power`, `multiple_storage`, `base_storage`, `plus_time`, `protection`, `start`, `natar`, `wwvillage`, `peace`, `genmap`, `maintenance`, `recommended`) VALUES
-(1, 'Developing', 'server1', 'http://ks1.t5.ph', 's1_', 100, 100, 1, 1, 1, 1, 1, 800, '86400*7', '86400*7', '1490014800', 1, 1, '0', '2', 0, 1);
+(1, 'Developing', 'server1', 'http://ks1.t5.ph', 's1_', 100, 100, 1, 1, 1, 1, 1, 800, '86400*7', '86400*7', '1500014800', 1, 1, '0', '2', 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `global_user`
+--
 
 CREATE TABLE `global_user` (
   `uid` int(11) NOT NULL,
   `username` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
   `password` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
   `email` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-  `timed` varchar(255) CHARACTER SET latin1 DEFAULT NULL
+  `timed` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `prestige` int(11) NOT NULL,
+  `level` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `global_user` (`uid`, `username`, `password`, `email`, `timed`) VALUES
-(1, 'phoomin2012', 'NzY5ODExMjI=', 'phoomin009@gmail.com', '1436542101'),
-(13, 'phoomin001', 'NzY5ODExMjI=', 'phoomin001@gmail.com', '1497538120');
+--
+-- Dumping data for table `global_user`
+--
+
+INSERT INTO `global_user` (`uid`, `username`, `password`, `email`, `timed`, `prestige`, `level`) VALUES
+(1, 'phoomin2012', 'NzY5ODExMjI=', 'phoomin009@gmail.com', '1436542101', 700, 0),
+(13, 'phoomin001', 'NzY5ODExMjI=', 'phoomin001@gmail.com', '1497538120', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_auction`
+--
 
 CREATE TABLE `s1_auction` (
   `id` int(11) NOT NULL,
@@ -99,6 +224,12 @@ CREATE TABLE `s1_auction` (
   `start` varchar(255) NOT NULL,
   `end` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_building`
+--
 
 CREATE TABLE `s1_building` (
   `id` int(10) UNSIGNED NOT NULL,
@@ -115,9 +246,11 @@ CREATE TABLE `s1_building` (
   `level` tinyint(3) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `s1_building` (`id`, `wid`, `location`, `type`, `sort`, `start`, `duration`, `timestamp`, `queue`, `paid`, `cost`, `level`) VALUES
-(730, '536756222', 33, 33, 1, '', '286', 0, 4, 0, '{\"wood\":8310,\"clay\":5190,\"iron\":4155,\"crop\":3115,\"pop\":2,\"cp\":22,\"effect\":52,\"time\":286}', 0),
-(731, '536887300', 25, 45, 1, '', '18', 0, 4, 0, '{\"wood\":720,\"clay\":685,\"iron\":645,\"crop\":250,\"pop\":4,\"cp\":7,\"effect\":100,\"time\":18}', 0);
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_cache`
+--
 
 CREATE TABLE `s1_cache` (
   `id` int(11) NOT NULL,
@@ -125,6 +258,161 @@ CREATE TABLE `s1_cache` (
   `data` text CHARACTER SET latin1 NOT NULL,
   `timed` varchar(255) CHARACTER SET latin1 NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_chat_line`
+--
+
+CREATE TABLE `s1_chat_line` (
+  `id` int(11) NOT NULL,
+  `room` varchar(255) NOT NULL,
+  `from` int(11) NOT NULL,
+  `text` text CHARACTER SET utf8 NOT NULL,
+  `time` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `s1_chat_line`
+--
+
+INSERT INTO `s1_chat_line` (`id`, `room`, `from`, `text`, `time`) VALUES
+(1, '1.102.101', 102, 'asdasd', '1503856081239'),
+(2, '1.102.101', 102, 'asdf', '1503858936828'),
+(3, '1.102.101', 102, 'fd', '1503859064773'),
+(4, '1.102.101', 102, 'rwerwerwer', '1503859068476'),
+(5, '1.102.101', 102, 'asdfasdf', '1503859071223'),
+(6, '1.102.101', 102, '2123123', '1503859073075'),
+(7, '1.102.101', 102, '[b]asdfasdf[/b]', '1503859089540'),
+(8, '1.102.101', 102, '[s][h]ไม่ต้องมา[/h][/s]', '1503859100310'),
+(9, '1.102.101', 102, '[h]อย่ามาตี[/h]', '1503859107488'),
+(10, '1.102.101', 101, 'สวัสดี', '1503935784313'),
+(11, '1.102.101', 102, 'ดีจ้าาาา', '1503935844317'),
+(12, '1.102.101', 101, 'อ่าดีๆ', '1503935855819'),
+(13, '1.102.101', 102, '555', '1503943845837'),
+(14, '1.102.101', 102, '555', '1503943917861'),
+(15, '1.102.101', 102, '555', '1503944065675'),
+(16, '1.102.101', 102, '555', '1503944098652'),
+(17, '1.102.101', 102, '55', '1503944150655'),
+(18, '1.102.101', 102, '555', '1503944220236'),
+(19, '1.102.101', 102, '555', '1503944264735'),
+(20, '1.102.101', 102, 'aa', '1503944301366'),
+(21, '1.102.101', 102, 'cc', '1503944304943'),
+(22, '1.102.101', 102, 'gg', '1503944354970'),
+(23, '1.102.101', 102, 'zz', '1503944421515'),
+(24, '1.102.101', 102, 'v', '1503944794040'),
+(25, '1.102.101', 102, 'ss', '1503945109013'),
+(26, '1.102.101', 102, 'a', '1503945240598'),
+(27, '1.102.101', 102, 'b', '1503945324147'),
+(28, '1.102.101', 102, 'ff', '1503945450502'),
+(29, '1.102.101', 102, 'AAA', '1503945725078'),
+(30, '1.102.101', 102, 'C', '1503946154465'),
+(31, '1.102.101', 102, 'ww', '1503946205649'),
+(32, '1.102.101', 102, 'p', '1503946318403'),
+(33, '1.102.101', 102, 'v', '1503946355280'),
+(34, '1.102.101', 102, 'asd', '1503946480953'),
+(35, '1.102.101', 102, 'pp', '1503946562366'),
+(36, '1.102.101', 102, 'a', '1503946725321'),
+(37, '1.102.101', 102, 'p', '1503946855062'),
+(38, '1.102.101', 102, '01', '1503946907523'),
+(39, '1.102.101', 102, 'za', '1503947005500'),
+(40, '1.102.101', 102, 'CC', '1503947007864'),
+(41, '1.102.101', 101, 'sf', '1503947062763'),
+(42, '1.102.101', 102, 'asdf', '1503947089723'),
+(43, '1.102.101', 101, 'D', '1503947093707'),
+(44, '1.102.101', 102, 'asdf', '1503947153297'),
+(45, '1.102.101', 102, 'hgfdss', '1503947175060'),
+(46, '1.102.101', 102, 'gd', '1503947205561'),
+(47, '1.102.101', 102, 'asdf', '1503948598952'),
+(48, '1.102.101', 102, 'f', '1503948857826'),
+(49, '1.102.101', 102, 'DD', '1503949005782'),
+(50, '1.102.101', 101, 'GSDSD', '1503949013610'),
+(51, '1.102.101', 101, 'fsdf', '1503949141671'),
+(52, '1.102.101', 102, 'sdf', '1503949165332'),
+(53, '1.102.101', 102, 'f', '1503949240217'),
+(54, '1.102.101', 101, 'f', '1503949252131'),
+(55, '1.102.101', 102, 'hh', '1503949457660'),
+(56, '1.102.101', 102, '12', '1503949644110'),
+(57, '1.102.101', 102, 'Fuck you', '1503949648902'),
+(58, '1.102.101', 102, 'Wgz', '1503949658356'),
+(59, '1.102.101', 101, '????????????????', '1503984169587'),
+(60, '1.102.101', 101, 'g', '1503984299400'),
+(61, '1.102.101', 101, 'gg', '1503988197941'),
+(62, '1.102.101', 101, 'f', '1503988220597'),
+(63, '1.102.101', 101, 'iii', '1503988404980'),
+(64, '1.102.101', 101, 'll', '1503988545126'),
+(65, '1.102.101', 101, 'cv', '1503988550937'),
+(66, '1.102.101', 101, 'itit', '1503988694580'),
+(67, '1.102.101', 101, 'f', '1503988751124'),
+(68, '1.102.101', 101, 'n', '1503988847150'),
+(69, '1.102.101', 101, 'b', '1503988902913'),
+(70, '1.102.101', 101, 'f', '1503989067769'),
+(71, '1.102.101', 101, 'r', '1503993634743'),
+(72, '1.102.101', 101, 'r', '1503993932932'),
+(73, '1.102.101', 101, 'r', '1503993936910'),
+(74, '1.102.101', 101, 'f', '1503993938912'),
+(75, '1.102.101', 101, 'f', '1503993968701'),
+(76, '1.102.101', 101, 'f', '1503993975559'),
+(77, '1.102.101', 101, 'f', '1503993978115'),
+(78, '1.102.101', 101, 'X', '1503993997287'),
+(79, '1.102.101', 101, 'C', '1503994070777'),
+(80, '1.102.101', 101, 'E', '1503994077217'),
+(81, '1.102.101', 101, 'VV', '1503994103677'),
+(82, '1.102.101', 101, 'rr', '1503994227402'),
+(83, '1.102.101', 101, 'rr', '1503994233193'),
+(84, '1.102.101', 101, 'CC', '1503994235679'),
+(85, '1.102.101', 101, 'D', '1503994237595'),
+(86, '1.102.101', 101, 'e', '1503994238884'),
+(87, '1.102.101', 101, 'r', '1503994240419'),
+(88, '1.102.101', 101, '12', '1503994242083'),
+(89, '1.102.101', 101, 'e', '1503994243522'),
+(90, '1.102.101', 101, '123', '1503994316723'),
+(91, '1.102.101', 101, '3', '1503994319037'),
+(92, '1.102.101', 101, '3', '1503994319882'),
+(93, '1.102.101', 101, '3', '1503994320180'),
+(94, '1.102.101', 101, '3', '1503994320444'),
+(95, '1.102.101', 101, '3', '1503994320625'),
+(96, '1.102.101', 101, '3', '1503994320813'),
+(97, '1.102.101', 101, '3', '1503994322445'),
+(98, '1.102.101', 101, 'f', '1503994769329'),
+(99, '1.102.101', 101, 'e', '1503994790206'),
+(100, '1.102.101', 101, 'e', '1503994791728'),
+(101, '1.102.101', 101, 'e', '1503994792315');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_chat_room`
+--
+
+CREATE TABLE `s1_chat_room` (
+  `id` int(11) NOT NULL,
+  `roomId` varchar(255) NOT NULL,
+  `type` int(11) NOT NULL,
+  `from` int(11) NOT NULL,
+  `to` int(11) NOT NULL,
+  `line` text NOT NULL,
+  `close` int(11) NOT NULL,
+  `closeby` int(11) NOT NULL,
+  `lastOtherRead` varchar(255) NOT NULL,
+  `lastOwnRead` varchar(255) NOT NULL,
+  `time` varchar(255) NOT NULL,
+  `playersRead` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `s1_chat_room`
+--
+
+INSERT INTO `s1_chat_room` (`id`, `roomId`, `type`, `from`, `to`, `line`, `close`, `closeby`, `lastOtherRead`, `lastOwnRead`, `time`, `playersRead`) VALUES
+(1, '1.102.101', 1, 102, 101, '[h]Hello World[/h]', 0, 0, '', '', '1503856081238', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_field`
+--
 
 CREATE TABLE `s1_field` (
   `id` int(10) UNSIGNED NOT NULL,
@@ -134,6 +422,10 @@ CREATE TABLE `s1_field` (
   `location` int(11) NOT NULL,
   `rubble` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;
+
+--
+-- Dumping data for table `s1_field`
+--
 
 INSERT INTO `s1_field` (`id`, `wid`, `type`, `level`, `location`, `rubble`) VALUES
 (1, 536756223, 1, 11, 1, 0),
@@ -208,7 +500,7 @@ INSERT INTO `s1_field` (`id`, `wid`, `type`, `level`, `location`, `rubble`) VALU
 (70, 536756222, 0, 0, 30, 0),
 (71, 536756222, 0, 0, 31, 0),
 (72, 536756222, 16, 1, 32, 0),
-(73, 536756222, 33, 16, 33, 0),
+(73, 536756222, 33, 17, 33, 0),
 (74, 536756222, 0, 0, 34, 0),
 (75, 536756222, 0, 0, 35, 0),
 (76, 536756222, 0, 0, 36, 0),
@@ -241,7 +533,7 @@ INSERT INTO `s1_field` (`id`, `wid`, `type`, `level`, `location`, `rubble`) VALU
 (103, 536887300, 0, 0, 22, 0),
 (104, 536887300, 0, 0, 23, 0),
 (105, 536887300, 0, 0, 24, 0),
-(106, 536887300, 45, 0, 25, 0),
+(106, 536887300, 45, 1, 25, 0),
 (107, 536887300, 0, 0, 26, 0),
 (108, 536887300, 15, 5, 27, 0),
 (109, 536887300, 0, 0, 28, 0),
@@ -256,7 +548,93 @@ INSERT INTO `s1_field` (`id`, `wid`, `type`, `level`, `location`, `rubble`) VALU
 (118, 536887300, 0, 0, 37, 0),
 (119, 536887300, 11, 1, 38, 0),
 (120, 536887300, 10, 1, 39, 0),
-(121, 536887300, 0, 0, 40, 0);
+(121, 536887300, 0, 0, 40, 0),
+(122, 536690687, 1, 6, 1, 0),
+(123, 536690687, 4, 3, 2, 0),
+(124, 536690687, 1, 6, 3, 0),
+(125, 536690687, 3, 6, 4, 0),
+(126, 536690687, 2, 6, 5, 0),
+(127, 536690687, 2, 6, 6, 0),
+(128, 536690687, 3, 6, 7, 0),
+(129, 536690687, 4, 3, 8, 0),
+(130, 536690687, 4, 3, 9, 0),
+(131, 536690687, 3, 6, 10, 0),
+(132, 536690687, 3, 6, 11, 0),
+(133, 536690687, 4, 3, 12, 0),
+(134, 536690687, 4, 3, 13, 0),
+(135, 536690687, 1, 6, 14, 0),
+(136, 536690687, 4, 3, 15, 0),
+(137, 536690687, 2, 5, 16, 0),
+(138, 536690687, 1, 6, 17, 0),
+(139, 536690687, 2, 5, 18, 0),
+(140, 536690687, 22, 3, 19, 0),
+(141, 536690687, 25, 10, 20, 0),
+(142, 536690687, 0, 0, 21, 0),
+(143, 536690687, 0, 0, 22, 0),
+(144, 536690687, 0, 0, 23, 0),
+(145, 536690687, 0, 0, 24, 0),
+(146, 536690687, 0, 0, 25, 0),
+(147, 536690687, 0, 0, 26, 0),
+(148, 536690687, 15, 5, 27, 0),
+(149, 536690687, 0, 0, 28, 0),
+(150, 536690687, 19, 10, 29, 0),
+(151, 536690687, 0, 0, 30, 0),
+(152, 536690687, 0, 0, 31, 0),
+(153, 536690687, 16, 1, 32, 0),
+(154, 536690687, 31, 5, 33, 0),
+(155, 536690687, 0, 0, 34, 0),
+(156, 536690687, 17, 8, 35, 0),
+(157, 536690687, 0, 0, 36, 0),
+(158, 536690687, 0, 0, 37, 0),
+(159, 536690687, 11, 10, 38, 0),
+(160, 536690687, 10, 12, 39, 0),
+(161, 536690687, 0, 0, 40, 0),
+(162, 536690691, 4, 0, 1, 0),
+(163, 536690691, 4, 0, 2, 0),
+(164, 536690691, 1, 2, 3, 0),
+(165, 536690691, 3, 2, 4, 0),
+(166, 536690691, 4, 0, 5, 0),
+(167, 536690691, 4, 0, 6, 0),
+(168, 536690691, 4, 0, 7, 0),
+(169, 536690691, 4, 0, 8, 0),
+(170, 536690691, 4, 0, 9, 0),
+(171, 536690691, 4, 0, 10, 0),
+(172, 536690691, 4, 0, 11, 0),
+(173, 536690691, 4, 0, 12, 0),
+(174, 536690691, 4, 0, 13, 0),
+(175, 536690691, 4, 0, 14, 0),
+(176, 536690691, 4, 0, 15, 0),
+(177, 536690691, 2, 2, 16, 0),
+(178, 536690691, 4, 0, 17, 0),
+(179, 536690691, 4, 0, 18, 0),
+(180, 536690691, 0, 0, 19, 0),
+(181, 536690691, 0, 0, 20, 0),
+(182, 536690691, 0, 0, 21, 0),
+(183, 536690691, 0, 0, 22, 0),
+(184, 536690691, 0, 0, 23, 0),
+(185, 536690691, 0, 0, 24, 0),
+(186, 536690691, 0, 0, 25, 0),
+(187, 536690691, 0, 0, 26, 0),
+(188, 536690691, 15, 3, 27, 0),
+(189, 536690691, 0, 0, 28, 0),
+(190, 536690691, 0, 0, 29, 0),
+(191, 536690691, 0, 0, 30, 0),
+(192, 536690691, 0, 0, 31, 0),
+(193, 536690691, 16, 1, 32, 0),
+(194, 536690691, 31, 1, 33, 0),
+(195, 536690691, 0, 0, 34, 0),
+(196, 536690691, 0, 0, 35, 0),
+(197, 536690691, 0, 0, 36, 0),
+(198, 536690691, 0, 0, 37, 0),
+(199, 536690691, 0, 0, 38, 0),
+(200, 536690691, 0, 0, 39, 0),
+(201, 536690691, 0, 0, 40, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_gamecard`
+--
 
 CREATE TABLE `s1_gamecard` (
   `id` int(11) NOT NULL,
@@ -268,6 +646,12 @@ CREATE TABLE `s1_gamecard` (
   `card4` varchar(255) NOT NULL,
   `card5` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_hero`
+--
 
 CREATE TABLE `s1_hero` (
   `id` int(11) NOT NULL,
@@ -305,8 +689,19 @@ CREATE TABLE `s1_hero` (
   `use_artwork` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `s1_hero`
+--
+
 INSERT INTO `s1_hero` (`id`, `owner`, `village`, `move`, `level`, `levelUp`, `speed`, `point`, `xp`, `dead`, `health`, `power`, `itempower`, `atkBonus`, `defBonus`, `resBonus`, `resType`, `regen`, `lastupdate`, `advPoint`, `useAdvPoint`, `advNext`, `advShort`, `advLong`, `revive`, `max_scroll`, `use_scroll`, `use_waterbucket`, `use_ointments`, `use_advcard`, `use_reschest`, `use_cropchest`, `use_artwork`) VALUES
-(1, '101', '536756223', '0', 7, 0, 7, 0, 3147, 0, 100.000000, 28, 0, 0, 0, 0, 0, 100, '1501682143.1401', 233, 130, '1501682497', '9', '20', '0', 0, 0, 0, 0, 0, 0, 0, 0);
+(1, '101', '536756223', '', 7, 0, 7, 0, 3447, 0, 100.000000, 28, 0, 0, 0, 0, 0, 100, '1503988367.5614', 272, 142, '1503989135', '10', '18', '0', 0, 0, 0, 0, 0, 0, 0, 0),
+(2, '102', '536690687', '', 3, 0, 7, 0, 987, 0, 100.000000, 320, 0, 0, 0, 12, 0, 500, '1503988367.5617', 76, 44, '1503988721', '11', '16', '0', 0, 0, 0, 0, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_hero_item`
+--
 
 CREATE TABLE `s1_hero_item` (
   `id` int(11) NOT NULL,
@@ -323,6 +718,10 @@ CREATE TABLE `s1_hero_item` (
   `lastChange` varchar(255) NOT NULL,
   `previousOwners` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `s1_hero_item`
+--
 
 INSERT INTO `s1_hero_item` (`id`, `owner`, `type`, `amount`, `slot`, `quality`, `tier`, `level`, `bonus`, `upgrade`, `equip`, `lastChange`, `previousOwners`) VALUES
 (1, '101', '118', 1, 1, 1, 1, 0, '[]', '[]', 0, '1497872767', ''),
@@ -356,13 +755,49 @@ INSERT INTO `s1_hero_item` (`id`, `owner`, `type`, `amount`, `slot`, `quality`, 
 (29, '101', '14', 1, 22, 1, 1, 0, '[]', '[]', 0, '1497885002', ''),
 (30, '101', '123', 1, 23, 1, 1, 0, '[]', '[]', 0, '1501678175', ''),
 (31, '101', '20', 1, 24, 1, 1, 0, '[]', '[]', 0, '1501678242', ''),
-(32, '101', '93', 1, 25, 1, 1, 0, '[]', '[]', 0, '1501678381', '');
+(32, '101', '93', 1, 25, 1, 1, 0, '[]', '[]', 0, '1501678381', ''),
+(33, '101', '89', 1, 26, 1, 1, 0, '[]', '[]', 0, '1501682262', ''),
+(34, '101', '134', 1, 27, 1, 1, 0, '[]', '[]', 0, '1501682853', ''),
+(35, '101', '51', 1, 28, 1, 1, 0, '[]', '[]', 0, '1503080153', ''),
+(36, '101', '53', 1, 29, 1, 1, 0, '[]', '[]', 0, '1503080326', ''),
+(37, '101', '55', 1, 30, 1, 1, 0, '[]', '[]', 0, '1503080702', ''),
+(38, '101', '65', 1, 31, 1, 1, 0, '[]', '[]', 0, '1503106353', ''),
+(39, '102', '27', 1, 0, 1, 1, 0, '[]', '[]', 1, '1503773972', ''),
+(40, '102', '48', 1, 1, 1, 1, 0, '[]', '[]', 0, '1503774161', ''),
+(41, '102', '6', 1, 2, 1, 1, 0, '[]', '[]', 0, '1503774404', ''),
+(42, '102', '105', 1, 0, 1, 1, 0, '[]', '[]', 1, '1503775295', ''),
+(43, '102', '62', 1, 0, 1, 1, 0, '[]', '[]', 1, '1503775822', ''),
+(44, '102', '71', 1, 4, 1, 1, 0, '[]', '[]', 0, '1503776102', ''),
+(45, '102', '9', 1, 0, 1, 1, 0, '[]', '[]', 1, '1503776152', ''),
+(46, '102', '90', 1, 0, 1, 1, 0, '[]', '[]', 1, '1503776181', ''),
+(47, '102', '59', 1, 3, 1, 1, 0, '[]', '[]', 0, '1503776241', ''),
+(48, '102', '65', 1, 5, 1, 1, 0, '[]', '[]', 0, '1503776290', ''),
+(49, '102', '55', 1, 6, 1, 1, 0, '[]', '[]', 0, '1503776316', ''),
+(50, '102', '139', 1, 7, 1, 1, 0, '[]', '[]', 0, '1503776337', ''),
+(51, '102', '121', 1, 0, 1, 1, 0, '[]', '[]', 1, '1503776387', ''),
+(52, '102', '69', 1, 8, 1, 1, 0, '[]', '[]', 0, '1503776406', ''),
+(53, '102', '117', 1, 9, 1, 1, 0, '[]', '[]', 0, '1503776438', ''),
+(54, '102', '10', 1, 10, 1, 1, 0, '[]', '[]', 0, '1503776489', ''),
+(55, '102', '56', 1, 11, 1, 1, 0, '[]', '[]', 0, '1503776710', ''),
+(56, '102', '101', 1, 12, 1, 1, 0, '[]', '[]', 0, '1503777383', ''),
+(57, '102', '42', 1, 13, 1, 1, 0, '[]', '[]', 0, '1503778331', ''),
+(58, '102', '139', 1, 14, 1, 1, 0, '[]', '[]', 0, '1503796919', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_influence`
+--
 
 CREATE TABLE `s1_influence` (
   `wid` varchar(255) NOT NULL,
   `owner` varchar(255) NOT NULL,
   `kingdom` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `s1_influence`
+--
 
 INSERT INTO `s1_influence` (`wid`, `owner`, `kingdom`) VALUES
 ('536723451', '101', '{\"101\":{\"536756223\":323.54252379847}}'),
@@ -423,6 +858,12 @@ INSERT INTO `s1_influence` (`wid`, `owner`, `kingdom`) VALUES
 ('536756227', '101', '{\"101\":{\"536756223\":333.5}}'),
 ('536788995', '101', '{\"101\":{\"536756223\":323.54252379847}}');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_kingdom`
+--
+
 CREATE TABLE `s1_kingdom` (
   `id` int(11) NOT NULL,
   `king` int(11) NOT NULL,
@@ -437,8 +878,18 @@ CREATE TABLE `s1_kingdom` (
   `duke4` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `s1_kingdom`
+--
+
 INSERT INTO `s1_kingdom` (`id`, `king`, `tag`, `vca`, `vcw`, `indesc`, `pubdesc`, `duke1`, `duke2`, `duke3`, `duke4`) VALUES
 (1, 101, 'ee', 1, 1, '', '', '', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_market`
+--
 
 CREATE TABLE `s1_market` (
   `id` int(10) UNSIGNED NOT NULL,
@@ -453,11 +904,24 @@ CREATE TABLE `s1_market` (
   `merchant` tinyint(2) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_nodejs`
+--
+
 CREATE TABLE `s1_nodejs` (
   `id` int(11) NOT NULL,
   `uid` varchar(255) NOT NULL,
-  `data` text NOT NULL
+  `data` text NOT NULL,
+  `sent` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_notification`
+--
 
 CREATE TABLE `s1_notification` (
   `id` int(11) NOT NULL,
@@ -468,6 +932,21 @@ CREATE TABLE `s1_notification` (
   `count` int(11) NOT NULL DEFAULT '1',
   `expire` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `s1_notification`
+--
+
+INSERT INTO `s1_notification` (`id`, `player`, `itemId`, `type`, `icon`, `count`, `expire`) VALUES
+(171, '102', '1234567890', 4, 'movement_defent_medium_flat_positive', 1, '2592000'),
+(169, '101', '3a43b48b26bb2430436a053d', 1, 'movement_attack_medium_flat_negative', 1, '2592000'),
+(170, '102', '3a43b48b26bb2430436a053d', 1, 'movement_defender_medium_flat_positive', 1, '2592000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_oasis`
+--
 
 CREATE TABLE `s1_oasis` (
   `id` int(11) NOT NULL,
@@ -490,6 +969,12 @@ CREATE TABLE `s1_oasis` (
   `unit` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_oasis_rank`
+--
+
 CREATE TABLE `s1_oasis_rank` (
   `id` int(11) NOT NULL,
   `oasis` varchar(255) NOT NULL,
@@ -499,11 +984,23 @@ CREATE TABLE `s1_oasis_rank` (
   `point` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_php`
+--
+
 CREATE TABLE `s1_php` (
   `id` int(11) NOT NULL,
   `uid` varchar(255) NOT NULL,
   `data` longtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_report_body`
+--
 
 CREATE TABLE `s1_report_body` (
   `id` int(11) NOT NULL,
@@ -517,6 +1014,10 @@ CREATE TABLE `s1_report_body` (
   `module_support` longtext NOT NULL,
   `time` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `s1_report_body`
+--
 
 INSERT INTO `s1_report_body` (`id`, `ref`, `owner`, `source_data`, `target_data`, `detail_data`, `module_source`, `module_target`, `module_support`, `time`) VALUES
 (1, '4c4db993c39b0e1245870559', '101', '{\"troopId\":\"2\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"-10101\",\"villageName\":\"phoomin009\'s village\"}', '{\"tribeId\":null,\"playerId\":null,\"playerName\":null,\"villageId\":\"536887296\",\"villageName\":null,\"coordinates\":{\"x\":0,\"y\":0}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":13,\"loss\":5},\"defender\":{\"sum\":5,\"loss\":5}}}', '{\"name\":\"troops\\/attacker\",\"body\":{\"wid\":\"-10101\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"\",\"villageName\":\"\",\"originalTroops\":{\"1\":\"0\",\"2\":\"12\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"1\"},\"lostTroops\":{\"1\":0,\"2\":5,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '{\"name\":\"troops\\/defender\",\"body\":{\"wid\":\"536920065\",\"tribeId\":\"1\",\"playerId\":\"-1\",\"playerName\":\"Robber\",\"villageId\":\"536920065\",\"villageName\":\"Robber hideout\",\"originalTroops\":{\"1\":5,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0},\"lostTroops\":{\"1\":5,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '[]', '1490927305'),
@@ -642,6 +1143,73 @@ INSERT INTO `s1_report_body` (`id`, `ref`, `owner`, `source_data`, `target_data`
 (121, 'e90e558fe79a1d3f456d0564', '101', '{\"troopId\":\"132\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":46,\"hp\":22,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":10514,\"2\":13307,\"3\":9681,\"4\":11816}}]}', '[]', '[]', '[]', '1501678316'),
 (122, '62dc43c9a946af2345830568', '101', '{\"troopId\":\"133\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":30,\"hp\":32,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":13069,\"2\":9583,\"3\":12810,\"4\":13524}},{\"type\":2,\"subType\":93,\"amount\":1}]}', '[]', '[]', '[]', '1501678381'),
 (123, 'afa1a8398c4e6aaf45380556', '101', '{\"troopId\":\"134\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":32,\"hp\":14,\"won\":false,\"loot\":[]}', '[]', '[]', '[]', '1501678432');
+INSERT INTO `s1_report_body` (`id`, `ref`, `owner`, `source_data`, `target_data`, `detail_data`, `module_source`, `module_target`, `module_support`, `time`) VALUES
+(124, '0936bc55d7aedb06454e055f', '101', '{\"troopId\":\"135\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":28,\"hp\":16,\"won\":true,\"loot\":[{\"type\":2,\"subType\":89,\"amount\":1}]}', '[]', '[]', '[]', '1501682262'),
+(125, 'f24a3559730a252d454e055c', '101', '{\"troopId\":\"136\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":29,\"hp\":18,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":7889,\"2\":12124,\"3\":9625,\"4\":12670}}]}', '[]', '[]', '[]', '1501682560'),
+(126, '5b49e22e7e0487d645770569', '101', '{\"troopId\":\"137\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":28,\"hp\":30,\"won\":true,\"loot\":[{\"type\":2,\"subType\":134,\"amount\":1},{\"type\":3,\"subType\":null,\"amount\":{\"1\":13419,\"2\":8554,\"3\":10458,\"4\":8099}}]}', '[]', '[]', '[]', '1501682853'),
+(127, '0f56bb59f7001c0544db0553', '101', '{\"troopId\":\"138\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":22,\"hp\":11,\"won\":true,\"loot\":[{\"type\":2,\"subType\":51,\"amount\":1}]}', '[]', '[]', '[]', '1503080153'),
+(128, '101a007a705a7a0f44dc054b', '101', '{\"troopId\":\"139\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":29,\"hp\":12,\"won\":true,\"loot\":[{\"type\":2,\"subType\":53,\"amount\":1}]}', '[]', '[]', '[]', '1503080326'),
+(129, 'df4094ceb2d8718545290561', '101', '{\"troopId\":\"140\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":29,\"hp\":13,\"won\":true,\"loot\":[{\"type\":2,\"subType\":55,\"amount\":1}]}', '[]', '[]', '[]', '1503080702'),
+(130, 'd0697baf1c13d0084533055e', '101', '{\"troopId\":\"141\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":63,\"hp\":12,\"won\":true,\"loot\":[]}', '[]', '[]', '[]', '1503080736'),
+(131, 'dea5245f9753609f45150552', '101', '{\"troopId\":\"142\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":10,\"hp\":15,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":11550,\"2\":7749,\"3\":12558,\"4\":7959}}]}', '[]', '[]', '[]', '1503080851'),
+(132, '5b2224f2d09ad1f744d80553', '101', '{\"troopId\":\"143\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":13,\"hp\":14,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":12229,\"2\":10458,\"3\":13034,\"4\":8141}}]}', '[]', '[]', '[]', '1503081062'),
+(133, 'c8cbb1cd6ab60cda44e80559', '101', '{\"troopId\":\"144\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":21,\"hp\":18,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":9744,\"2\":8141,\"3\":12999,\"4\":10696}}]}', '[]', '[]', '[]', '1503081110'),
+(134, 'a36124c086adb3c744d50551', '101', '{\"troopId\":\"145\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":28,\"hp\":11,\"won\":true,\"loot\":[{\"type\":2,\"subType\":65,\"amount\":1}]}', '[]', '[]', '[]', '1503106353'),
+(135, 'd64b6da0fd57134845980567', '102', '{\"troopId\":\"147\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"-10102\",\"villageName\":\"phXXX1\'s village\"}', '{\"tribeId\":null,\"playerId\":null,\"playerName\":null,\"villageId\":\"536887296\",\"villageName\":null,\"coordinates\":{\"x\":0,\"y\":0}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":6,\"loss\":6},\"defender\":{\"sum\":5,\"loss\":2}}}', '{\"name\":\"troops\\/attacker\",\"body\":{\"wid\":\"-10102\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"\",\"villageName\":\"\",\"originalTroops\":{\"1\":\"5\",\"2\":\"0\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"1\"},\"lostTroops\":{\"1\":5,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":1}}}', '{\"name\":\"troops\\/defender\",\"body\":{\"wid\":\"536920065\",\"tribeId\":\"1\",\"playerId\":\"-1\",\"playerName\":\"Robber\",\"villageId\":\"536920065\",\"villageName\":\"Robber hideout\",\"originalTroops\":{\"1\":5,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0},\"lostTroops\":{\"1\":2,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '[]', '1503772469'),
+(136, '9b0de8682c9ca29c45500559', '102', '{\"troopId\":\"150\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":23,\"hp\":8,\"won\":true,\"loot\":[{\"type\":2,\"subType\":27,\"amount\":1}]}', '[]', '[]', '[]', '1503773972'),
+(137, '042daed1733be16045be056d', '102', '{\"troopId\":\"151\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":12,\"hp\":14,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":0,\"2\":0,\"3\":0,\"4\":0}}]}', '[]', '[]', '[]', '1503773983'),
+(138, '2450b26c242d412945680558', '102', '{\"troopId\":\"152\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":22,\"hp\":14,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":0,\"2\":0,\"3\":0,\"4\":0}}]}', '[]', '[]', '[]', '1503774077'),
+(139, 'b70e3a92bf9064ce44eb0548', '102', '{\"troopId\":\"153\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":14,\"hp\":15,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":0,\"2\":0,\"3\":0,\"4\":0}}]}', '[]', '[]', '[]', '1503774111'),
+(140, 'c7be401be33ec23845500558', '102', '{\"troopId\":\"154\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":12,\"hp\":16,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":0,\"2\":0,\"3\":0,\"4\":0}}]}', '[]', '[]', '[]', '1503774146'),
+(141, 'cd70f5a51af853d24537055a', '102', '{\"troopId\":\"155\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":17,\"hp\":13,\"won\":true,\"loot\":[{\"type\":2,\"subType\":48,\"amount\":1}]}', '[]', '[]', '[]', '1503774161'),
+(142, '3cdc2cd4a6aacd004579055c', '102', '{\"troopId\":\"156\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":29,\"hp\":14,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":1447,\"2\":1438,\"3\":1368,\"4\":1921}}]}', '[]', '[]', '[]', '1503774186'),
+(143, 'b52945d657155328459e056a', '102', '{\"troopId\":\"157\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":19,\"hp\":8,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":1598,\"2\":1072,\"3\":1670,\"4\":1820}}]}', '[]', '[]', '[]', '1503774286'),
+(144, '9bba5c510c5c43da4592056d', '102', '{\"troopId\":\"158\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":25,\"hp\":9,\"won\":true,\"loot\":[{\"type\":2,\"subType\":6,\"amount\":1}]}', '[]', '[]', '[]', '1503774404'),
+(145, '6be4c94b9d224eea4571055e', '102', '{\"troopId\":\"159\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '{\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\",\"coordinates\":{\"x\":-1,\"y\":-4}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":5,\"loss\":5},\"defender\":{\"sum\":901,\"loss\":0}}}', '{\"name\":\"troops\\/attacker\",\"body\":{\"wid\":\"536690687\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"\",\"villageName\":\"\",\"originalTroops\":{\"1\":\"0\",\"2\":\"5\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"0\"},\"lostTroops\":{\"1\":0,\"2\":5,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '{\"name\":\"troops\\/defender\",\"body\":{\"wid\":\"536756223\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\",\"originalTroops\":{\"1\":\"850\",\"2\":\"50\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"1\"},\"lostTroops\":{\"1\":0,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '[]', '1503774462'),
+(146, '075472d53fd57a5a459c0563', '102', '{\"troopId\":\"163\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":30,\"hp\":15,\"won\":true,\"loot\":[{\"type\":2,\"subType\":105,\"amount\":1}]}', '[]', '[]', '[]', '1503775295'),
+(147, '334760a561f2dd3d455e055d', '102', '{\"troopId\":\"162\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '{\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536887300\",\"villageName\":\"PCCT3\",\"coordinates\":{\"x\":4,\"y\":0}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":5,\"loss\":0},\"defender\":{\"sum\":0,\"loss\":0}}}', '{\"name\":\"troops\\/attacker\",\"body\":{\"wid\":\"536690687\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"\",\"villageName\":\"\",\"originalTroops\":{\"1\":\"5\",\"2\":\"0\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"0\"},\"lostTroops\":{\"1\":0,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '{\"name\":\"troops\\/defender\",\"body\":{\"wid\":\"536887300\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536887300\",\"villageName\":\"PCCT3\",\"originalTroops\":{\"1\":\"0\",\"2\":\"0\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"0\"},\"lostTroops\":{\"1\":0,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '[]', '1503775312'),
+(148, 'ba2efe6d8db29a0a458a055f', '102', '{\"troopId\":\"164\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":25,\"hp\":9,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":1158,\"2\":1121,\"3\":1596,\"4\":1795}}]}', '[]', '[]', '[]', '1503775565'),
+(149, 'acfbd1d60eb8596b458a055e', '102', '{\"troopId\":\"165\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":27,\"hp\":17,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":1736,\"2\":1151,\"3\":1151,\"4\":1734}}]}', '[]', '[]', '[]', '1503775694'),
+(150, 'b525e23e410a44604539054f', '102', '{\"troopId\":\"166\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":18,\"hp\":18,\"won\":true,\"loot\":[{\"type\":2,\"subType\":62,\"amount\":1}]}', '[]', '[]', '[]', '1503775822'),
+(151, '1cb3dbbae9b0f76245bf0566', '102', '{\"troopId\":\"167\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":24,\"hp\":13,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":1928,\"2\":1281,\"3\":1078,\"4\":1060}}]}', '[]', '[]', '[]', '1503775876'),
+(152, '567c0d8825bc097745a5056a', '102', '{\"troopId\":\"168\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":44,\"hp\":18,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":1746,\"2\":2000,\"3\":1426,\"4\":1504}}]}', '[]', '[]', '[]', '1503775907'),
+(153, '9166abc41b745574458d0561', '102', '{\"troopId\":\"169\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":36,\"hp\":15,\"won\":true,\"loot\":[]}', '[]', '[]', '[]', '1503775945'),
+(154, '882f88865c9f500a454d055b', '102', '{\"troopId\":\"170\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":17,\"hp\":8,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":3688,\"2\":3740,\"3\":2656,\"4\":2052}}]}', '[]', '[]', '[]', '1503776033'),
+(155, '6bc17af1aa11612c451d0555', '102', '{\"troopId\":\"171\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":14,\"hp\":14,\"won\":true,\"loot\":[{\"type\":2,\"subType\":71,\"amount\":1}]}', '[]', '[]', '[]', '1503776102'),
+(156, '1e21476662dc843445660560', '102', '{\"troopId\":\"172\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":18,\"hp\":9,\"won\":true,\"loot\":[{\"type\":2,\"subType\":9,\"amount\":1}]}', '[]', '[]', '[]', '1503776152'),
+(157, 'e0a4717678220b6645980564', '102', '{\"troopId\":\"173\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":48,\"hp\":20,\"won\":true,\"loot\":[{\"type\":2,\"subType\":90,\"amount\":1}]}', '[]', '[]', '[]', '1503776181'),
+(158, '5f3e410a7114422545670562', '102', '{\"troopId\":\"174\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":27,\"hp\":9,\"won\":true,\"loot\":[]}', '[]', '[]', '[]', '1503776219'),
+(159, '923374bbb19a8e9945540556', '102', '{\"troopId\":\"175\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":20,\"hp\":9,\"won\":true,\"loot\":[{\"type\":2,\"subType\":59,\"amount\":1}]}', '[]', '[]', '[]', '1503776241'),
+(160, '028dc0a2833e9a0445870565', '102', '{\"troopId\":\"176\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":11,\"hp\":15,\"won\":true,\"loot\":[{\"type\":2,\"subType\":65,\"amount\":1}]}', '[]', '[]', '[]', '1503776290'),
+(161, '652fd6338a544cfa456a0560', '102', '{\"troopId\":\"177\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":24,\"hp\":13,\"won\":true,\"loot\":[{\"type\":2,\"subType\":55,\"amount\":1}]}', '[]', '[]', '[]', '1503776316'),
+(162, 'ddace597c07acc4e45ab0571', '102', '{\"troopId\":\"178\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":22,\"hp\":12,\"won\":true,\"loot\":[{\"type\":2,\"subType\":139,\"amount\":1}]}', '[]', '[]', '[]', '1503776337'),
+(163, '716a9b0d8609373a45650559', '102', '{\"troopId\":\"179\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":41,\"hp\":15,\"won\":true,\"loot\":[]}', '[]', '[]', '[]', '1503776364'),
+(164, '5cb0466fa3812be54580055d', '102', '{\"troopId\":\"180\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":21,\"hp\":16,\"won\":true,\"loot\":[{\"type\":2,\"subType\":121,\"amount\":1}]}', '[]', '[]', '[]', '1503776387'),
+(165, '2ca9c4e43fafe808455e0559', '102', '{\"troopId\":\"181\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":19,\"hp\":12,\"won\":true,\"loot\":[{\"type\":2,\"subType\":69,\"amount\":1}]}', '[]', '[]', '[]', '1503776406'),
+(166, 'f556a1aaefba990a4568055a', '102', '{\"troopId\":\"182\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":24,\"hp\":30,\"won\":true,\"loot\":[{\"type\":2,\"subType\":117,\"amount\":1}]}', '[]', '[]', '[]', '1503776438'),
+(167, 'c357c356e30e953b45c60572', '102', '{\"troopId\":\"183\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":27,\"hp\":18,\"won\":true,\"loot\":[{\"type\":2,\"subType\":10,\"amount\":1}]}', '[]', '[]', '[]', '1503776489'),
+(168, '7a13b351f2446e3545d9056d', '102', '{\"troopId\":\"184\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":36,\"hp\":11,\"won\":true,\"loot\":[]}', '[]', '[]', '[]', '1503776688'),
+(169, 'cbd0322effd60d234566055b', '102', '{\"troopId\":\"185\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":19,\"hp\":17,\"won\":true,\"loot\":[{\"type\":2,\"subType\":56,\"amount\":1}]}', '[]', '[]', '[]', '1503776710'),
+(170, '3c55d9bd10b5c362455a0554', '102', '{\"troopId\":\"186\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":10,\"hp\":18,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":4377,\"2\":5094,\"3\":3438,\"4\":3660}}]}', '[]', '[]', '[]', '1503777184'),
+(171, 'f9df1d74e0d86894455a055b', '102', '{\"troopId\":\"187\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":11,\"hp\":11,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":3645,\"2\":3723,\"3\":3549,\"4\":3489}}]}', '[]', '[]', '[]', '1503777245'),
+(172, '2d75dc55d98958784598056a', '102', '{\"troopId\":\"188\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '{\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756222\",\"villageName\":\"PCCT2\",\"coordinates\":{\"x\":-2,\"y\":-4}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":5,\"loss\":2},\"defender\":{\"sum\":1,\"loss\":1}}}', '{\"name\":\"troops\\/attacker\",\"body\":{\"wid\":\"536690687\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"\",\"villageName\":\"\",\"originalTroops\":{\"1\":\"5\",\"2\":\"0\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"0\"},\"lostTroops\":{\"1\":2,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '{\"name\":\"troops\\/defender\",\"body\":{\"wid\":\"536756222\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756222\",\"villageName\":\"PCCT2\",\"originalTroops\":{\"1\":\"1\",\"2\":\"0\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"0\"},\"lostTroops\":{\"1\":1,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '[]', '1503777350'),
+(173, '375c2fa02091bb4e4580055f', '102', '{\"troopId\":\"189\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":21,\"hp\":15,\"won\":true,\"loot\":[{\"type\":2,\"subType\":101,\"amount\":1}]}', '[]', '[]', '[]', '1503777383'),
+(174, '32128d7de12fa83f4580055f', '102', '{\"troopId\":\"190\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":28,\"hp\":11,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":3492,\"2\":5055,\"3\":4065,\"4\":5232}}]}', '[]', '[]', '[]', '1503777446'),
+(175, 'd920ba3844bb659d45b20568', '102', '{\"troopId\":\"191\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '{\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\",\"coordinates\":{\"x\":-1,\"y\":-4}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":5,\"loss\":5},\"defender\":{\"sum\":901,\"loss\":0}}}', '{\"name\":\"troops\\/attacker\",\"body\":{\"wid\":\"536690687\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"\",\"villageName\":\"\",\"originalTroops\":{\"1\":\"5\",\"2\":\"0\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"0\"},\"lostTroops\":{\"1\":5,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '{\"name\":\"troops\\/defender\",\"body\":{\"wid\":\"536756223\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\",\"originalTroops\":{\"1\":\"850\",\"2\":\"50\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"1\"},\"lostTroops\":{\"1\":0,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '[]', '1503777466'),
+(176, '7b3d67a8df97771645550555', '102', '{\"troopId\":\"192\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":63,\"hp\":11,\"won\":true,\"loot\":[]}', '[]', '[]', '[]', '1503777480'),
+(177, '0aeabfb942d337df4590055b', '102', '{\"troopId\":\"193\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '{\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\",\"coordinates\":{\"x\":-1,\"y\":-4}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":5,\"loss\":5},\"defender\":{\"sum\":901,\"loss\":0}}}', '{\"name\":\"troops\\/attacker\",\"body\":{\"wid\":\"536690687\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"\",\"villageName\":\"\",\"originalTroops\":{\"1\":\"5\",\"2\":\"0\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"0\"},\"lostTroops\":{\"1\":5,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '{\"name\":\"troops\\/defender\",\"body\":{\"wid\":\"536756223\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\",\"originalTroops\":{\"1\":\"850\",\"2\":\"50\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"1\"},\"lostTroops\":{\"1\":0,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '[]', '1503777931'),
+(178, '385af10675209ac64568055b', '102', '{\"troopId\":\"194\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '{\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\",\"coordinates\":{\"x\":-1,\"y\":-4}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":5,\"loss\":5},\"defender\":{\"sum\":901,\"loss\":0}}}', '{\"name\":\"troops\\/attacker\",\"body\":{\"wid\":\"536690687\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"\",\"villageName\":\"\",\"originalTroops\":{\"1\":\"5\",\"2\":\"0\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"0\"},\"lostTroops\":{\"1\":5,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '{\"name\":\"troops\\/defender\",\"body\":{\"wid\":\"536756223\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\",\"originalTroops\":{\"1\":\"850\",\"2\":\"50\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"1\"},\"lostTroops\":{\"1\":0,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '[]', '1503778109'),
+(179, 'bbb80bf98947453f456e0556', '102', '{\"troopId\":\"195\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '{\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\",\"coordinates\":{\"x\":-1,\"y\":-4}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":5,\"loss\":5},\"defender\":{\"sum\":901,\"loss\":0}}}', '{\"name\":\"troops\\/attacker\",\"body\":{\"wid\":\"536690687\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"\",\"villageName\":\"\",\"originalTroops\":{\"1\":\"5\",\"2\":\"0\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"0\"},\"lostTroops\":{\"1\":5,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '{\"name\":\"troops\\/defender\",\"body\":{\"wid\":\"536756223\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\",\"originalTroops\":{\"1\":\"850\",\"2\":\"50\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"1\"},\"lostTroops\":{\"1\":0,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '[]', '1503778213'),
+(180, 'e720e079e64c7c4a45b5056b', '102', '{\"troopId\":\"196\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":23,\"hp\":13,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":3516,\"2\":3198,\"3\":3726,\"4\":4290}}]}', '[]', '[]', '[]', '1503778226'),
+(181, 'b91d66b445a1a97a45500556', '102', '{\"troopId\":\"197\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":14,\"hp\":9,\"won\":true,\"loot\":[{\"type\":2,\"subType\":42,\"amount\":1}]}', '[]', '[]', '[]', '1503778331'),
+(182, '71e4eaf5f39ffd0345ed0572', '102', '{\"troopId\":\"200\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":52,\"hp\":26,\"won\":true,\"loot\":[{\"type\":2,\"subType\":139,\"amount\":1}]}', '[]', '[]', '[]', '1503796919'),
+(183, '95a0b117f5021e6b45930562', '101', '{\"troopId\":\"201\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '{\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\",\"coordinates\":{\"x\":-1,\"y\":-6}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":1,\"loss\":1},\"defender\":{\"sum\":21,\"loss\":0}}}', '{\"name\":\"troops\\/attacker\",\"body\":{\"wid\":\"536756223\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"\",\"villageName\":\"\",\"originalTroops\":{\"1\":\"1\",\"2\":\"0\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"0\"},\"lostTroops\":{\"1\":1,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '{\"name\":\"troops\\/defender\",\"body\":{\"wid\":\"536690687\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\",\"originalTroops\":{\"1\":\"5\",\"2\":\"15\",\"3\":\"0\",\"4\":\"0\",\"5\":\"0\",\"6\":\"0\",\"7\":\"0\",\"8\":\"0\",\"9\":\"0\",\"10\":\"0\",\"11\":\"1\"},\"lostTroops\":{\"1\":0,\"2\":0,\"3\":0,\"4\":0,\"5\":0,\"6\":0,\"7\":0,\"8\":0,\"9\":0,\"10\":0,\"11\":0}}}', '[]', '1503988302');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_report_head`
+--
 
 CREATE TABLE `s1_report_head` (
   `id` int(11) NOT NULL,
@@ -657,6 +1225,10 @@ CREATE TABLE `s1_report_head` (
   `favorite` int(11) NOT NULL,
   `time` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `s1_report_head`
+--
 
 INSERT INTO `s1_report_head` (`id`, `ref`, `owner`, `body`, `collection`, `token`, `type`, `source_data`, `target_data`, `detail_data`, `favorite`, `time`) VALUES
 (1, 'e3aebc0f255178b54356053a', '101', '4c4db993c39b0e1245870559', 'own', 958346, 4, '{\"troopId\":\"2\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"-10101\",\"villageName\":\"phoomin009\'s village\"}', '{\"tribeId\":null,\"playerId\":null,\"playerName\":null,\"villageId\":\"536887296\",\"villageName\":null,\"coordinates\":{\"x\":0,\"y\":0}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":13,\"loss\":5},\"defender\":{\"sum\":5,\"loss\":5}}}', 0, '1490927305'),
@@ -782,7 +1354,73 @@ INSERT INTO `s1_report_head` (`id`, `ref`, `owner`, `body`, `collection`, `token
 (121, '46ed50138eecfcf843520544', '101', 'e90e558fe79a1d3f456d0564', 'own', 451312, 3, '{\"troopId\":\"132\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":46,\"hp\":22,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":10514,\"2\":13307,\"3\":9681,\"4\":11816}}]}', 0, '1501678316'),
 (122, 'cd3f4655b6f261cb43490542', '101', '62dc43c9a946af2345830568', 'own', 334066, 3, '{\"troopId\":\"133\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":30,\"hp\":32,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":13069,\"2\":9583,\"3\":12810,\"4\":13524}},{\"type\":2,\"subType\":93,\"amount\":1}]}', 0, '1501678381');
 INSERT INTO `s1_report_head` (`id`, `ref`, `owner`, `body`, `collection`, `token`, `type`, `source_data`, `target_data`, `detail_data`, `favorite`, `time`) VALUES
-(123, '0042ada5fa3358d14344053e', '101', 'afa1a8398c4e6aaf45380556', 'own', 281807, 3, '{\"troopId\":\"134\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":32,\"hp\":14,\"won\":false,\"loot\":[]}', 0, '1501678432');
+(123, '0042ada5fa3358d14344053e', '101', 'afa1a8398c4e6aaf45380556', 'own', 281807, 3, '{\"troopId\":\"134\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":32,\"hp\":14,\"won\":false,\"loot\":[]}', 0, '1501678432'),
+(124, 'a6d5b9c97c54f20d42f60532', '101', '0936bc55d7aedb06454e055f', 'own', 188774, 3, '{\"troopId\":\"135\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":28,\"hp\":16,\"won\":true,\"loot\":[{\"type\":2,\"subType\":89,\"amount\":1}]}', 0, '1501682262'),
+(125, '5da930c517ba3eab4311053c', '101', 'f24a3559730a252d454e055c', 'own', 66854, 3, '{\"troopId\":\"136\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":29,\"hp\":18,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":7889,\"2\":12124,\"3\":9625,\"4\":12670}}]}', 0, '1501682560'),
+(126, 'f4aae7b26e06fe1543220539', '101', '5b49e22e7e0487d645770569', 'own', 950073, 3, '{\"troopId\":\"137\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":28,\"hp\":30,\"won\":true,\"loot\":[{\"type\":2,\"subType\":134,\"amount\":1},{\"type\":3,\"subType\":null,\"amount\":{\"1\":13419,\"2\":8554,\"3\":10458,\"4\":8099}}]}', 0, '1501682853'),
+(127, 'a0b5bec561a6741242b70532', '101', '0f56bb59f7001c0544db0553', 'own', 961326, 3, '{\"troopId\":\"138\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":22,\"hp\":11,\"won\":true,\"loot\":[{\"type\":2,\"subType\":51,\"amount\":1}]}', 0, '1503080153'),
+(128, 'bff905e69254aed742e4053b', '101', '101a007a705a7a0f44dc054b', 'own', 611006, 3, '{\"troopId\":\"139\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":29,\"hp\":12,\"won\":true,\"loot\":[{\"type\":2,\"subType\":53,\"amount\":1}]}', 0, '1503080326'),
+(129, '70a391522a61b0e642b70530', '101', 'df4094ceb2d8718545290561', 'own', 847236, 3, '{\"troopId\":\"140\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":29,\"hp\":13,\"won\":true,\"loot\":[{\"type\":2,\"subType\":55,\"amount\":1}]}', 0, '1503080702'),
+(130, '7f8a7e335823bd1143150543', '101', 'd0697baf1c13d0084533055e', 'own', 120120, 3, '{\"troopId\":\"141\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":63,\"hp\":12,\"won\":true,\"loot\":[]}', 0, '1503080736'),
+(131, '714621c3b86363be42ff0541', '101', 'dea5245f9753609f45150552', 'own', 404504, 3, '{\"troopId\":\"142\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":10,\"hp\":15,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":11550,\"2\":7749,\"3\":12558,\"4\":7959}}]}', 0, '1503080851'),
+(132, 'f4c1216e17ddc2aa42a10525', '101', '5b2224f2d09ad1f744d80553', 'own', 859965, 3, '{\"troopId\":\"143\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":13,\"hp\":14,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":12229,\"2\":10458,\"3\":13034,\"4\":8141}}]}', 0, '1503081062'),
+(133, '6728b45111afa34042970533', '101', 'c8cbb1cd6ab60cda44e80559', 'own', 986530, 3, '{\"troopId\":\"144\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":21,\"hp\":18,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":9744,\"2\":8141,\"3\":12999,\"4\":10696}}]}', 0, '1503081110'),
+(134, '0c82215cbc40e10b42d00536', '101', 'a36124c086adb3c744d50551', 'own', 307893, 3, '{\"troopId\":\"145\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '[]', '{\"neededRights\":0,\"xp\":28,\"hp\":11,\"won\":true,\"loot\":[{\"type\":2,\"subType\":65,\"amount\":1}]}', 0, '1503106353'),
+(135, '79a8683c9fd919b043840549', '102', 'd64b6da0fd57134845980567', 'own', 927130, 4, '{\"troopId\":\"147\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"-10102\",\"villageName\":\"phXXX1\'s village\"}', '{\"tribeId\":null,\"playerId\":null,\"playerName\":null,\"villageId\":\"536887296\",\"villageName\":null,\"coordinates\":{\"x\":0,\"y\":0}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":6,\"loss\":6},\"defender\":{\"sum\":5,\"loss\":2}}}', 0, '1503772469'),
+(136, '34eeedf49c9c39d143780543', '102', '9b0de8682c9ca29c45500559', 'own', 301574, 3, '{\"troopId\":\"150\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":23,\"hp\":8,\"won\":true,\"loot\":[{\"type\":2,\"subType\":27,\"amount\":1}]}', 0, '1503773972'),
+(137, 'abceab4d7a395fa543810547', '102', '042daed1733be16045be056d', 'own', 394802, 3, '{\"troopId\":\"151\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":12,\"hp\":14,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":0,\"2\":0,\"3\":0,\"4\":0}}]}', 0, '1503773983'),
+(138, '8bb3b7f0dd6ffe104384054f', '102', '2450b26c242d412945680558', 'own', 149906, 3, '{\"troopId\":\"152\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":22,\"hp\":14,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":0,\"2\":0,\"3\":0,\"4\":0}}]}', 0, '1503774077'),
+(139, '18ed3f0ea2ec11bd42f80530', '102', 'b70e3a92bf9064ce44eb0548', 'own', 337558, 3, '{\"troopId\":\"153\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":14,\"hp\":15,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":0,\"2\":0,\"3\":0,\"4\":0}}]}', 0, '1503774111'),
+(140, '685d4587029d549043470543', '102', 'c7be401be33ec23845500558', 'own', 356367, 3, '{\"troopId\":\"154\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":12,\"hp\":16,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":0,\"2\":0,\"3\":0,\"4\":0}}]}', 0, '1503774146'),
+(141, '6293f039d616a9b04329053d', '102', 'cd70f5a51af853d24537055a', 'own', 395626, 3, '{\"troopId\":\"155\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":17,\"hp\":13,\"won\":true,\"loot\":[{\"type\":2,\"subType\":48,\"amount\":1}]}', 0, '1503774161'),
+(142, '933f29486b9e28b343a1054e', '102', '3cdc2cd4a6aacd004579055c', 'own', 84980, 3, '{\"troopId\":\"156\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":29,\"hp\":14,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":1447,\"2\":1438,\"3\":1368,\"4\":1921}}]}', 0, '1503774186'),
+(143, '1aca404afc1382ee437d054f', '102', 'b52945d657155328459e056a', 'own', 66811, 3, '{\"troopId\":\"157\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":19,\"hp\":8,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":1598,\"2\":1072,\"3\":1670,\"4\":1820}}]}', 0, '1503774286'),
+(144, '345959cdbe1df90043570545', '102', '9bba5c510c5c43da4592056d', 'own', 681766, 3, '{\"troopId\":\"158\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":25,\"hp\":9,\"won\":true,\"loot\":[{\"type\":2,\"subType\":6,\"amount\":1}]}', 0, '1503774404'),
+(145, 'c407ccd75b881506434a053c', '102', '6be4c94b9d224eea4571055e', 'own', 602778, 4, '{\"troopId\":\"159\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '{\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\",\"coordinates\":{\"x\":-1,\"y\":-4}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":5,\"loss\":5},\"defender\":{\"sum\":901,\"loss\":0}}}', 0, '1503774462'),
+(146, 'a8b777494e3eae3d436d0542', '102', '075472d53fd57a5a459c0563', 'own', 761568, 3, '{\"troopId\":\"163\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":30,\"hp\":15,\"won\":true,\"loot\":[{\"type\":2,\"subType\":105,\"amount\":1}]}', 0, '1503775295'),
+(147, '9ca4653948820a96433e0543', '102', '334760a561f2dd3d455e055d', 'own', 71238, 4, '{\"troopId\":\"162\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '{\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536887300\",\"villageName\":\"PCCT3\",\"coordinates\":{\"x\":4,\"y\":0}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":5,\"loss\":0},\"defender\":{\"sum\":0,\"loss\":0}}}', 0, '1503775312'),
+(148, '15cdfbf1465ab3ff4384054d', '102', 'ba2efe6d8db29a0a458a055f', 'own', 854628, 3, '{\"troopId\":\"164\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":25,\"hp\":9,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":1158,\"2\":1121,\"3\":1596,\"4\":1795}}]}', 0, '1503775565'),
+(149, '0318d44a3d6855e8437d0540', '102', 'acfbd1d60eb8596b458a055e', 'own', 723500, 3, '{\"troopId\":\"165\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":27,\"hp\":17,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":1736,\"2\":1151,\"3\":1151,\"4\":1734}}]}', 0, '1503775694'),
+(150, '1ac6e7a26bb7e9bf434d0540', '102', 'b525e23e410a44604539054f', 'own', 201656, 3, '{\"troopId\":\"166\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":18,\"hp\":18,\"won\":true,\"loot\":[{\"type\":2,\"subType\":62,\"amount\":1}]}', 0, '1503775822'),
+(151, 'b350de260d7237c643950547', '102', '1cb3dbbae9b0f76245bf0566', 'own', 853925, 3, '{\"troopId\":\"167\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":24,\"hp\":13,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":1928,\"2\":1281,\"3\":1078,\"4\":1060}}]}', 0, '1503775876'),
+(152, 'f99f081445625a884350053b', '102', '567c0d8825bc097745a5056a', 'own', 227787, 3, '{\"troopId\":\"168\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":44,\"hp\":18,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":1746,\"2\":2000,\"3\":1426,\"4\":1504}}]}', 0, '1503775907'),
+(153, '3e85ae587c4c99c4439a054a', '102', '9166abc41b745574458d0561', 'own', 619646, 3, '{\"troopId\":\"169\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":36,\"hp\":15,\"won\":true,\"loot\":[]}', 0, '1503775945'),
+(154, '27cc8d1a93ab505043590548', '102', '882f88865c9f500a454d055b', 'own', 369307, 3, '{\"troopId\":\"170\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":17,\"hp\":8,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":3688,\"2\":3740,\"3\":2656,\"4\":2052}}]}', 0, '1503776033'),
+(155, 'c4227f6dea9f045643410549', '102', '6bc17af1aa11612c451d0555', 'own', 353878, 3, '{\"troopId\":\"171\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":14,\"hp\":14,\"won\":true,\"loot\":[{\"type\":2,\"subType\":71,\"amount\":1}]}', 0, '1503776102'),
+(156, 'b1c242fa8ed908dc434d0546', '102', '1e21476662dc843445660560', 'own', 601748, 3, '{\"troopId\":\"172\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":18,\"hp\":9,\"won\":true,\"loot\":[{\"type\":2,\"subType\":9,\"amount\":1}]}', 0, '1503776152'),
+(157, '4f4774eacb065470434d053b', '102', 'e0a4717678220b6645980564', 'own', 409071, 3, '{\"troopId\":\"173\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":48,\"hp\":20,\"won\":true,\"loot\":[{\"type\":2,\"subType\":90,\"amount\":1}]}', 0, '1503776181'),
+(158, 'f0dd44961a88d6054370054b', '102', '5f3e410a7114422545670562', 'own', 559462, 3, '{\"troopId\":\"174\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":27,\"hp\":9,\"won\":true,\"loot\":[]}', 0, '1503776219'),
+(159, '3dd07127a3ec9d65432e0539', '102', '923374bbb19a8e9945540556', 'own', 774223, 3, '{\"troopId\":\"175\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":20,\"hp\":9,\"won\":true,\"loot\":[{\"type\":2,\"subType\":59,\"amount\":1}]}', 0, '1503776241'),
+(160, 'ad6ec53eb4463d01436e054a', '102', '028dc0a2833e9a0445870565', 'own', 435941, 3, '{\"troopId\":\"176\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":11,\"hp\":15,\"won\":true,\"loot\":[{\"type\":2,\"subType\":65,\"amount\":1}]}', 0, '1503776290'),
+(161, 'caccd3afd82634cf43410543', '102', '652fd6338a544cfa456a0560', 'own', 795164, 3, '{\"troopId\":\"177\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":24,\"hp\":13,\"won\":true,\"loot\":[{\"type\":2,\"subType\":55,\"amount\":1}]}', 0, '1503776316'),
+(162, '724fe00bc8c500d74333053c', '102', 'ddace597c07acc4e45ab0571', 'own', 75938, 3, '{\"troopId\":\"178\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":22,\"hp\":12,\"won\":true,\"loot\":[{\"type\":2,\"subType\":139,\"amount\":1}]}', 0, '1503776337'),
+(163, 'de899e9189c24619433a053a', '102', '716a9b0d8609373a45650559', 'own', 359200, 3, '{\"troopId\":\"179\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":41,\"hp\":15,\"won\":true,\"loot\":[]}', 0, '1503776364'),
+(164, 'f35343f326a1760b4368053e', '102', '5cb0466fa3812be54580055d', 'own', 61821, 3, '{\"troopId\":\"180\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":21,\"hp\":16,\"won\":true,\"loot\":[{\"type\":2,\"subType\":121,\"amount\":1}]}', 0, '1503776387'),
+(165, '834ac1789d1d2ea343860551', '102', '2ca9c4e43fafe808455e0559', 'own', 182633, 3, '{\"troopId\":\"181\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":19,\"hp\":12,\"won\":true,\"loot\":[{\"type\":2,\"subType\":69,\"amount\":1}]}', 0, '1503776406'),
+(166, '5ab5a436bc6cbae243930548', '102', 'f556a1aaefba990a4568055a', 'own', 819720, 3, '{\"troopId\":\"182\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":24,\"hp\":30,\"won\":true,\"loot\":[{\"type\":2,\"subType\":117,\"amount\":1}]}', 0, '1503776438'),
+(167, '6cb4c6caac3567f843d50555', '102', 'c357c356e30e953b45c60572', 'own', 916004, 3, '{\"troopId\":\"183\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":27,\"hp\":18,\"won\":true,\"loot\":[{\"type\":2,\"subType\":10,\"amount\":1}]}', 0, '1503776489'),
+(168, 'd5f0b6cddbb3c13643b20548', '102', '7a13b351f2446e3545d9056d', 'own', 473396, 3, '{\"troopId\":\"184\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":36,\"hp\":11,\"won\":true,\"loot\":[]}', 0, '1503776688'),
+(169, '643337b23839fabc4373054c', '102', 'cbd0322effd60d234566055b', 'own', 592933, 3, '{\"troopId\":\"185\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":19,\"hp\":17,\"won\":true,\"loot\":[{\"type\":2,\"subType\":56,\"amount\":1}]}', 0, '1503776710'),
+(170, '93b6dc213e88cf01437e0549', '102', '3c55d9bd10b5c362455a0554', 'own', 326522, 3, '{\"troopId\":\"186\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":10,\"hp\":18,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":4377,\"2\":5094,\"3\":3438,\"4\":3660}}]}', 0, '1503777184'),
+(171, '563c18e852eb2df443a20550', '102', 'f9df1d74e0d86894455a055b', 'own', 254368, 3, '{\"troopId\":\"187\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":11,\"hp\":11,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":3645,\"2\":3723,\"3\":3549,\"4\":3489}}]}', 0, '1503777245'),
+(172, '8296d9c92814b70643370539', '102', '2d75dc55d98958784598056a', 'own', 361798, 4, '{\"troopId\":\"188\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '{\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756222\",\"villageName\":\"PCCT2\",\"coordinates\":{\"x\":-2,\"y\":-4}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":5,\"loss\":2},\"defender\":{\"sum\":1,\"loss\":1}}}', 0, '1503777350'),
+(173, '98bf2a3c2fc98e734384054a', '102', '375c2fa02091bb4e4580055f', 'own', 584245, 3, '{\"troopId\":\"189\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":21,\"hp\":15,\"won\":true,\"loot\":[{\"type\":2,\"subType\":101,\"amount\":1}]}', 0, '1503777383'),
+(174, '9df188e14d65df0643ae0553', '102', '32128d7de12fa83f4580055f', 'own', 493288, 3, '{\"troopId\":\"190\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":28,\"hp\":11,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":3492,\"2\":5055,\"3\":4065,\"4\":5232}}]}', 0, '1503777446'),
+(175, '76c3bfa45eb080a143860548', '102', 'd920ba3844bb659d45b20568', 'own', 36454, 4, '{\"troopId\":\"191\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '{\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\",\"coordinates\":{\"x\":-1,\"y\":-4}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":5,\"loss\":5},\"defender\":{\"sum\":901,\"loss\":0}}}', 0, '1503777466'),
+(176, 'd4de6234db2fa0e84386054f', '102', '7b3d67a8df97771645550555', 'own', 441420, 3, '{\"troopId\":\"192\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":63,\"hp\":11,\"won\":true,\"loot\":[]}', 0, '1503777480'),
+(177, 'a509ba25e3d5965543920548', '102', '0aeabfb942d337df4590055b', 'own', 48181, 4, '{\"troopId\":\"193\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '{\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\",\"coordinates\":{\"x\":-1,\"y\":-4}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":5,\"loss\":5},\"defender\":{\"sum\":901,\"loss\":0}}}', 0, '1503777931'),
+(178, '97b9f49a1fcb67fd43810549', '102', '385af10675209ac64568055b', 'own', 885192, 4, '{\"troopId\":\"194\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '{\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\",\"coordinates\":{\"x\":-1,\"y\":-4}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":5,\"loss\":5},\"defender\":{\"sum\":901,\"loss\":0}}}', 0, '1503778109'),
+(179, '145b0e6560e1568e43250530', '102', 'bbb80bf98947453f456e0556', 'own', 728171, 4, '{\"troopId\":\"195\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '{\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\",\"coordinates\":{\"x\":-1,\"y\":-4}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":5,\"loss\":5},\"defender\":{\"sum\":901,\"loss\":0}}}', 0, '1503778213'),
+(180, '48c3e5e5d4b21f76435a053d', '102', 'e720e079e64c7c4a45b5056b', 'own', 732101, 3, '{\"troopId\":\"196\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":23,\"hp\":13,\"won\":true,\"loot\":[{\"type\":3,\"subType\":null,\"amount\":{\"1\":3516,\"2\":3198,\"3\":3726,\"4\":4290}}]}', 0, '1503778226'),
+(181, '16fe6328352c73fd4378054e', '102', 'b91d66b445a1a97a45500556', 'own', 1320, 3, '{\"troopId\":\"197\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":14,\"hp\":9,\"won\":true,\"loot\":[{\"type\":2,\"subType\":42,\"amount\":1}]}', 0, '1503778331'),
+(182, 'de07ef6974a886de43af0548', '102', '71e4eaf5f39ffd0345ed0572', 'own', 621609, 3, '{\"troopId\":\"200\",\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\"}', '[]', '{\"neededRights\":0,\"xp\":52,\"hp\":26,\"won\":true,\"loot\":[{\"type\":2,\"subType\":139,\"amount\":1}]}', 0, '1503796919'),
+(183, '3a43b48b26bb2430436a053d', '101', '95a0b117f5021e6b45930562', 'own', 106571, 4, '{\"troopId\":\"201\",\"tribeId\":\"3\",\"playerId\":\"101\",\"playerName\":\"phoomin009\",\"villageId\":\"536756223\",\"villageName\":\"PCCT\"}', '{\"tribeId\":\"1\",\"playerId\":\"102\",\"playerName\":\"phXXX1\",\"villageId\":\"536690687\",\"villageName\":\"phXXX1\'s village\",\"coordinates\":{\"x\":-1,\"y\":-6}}', '{\"capacity\":0,\"bounty\":{\"wood\":0,\"clay\":0,\"iron\":0,\"crop\":0},\"final\":{\"attacker\":{\"sum\":1,\"loss\":1},\"defender\":{\"sum\":21,\"loss\":0}}}', 0, '1503988302');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_setting`
+--
 
 CREATE TABLE `s1_setting` (
   `id` int(11) NOT NULL,
@@ -806,9 +1444,19 @@ CREATE TABLE `s1_setting` (
   `email` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `s1_setting`
+--
+
 INSERT INTO `s1_setting` (`id`, `uid`, `attacksFilter`, `disableAnimations`, `HelpNotifications`, `TabNotifications`, `extendedSimulator`, `lang`, `mapFilter`, `musicVolume`, `muteAll`, `notpadsVisible`, `onlineStatusFilter`, `premiumConfirmation`, `soundVolume`, `timeFormat`, `timeZone`, `uiSoundVolume`, `email`) VALUES
 (1, '101', '2', '0', '0', '1', '0', 'en', '-1', '0', '0', '0', '0', '2', '0', '0', '1', '50', 'phoomin009@gmail.com'),
 (2, '102', '2', '0', '0', '1', '0', 'en', '-1', '0', '0', '0', '0', '2', '0', '0', '1', '50', 'phoomin001@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_tdata`
+--
 
 CREATE TABLE `s1_tdata` (
   `wid` varchar(11) NOT NULL,
@@ -823,10 +1471,22 @@ CREATE TABLE `s1_tdata` (
   `t9` int(2) NOT NULL DEFAULT '-2'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `s1_tdata`
+--
+
 INSERT INTO `s1_tdata` (`wid`, `t1`, `t2`, `t3`, `t4`, `t5`, `t6`, `t7`, `t8`, `t9`) VALUES
 ('536756223', 10, 4, -2, -2, -2, -2, -2, -2, -2),
 ('536756222', 0, -2, -2, -2, -2, -2, -2, -2, -2),
-('536887300', 0, -2, -2, -2, -2, -2, -2, -2, -2);
+('536887300', 0, -2, -2, -2, -2, -2, -2, -2, -2),
+('536690687', 0, -2, -2, -2, -2, -2, -2, -2, -2),
+('536690691', 0, -2, -2, -2, -2, -2, -2, -2, -2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_tqueue`
+--
 
 CREATE TABLE `s1_tqueue` (
   `id` int(11) NOT NULL,
@@ -836,6 +1496,12 @@ CREATE TABLE `s1_tqueue` (
   `start` varchar(255) NOT NULL,
   `end` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_train`
+--
 
 CREATE TABLE `s1_train` (
   `id` int(11) NOT NULL,
@@ -847,12 +1513,24 @@ CREATE TABLE `s1_train` (
   `order` tinyint(2) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_train_queue`
+--
+
 CREATE TABLE `s1_train_queue` (
   `id` int(11) NOT NULL,
   `tid` varchar(255) NOT NULL COMMENT 'Train id',
   `amount` int(11) NOT NULL,
   `duration` float NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_troop_move`
+--
 
 CREATE TABLE `s1_troop_move` (
   `id` int(11) NOT NULL,
@@ -869,6 +1547,12 @@ CREATE TABLE `s1_troop_move` (
   `data` longtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_troop_stay`
+--
+
 CREATE TABLE `s1_troop_stay` (
   `id` int(11) NOT NULL,
   `wid` varchar(255) NOT NULL,
@@ -876,10 +1560,22 @@ CREATE TABLE `s1_troop_stay` (
   `unit` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `s1_troop_stay`
+--
+
 INSERT INTO `s1_troop_stay` (`id`, `wid`, `owner`, `unit`) VALUES
 (1, '536756223', '101', '1'),
 (2, '536756222', '101', '5'),
-(3, '536887300', '101', '126');
+(3, '536887300', '101', '126'),
+(4, '536690687', '102', '146'),
+(5, '536690691', '102', '199');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_units`
+--
 
 CREATE TABLE `s1_units` (
   `id` int(11) NOT NULL,
@@ -897,8 +1593,12 @@ CREATE TABLE `s1_units` (
   `u11` bigint(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `s1_units`
+--
+
 INSERT INTO `s1_units` (`id`, `wid`, `u1`, `u2`, `u3`, `u4`, `u5`, `u6`, `u7`, `u8`, `u9`, `u10`, `u11`) VALUES
-(1, '536756223', 822, 12, 0, 0, 0, 0, 0, 0, 0, 0, 1),
+(1, '536756223', 850, 50, 0, 0, 0, 0, 0, 0, 0, 0, 1),
 (5, '536756222', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (59, '536756223', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
 (61, '536756223', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
@@ -906,7 +1606,15 @@ INSERT INTO `s1_units` (`id`, `wid`, `u1`, `u2`, `u3`, `u4`, `u5`, `u6`, `u7`, `
 (63, '536756223', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
 (117, '536756223', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
 (126, '536887300', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(134, '536756223', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
+(134, '536756223', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
+(146, '536690687', 5, 15, 0, 0, 0, 0, 0, 0, 0, 0, 1),
+(199, '536690691', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_user`
+--
 
 CREATE TABLE `s1_user` (
   `uid` int(11) NOT NULL,
@@ -929,12 +1637,23 @@ CREATE TABLE `s1_user` (
   `resBonus` varchar(255) NOT NULL DEFAULT '0',
   `cropBonus` varchar(255) NOT NULL DEFAULT '0',
   `starterPack` varchar(255) NOT NULL DEFAULT '0',
-  `autoExtend` int(11) NOT NULL DEFAULT '0'
+  `autoExtend` int(11) NOT NULL DEFAULT '0',
+  `lastLogin` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-INSERT INTO `s1_user` (`uid`, `username`, `email`, `tribe`, `kingdom`, `gold`, `silver`, `cp`, `avatar`, `serial`, `protection`, `tutorial`, `quest`, `master`, `online`, `spawn`, `plus`, `resBonus`, `cropBonus`, `starterPack`, `autoExtend`) VALUES
-(101, 'phoomin009', 'phoomin009@gmail.com', 3, 1, '96', 31400, 7154014377.590799, '2', 43425, '0', 1491291640, '', 3, 1, '1497365328', '1497800684', '1497799806', '1497799774', '0', 0),
-(102, NULL, 'phoomin001@gmail.com', 0, 0, '100', 0, 0.000000, '3', 34, '0', 0, '', 0, 0, '0', '0', '0', '0', '0', 0);
+--
+-- Dumping data for table `s1_user`
+--
+
+INSERT INTO `s1_user` (`uid`, `username`, `email`, `tribe`, `kingdom`, `gold`, `silver`, `cp`, `avatar`, `serial`, `protection`, `tutorial`, `quest`, `master`, `online`, `spawn`, `plus`, `resBonus`, `cropBonus`, `starterPack`, `autoExtend`, `lastLogin`) VALUES
+(101, 'phoomin009', 'phoomin009@gmail.com', 3, 1, '96', 36900, 7188420156.399778, '2', 54478, '0', 1491291640, '', 3, 0, '1500767973', '1497800684', '1497799806', '1497799774', '0', 0, '1503667973'),
+(102, 'phXXX1', 'phoomin001@gmail.com', 1, 0, '0', 6000, 632009292.448721, '3', 9658, '0', 1503773390, '', 2, 1, '1503773264', '0', '0', '0', '0', 0, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_village`
+--
 
 CREATE TABLE `s1_village` (
   `wid` int(11) NOT NULL,
@@ -965,10 +1684,22 @@ CREATE TABLE `s1_village` (
   `area` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `s1_village`
+--
+
 INSERT INTO `s1_village` (`wid`, `vname`, `owner`, `pop`, `wood`, `clay`, `iron`, `pwood`, `pclay`, `piron`, `maxstore`, `maxcrop`, `crop`, `pcrop`, `cp`, `settler`, `settler_used`, `capitel`, `town`, `effect`, `ref`, `lastupdate`, `settled`, `expandedfrom`, `natar`, `area`) VALUES
-(536756223, 'PCCT', 101, 1334, 200000.00000, 200000.00000, 200000.00000, 28000, 30375, 28000, 160000, 160000, 200000.00000, 44187, 3873.00000, 6, 6, 1, 1, NULL, NULL, '1501682144.107', '', '', 0, -1),
-(536756222, 'PCCT2', 101, 106, 6869.24810, 17988.74311, 22645.06073, 675, 675, 475, 32000, 32000, 21238.54014, 1098, 368.00000, 0, 0, 0, 0, NULL, NULL, '1501682144.1199', '1493829908', '536756223', 0, 0),
-(536887300, 'PCCT3', 101, 20, 266.91829, 97.88163, 284.74143, 525, 275, 275, 1200, 1200, 787.43093, 370, 26.00000, 0, 0, 0, 0, NULL, NULL, '1501682144.133', '1497885532', '536756223', 0, 0);
+(536756223, 'PCCT', 101, 1334, 200000.00000, 200000.00000, 200000.00000, 28000, 30375, 28000, 160000, 160000, 200000.00000, 44162, 3873.00000, 6, 6, 1, 1, NULL, NULL, '1503996874.087', '', '', 0, -1),
+(536756222, 'PCCT2', 101, 108, 40000.00000, 40000.00000, 40000.00000, 675, 675, 475, 32000, 32000, 40000.00000, 1098, 390.00000, 0, 0, 0, 0, NULL, NULL, '1503996874.1037', '1493829908', '536756223', 0, 0),
+(536887300, 'PCCT3', 101, 24, 1500.00000, 1500.00000, 1500.00000, 525, 275, 275, 1200, 1200, 1500.00000, 369, 33.00000, 0, 0, 0, 0, NULL, NULL, '1503996874.1184', '1497885532', '536756223', 0, 0),
+(536690687, 'phXXX1\'s village', 102, 205, 18000.00000, 18000.00000, 18000.00000, 20000, 16600, 20000, 18000, 12000, 12000.00000, 8775, 411.00000, 3, 3, 1, 0, NULL, NULL, '1503998517.2823', '', '', 0, 0),
+(536690691, 'phXXX1\'s village', 102, 15, 800.00000, 800.00000, 800.00000, 900, 900, 900, 800, 800, 800.00000, 2985, 14.00000, 0, 0, 0, 0, NULL, NULL, '1503998517.3045', '1503796742', '536690687', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s1_world`
+--
 
 CREATE TABLE `s1_world` (
   `id` int(10) UNSIGNED NOT NULL,
@@ -979,6 +1710,10 @@ CREATE TABLE `s1_world` (
   `bonus` tinyint(2) NOT NULL,
   `image` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `s1_world`
+--
 
 INSERT INTO `s1_world` (`id`, `fieldtype`, `oasistype`, `x`, `y`, `bonus`, `image`) VALUES
 (536887226, '4446', '0', -70, 0, 0, '18'),
@@ -16367,173 +17102,397 @@ INSERT INTO `s1_world` (`id`, `fieldtype`, `oasistype`, `x`, `y`, `bonus`, `imag
 (537247813, '4446', '0', 69, 11, 0, '14'),
 (536887366, '4536', '0', 70, 0, 0, '29');
 
+--
+-- Indexes for dumped tables
+--
 
+--
+-- Indexes for table `error_nodejs`
+--
 ALTER TABLE `error_nodejs`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `error_php`
+--
 ALTER TABLE `error_php`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `global_avatar`
+--
 ALTER TABLE `global_avatar`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `global_msid`
+--
 ALTER TABLE `global_msid`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `global_server_data`
+--
 ALTER TABLE `global_server_data`
   ADD PRIMARY KEY (`sid`,`name`,`tag`,`folder`);
 
+--
+-- Indexes for table `global_user`
+--
 ALTER TABLE `global_user`
   ADD PRIMARY KEY (`uid`);
 
+--
+-- Indexes for table `s1_auction`
+--
 ALTER TABLE `s1_auction`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_building`
+--
 ALTER TABLE `s1_building`
   ADD PRIMARY KEY (`id`),
   ADD KEY `wid` (`wid`),
   ADD KEY `field` (`location`);
 
+--
+-- Indexes for table `s1_cache`
+--
 ALTER TABLE `s1_cache`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_chat_line`
+--
+ALTER TABLE `s1_chat_line`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `s1_chat_room`
+--
+ALTER TABLE `s1_chat_room`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `s1_field`
+--
 ALTER TABLE `s1_field`
   ADD PRIMARY KEY (`id`),
   ADD KEY `vref` (`id`);
 
+--
+-- Indexes for table `s1_gamecard`
+--
 ALTER TABLE `s1_gamecard`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_hero`
+--
 ALTER TABLE `s1_hero`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_hero_item`
+--
 ALTER TABLE `s1_hero_item`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_influence`
+--
 ALTER TABLE `s1_influence`
   ADD PRIMARY KEY (`wid`);
 
+--
+-- Indexes for table `s1_kingdom`
+--
 ALTER TABLE `s1_kingdom`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_market`
+--
 ALTER TABLE `s1_market`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_nodejs`
+--
 ALTER TABLE `s1_nodejs`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_notification`
+--
 ALTER TABLE `s1_notification`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_oasis`
+--
 ALTER TABLE `s1_oasis`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_oasis_rank`
+--
 ALTER TABLE `s1_oasis_rank`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_php`
+--
 ALTER TABLE `s1_php`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_report_body`
+--
 ALTER TABLE `s1_report_body`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_report_head`
+--
 ALTER TABLE `s1_report_head`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_setting`
+--
 ALTER TABLE `s1_setting`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_tdata`
+--
 ALTER TABLE `s1_tdata`
   ADD PRIMARY KEY (`wid`);
 
+--
+-- Indexes for table `s1_tqueue`
+--
 ALTER TABLE `s1_tqueue`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_train`
+--
 ALTER TABLE `s1_train`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_train_queue`
+--
 ALTER TABLE `s1_train_queue`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_troop_move`
+--
 ALTER TABLE `s1_troop_move`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_troop_stay`
+--
 ALTER TABLE `s1_troop_stay`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_units`
+--
 ALTER TABLE `s1_units`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `s1_user`
+--
 ALTER TABLE `s1_user`
   ADD PRIMARY KEY (`uid`);
 
+--
+-- Indexes for table `s1_village`
+--
 ALTER TABLE `s1_village`
   ADD PRIMARY KEY (`wid`);
 
+--
+-- Indexes for table `s1_world`
+--
 ALTER TABLE `s1_world`
   ADD PRIMARY KEY (`id`),
   ADD KEY `x` (`x`),
   ADD KEY `y` (`y`),
   ADD KEY `wdata` (`x`,`y`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
 
+--
+-- AUTO_INCREMENT for table `error_nodejs`
+--
 ALTER TABLE `error_nodejs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `error_php`
+--
 ALTER TABLE `error_php`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+--
+-- AUTO_INCREMENT for table `global_avatar`
+--
 ALTER TABLE `global_avatar`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `global_msid`
+--
 ALTER TABLE `global_msid`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `global_server_data`
+--
 ALTER TABLE `global_server_data`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `global_user`
+--
 ALTER TABLE `global_user`
   MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT for table `s1_auction`
+--
 ALTER TABLE `s1_auction`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `s1_building`
+--
 ALTER TABLE `s1_building`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=736;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=915;
+--
+-- AUTO_INCREMENT for table `s1_cache`
+--
 ALTER TABLE `s1_cache`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `s1_chat_line`
+--
+ALTER TABLE `s1_chat_line`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+--
+-- AUTO_INCREMENT for table `s1_chat_room`
+--
+ALTER TABLE `s1_chat_room`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `s1_field`
+--
 ALTER TABLE `s1_field`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
+--
+-- AUTO_INCREMENT for table `s1_gamecard`
+--
 ALTER TABLE `s1_gamecard`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `s1_hero`
+--
 ALTER TABLE `s1_hero`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `s1_hero_item`
+--
 ALTER TABLE `s1_hero_item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+--
+-- AUTO_INCREMENT for table `s1_kingdom`
+--
 ALTER TABLE `s1_kingdom`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `s1_market`
+--
 ALTER TABLE `s1_market`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `s1_nodejs`
+--
 ALTER TABLE `s1_nodejs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13793;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18022;
+--
+-- AUTO_INCREMENT for table `s1_notification`
+--
 ALTER TABLE `s1_notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
+--
+-- AUTO_INCREMENT for table `s1_oasis`
+--
 ALTER TABLE `s1_oasis`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `s1_oasis_rank`
+--
 ALTER TABLE `s1_oasis_rank`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `s1_php`
+--
 ALTER TABLE `s1_php`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `s1_report_body`
+--
 ALTER TABLE `s1_report_body`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
+--
+-- AUTO_INCREMENT for table `s1_report_head`
+--
 ALTER TABLE `s1_report_head`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
+--
+-- AUTO_INCREMENT for table `s1_setting`
+--
 ALTER TABLE `s1_setting`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `s1_tqueue`
+--
 ALTER TABLE `s1_tqueue`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `s1_train`
+--
 ALTER TABLE `s1_train`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT for table `s1_train_queue`
+--
 ALTER TABLE `s1_train_queue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT for table `s1_troop_move`
+--
 ALTER TABLE `s1_troop_move`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
+--
+-- AUTO_INCREMENT for table `s1_troop_stay`
+--
 ALTER TABLE `s1_troop_stay`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `s1_units`
+--
 ALTER TABLE `s1_units`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
+--
+-- AUTO_INCREMENT for table `s1_user`
+--
 ALTER TABLE `s1_user`
   MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
