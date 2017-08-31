@@ -589,8 +589,9 @@ class World {
         return array($dbarray['id'], $q);
     }
 
-    public function getRegionDetail1($id) {
+    public function getRegionDetail1($id=null) {
         global $engine;
+        $id == null ? $id = $this->xy2id(0, 0) : false;
         $b = $this->id2xy($id);
         $b[0] = $b[0] * 5;
         $b[1] = $b[1] * 5;
