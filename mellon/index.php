@@ -169,9 +169,9 @@ if ($page->getURI(0) == "authentication") {
     }
 } elseif ($page->getURI(0) == "instant") {
     $error = "<div class=\"page-header\"><h1>Feature unavaliable</h1></div>";
-    include_once dirname(__FILE__) . '/template/error.php';
+    include_once __DIR__ . '/template/error.php';
 } elseif ($page->getURI(0) == "easyXDM") {
-    echo file_get_contents(__DIR__ . '/easyXDM/'.$page->getURI(0));
+	include_once __DIR__ . '/easyXDM/index.php';
 } else {
     if ($page->getURI(0) == "fenster-css.css") {
         header("Content-type: text/css", true);

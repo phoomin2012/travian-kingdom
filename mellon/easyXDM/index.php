@@ -1,10 +1,10 @@
 <?php
 
 //include_once dirname(__FILE__) . '/api/page.php';
-include_once dirname(__FILE__) . '/../engine/session.php';
+include_once __DIR__ . '/../engine/session.php';
 
 $page = new Page();
-$a = 0;
+!isset($a) ? $a = 0 : false;
 if ($page->getURI($a + 1) == "name.html") {
     include_once __DIR__.'/_name.php';
 } elseif ($page->getURI($a + 1) == "proxy.html") {
