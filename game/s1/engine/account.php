@@ -14,6 +14,11 @@ class Account {
     public $resBonus_time = 86400 * 5;
     public $cropBonus_time = 86400 * 5;
     public $prestige_data = [
+        "0" => [
+            "bronze" => 0,
+            "silver" => 0,
+            "gold" => 0
+        ],
         "25" => [
             "bronze" => 1,
             "silver" => 0,
