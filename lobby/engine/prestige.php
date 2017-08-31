@@ -2,7 +2,7 @@
 
 class Prestige {
 
-    public function get($uid) {
+    public function get($uid=null) {
         global $engine;
         $uid === null ? $uid = $_SESSION['lobby_uid'] : 0;
         
