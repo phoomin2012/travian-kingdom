@@ -146,8 +146,22 @@ class Account {
         }
     }
 
-    public function getAjax($id) {
+    public function getProfile($uid = null, $head = true) {
         global $engine;
+        ($uid === null ) ? $uid = $_SESSION[$engine->server->prefix . 'uid'] : '';
+        $u = query("SELECT * FROM `" . $engine->server->prefix . "user` WHERE `uid`=?;", [$uid])->fetch(PDO::FETCH_ASSOC);
+        $r = [
+            "name" => "PlayerProfile:" . $uid,
+            "data" => [
+                "description" => $u['desc'],
+            ]
+        ];
+        return $r;
+    }
+
+    public function getAjax($id = null) {
+        global $engine;
+        ($id === null ) ? $id = $_SESSION[$engine->server->prefix . 'uid'] : '';
 
         $p = query("SELECT * FROM `" . $engine->server->prefix . "user` WHERE `uid`=?", array($id))->fetch(PDO::FETCH_ASSOC);
         $k = $engine->kingdom->getData($p['kingdom']);

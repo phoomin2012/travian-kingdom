@@ -419,7 +419,7 @@ io.on('connect', function (socket) {
             } else {
                 console.log('Add line to ', data.roomId, '(1) ,message : ', data.text)
                 Travian.chat.addLine(data.roomId, Travian.player.index[socket.id], data.text, (id) => {
-                    Travian.chat.getRoom(room, (roomData) => {
+                    Travian.chat.getRoom(data.roomId, (roomData) => {
                         console.log(roomData)
                         Travian.chat.sendNotifLine(roomData.from, id);
                         Travian.chat.sendNotifLine(roomData.to, id);
@@ -592,103 +592,96 @@ io.on('connect', function (socket) {
     socket.on('nameService', function (data, callback_ns) {
         if (data.type == "askForName") {
             if (data.nameType == "player") {
-                query("SELECT * FROM `" + config.prefix + "user` WHERE `uid`=?", [data.query[0]], function (err_ap, res_ap) {
-                    $return = {
-                        id: [],
-                        nameType: 'player',
-                        name: {},
-                        resultType: {},
-                    };
-                    if (data.query[0] == "-1") {
-                        $return.name[data.query[0]] = "Robber";
-                    } else if (data.query[0] == "0") {
-                        $return.name[data.query[0]] = "Nature";
-                    } else if (data.query[0] == "1") {
-                        $return.name[data.query[0]] = "Natars";
-                    } else {
-                        if (typeof res_ap[0] == "undefined") {
-                            $return.name[data.query[0]] = "Unknow";
+                var $return = {
+                    id: [],
+                    nameType: 'player',
+                    name: {},
+                    resultType: {},
+                };
+                async.each(data.query, (id, callback) => {
+                    query("SELECT * FROM `" + config.prefix + "user` WHERE `uid`=?", [id], function (err_ap, res_ap) {
+                        if (id == "-1") {
+                            $return.name[id] = "Robber";
+                        } else if (id == "0") {
+                            $return.name[id] = "Nature";
+                        } else if (id == "1") {
+                            $return.name[id] = "Natars";
                         } else {
-                            $return.name[res_ap[0].uid] = res_ap[0].username;
+                            if (typeof res_ap[0] == "undefined") {
+                                $return.name[id] = "Unknow";
+                            } else {
+                                $return.name[res_ap[0].uid] = res_ap[0].username;
+                            }
                         }
-                    }
+                        callback();
+                    });
+                }, () => {
                     callback_ns($return);
                 });
             } else if (data.nameType == "village") {
-                if (data.query[0] == "536920065") {
-                    $return = {
-                        id: [],
-                        nameType: 'village',
-                        name: {"536920065": "Robber hideout"},
-                        resultType: {},
-                    };
-                    $return.name[data.query[0]] = "";
-                    callback_ns($return);
-                } else {
-                    query("SELECT * FROM `" + config.prefix + "village` WHERE `wid`=?", [data.query[0]], function (err_av, res_av) {
-                        query("SELECT * FROM `" + config.prefix + "world` WHERE `id`=?", [data.query[0]], function (err_w_av, res_w_av) {
-                            if (res_w_av[0] == undefined) {
-                                $return = {
-                                    id: [],
-                                    nameType: 'village',
-                                    name: {},
-                                    resultType: {},
-                                };
-                                $return.name[data.query[0]] = "";
-                                callback_ns($return);
-                            } else {
-                                if (res_av[0] == undefined) {
-                                    $return = {
-                                        id: [],
-                                        nameType: 'village',
-                                        name: {},
-                                        resultType: {},
-                                    };
-                                    $return.name[data.query[0]] = "Field (" + res_w_av[0].x + "|" + res_w_av[0].y + ")";
-                                    callback_ns($return);
-                                } else {
-                                    $return = {
-                                        id: [],
-                                        nameType: 'village',
-                                        name: {},
-                                        resultType: {},
-                                    };
-                                    if (res_w_av[0].fieldtype != "0") {
-                                        $return.name[data.query[0]] = res_av[0].vname;
-                                    } else {
-                                        if (res_w_av[0].oasistype != "0") {
-                                            $return.name[data.query[0]] = "Oasis (" + res_w_av[0].x + "|" + res_w_av[0].y + ")";
-                                        } else {
-                                            $return.name[data.query[0]] = "Field (" + res_w_av[0].x + "|" + res_w_av[0].y + ")";
-                                        }
-                                    }
-                                    callback_ns($return);
-                                }
-                            }
-                        });
-                    });
-                }
-            } else if (data.nameType == "kingdom") {
-                query("SELECT * FROM `" + config.prefix + "kingdom` WHERE `id`=?", [data.query[0]], function (err_ap, res_ak) {
-                    $return = {
-                        id: [],
-                        nameType: 'kingdom',
-                        name: {},
-                        resultType: {},
-                        kingObject: {},
-                    };
-                    if (data.query[0] == "0") {
-                        $return.name[data.query[0]] = "";
-                        $return.kingObject[data.query[0]] = {};
+                var $return = {
+                    id: [],
+                    nameType: 'village',
+                    name: {},
+                    resultType: {},
+                };
+                async.each(data.query, (id, callback) => {
+                    if (id == "536920065") {
+                        $return.name[id] = "Robber hideout";
+                        callback();
                     } else {
-                        if (typeof res_ak[0] == "undefined") {
-                            $return.name[data.query[0]] = "Unknow";
-                            $return.kingObject[data.query[0]] = {};
-                        } else {
-                            $return.name[res_ak[0].id] = res_ak[0].tag;
-                            $return.kingObject[res_ak[0].id] = {};
-                        }
+                        query("SELECT * FROM `" + config.prefix + "village` WHERE `wid`=?", [id], function (err_av, res_av) {
+                            query("SELECT * FROM `" + config.prefix + "world` WHERE `id`=?", [id], function (err_w_av, res_w_av) {
+                                if (res_w_av[0] == undefined) {
+                                    $return.name[id] = "";
+                                } else {
+                                    if (res_av[0] == undefined) {
+                                        $return.name[id] = "Field (" + res_w_av[0].x + "|" + res_w_av[0].y + ")";
+                                    } else {
+                                        if (res_w_av[0].fieldtype != "0") {
+                                            $return.name[id] = res_av[0].vname;
+                                        } else {
+                                            if (res_w_av[0].oasistype != "0") {
+                                                $return.name[id] = "Oasis (" + res_w_av[0].x + "|" + res_w_av[0].y + ")";
+                                            } else {
+                                                $return.name[id] = "Field (" + res_w_av[0].x + "|" + res_w_av[0].y + ")";
+                                            }
+                                        }
+
+                                    }
+                                }
+                                callback();
+                            });
+                        });
                     }
+                }, (err, res) => {
+                    callback_ns($return);
+                });
+            } else if (data.nameType == "kingdom") {
+                var $return = {
+                    id: [],
+                    nameType: 'kingdom',
+                    name: {},
+                    resultType: {},
+                    kingObject: {},
+                };
+                async.each(data.query, (id, callback) => {
+                    query("SELECT * FROM `" + config.prefix + "kingdom` WHERE `id`=?", [id], function (err_ap, res_ak) {
+                        if (id == "0") {
+                            $return.name[id] = "";
+                            $return.kingObject[id] = {};
+                        } else {
+                            if (typeof res_ak[0] == "undefined") {
+                                $return.name[id] = "Unknow";
+                                $return.kingObject[id] = {};
+                            } else {
+                                $return.name[res_ak[0].id] = res_ak[0].tag;
+                                $return.kingObject[res_ak[0].id] = {};
+                            }
+                        }
+                        callback();
+                    });
+                }, () => {
                     callback_ns($return);
                 });
             }

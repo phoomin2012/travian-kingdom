@@ -45,10 +45,7 @@ class Cache {
             )
         );
         $json['cache'][count($json['cache'])] = $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']);
-        $json['cache'][count($json['cache'])] = array(
-            'name' => 'Settings:' . $_SESSION[$engine->server->prefix . 'uid'],
-            'data' => $engine->setting->getAll(),
-        );
+        $json['cache'][count($json['cache'])] = $engine->setting->getAll(true);
         $json['cache'][count($json['cache'])] = array(
             'name' => 'Session:' . session_id(),
             'data' => array(

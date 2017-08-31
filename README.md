@@ -38,7 +38,7 @@ Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
     - [ ] Change account name
     - [ ] Subscribe to newsletter
     - [ ] Logout
-- Game
+- Gameplay
   - Building list
     - [x] Construct building
     - [x] Upgrade building
@@ -48,14 +48,13 @@ Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
     - [x] Buy more slot
     - [x] Reserve resource
     - [x] Finish now
-  - Troops & Merchants
+  - Troops
     - [x] Train troop
     - [x] Send attack (no attack)
     - [ ] Send raid (no attack)
     - [ ] Send siege (no attack)
     - [x] Settle new village
     - [ ] Conqure village
-    - [x] Send resources
   - Hero
     - [x] Adventure (generate item with no effect)
     - [ ] Attack
@@ -89,25 +88,18 @@ Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
     - [ ] Weeky prestige
     - [ ] Share report
     - [ ] Favorites report
-  - Message
-    - [ ] Private message
-    - [ ] Kingdom message
-    - [ ] Secret society message
-    - [ ] Kingdom chat
-    - [ ] Beginner chat
-    - [ ] Global chat
   - Statistics
     - Player
-      - [ ] Overview
-      - [ ] Attacker
-      - [ ] Defender
-      - [ ] Villages
-      - [ ] Heroes
+      - [x] Overview
+      - [x] Attacker
+      - [x] Defender
+      - [x] Villages
+      - [x] Heroes
       - [ ] Top 10
       - [ ] Search
     - Kingdom
-      - [ ] Victory points
-      - [ ] Population
+      - [x] Victory points
+      - [x] Population
       - [ ] Area
       - [ ] Attacker
       - [ ] Defender
@@ -121,13 +113,14 @@ Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
     - [ ] Daliy quest
     - [ ] Quest
   - Setting
-    - [ ] Change setting
+    - [x] Change setting
     - [ ] Delete avatar
   - Prestige
-    - [ ] Prestige
+    - [x] Prestige
+    - [ ] Give prestige
   - Player profile
     - [ ] Modal
-    - [ ] Change description
+    - [x] Change description
   - Auction
     - [ ] Buy
     - [ ] Sell
@@ -146,6 +139,7 @@ Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
     - [ ] Ranking
     - [ ] Treasuries
     - [ ] Tributes
+    - [ ] Collect tributes
     - [ ] Diplomacy
     - [ ] Create offer
   - Notification
@@ -186,12 +180,22 @@ Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
     - [x] Finish now improve
     - [x] Demolish building
     - [x] Clear rubbles
+  - Market
+    - [x] Send resources
+    - [ ] Create trade route
+    - [ ] Auto send resources
+    - [ ] Create offer
+    - [ ] List offers
+    - [ ] Filter offer
+    - [ ] Accept offer
+    - [ ] Cancel offer
+    - [ ] NPC merchant
   - Notepads
     - [ ] Show/hide notepad
     - [ ] Create a new note
     - [ ] Edit note
     - [ ] Delete note
-  - Chat
+  - Message & Chat
     - [ ] Open chat on bar
     - [ ] Show chat on bar
     - [ ] Join global room

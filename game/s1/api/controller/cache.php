@@ -22,8 +22,7 @@ if ($data['action'] == "get") {
                     break;
                 }
             case "PlayerProfile": {
-                    $r = $engine->account->getAjax($action[1]);
-                    $r['name'] = "PlayerProfile";
+                    $r = $engine->account->getProfile($action[1]);
                     array_push($return, $r);
                     unset($r);
                     break;
@@ -237,6 +236,24 @@ if ($data['action'] == "get") {
                             'freeRolls' => 1,
                         )
                     );
+                    array_push($return, $r);
+                    unset($r);
+                    break;
+                }
+            case "StatsWeeklyTop": {
+                    $r = [
+                        "name" => "StatsWeeklyTop:{$action[1]}:{$action[2]}",
+                        "data" => [
+                            "top10Attacker" => [],
+                            "top10Climber" => [],
+                            "top10Defender" => [],
+                            "top10Robber" => [],
+                            "top10Attacker_ranking_Player" => [],
+                            "top10Climber_ranking_Player" => [],
+                            "top10Defender_ranking_Player" => [],
+                            "top10Robber_ranking_Player" => [],
+                        ],
+                    ];
                     array_push($return, $r);
                     unset($r);
                     break;
