@@ -785,7 +785,7 @@ class Unit {
         if ($data['owner'] > 100) {
             $id = $engine->report->add(4, $pa['uid'], $source, $target, $detail, $modules);
             // Attacker
-            if ($pa['uid'] != null) {
+            if (is_numeric($pa['uid'])) {
                 if ($detail['final']['attacker']['loss'] == $detail['final']['attacker']['sum']) {
                     $engine->notification->add($pa['uid'], 1, $id, 'movement_attack_medium_flat_negative');
                 } elseif ($detail['final']['attacker']['loss'] == 0) {
@@ -795,7 +795,7 @@ class Unit {
                 }
             }
             // Denfender
-            if ($pd['uid'] != null) {
+            if (is_numeric($pd['uid'])) {
                 if ($detail['final']['defender']['loss'] == $detail['final']['defender']['sum']) {
                     $engine->notification->add($pd['uid'], 1, $id, 'movement_defender_medium_flat_negative');
                 } elseif ($detail['final']['defender']['sum'] == 0) {
