@@ -1,10 +1,12 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <title>Mellon</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/min?g=core-styles" media="screen" rel="stylesheet" type="text/css">
         <link href="/min?g=styles" media="screen" rel="stylesheet" type="text/css">
+
         <script type="text/javascript" src="/min?g=core-scripts"></script>
         <script type="text/javascript" src="/min?g=scripts"></script>
         <script type="text/javascript">
@@ -33,17 +35,16 @@
                     return;
                 }
                 var bridge = window.parent.bridge;
-                bridge.setCookie("msid", "ji9hmqge85c2nv59plhdlrnhd0", {});
+                bridge.setCookie("msid", "<?php echo $_SESSION['mellon_msid']; ?>", {});
             });
             //-->
         </script>
         <script type="text/javascript">
             //<!--
-
             $(function () {
                 setTimeout(function () {
                     if (!window.bridgePresenceCheckSkip && (!window.parent || !window.parent.bridge)) {
-                        window.location.href = 'http://www.kingdoms.com/com?msid=ji9hmqge85c2nv59plhdlrnhd0&msname=msid';
+                        window.location.href = 'http://www.kingdoms.com/com?msid=<?php echo $_SESSION['mellon_msid']; ?>&msname=msid';
                     }
                 }, 4000);
             });
@@ -57,7 +58,7 @@
                     return;
                 }
                 var bridge = window.parent.bridge;
-                bridge.event("password-reset-request");
+                bridge.event("login");
             });
             //-->
         </script>
@@ -71,43 +72,26 @@
                 bridge.event("loaded");
             });
             //-->
-        </script>        <script>
+        </script>
+        <script>
             $(document).ready(function () {
-                $.fn.ajaxValidation.defaults.url = "/ajax/form-validate?msid=ji9hmqge85c2nv59plhdlrnhd0&msname=msid";
+                $.fn.ajaxValidation.defaults.url = "/ajax/form-validate?msid=<?php echo $_SESSION['mellon_msid']; ?>&msname=msid";
             });
         </script>
     </head>
 
-    <body class="mellon-dialog c-authentication-password-reset-request ltr">
+    <body class="mellon-dialog c-authentication-login ltr">
         <div class="container">
-            <div class="pages">
-                <span>1/2</span>
-            </div>
-            <div class="page-header">
-                <h1>Reset password</h1>
-            </div>
-
-            <p class="description">Enter the email address registered to your account and we'll email you a link to reset your password.</p>
-
-            <form action="" method="POST">
-                <div class="form-group form-group-type-text">
-                    <label>Email address:</label>
-
-                    <input type="text" name="email" class="form-control&#x20;input-email" placeholder="Email&#x20;address" value="">        
-                </div>
-                <div class="form-group form-group-type-submit">
-
-                    <input type="submit" name="submit" class="btn&#x20;btn-primary" value="Send&#x20;reset&#x20;link">        
-                </div>
-            </form>
+            <?php echo $error;?>
 
             <script type="text/javascript">
-                $('body').width('490px');
+                $('body').width('386px');
 
                 $(document).ready(function () {
-                    $('input[name=email]').ajaxValidation({formName: 'resetPasswordRequest'})
+                    
                 });
             </script>
+
         </div> <!-- /container -->
 
         <!-- facebook layer -->

@@ -134,6 +134,12 @@ if ($page->getURI(0) == "authentication") {
     } elseif ($page->getURI(1) == "session-validate") {
         header("Content-type: text/json", true);
         echo json_encode(['isValid' => true]);
+    } elseif ($page->getURI(1) == "game-world-list") {
+        header("Content-type: text/json");
+        echo json_encode([
+            'success' => true,
+            'list' => $engine->database->listServer(),
+        ]);
     } else {
         echo json_encode($page->getURI());
     }
@@ -161,6 +167,9 @@ if ($page->getURI(0) == "authentication") {
     } elseif ($_GET['g'] == "scripts") {
         echo file_get_contents(__DIR__ . '/js/scripts.js');
     }
+} elseif ($page->getURI(0) == "instant") {
+    $error = "<div class=\"page-header\"><h1>Feature unavaliable</h1></div>";
+    include_once dirname(__FILE__) . '/template/error.php';
 } else {
     if ($page->getURI(0) == "fenster-css.css") {
         header("Content-type: text/css", true);
