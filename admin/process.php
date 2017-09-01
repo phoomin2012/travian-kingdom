@@ -16,7 +16,7 @@ switch ($_GET['p']) {
             }
         }
         $engine->world->generateMap();
-        query("UPDATE `global_server_data` SET `start`=? WHERE `sid`=?;", [time(), $_GET['id']]);
+        query("UPDATE `global_server_data` SET `start`=?,`installed`=? WHERE `sid`=?;", [time(), 1, $_GET['id']]);
         header("Location: index.php?p=info&id={$_GET['id']}");
         break;
     case 'import':
