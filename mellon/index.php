@@ -170,7 +170,7 @@ if ($page->getURI(0) == "authentication") {
 } elseif ($page->getURI(0) == "instant") {
     $error = "<div class=\"page-header\"><h1>Feature unavaliable</h1></div>";
     include_once __DIR__ . '/template/error.php';
-} elseif ($page->getURI(0) == "easyXDM") {
+} elseif ($page->getURI(0) == "easyxdm") {
     include_once __DIR__ . '/easyXDM/index.php';
 } else {
     if ($page->getURI(0) == "fenster-css.css") {
