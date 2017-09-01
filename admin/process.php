@@ -23,6 +23,15 @@ if ($s) {
         case 'import':
             $sql = file_get_contents(__DIR__ . '/sql.sql');
             query($sql);
+            $q = query("SHOW TABLES LIKE ?;", ["%{$s['prefix']}%"])->fetchAll();
+            foreach ($q as $n) {
+                $n = $n[0];
+                query("TRUNCATE TABLE `{$n}`");
+            }
+            $tbs = ['error_nodejs', 'error_php', 'global_avatar', 'global_msid', 'global_user', 'process_php'];
+            foreach ($tbs as $tb) {
+                query("TRUNCATE TABLE `{$tb}`");
+            }
             header("Location: index.php");
             break;
         default:
