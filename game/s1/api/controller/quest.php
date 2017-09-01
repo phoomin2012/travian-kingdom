@@ -125,7 +125,7 @@ if ($data['action'] == "dialogAction") {
     } elseif ($data['params']['questId'] == "35") {
         if ($data['params']['command'] == "activate") {
             $engine->account->edit('tutorial', 15, $_SESSION[$engine->server->prefix . 'uid']);
-            //Set resource
+            // Set resource
             query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(600, 600, 600, 600, $_COOKIE['village']));
             $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->village->get($_COOKIE['village']));
             

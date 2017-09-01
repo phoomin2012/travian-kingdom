@@ -137,7 +137,12 @@ class Auto {
                         // Reseach unit tier2 free
                         query("UPDATE `" . $engine->server->prefix . "tdata` SET `t2`=? WHERE `wid`=?", array(0, $b['wid']));
                         // Set village resource
-                        query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(255,300,150,300, $b['wid']));
+                        if ($p['tribe'] == 1)
+                            query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(240, 300, 480, 300, $b['wid']));
+                        elseif ($p['tribe'] == 2)
+                            query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(255, 300, 150, 300, $b['wid']));
+                        elseif ($p['tribe'] == 3)
+                            query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(285, 180, 420, 300, $b['wid']));
                     }
                 } elseif ($p['tutorial'] == 15) {
                     if ($b['type'] == "4") {
