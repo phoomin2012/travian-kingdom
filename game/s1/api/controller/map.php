@@ -39,7 +39,7 @@ if ($data['action'] == "getHeatmapMaximums") {
             }
         }
     }
-    echo json_encode(array(
+    echo json_encode([
         'time' => round(microtime(true) * 1000),
         'serialNo' => $engine->session->serialNo(),
         'response' => [
@@ -50,7 +50,7 @@ if ($data['action'] == "getHeatmapMaximums") {
             5 => $c[5],
             6 => $c[6]
         ],
-    ));
+    ]);
 } elseif ($data['action'] == "getKingdomInfluenceStatistics") {
     echo json_encode([
         "response" => $engine->kingdom->getInf(),

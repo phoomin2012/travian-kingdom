@@ -344,7 +344,7 @@ if ($data['action'] == "login") {
     echo json_encode(array(
         "time" => round(microtime(true) * 1000),
         "response" => array(
-            'data' => 'http://lobby.t5th.ph/api/login.php?token='.$_SESSION['mellon_msid']
+            'data' => $lobby_url.'api/login.php?token='.$_SESSION['mellon_msid']
         )
     ));
 }

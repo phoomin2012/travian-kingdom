@@ -11,7 +11,7 @@ class Page {
     }
 
     public function getURI($index = null) {
-        $str = str_replace(strtolower(str_replace('\\','/',str_replace('engine', '', __DIR__))), '', $_SERVER['DOCUMENT_ROOT'] . $_SERVER['REQUEST_URI']);
+        $str = str_replace(strtolower(str_replace('\\','/',str_replace('engine', '', __DIR__))), '', strtolower($_SERVER['DOCUMENT_ROOT'] . $_SERVER['REQUEST_URI']));
         $page = explode('/', $str);
         $qs = explode("?", $page[count($page) - 1]);
         $page[count($page) - 1] = $qs[0];
@@ -32,7 +32,7 @@ class Page {
     }
 
     public function getFullURI() {
-        return str_replace(strtolower(str_replace('\\','/',str_replace('engine', '', __DIR__))), '', $_SERVER['DOCUMENT_ROOT'] . $_SERVER['REQUEST_URI']);
+        return str_replace(strtolower(str_replace('\\','/',str_replace('engine', '', __DIR__))), '', strtolower($_SERVER['DOCUMENT_ROOT'] . $_SERVER['REQUEST_URI']));
     }
 
     public function getPageURI() {
