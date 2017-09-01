@@ -32,7 +32,6 @@ if ($data['action'] == "ping") {
     echo json_encode(array(
         "response" => array(),
         "serialNo" => $engine->session->serialNo(),
-        "ignoreSerial" => 6,
         "time" => round(microtime(true) * 1000),
         "event" => array(
             array(

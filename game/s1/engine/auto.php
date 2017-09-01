@@ -82,9 +82,9 @@ class Auto {
                 $bD = BuildingData::get($b['type'], $level);
                 query("UPDATE `" . $engine->server->prefix . "village` SET `pop`=`pop`+?,`cp`=`cp`+? WHERE `wid`=?;", array($bD['pop'], $bD['cp'], $b['wid']));
                 $engine->world->calInf($b['wid']);
-                
-                $v = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?", array($b['wid']))->fetch();
-                $p = query("SELECT * FROM `" . $engine->server->prefix . "user` WHERE `uid`=?", array($v['owner']))->fetch();
+
+                $v = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?", array($b['wid']))->fetch(PDO::FETCH_ASSOC);
+                $p = query("SELECT * FROM `" . $engine->server->prefix . "user` WHERE `uid`=?", array($v['owner']))->fetch(PDO::FETCH_ASSOC);
 
                 if ($b['type'] == 10) { //Warehouse
                     $max = $engine->village->getVillageField($b['wid'], "maxstore");
@@ -134,6 +134,10 @@ class Auto {
                     if ($b['location'] == "29") {
                         $engine->account->edit('tutorial', 9, $p['uid']);
                         $engine->auto->emitCache($p['uid'], $engine->quest->get($p['uid']));
+                        // Reseach unit tier2 free
+                        query("UPDATE `" . $engine->server->prefix . "tdata` SET `t2`=? WHERE `wid`=?", array(0, $b['wid']));
+                        // Set village resource
+                        query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(255,300,150,300, $b['wid']));
                     }
                 } elseif ($p['tutorial'] == 15) {
                     if ($b['type'] == "4") {
@@ -478,14 +482,15 @@ class Auto {
             $hp = $hp + (($h['regen'] * $engine->server->speed_world / 86400) * (microtime(true) - $h['lastupdate']));
             ($hp > 100) ? $hp = 100 : '';
             query("UPDATE `{$engine->server->prefix}hero` SET `health`=?,`lastupdate`=? WHERE `id`=?;", [$hp, microtime(true), $h['id']]);
-            if ($engine->server->speed_world >= 100)
-                $timer = 10;
-            else
-                $timer = 120;
-            if ($this->last['hpHero'] + $timer < time()) {
-                $this->last['hpHero'] = time();
-                $this->emitCache($h['owner'], $engine->hero->get($h['owner']));
-            }
+
+            /* if ($engine->server->speed_world >= 100)
+              $timer = 10;
+              else
+              $timer = 120;
+              if ($this->last['hpHero'] + $timer < time()) {
+              $this->last['hpHero'] = time();
+              $this->emitCache($h['owner'], $engine->hero->get($h['owner']));
+              } */
         }
     }
 

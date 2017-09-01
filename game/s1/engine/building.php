@@ -24,10 +24,10 @@ class Building {
         $b2 = query("SELECT * FROM `{$engine->server->prefix}building` WHERE `wid`=? AND `queue`=? ORDER BY `sort` ASC;", array($id, 2))->fetchAll(PDO::FETCH_ASSOC);
         $b4 = query("SELECT * FROM `{$engine->server->prefix}building` WHERE `wid`=? AND `queue`=? ORDER BY `paid` DESC,`sort` ASC;", array($id, 4))->fetchAll(PDO::FETCH_ASSOC);
         $b5 = query("SELECT * FROM `{$engine->server->prefix}building` WHERE `wid`=? AND `queue`=? ORDER BY `sort` ASC;", array($id, 5))->fetchAll(PDO::FETCH_ASSOC);
-        $b1n = array();
-        $b2n = array();
-        $b4n = array();
-        $b5n = array();
+        $b1n = [];
+        $b2n = [];
+        $b4n = [];
+        $b5n = [];
         foreach ($b1 as $key => $value) {
             $b1n[count($b1n)] = $this->makeQueue($value);
         }
@@ -105,7 +105,7 @@ class Building {
         $v = query("SELECT * FROM `{$engine->server->prefix}village` WHERE `wid`=?", array($id))->fetch(PDO::FETCH_ASSOC);
         $p = query("SELECT * FROM `{$engine->server->prefix}user` WHERE `uid`=?", array($v['owner']))->fetch(PDO::FETCH_ASSOC);
         $b = query("SELECT * FROM `{$engine->server->prefix}field` WHERE `wid`=?", array($id))->fetchAll(PDO::FETCH_ASSOC);
-        $ba = array();
+        $ba = [];
         for ($i = 0; $i < count($b); $i++) {
             $ba[count($ba)] = $this->makeDetail($b[$i]['id'], $id, $b[$i]['location'], $b[$i]['type'], $b[$i]['level']);
         }
@@ -129,7 +129,7 @@ class Building {
         return $this->makeDetail($b['id'], $b['wid'], $b['location'], $b['type'], $b['level']);
     }
 
-    public function makeDetail($id, $wid, $location, $type, $level, $option = array(), $status = 0) {
+    public function makeDetail($id, $wid, $location, $type, $level, $option = [], $status = 0) {
         global $engine;
 
         $queue = query("SELECT * FROM `{$engine->server->prefix}building` WHERE `wid`=? AND `location`=? AND `type`=?;", [$wid, $location, $type])->rowCount();
@@ -161,15 +161,15 @@ class Building {
                 'lvlNext' => $level + 1 + $queue,
                 'isMaxLvl' => $this->isMax($wid, $location, $type, $level),
                 'lvlMax' => $max,
-                'upgradeCosts' => array(),
+                'upgradeCosts' => [],
                 'upgradeTime' => 0,
-                'nextUpgradeCosts' => array(),
-                'nextUpgradeTimes' => array(),
+                'nextUpgradeCosts' => [],
+                'nextUpgradeTimes' => [],
                 'upgradeSupplyUsage' => 0,
-                'upgradeSupplyUsageSums' => array(),
+                'upgradeSupplyUsageSums' => [],
                 'category' => $cat,
                 'sortOrder' => 15,
-                'effect' => array(),
+                'effect' => [],
             ),
         );
         $f = query("SELECT * FROM `{$engine->server->prefix}field` WHERE `wid`=? AND `location`=?", array($wid, $location))->fetch(PDO::FETCH_ASSOC);
@@ -216,7 +216,7 @@ class Building {
             $return['data']['effect'][0] = $upgrade['effect'];
         }
         //End
-        
+
         for ($i2 = $level; $i2 <= (($level + 7 > $max) ? $max : $level + 7); $i2++) {
             $upgrade = BuildingData::get($type, $i2 + 1);
             if ($upgrade) {
@@ -267,14 +267,14 @@ class Building {
 
     public function getAllBuildlist($vid = null) {
         global $engine;
-        $return = array();
+        $return = [];
 
         $q = query("SELECT * FROM `{$engine->server->prefix}village` WHERE `owner`=?;", array($engine->session->data->uid));
         $data = $q->fetchAll(PDO::FETCH_ASSOC);
         for ($i = 0; $i < $q->rowCount(); $i += 1) {
             $b = query("SELECT * FROM `{$engine->server->prefix}building` WHERE `wid`=? ORDER BY `timestamp` ASC;", array($data[$i]['wid']));
             if ($b->rowCount() == 0) {
-                $return[$i] = array();
+                $return[$i] = [];
             } else {
                 $this->buildArray = $b->fetchAll(PDO::FETCH_ASSOC);
                 $return[$i] = $this->buildArray;
@@ -412,13 +412,17 @@ class Building {
                 $queuetype = 1;
             }
 
+            if ($owner['tutorial'] < 256) {
+                $duration = 1;
+                $time = time() + 1;
+            }
+
             $engine->auto->procRes($wid);
             $v = query("SELECT * FROM `{$engine->server->prefix}village` WHERE `wid`=?", [$wid])->fetch(PDO::FETCH_ASSOC);
             if (($v['wood'] - $request['wood'] >= 0) && ($v['clay'] - $request['clay'] >= 0) && ($v['iron'] - $request['iron'] >= 0) && ($v['crop'] - $request['crop'] >= 0)) {
                 query("UPDATE `{$engine->server->prefix}village` SET `wood`=`wood`-?,`clay`=`clay`-?,`iron`=`iron`-?,`crop`=`crop`-? WHERE `wid`=?", array($request['wood'], $request['clay'], $request['iron'], $request['crop'], $wid));
                 query("UPDATE `{$engine->server->prefix}field` SET `type`=? WHERE `wid`=? AND `location`=?", array($type, $wid, $location));
                 query("INSERT INTO `{$engine->server->prefix}building` (`wid`,`location`,`type`,`timestamp`,`start`,`queue`,`paid`,`duration`) VALUE (?,?,?,?,?,?,?,?);", array($wid, $location, $type, $time, $start, $queuetype, 1, $duration));
-
                 return true;
             } else {
                 return false;
@@ -545,8 +549,8 @@ class Building {
 
     public function getBuildable($wid, $id) {
         global $engine;
-        $buildable = array();
-        $notBuildable = array();
+        $buildable = [];
+        $notBuildable = [];
 
         $artEffGrt = 0;
         $village = $engine->village->get($wid, false);
@@ -630,7 +634,7 @@ class Building {
                         )
                 ));
             } else {
-                $option = array('requiredBuildings' => array());
+                $option = array('requiredBuildings' => []);
             }
             $buildable[count($buildable)] = $this->makeDetail(0, $wid, $id, 23, 0, $option, true, 1);
         }
@@ -652,25 +656,25 @@ class Building {
                         )
                 ));
             } else {
-                $option = array('requiredBuildings' => array());
+                $option = array('requiredBuildings' => []);
             }
             $buildable[count($buildable)] = $this->makeDetail(0, $wid, $id, 11, 0, $option, true, 1);
         }
         if ($wall == 0 && !$this->inQueue($wid, 32)) {
             if ($engine->session->data->tribe == 1 && $id != 32) {
-                $buildable[count($buildable)] = $this->makeDetail(0, $wid, $id, 31, 0, array('requiredBuildings' => array()), true, 1);
+                $buildable[count($buildable)] = $this->makeDetail(0, $wid, $id, 31, 0, array('requiredBuildings' => []), true, 1);
             }
             if ($engine->session->data->tribe == 2 && $id != 32) {
-                $buildable[count($buildable)] = $this->makeDetail(0, $wid, $id, 32, 0, array('requiredBuildings' => array()), true, 1);
+                $buildable[count($buildable)] = $this->makeDetail(0, $wid, $id, 32, 0, array('requiredBuildings' => []), true, 1);
             }
             if ($engine->session->data->tribe == 3 && $id != 32) {
-                $buildable[count($buildable)] = $this->makeDetail(0, $wid, $id, 33, 0, array('requiredBuildings' => array()), true, 1);
+                $buildable[count($buildable)] = $this->makeDetail(0, $wid, $id, 33, 0, array('requiredBuildings' => []), true, 1);
             }
             if ($engine->session->data->tribe == 4 && $id != 32) {
-                $buildable[count($buildable)] = $this->makeDetail(0, $wid, $id, 33, 0, array('requiredBuildings' => array()), true, 1);
+                $buildable[count($buildable)] = $this->makeDetail(0, $wid, $id, 33, 0, array('requiredBuildings' => []), true, 1);
             }
             if ($engine->session->data->tribe == 5 && $id != 32) {
-                $buildable[count($buildable)] = $this->makeDetail(0, $wid, $id, 33, 0, array('requiredBuildings' => array()), true, 1);
+                $buildable[count($buildable)] = $this->makeDetail(0, $wid, $id, 33, 0, array('requiredBuildings' => []), true, 1);
             }
         }
         if ((($warehouse == 0 && !$this->inQueue($wid, 10)) || $warehouse == 20) && $id != 32 && $id != 33) {

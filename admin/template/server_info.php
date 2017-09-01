@@ -75,11 +75,11 @@ $s = $engine->database->getServer($_GET['id']);
                 </tr>
                 <tr>
                     <td>Installed</td>
-                    <td><?php echo ($s['installed'] == 1 ? '<i class="fa fa-check"></i>':'<i class="fa fa-remove"></i>'); ?></td>
+                    <td><?php echo ($s['installed'] == 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-remove"></i>'); ?></td>
                 </tr>
                 <tr>
                     <td>Recommended</td>
-                    <td><?php echo ($s['recommended'] == 1 ? '<i class="fa fa-check"></i>':'<i class="fa fa-remove"></i>'); ?></td>
+                    <td><?php echo ($s['recommended'] == 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-remove"></i>'); ?></td>
                 </tr>
             </table>
         </div>
@@ -90,14 +90,14 @@ $s = $engine->database->getServer($_GET['id']);
                     <?php
                     if ($s['installed'] == 0) {
                         ?>
-                        <a href="?p=install&id=<?php echo $s['sid']; ?>" class="btn btn-success">
+                        <a href="process.php?p=install&id=<?php echo $s['sid']; ?>" class="btn btn-success">
                             <i class="fa fa-download"></i>
                             Install
                         </a>
                         <?php
                     } else {
                         ?>
-                        <a href="?p=install&id=<?php echo $s['sid']; ?>" class="btn btn-success">
+                        <a href="process.php?p=install&id=<?php echo $s['sid']; ?>" class="btn btn-success">
                             <i class="fa fa-refresh"></i>
                             Reinstall
                         </a>
@@ -107,14 +107,14 @@ $s = $engine->database->getServer($_GET['id']);
                     <?php
                     if ($s['maintenance'] == 0) {
                         ?>
-                        <a href="?p=maintenance&id=<?php echo $s['sid']; ?>" class="btn btn-warning">
+                        <a href="process.php?p=maintenance&id=<?php echo $s['sid']; ?>" class="btn btn-warning">
                             <i class="fa fa-cog"></i>
                             Maintenance mode
                         </a>
                         <?php
                     } else {
                         ?>
-                        <a href="?p=maintenance&id=<?php echo $s['sid']; ?>" class="btn btn-warning">
+                        <a href="process.php?p=maintenance&id=<?php echo $s['sid']; ?>" class="btn btn-warning">
                             <i class="fa fa-check"></i>
                             Normal mode
                         </a>
@@ -124,19 +124,26 @@ $s = $engine->database->getServer($_GET['id']);
                     <?php
                     if ($s['peace'] == 0) {
                         ?>
-                        <a href="?p=peace&id=<?php echo $s['sid']; ?>" class="btn btn-warning">
+                        <a href="process.php?p=peace&id=<?php echo $s['sid']; ?>" class="btn btn-warning">
                             <i class="fa fa-cog"></i>
                             Disable attack
                         </a>
                         <?php
                     } else {
                         ?>
-                        <a href="?p=peace&id=<?php echo $s['sid']; ?>" class="btn btn-warning">
+                        <a href="process.php?p=peace&id=<?php echo $s['sid']; ?>" class="btn btn-warning">
                             <i class="fa fa-check"></i>
                             Enable attack
                         </a>
                         <?php
                     }
+                    ?>
+                    <hr>
+                    <?php
+                    $q = query("SHOW TABLES LIKE ?;", ["%{$s['prefix']}%"])->fetchAll();
+                    echo "<pre>";
+                    var_dump($q);
+                    echo "</pre>";
                     ?>
                 </div>
             </div>

@@ -8,15 +8,14 @@ if ($data['action'] == "dialogAction") {
             query("UPDATE `" . $engine->server->prefix . "village` SET `vname`=? WHERE `wid`=?;", array($data['params']['input'] . "'s village", $_COOKIE['village']));
 
             echo json_encode(array(
-                "ignoreSerial" => 2,
-                "response" => array(),
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime() * 1000),
-                "cache" => array(
+                "cache" => [
                     $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
                     $engine->village->get($_COOKIE['village']),
                     $engine->quest->get(),
-                )
+                ],
             ));
         } elseif ($data['params']['command'] == "activate") {
             query("UPDATE `" . $engine->server->prefix . 'user` SET `tutorial`=? WHERE `uid`=?', array(2, $_SESSION[$engine->server->prefix . 'uid']));
@@ -30,12 +29,13 @@ if ($data['action'] == "dialogAction") {
             $engine->session->checkLogin();
 
             echo json_encode(array(
-                "response" => [
+                "cache" => [
                     $engine->quest->get(),
                     $engine->quest->giver(),
                     $engine->hero->get($_SESSION[$engine->server->prefix . 'uid']),
                     $engine->unit->getUnit($_COOKIE['village']),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ));
@@ -43,12 +43,13 @@ if ($data['action'] == "dialogAction") {
             $engine->account->edit('tutorial', 5, $_SESSION[$engine->server->prefix . 'uid']);
 
             echo json_encode(array(
-                "response" => [
+                "cache" => [
                     $engine->quest->get(),
                     $engine->quest->giver(),
                     $engine->hero->get($_SESSION[$engine->server->prefix . 'uid']),
                     $engine->unit->getUnit($_COOKIE['village']),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ));
@@ -56,12 +57,13 @@ if ($data['action'] == "dialogAction") {
             $engine->account->edit('tutorial', 6, $_SESSION[$engine->server->prefix . 'uid']);
 
             echo json_encode(array(
-                "response" => [
+                "cache" => [
                     $engine->quest->get(),
                     $engine->quest->giver(),
                     $engine->village->get($_COOKIE['village']),
                     $engine->building->getBuildings($_COOKIE['village']),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ));
@@ -71,10 +73,11 @@ if ($data['action'] == "dialogAction") {
             $engine->move->robber_start([1 => 5], true);
 
             echo json_encode(array(
-                "response" => [
+                "cache" => [
                     $engine->quest->get(),
                     $engine->quest->giver(),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ));
@@ -82,10 +85,11 @@ if ($data['action'] == "dialogAction") {
             $engine->account->edit('tutorial', 13, $_SESSION[$engine->server->prefix . 'uid']);
 
             echo json_encode(array(
-                "response" => [
+                "cache" => [
                     $engine->quest->get(),
                     $engine->quest->giver(),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ));
@@ -95,10 +99,11 @@ if ($data['action'] == "dialogAction") {
             $engine->account->edit('tutorial', 8, $_SESSION[$engine->server->prefix . 'uid']);
 
             echo json_encode(array(
-                "response" => [
+                "cache" => [
                     $engine->quest->get(),
                     $engine->quest->giver(),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ));
@@ -106,13 +111,13 @@ if ($data['action'] == "dialogAction") {
     } elseif ($data['params']['questId'] == "34") {
         if ($data['params']['command'] == "face") {
             $engine->account->edit('tutorial', 14, $_SESSION[$engine->server->prefix . 'uid']);
-
             echo json_encode(array(
-                "response" => [
+                "cache" => [
                     $engine->quest->get(),
                     $engine->quest->giver(),
                     $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ));
@@ -120,15 +125,19 @@ if ($data['action'] == "dialogAction") {
     } elseif ($data['params']['questId'] == "35") {
         if ($data['params']['command'] == "activate") {
             $engine->account->edit('tutorial', 15, $_SESSION[$engine->server->prefix . 'uid']);
-
+            //Set resource
+            query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(600, 600, 600, 600, $_COOKIE['village']));
+            $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->village->get($_COOKIE['village']));
+            
             echo json_encode(array(
-                "response" => [
+                "cache" => [
                     $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
                     $engine->building->getBuildings($_COOKIE['village']),
                     $engine->village->get($_COOKIE['village']),
                     $engine->quest->get(),
                     $engine->quest->giver(),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ));
@@ -136,11 +145,12 @@ if ($data['action'] == "dialogAction") {
             $engine->account->edit('tutorial', 17, $_SESSION[$engine->server->prefix . 'uid']);
 
             echo json_encode(array(
-                "response" => [
+                "cache" => [
                     $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
                     $engine->quest->get(),
                     $engine->quest->giver(),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ));
@@ -150,10 +160,11 @@ if ($data['action'] == "dialogAction") {
             $engine->account->edit('tutorial', 18, $_SESSION[$engine->server->prefix . 'uid']);
 
             echo json_encode(array(
-                "response" => [
+                "cache" => [
                     $engine->quest->get(),
                     $engine->quest->giver(),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ));
@@ -161,10 +172,11 @@ if ($data['action'] == "dialogAction") {
             $engine->account->edit('tutorial', 19, $_SESSION[$engine->server->prefix . 'uid']);
 
             echo json_encode(array(
-                "response" => [
+                "cache" => [
                     $engine->quest->get(),
                     $engine->quest->giver(),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ));
@@ -173,10 +185,11 @@ if ($data['action'] == "dialogAction") {
             //$engine->account->edit('tutorial', 19, $_SESSION[$engine->server->prefix . 'uid']);
 
             echo json_encode(array(
-                "response" => [
+                "cache" => [
                     $engine->quest->get(),
                     $engine->quest->giver(),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ));
@@ -186,13 +199,14 @@ if ($data['action'] == "dialogAction") {
             $engine->account->edit('tutorial', 20, $_SESSION[$engine->server->prefix . 'uid']);
 
             echo json_encode(array(
-                "response" => [
+                "cache" => [
                     $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
                     $engine->building->getBuildings($_COOKIE['village']),
                     $engine->village->get($_COOKIE['village']),
                     $engine->quest->get(),
                     $engine->quest->giver(),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ));
@@ -200,11 +214,12 @@ if ($data['action'] == "dialogAction") {
             $engine->account->edit('tutorial', 23, $_SESSION[$engine->server->prefix . 'uid']);
 
             echo json_encode(array(
-                "response" => [
+                "cache" => [
                     $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
                     $engine->quest->get(),
                     $engine->quest->giver(),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ));
@@ -233,7 +248,7 @@ if ($data['action'] == "dialogAction") {
             $engine->account->edit('tutorial', 22, $_SESSION[$engine->server->prefix . 'uid']);
             $engine->account->edit('spawn', time(), $_SESSION[$engine->server->prefix . 'uid']);
             echo json_encode(array(
-                "response" => [
+                "cache" => [
                     $engine->world->getMapDetail($_COOKIE['village']),
                     $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
                     $engine->building->getBuildings($_COOKIE['village']),
@@ -251,6 +266,7 @@ if ($data['action'] == "dialogAction") {
                         'data' => $engine->setting->getAll(),
                     ]
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ));
@@ -263,10 +279,11 @@ if ($data['action'] == "dialogAction") {
             $engine->account->edit('tutorial', 23, $_SESSION[$engine->server->prefix . 'uid']);
 
             echo json_encode(array(
-                "response" => [
+                "cache" => [
                     $engine->quest->giver(),
                     $engine->quest->get(),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ));
@@ -276,10 +293,11 @@ if ($data['action'] == "dialogAction") {
             $engine->account->edit('tutorial', 23, $_SESSION[$engine->server->prefix . 'uid']);
 
             echo json_encode([
-                "response" => [
+                "cache" => [
                     $engine->quest->giver(),
                     $engine->quest->get(),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ]);
@@ -287,15 +305,20 @@ if ($data['action'] == "dialogAction") {
             $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']));
         } elseif ($data['params']['command'] == "finish") {
             $engine->account->edit('tutorial', time(), $_SESSION[$engine->server->prefix . 'uid']);
+            
+            //Set resource
+            query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(750, 750, 750, 750, $_COOKIE['village']));
+            $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->village->get($_COOKIE['village']));
 
             echo json_encode([
-                "response" => [
+                "cache" => [
                     $engine->quest->giver(),
                     $engine->quest->get(),
                     $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
                     $engine->building->getBuildings($_COOKIE['village']),
                     $engine->hero->get($_SESSION[$engine->server->prefix . 'uid']),
                 ],
+                "response" => [],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ]);
@@ -303,9 +326,9 @@ if ($data['action'] == "dialogAction") {
         }
     } elseif ($data['params']['questId'] == "991") {
         $engine->hero->sendAdventure();
-        $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'],$engine->move->get($_COOKIE['village']));
-        $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'],$engine->unit->getStay($_COOKIE['village']));
-        $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'],$engine->hero->get($_SESSION[$engine->server->prefix . 'uid']));
+        $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->move->get($_COOKIE['village']));
+        $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->unit->getStay($_COOKIE['village']));
+        $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->hero->get($_SESSION[$engine->server->prefix . 'uid']));
         echo json_encode([
             "cache" => [
                 $engine->quest->giver(),
@@ -371,10 +394,11 @@ if ($data['action'] == "dialogAction") {
         ));
     } else {
         echo json_encode(array(
-            "response" => [
+            "cache" => [
                 $engine->quest->giver(),
                 $engine->quest->get(),
             ],
+            "response" => [],
             "serialNo" => $engine->session->serialNo(),
             "time" => round(microtime(true) * 1000),
         ));

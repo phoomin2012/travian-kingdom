@@ -267,7 +267,6 @@ if ($data['action'] == "get") {
     echo json_encode(
             array(
                 "serialNo" => $engine->session->serialNo(),
-                "ignoreSerial" => 6,
                 "response" => array(),
                 "cache" => $return,
                 "time" => round(microtime(true) * 1000)

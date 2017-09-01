@@ -17,7 +17,6 @@ if ($data['action'] == "bookFeature") {
                 $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
             ],
             "response" => [],
-            "ignoreSerial" => 2,
             "serialNo" => $engine->session->serialNo(),
             "time" => round(microtime(true) * 1000),
         ]);
@@ -32,7 +31,6 @@ if ($data['action'] == "bookFeature") {
                         $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
                     ],
                     "response" => [],
-                    "ignoreSerial" => 2,
                     "serialNo" => $engine->session->serialNo(),
                     "time" => round(microtime(true) * 1000),
                 ]);
@@ -52,7 +50,6 @@ if ($data['action'] == "bookFeature") {
                     $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
                 ],
                 "response" => [],
-                "ignoreSerial" => 2,
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
             ]);
@@ -76,7 +73,6 @@ if ($data['action'] == "bookFeature") {
                 $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
             ],
             "response" => [],
-            "ignoreSerial" => 2,
             "serialNo" => $engine->session->serialNo(),
             "time" => round(microtime(true) * 1000),
         ]);
@@ -94,7 +90,6 @@ if ($data['action'] == "bookFeature") {
                 ],
             ],
             "response" => [],
-            "ignoreSerial" => 2,
             "serialNo" => $engine->session->serialNo(),
             "time" => round(microtime(true) * 1000),
         ]);
@@ -112,7 +107,6 @@ if ($data['action'] == "bookFeature") {
                 ],
             ],
             "response" => [],
-            "ignoreSerial" => 2,
             "serialNo" => $engine->session->serialNo(),
             "time" => round(microtime(true) * 1000),
         ]);
@@ -130,7 +124,6 @@ if ($data['action'] == "bookFeature") {
                 ],
             ],
             "response" => [],
-            "ignoreSerial" => 2,
             "serialNo" => $engine->session->serialNo(),
             "time" => round(microtime(true) * 1000),
         ]);
@@ -156,7 +149,6 @@ if ($data['action'] == "bookFeature") {
         echo json_encode([
             "cache" => [],
             "response" => [],
-            "ignoreSerial" => 2,
             "serialNo" => $engine->session->serialNo(),
             "time" => round(microtime(true) * 1000),
         ]);
@@ -167,7 +159,6 @@ if ($data['action'] == "bookFeature") {
         "response" => [
             "data" => true,
         ],
-        "ignoreSerial" => 2,
         "serialNo" => $engine->session->serialNo(),
         "time" => round(microtime(true) * 1000),
     ]);

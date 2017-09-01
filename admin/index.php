@@ -1,6 +1,6 @@
 <?php
-define('PREFIX', 'admin_');
 include_once __DIR__ . '/engine/engine.php';
+!isset($_GET['p']) ? $_GET['p'] = '' : false;
 ?>
 <!DOCTYPE=html>
 <html>

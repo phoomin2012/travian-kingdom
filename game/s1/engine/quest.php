@@ -26,29 +26,24 @@ class Quest {
 
     public function giver($uid = null) {
         global $engine;
+        $uid == null ? $uid = $_SESSION[$engine->server->prefix . 'uid'] : null;
         $player = $engine->account->getById($uid);
-        $i = 0;
+        $i = 1;
         $r = [];
         $t = $player['tutorial'];
         if ($t <= 256) {
-            array_push($r, [
-                'name' => 'QuestGiver:' . $i++,
-                'data' => [
-                    'npcId' => '-1',
-                    'questId' => '10000',
-                    'dialog' => '-2',
-                    'questStatus' => '2',
-                ],
-            ]);
             $status = 2;
             $dialog = -2;
             if ($t < 6) {
+                if ($t >= 2) {
+                    $status = 3;
+                }
                 $qid = "1";
             } elseif ($t < 13) {
                 $qid = "30";
-            }if ($t < 17) {
+            } elseif ($t < 17) {
                 $qid = "35";
-            }if ($t < 19) {
+            } elseif ($t < 19) {
                 $qid = "203";
             } elseif ($t < 22) {
                 $qid = "204";
@@ -70,8 +65,6 @@ class Quest {
                 ],
             ]);
         } else {
-
-
             if ($engine->hero->isHome()) {
                 //Can Adventure
                 array_push($r, [
@@ -213,6 +206,9 @@ class Quest {
                 if ($t == 6) {
                     $rn['data']['status'] = 3;
                 } elseif ($t == 7) {
+                    $rn['data']['status'] = 3;
+                    $rn['data']['progress'] = 1;
+                } elseif ($t == 8) {
                     $rn['data']['status'] = 3;
                     $rn['data']['progress'] = 1;
                 } elseif ($t == 9) {

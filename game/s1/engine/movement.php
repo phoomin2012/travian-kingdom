@@ -371,14 +371,15 @@ class Movement {
             //Send troop back
             $p = $engine->account->getByVillage($data['from'], 'uid');
             $engine->auto->emitCache($p, $this->get($data['from']));
+            $engine->auto->emitCache($p, $engine->village->get($data['from']));
 
             $engine->auto->emitEvent([
                 "name" => "invalidateCache",
-                "data" => "MapDetails:536133614",
+                "data" => "MapDetails:536887296",
             ]);
             $engine->auto->emitEvent([
                 "name" => "mapChanged",
-                "data" => "536133614",
+                "data" => "536887296",
             ]);
         } else {
             // Send Data Back

@@ -38,8 +38,6 @@ class Village {
         $p = query("SELECT * FROM `" . $engine->server->prefix . "user` WHERE `uid`=?", array($v['owner']))->fetch(PDO::FETCH_ASSOC);
         $k = query("SELECT * FROM `" . $engine->server->prefix . "kingdom` WHERE `id`=?", array($p['kingdom']))->fetch(PDO::FETCH_ASSOC);
 
-        
-        
         $r = array(
             'name' => 'Village:' . $id,
             'data' => array(

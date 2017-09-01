@@ -83,7 +83,6 @@ if ($data['action'] == "getValuePoints") {
                 ]
             ],
         ],
-        "ignoreSerial" => 1,
         "response" => [],
         "serialNo" => $engine->session->serialNo(),
         "time" => round(microtime(true) * 1000),
@@ -92,7 +91,6 @@ if ($data['action'] == "getValuePoints") {
     $r = $engine->item->useItem($data['params']);
     echo json_encode([
         "cache" => $r['cache'],
-        "ignoreSerial" => 1,
         "response" => $r['response'],
         "serialNo" => $engine->session->serialNo(),
         "time" => round(microtime(true) * 1000),

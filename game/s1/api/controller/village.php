@@ -26,7 +26,6 @@ if ($data['action'] == "getAllianceInformation") {
     ]);
     echo json_encode(array(
         "serialNo" => $engine->session->serialNo(),
-        "ignoreSerial" => 1,
         "response" => array(),
         "cache" => array(
             $engine->village->get($data['params']['villageId'])

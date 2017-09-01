@@ -19,7 +19,6 @@ if ($data['action'] == "getBuildingList") {
             $engine->building->getQueue($data['params']['villageId']),
         ],
         "response" => array(),
-        "ignoreSerial" => 2,
         "serialNo" => $engine->session->serialNo(),
         "time" => round(microtime(true) * 1000),
     ));
@@ -44,7 +43,6 @@ if ($data['action'] == "getBuildingList") {
             $engine->building->getQueue($data['params']['villageId'])
         ),
         "response" => array(),
-        "ignoreSerial" => 2,
         "serialNo" => $engine->session->serialNo(),
         "time" => round(microtime(true) * 1000),
     ));
@@ -62,7 +60,6 @@ if ($data['action'] == "getBuildingList") {
             $engine->building->getQueue($data['params']['villageId'])
         ),
         "response" => array(),
-        "ignoreSerial" => 2,
         "serialNo" => $engine->session->serialNo(),
         "time" => round(microtime(true) * 1000),
     ));
@@ -73,7 +70,6 @@ if ($data['action'] == "getBuildingList") {
             $engine->building->getQueue($data['params']['villageId'])
         ),
         "response" => array(),
-        "ignoreSerial" => 2,
         "serialNo" => $engine->session->serialNo(),
         "time" => round(microtime(true) * 1000),
     ));
@@ -131,7 +127,6 @@ if ($data['action'] == "getBuildingList") {
             $engine->tech->getResearchQueue($data['params']['villageId']),
         ),
         "response" => array(),
-        "ignoreSerial" => 2,
         "serialNo" => $engine->session->serialNo(),
         "time" => round(microtime(true) * 1000),
     ));
@@ -151,7 +146,6 @@ if ($data['action'] == "getBuildingList") {
             $engine->unit->getTraining($data['params']['villageId']),
         ),
         "response" => array(),
-        "ignoreSerial" => 2,
         "serialNo" => $engine->session->serialNo(),
         "time" => round(microtime(true) * 1000),
     ));
@@ -260,7 +254,6 @@ if ($data['action'] == "getBuildingList") {
             $engine->building->getQueue($data['params']['villageId'])
         ),
         "response" => array(),
-        "ignoreSerial" => 2,
         "serialNo" => $engine->session->serialNo(),
         "time" => round(microtime(true) * 1000),
     ));

@@ -8,6 +8,7 @@
  */
 @session_start();
 date_default_timezone_set('Asia/Bangkok');
+define('PREFIX', 'admin_');
 include_once(dirname(__FILE__) . "/../../config.php");
 include_once(dirname(__FILE__) . "/database.php");
 include_once(dirname(__FILE__) . "/essentials.php");
@@ -22,6 +23,7 @@ $engine = (object) array(
             "error" => (object) array(
                 "sql" => null
             ),
+            "server" => null,
             "session" => new Session(),
             "database" => new Database(),
             "world" => new World(),
