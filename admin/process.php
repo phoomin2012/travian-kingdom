@@ -14,11 +14,9 @@ switch ($_GET['p']) {
                 $n = $n[0];
                 query("TRUNCATE TABLE `{$n}`");
             }
-            $engine->world->generateMap();
-            query("UPDATE `global_server_data` SET `start`=? WHERE `sid`=?;", [time(), $_GET['id']]);
-        } else {
-            
         }
+        $engine->world->generateMap();
+        query("UPDATE `global_server_data` SET `start`=? WHERE `sid`=?;", [time(), $_GET['id']]);
         header("Location: index.php?p=info&id={$_GET['id']}");
         break;
     case 'import':
