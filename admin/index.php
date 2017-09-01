@@ -13,6 +13,9 @@ include_once __DIR__ . '/engine/engine.php';
             <a href="?p=index" class="btn btn-secondary">
                 Home
             </a>
+            <a href="process.php?p=import" class="btn btn-secondary">
+                Import Database
+            </a>
         </div>
         <hr>
         <?php
