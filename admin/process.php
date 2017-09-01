@@ -2,8 +2,10 @@
 
 include_once __DIR__ . '/engine/engine.php';
 
-$s = $engine->database->getServer($_GET['id']);
-$engine->server = (object) $s;
+if (isset($_GET['id'])) {
+    $s = $engine->database->getServer($_GET['id']);
+    $engine->server = (object) $s;
+}
 if ($s) {
     switch ($_GET['p']) {
         case 'install':
