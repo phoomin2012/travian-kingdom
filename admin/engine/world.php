@@ -257,7 +257,7 @@ class World {
                     $troop[$i] = rand(5,20); // random 5 to 20 animals of type will add to oasis
                 }
             }
-            $unit = $engine->unit->createUnit(0,$troop);
+            $unit = $engine->unit->createUnit($id,$troop);
             $engine->unit->addStay($id, 0,$unit);
             
             // Set field data
