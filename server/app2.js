@@ -161,7 +161,7 @@ Travian.chat = {
     openRoom: function (type, from, to, line) {
         var timestamp = (new Date()).getTime();
         var roomId = `${type}.${from}.${to}`;
-        query("INSERT INTO `" + config.prefix + "chat_room` (`roomId`,`type`,`from`,`to`,`time`,`line`) VALUES (?,?,?,?,?,?);", [roomId, type, from, to, timestamp], (err) => {
+        query("INSERT INTO `" + config.prefix + "chat_room` (`roomId`,`type`,`from`,`to`,`time`,`line`) VALUES (?,?,?,?,?,?);", [roomId, type, from, to, timestamp,line], (err) => {
             console.log(err);
         });
     },

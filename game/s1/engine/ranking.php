@@ -116,7 +116,7 @@ class Ranking {
         $rank = 0;
         $all = 0;
         if ($params['rankingType'] == "ranking_Player") {
-            $us = query("SELECT `{$engine->server->prefix}user`.`uid` `uid`,`{$engine->server->prefix}user`.`username` `username`, (SELECT SUM( `{$engine->server->prefix}village`.`pop` ) FROM `{$engine->server->prefix}village` WHERE `{$engine->server->prefix}village`.`owner` = `uid`)`totalpop` FROM `{$engine->server->prefix}user` WHERE `{$engine->server->prefix}user`.`uid` > 100 ORDER BY `totalpop` DESC, `uid` ASC")->fetchAll(PDO::FETCH_ASSOC);
+            $us = query("SELECT `{$engine->server->prefix}user`.`uid` `uid`,`{$engine->server->prefix}user`.`username` `username`, (SELECT SUM( `{$engine->server->prefix}village`.`pop` ) FROM `{$engine->server->prefix}village` WHERE `{$engine->server->prefix}village`.`owner` = `uid`)`totalpop` FROM `{$engine->server->prefix}user` WHERE `{$engine->server->prefix}user`.`uid` > 100 AND `{$engine->server->prefix}user`.`tutorial` >= 256 ORDER BY `totalpop` DESC, `uid` ASC")->fetchAll(PDO::FETCH_ASSOC);
             $all = count($us);
             foreach ($us as $u) {
                 $rank += 1;
@@ -152,7 +152,7 @@ class Ranking {
         $perpage = 10;
 
         if ($params['rankingType'] == "ranking_Player") {
-            $us = query("SELECT `{$engine->server->prefix}user`.`uid` `uid`,`{$engine->server->prefix}user`.`username` `username`, (SELECT SUM( `{$engine->server->prefix}village`.`pop`) FROM `{$engine->server->prefix}village` WHERE `{$engine->server->prefix}village`.`owner` = `uid`) `totalpop` FROM `{$engine->server->prefix}user` WHERE `{$engine->server->prefix}user`.`uid` > 100 ORDER BY `totalpop` DESC, `uid` ASC LIMIT {$params['start']},{$params['end']}")->fetchAll(PDO::FETCH_ASSOC);
+            $us = query("SELECT `{$engine->server->prefix}user`.`uid` `uid`,`{$engine->server->prefix}user`.`username` `username`, (SELECT SUM( `{$engine->server->prefix}village`.`pop`) FROM `{$engine->server->prefix}village` WHERE `{$engine->server->prefix}village`.`owner` = `uid`) `totalpop` FROM `{$engine->server->prefix}user` WHERE `{$engine->server->prefix}user`.`uid` > 100  AND `{$engine->server->prefix}user`.`tutorial` >= 256 ORDER BY `totalpop` DESC, `uid` ASC LIMIT {$params['start']},{$params['end']}")->fetchAll(PDO::FETCH_ASSOC);
             $rank = 0;
             if ($params['rankingSubtype'] == "population") {
                 foreach ($us as $u) {
