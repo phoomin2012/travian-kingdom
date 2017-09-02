@@ -447,20 +447,22 @@ class Unit {
                 }
             }
         } else {
-            $return = query("SELECT * FROM `" . $engine->server->prefix . "units` WHERE `wid`=?", array($vref))->fetch();
+            $return = query("SELECT * FROM `" . $engine->server->prefix . "units` WHERE `wid`=?", [$vref])->fetch(PDO::FETCH_ASSOC);
         }
         return $return;
     }
 
-    public function getStay($wid, $head = true) {
+    public function getStay($wid, $head = true, $oasis = false) {
         global $engine;
 
         $r = array();
-        $stays = query("SELECT * FROM `" . $engine->server->prefix . "troop_stay` WHERE `wid`=?;", array($wid))->fetchAll();
-
+        if (!$oasis)
+            $stays = query("SELECT * FROM `" . $engine->server->prefix . "troop_stay` WHERE `wid`=?;", [$wid])->fetchAll(PDO::FETCH_ASSOC);
+        else
+            $stays = query("SELECT * FROM `" . $engine->server->prefix . "troop_stay` WHERE `wid`=? AND `owner`=?;", [$wid,0])->fetchAll(PDO::FETCH_ASSOC);
         foreach ($stays as $stay) {
-            $u = query("SELECT * FROM `" . $engine->server->prefix . "units` WHERE `id`=?;", array($stay['unit']))->fetch();
-            $v = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?;", array($u['wid']))->fetch();
+            $u = query("SELECT * FROM `" . $engine->server->prefix . "units` WHERE `id`=?;", [$stay['unit']])->fetch(PDO::FETCH_ASSOC);
+            $v = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?;", [$u['wid']])->fetch(PDO::FETCH_ASSOC);
             $p = $engine->account->getById($stay['owner']);
             $w = $engine->world->getMapDetail($u['wid']);
 
@@ -486,7 +488,7 @@ class Unit {
                 $username = $p['username'];
             }
 
-            $vl = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?;", array($stay['wid']))->fetch();
+            $vl = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?;", [$stay['wid']])->fetch(PDO::FETCH_ASSOC);
             $pl = $engine->account->getByVillage($stay['wid']);
 
             $supply = 0;
@@ -539,12 +541,12 @@ class Unit {
         return $head ? $r : $r['data']['cache'];
     }
 
-    public function createUnit($owner, $units) {
+    public function createUnit($wid, $units) {
         global $engine;
         for ($i = 1; $i <= 11; $i++) {
             !isset($units[$i]) ? $units[$i] = 0 : '';
         }
-        query("INSERT INTO `" . $engine->server->prefix . "units` (`wid`,`u1`,`u2`,`u3`,`u4`,`u5`,`u6`,`u7`,`u8`,`u9`,`u10`,`u11`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", array($owner, $units[1], $units[2], $units[3], $units[4], $units[5], $units[6], $units[7], $units[8], $units[9], $units[10], $units[11]));
+        query("INSERT INTO `" . $engine->server->prefix . "units` (`wid`,`u1`,`u2`,`u3`,`u4`,`u5`,`u6`,`u7`,`u8`,`u9`,`u10`,`u11`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", array($wid, $units[1], $units[2], $units[3], $units[4], $units[5], $units[6], $units[7], $units[8], $units[9], $units[10], $units[11]));
         return $engine->sql->lastInsertId();
     }
 

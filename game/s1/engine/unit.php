@@ -548,7 +548,7 @@ class Unit {
         return $engine->sql->lastInsertId();
     }
 
-    public function addStay($village, $owner, $unit) {
+    public function addStay($village, $owner=0, $unit) {
         global $engine;
         query("INSERT INTO `" . $engine->server->prefix . "troop_stay` (`wid`,`owner`,`unit`) VALUES (?,?,?)", array($village, $owner, $unit));
     }
