@@ -13,6 +13,7 @@ class World {
     public $worldmax = 100;
     public $radius = 70;
     public $ww_radius = 8;
+    public $percent_spawn_oasis = 40;
 
     public function generateMap() {
         global $engine;
@@ -258,22 +259,21 @@ class World {
             $x = $f['x'];
             $y = $f['y'];
             $id = $this->xy2id($f['x'], $f['y']);
-            $rand = rand(100, 900);
-
-            //Add troops
-            $troop = [];
-            for ($i = 1; $i <= 10; $i++) {
-                if (rand(0, 10) == 0) { // 10% to spawn animals
-                    $troop[$i] = rand(5, 20); // random 5 to 20 animals of type will add to oasis
-                }
-            }
-            $unit = $engine->unit->createUnit($id, $troop);
-            $engine->unit->addStay($id, 0, $unit);
+            $rand = rand(0, 100);
 
             if (!in_array([$x, $y], $wwr)) {
                 // Set field data
-                if (150 >= $rand) {
+                if ($this->percent_spawn_oasis >= $rand) {
                     $oasistype = rand(1, 4);
+                    //Add troops
+                    $troop = [];
+                    for ($i = 1; $i <= 10; $i++) {
+                        if (rand(0, 10) == 0) { // 10% to spawn animals
+                            $troop[$i] = rand(5, 20); // random 5 to 20 animals of type will add to oasis
+                        }
+                    }
+                    $unit = $engine->unit->createUnit($id, $troop);
+                    $engine->unit->addStay($id, 0, $unit);
                     if ($oasistype == 1) {
                         $image = rand(0, 9);
                         $bonus = array(0, 25, 25, 25, 50);

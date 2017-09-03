@@ -15,7 +15,7 @@ if ($data['action'] == "ping") {
         $_SESSION[$engine->server->prefix . 'tribe'] = $data['params']['tribeId'];
 
         $vid = - 10000 - $_SESSION[$engine->server->prefix . 'uid'];
-        $engine->village->createVillage($_SESSION[$engine->server->prefix . 'uid'], null, $vid);
+        $engine->village->createVillage($_SESSION[$engine->server->prefix . 'uid'], $_SESSION[$engine->server->prefix . 'username'], $vid);
         $engine->building->setBuilding($vid, 20, 10, 0, true);
         $engine->building->setBuilding($vid, 23, 8, 0, true);
         $engine->building->setBuilding($vid, 27, 15, 3);

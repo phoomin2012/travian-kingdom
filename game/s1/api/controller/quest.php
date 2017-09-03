@@ -70,7 +70,7 @@ if ($data['action'] == "dialogAction") {
         }
     } elseif ($data['params']['questId'] == "30") {
         if ($data['params']['command'] == "attack") {
-            $engine->move->robber_start('536887296',- 10000 - $_SESSION[$engine->server->prefix . 'uid'], [1 => 5], true, 7);
+            $engine->move->robber_start('536887296', - 10000 - $_SESSION[$engine->server->prefix . 'uid'], [1 => 5], true, 7);
 
             echo json_encode(array(
                 "cache" => [
@@ -236,13 +236,14 @@ if ($data['action'] == "dialogAction") {
                 $new_wid = $engine->world->bestPosition(4);
             }
             $new_wid = $new_wid[0];
+            $old_wid = - 10000 - $_SESSION[$engine->server->prefix . 'uid'];
 
-            query("UPDATE `{$engine->server->prefix}village` SET `wid`=? WHERE `wid`=? AND `owner`=?", [$new_wid, $_COOKIE['village'], $_SESSION[$engine->server->prefix . 'uid']]);
-            query("UPDATE `{$engine->server->prefix}units` SET `wid`=? WHERE `wid`=?", [$new_wid, $_COOKIE['village']]);
-            query("UPDATE `{$engine->server->prefix}troop_stay` SET `wid`=? WHERE `wid`=?", [$new_wid, $_COOKIE['village']]);
-            query("UPDATE `{$engine->server->prefix}tdata` SET `wid`=? WHERE `wid`=?", [$new_wid, $_COOKIE['village']]);
-            query("UPDATE `{$engine->server->prefix}hero` SET `village`=? WHERE `village`=?", [$new_wid, $_COOKIE['village']]);
-            query("UPDATE `{$engine->server->prefix}field` SET `wid`=? WHERE `wid`=?", [$new_wid, $_COOKIE['village']]);
+            query("UPDATE `{$engine->server->prefix}village` SET `wid`=?,`name`=? WHERE `wid`=? AND `owner`=?", [$new_wid, $_SESSION[$engine->server->prefix . 'username'] . "'s village", $old_wid, $_SESSION[$engine->server->prefix . 'uid']]);
+            query("UPDATE `{$engine->server->prefix}units` SET `wid`=? WHERE `wid`=?", [$new_wid, $old_wid]);
+            query("UPDATE `{$engine->server->prefix}troop_stay` SET `wid`=? WHERE `wid`=?", [$new_wid, $old_wid]);
+            query("UPDATE `{$engine->server->prefix}tdata` SET `wid`=? WHERE `wid`=?", [$new_wid, $old_wid]);
+            query("UPDATE `{$engine->server->prefix}hero` SET `village`=? WHERE `village`=?", [$new_wid, $old_wid]);
+            query("UPDATE `{$engine->server->prefix}field` SET `wid`=? WHERE `wid`=?", [$new_wid, $old_wid]);
 
             $_COOKIE['village'] = $new_wid;
             setcookie('village', $new_wid);

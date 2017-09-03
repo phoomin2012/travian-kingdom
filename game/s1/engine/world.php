@@ -106,12 +106,14 @@ class World {
         }
         $q = "SELECT `id`,`x`,`y` FROM `{$engine->server->prefix}world` WHERE " . $queryit . "";
         $wdata = query($q)->fetchAll(PDO::FETCH_ASSOC);
-        $wid = $this->xy2id(0, 0);
+        $wid = 0;
         $wwr = $this->getWWTile();
-        foreach ($wdata as $w) {
-            if (!in_array([$w['x'], $w['y']], $wwr)) {
-                $wid = $w['id'];
-                break;
+        while ($wid == 0) {
+            foreach ($wdata as $w) {
+                if (!in_array([$w['x'], $w['y']], $wwr)) {
+                    $wid = $w['id'];
+                    break;
+                }
             }
         }
         return [$wid, $q];
