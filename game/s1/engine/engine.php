@@ -85,7 +85,7 @@ $engine->sql->exec("SET character_set_results=utf8");
 $engine->sql->exec("SET character_set_client=utf8");
 $engine->sql->exec("SET character_set_connection=utf8");
 $engine->sql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$engine->server = (object) $engine->database->getServerInfo();
+$engine->server = (object) $engine->database->getServer();
 define('TB_PREFIX', $engine->server->tag);
 
 if (!isset($ignoreLoad)) {
