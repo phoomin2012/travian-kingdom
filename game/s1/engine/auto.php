@@ -68,7 +68,7 @@ class Auto {
         global $engine;
 
         //Process building queue first 
-        $bs = query("SELECT * FROM `" . $engine->server->prefix . "building` WHERE `timestamp`<=? AND `queue`<>?", array(time(), 4))->fetchAll();
+        $bs = query("SELECT * FROM `" . $engine->server->prefix . "building` WHERE `timestamp`<=? AND `queue`<>?", array(time(), 4))->fetchAll(PDO::FETCH_ASSOC);
         for ($i = 0; $i < count($bs); $i++) {
             $b = $bs[$i];
             if ($b['queue'] == "1" || $b['queue'] == "2") {
@@ -143,6 +143,8 @@ class Auto {
                             query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(255, 300, 150, 300, $b['wid']));
                         elseif ($p['tribe'] == 3)
                             query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(285, 180, 420, 300, $b['wid']));
+                        else
+                            query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(500, 500, 500, 300, $b['wid']));
                     }
                 } elseif ($p['tutorial'] == 15) {
                     if ($b['type'] == "4") {
@@ -187,8 +189,8 @@ class Auto {
                     query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=`wood`+?,`clay`=`clay`+?,`iron`=`iron`+?,`crop`=`crop`+? WHERE `wid`=?", array($bD['wood'], $bD['clay'], $bD['iron'], $bD['crop'], $b['wid']));
                 }
 
-                $v = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?", array($b['wid']))->fetch();
-                $p = query("SELECT * FROM `" . $engine->server->prefix . "user` WHERE `uid`=?", array($v['owner']))->fetch();
+                $v = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?", array($b['wid']))->fetch(PDO::FETCH_ASSOC);
+                $p = query("SELECT * FROM `" . $engine->server->prefix . "user` WHERE `uid`=?", array($v['owner']))->fetch(PDO::FETCH_ASSOC);
 
                 $this->emitEvent($p['uid'], array(
                     "name" => "flashNotification",
@@ -204,11 +206,11 @@ class Auto {
         }
 
         //Process master building queue
-        $bs = query("SELECT * FROM `" . $engine->server->prefix . "building` WHERE `queue`=?;", [4])->fetchAll();
+        $bs = query("SELECT * FROM `" . $engine->server->prefix . "building` WHERE `queue`=?;", [4])->fetchAll(PDO::FETCH_ASSOC);
         for ($i = 0; $i < count($bs); $i++) {
             $b = $bs[$i];
-            $v = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?", array($b['wid']))->fetch();
-            $p = query("SELECT * FROM `" . $engine->server->prefix . "user` WHERE `uid`=?", array($v['owner']))->fetch();
+            $v = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?", array($b['wid']))->fetch(PDO::FETCH_ASSOC);
+            $p = query("SELECT * FROM `" . $engine->server->prefix . "user` WHERE `uid`=?", array($v['owner']))->fetch(PDO::FETCH_ASSOC);
             $b1 = query("SELECT * FROM `" . $engine->server->prefix . "building` WHERE `wid`=? AND `queue`=? ORDER BY `sort` ASC;", array($b['wid'], 1))->rowCount();
             $b2 = query("SELECT * FROM `" . $engine->server->prefix . "building` WHERE `wid`=? AND `queue`=? ORDER BY `sort` ASC;", array($b['wid'], 2))->rowCount();
             $f = query("SELECT * FROM `{$engine->server->prefix}field` WHERE `wid`=? AND `location`=?", [$b['wid'], $b['location']])->fetch(PDO::FETCH_ASSOC);
@@ -334,7 +336,7 @@ class Auto {
 
     private function researchComplete() {
         global $engine;
-        $t = query("SELECT * FROM `" . $engine->server->prefix . "tqueue` WHERE `end`<=?", array(time()))->fetchAll();
+        $t = query("SELECT * FROM `" . $engine->server->prefix . "tqueue` WHERE `end`<=?", array(time()))->fetchAll(PDO::FETCH_ASSOC);
         for ($i = 0; $i < count($t); $i++) {
             $tl = $engine->tech->getTech($t[$i]['wid'], $t[$i]['type']);
             if ($tl == -2) {
@@ -344,8 +346,8 @@ class Auto {
             }
             query("UPDATE `" . $engine->server->prefix . "tdata` SET `t" . ($t[$i]['type'] % 10) . "`=? WHERE `wid`=?", array($nl, $t[$i]['wid']));
             query("DELETE FROM `" . $engine->server->prefix . "tqueue` WHERE `id`=?;", array($t[$i]['id']));
-            $v = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?", array($t[$i]['wid']))->fetch();
-            $p = query("SELECT * FROM `" . $engine->server->prefix . "user` WHERE `uid`=?", array($v['owner']))->fetch();
+            $v = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?", array($t[$i]['wid']))->fetch(PDO::FETCH_ASSOC);
+            $p = query("SELECT * FROM `" . $engine->server->prefix . "user` WHERE `uid`=?", array($v['owner']))->fetch(PDO::FETCH_ASSOC);
             $this->emitCache($p['uid'], $engine->tech->getResearch($t[$i]['wid']));
             $this->emitCache($p['uid'], $engine->tech->getResearchQueue($t[$i]['wid']));
             $engine->auto->emitEvent($p['uid'], array(
@@ -359,16 +361,16 @@ class Auto {
         global $engine;
 
         if ($wid === null) {
-            $t = query("SELECT * FROM `" . $engine->server->prefix . "train` WHERE `next`<=?", array(time()))->fetchAll();
+            $t = query("SELECT * FROM `" . $engine->server->prefix . "train` WHERE `next`<=?", array(time()))->fetchAll(PDO::FETCH_ASSOC);
         } else {
-            $t = query("SELECT * FROM `" . $engine->server->prefix . "train` WHERE `next`<=? AND `wid`=?", array(time(), $wid))->fetchAll();
+            $t = query("SELECT * FROM `" . $engine->server->prefix . "train` WHERE `next`<=? AND `wid`=?", array(time(), $wid))->fetchAll(PDO::FETCH_ASSOC);
         }
         for ($i = 0; $i < count($t); $i++) {
             $unit = 0;
             $all_unit = 0;
             $last_unit = 0;
             $time = 0;
-            $tsub = query("SELECT * FROM `" . $engine->server->prefix . "train_queue` WHERE `tid`=?", array($t[$i]['id']))->fetchAll();
+            $tsub = query("SELECT * FROM `" . $engine->server->prefix . "train_queue` WHERE `tid`=?", array($t[$i]['id']))->fetchAll(PDO::FETCH_ASSOC);
             foreach ($tsub as $value) {
                 $all_unit += $value['amount'];
                 $last_unit = 0;
@@ -517,7 +519,7 @@ class Auto {
         $this->buildComplete();
         $this->procRes();
         $this->researchComplete();
-        $this->trainComplete();
+        //$this->trainComplete();
         $this->movement();
         $this->procTreasuryTransformations();
         $this->procAdventurePoint();

@@ -446,11 +446,14 @@ class World {
 
                     $o = $engine->oasis->get($id);
                     $troop = [];
-                    if ($o) {
+                    /*if ($o) {
                         if ($o['unit'] != 0) {
                             $troop = $engine->unit->getUnit($o['unit']);
                         }
-                    }
+                    }*/
+                    $unit = query("SELECT * FROM `{$engine->server->prefix}troop_stay` WHERE `wid`=? AND `owner`=?;",[$id,0])->fetch(PDO::FETCH_ASSOC);
+                    $troop = $engine->unit->getUnit($unit['unit'])['data'];
+                    $troop['tribeId'] = 4;
 
                     return array(
                         "hasNPC" => 0,

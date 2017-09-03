@@ -154,7 +154,7 @@ class Movement {
         );
     }
 
-    public function robber_start($from = '536887296', $to = null, $units = [], $tutorial = false) {
+    public function robber_start($from = '536887296', $to = null, $units = [], $tutorial = false, $time = false) {
         global $engine;
 
         ##################  Check Arguments  ######################
@@ -174,13 +174,17 @@ class Movement {
             $tutorial = $to;
             $to = null;
         }
+        if (is_numeric($units)) {
+            $time = $units;
+            $units = [];
+        }
         ($to === null) ? $to = $_COOKIE['village'] : '';
         ###########################################################
 
         $tid = $engine->unit->createUnit('536887296', $units);
         $dist = $engine->world->getDistance($from, $to);
         $start = time();
-        $end = $start + ($dist / (0.5 * $engine->server->speed_unit) * 3600);
+        $end = $start + ($time) ? $time : ($dist / (0.5 * $engine->server->speed_unit) * 3600);
 
         if ($tutorial) {
             $p = $engine->account->getByVillage($to);
@@ -239,7 +243,7 @@ class Movement {
         if ($p['tutorial'] == 2) {
             $to = 536887296;
             $engine->account->edit('tutorial', 3, $p['uid']);
-            $engine->auto->emitCache($p['uid'], $engine->quest->get('',$p['uid']));
+            $engine->auto->emitCache($p['uid'], $engine->quest->get('', $p['uid']));
             $end = $start + 5;
         }
 
@@ -356,7 +360,7 @@ class Movement {
         if ($data['owner'] == "-1" && $data['data']['tutorial'] == true) {
             $uid = $engine->account->getByVillage($data['to'], 'uid');
             $engine->account->edit('tutorial', 12, $uid);
-            $engine->auto->emitCache($uid, $engine->quest->get('',$uid));
+            $engine->auto->emitCache($uid, $engine->quest->get('', $uid));
             query("DELETE FROM `" . $engine->server->prefix . "units` WHERE `id`=?", array($data['unit']));
             query("DELETE FROM `" . $engine->server->prefix . "troop_move` WHERE `id`=?", array($data['id']));
         } else {
@@ -545,7 +549,7 @@ class Movement {
         $engine->auto->emitCache($pt['uid'], $this->get($vt['villageId']));
         $engine->auto->emitCache($pt['uid'], $engine->unit->getStay($vt['villageId']));
         $engine->auto->emitCache($pt['uid'], $engine->hero->get($pt['uid']));
-        $engine->auto->emitCache($pt['uid'], $engine->quest->get('',$pt['uid']));
+        $engine->auto->emitCache($pt['uid'], $engine->quest->get('', $pt['uid']));
     }
 
     public function settle($data) {

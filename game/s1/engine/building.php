@@ -150,7 +150,7 @@ class Building {
         } else {
             $cat = 1;
         }
-
+        $order = [23 => 27, 45 => 23];
         $return = array(
             'name' => 'Building:' . $id,
             'data' => array(
@@ -168,7 +168,7 @@ class Building {
                 'upgradeSupplyUsage' => 0,
                 'upgradeSupplyUsageSums' => [],
                 'category' => $cat,
-                'sortOrder' => 15,
+                'sortOrder' => in_array($id, $order) ? $order[$id] : $id,
                 'effect' => [],
             ),
         );

@@ -31,14 +31,14 @@ class Unit {
             ),
         );
 
-        $tq = query("SELECT * FROM `" . $engine->server->prefix . "train` WHERE `wid`=?", array($id))->fetchAll();
+        $tq = query("SELECT * FROM `{$engine->server->prefix}train` WHERE `wid`=?", array($id))->fetchAll();
 
         for ($i = 0; $i < count($tq); $i++) {
 
             $all_unit = 0;
             $last_time = $tq[$i]['start'];
             $duration = 0;
-            $tqsub = query("SELECT * FROM `" . $engine->server->prefix . "train_queue` WHERE `tid`=?", array($tq[$i]['id']))->fetchAll();
+            $tqsub = query("SELECT * FROM `{$engine->server->prefix}train_queue` WHERE `tid`=?", array($tq[$i]['id']))->fetchAll();
             foreach ($tqsub as $value) {
                 if ($duration == 0) {
                     $duration = $value['duration'];
@@ -97,6 +97,12 @@ class Unit {
         return $r;
     }
 
+    public function finishTraining($wid, $type) {
+        global $engine;
+
+        query("UPDATE `{$engine->server->prefix}train` SET `");
+    }
+
     public function training($wid, $type, $amount = 0) {
         global $engine;
 
@@ -132,18 +138,18 @@ class Unit {
         $start = time();
         $next = $start + $duration;
 
-        $qt = query("SELECT * FROM `" . $engine->server->prefix . "train` WHERE `wid`=? AND `type`=?", array($wid, $type));
+        $qt = query("SELECT * FROM `{$engine->server->prefix}train` WHERE `wid`=? AND `type`=?", array($wid, $type));
         if ($qt->rowCount() > 0) {
             $last = $qt->fetch()['id'];
         } else {
-            query("INSERT INTO `" . $engine->server->prefix . "train` (`wid`,`type`,`duration`,`start`,`next`) VALUES (?,?,?,?,?)", array($wid, $type, $duration, $start, $next));
+            query("INSERT INTO `{$engine->server->prefix}train` (`wid`,`type`,`duration`,`start`,`next`) VALUES (?,?,?,?,?)", array($wid, $type, $duration, $start, $next));
             $last = $engine->sql->lastInsertId();
         }
-        $tsub = query("SELECT * FROM `" . $engine->server->prefix . "train_queue` WHERE `tid`=? AND `duration`=?", array($last, $duration));
+        $tsub = query("SELECT * FROM `{$engine->server->prefix}train_queue` WHERE `tid`=? AND `duration`=?", array($last, $duration));
         if ($tsub->rowCount() > 0) {
-            query("UPDATE `" . $engine->server->prefix . "train_queue` SET `amount`=`amount`+? WHERE `tid`=? AND `duration`=?", array($amount, $last, $duration));
+            query("UPDATE `{$engine->server->prefix}train_queue` SET `amount`=`amount`+? WHERE `tid`=? AND `duration`=?", array($amount, $last, $duration));
         } else {
-            query("INSERT INTO `" . $engine->server->prefix . "train_queue` (`tid`,`amount`,`duration`) VALUES (?,?,?)", array($last, $amount, $duration));
+            query("INSERT INTO `{$engine->server->prefix}train_queue` (`tid`,`amount`,`duration`) VALUES (?,?,?)", array($last, $amount, $duration));
         }
         $res = UnitData::get($type);
         $res['wood'] = $res['wood'] * $amount;
@@ -151,7 +157,7 @@ class Unit {
         $res['iron'] = $res['iron'] * $amount;
         $res['crop'] = $res['crop'] * $amount;
         $engine->auto->procRes($wid);
-        query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=`wood`-?,`clay`=`clay`-?,`iron`=`iron`-?,`crop`=`crop`-? WHERE `wid`=?", array($res['wood'], $res['clay'], $res['iron'], $res['crop'], $wid));
+        query("UPDATE `{$engine->server->prefix}village` SET `wood`=`wood`-?,`clay`=`clay`-?,`iron`=`iron`-?,`crop`=`crop`-? WHERE `wid`=?", array($res['wood'], $res['clay'], $res['iron'], $res['crop'], $wid));
 
         $p = $engine->account->getById($_SESSION[$engine->server->prefix . 'uid']);
         if ($p['tutorial'] == 9) {
@@ -162,7 +168,7 @@ class Unit {
 
     public function getVillageSupply($wid) {
         global $engine;
-        $u = query("SELECT * FROM `" . $engine->server->prefix . "units` WHERE `wid`=?;", array($wid))->fetch();
+        $u = query("SELECT * FROM `{$engine->server->prefix}units` WHERE `wid`=?;", array($wid))->fetch();
         $p = $engine->account->getByVillage($wid);
         $supply = 0;
         for ($i = 1; $i <= 10; $i++) {
@@ -173,13 +179,25 @@ class Unit {
 
     public function getUnit($id, $head = true) {
         global $engine;
-        $u = query("SELECT * FROM `" . $engine->server->prefix . "units` WHERE `id`=?;", array($id))->fetch();
-        $v = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?;", array($u['wid']))->fetch();
+        $u = query("SELECT * FROM `{$engine->server->prefix}units` WHERE `id`=?;", array($id))->fetch();
+        $v = query("SELECT * FROM `{$engine->server->prefix}village` WHERE `wid`=?;", array($u['wid']))->fetch();
         $p = $engine->account->getByVillage($u['wid']);
 
         $supply = 0;
         for ($i = 1; $i <= 10; $i++) {
             $supply += $u['u' . $i] * UnitData::get($i + (($p['tribe'] - 1) * 10), 'pop');
+        }
+
+        if (!$p) {
+            $p = [
+                'uid' => 0,
+                'username' => null,
+                'tribe' => 4,
+            ];
+            $v = [
+                'wid' => $id,
+                'vname' => null
+            ];
         }
 
         $return = array(
@@ -224,8 +242,8 @@ class Unit {
 
     public function checkTarget($target, $village, $type, $hero = false, $redeployHero = false, $short_time = false) {
         global $engine;
-        $v = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?;", array($village))->fetch();
-        $p = query("SELECT * FROM `" . $engine->server->prefix . "user` WHERE `uid`=?;", array($v['owner']))->fetch();
+        $v = query("SELECT * FROM `{$engine->server->prefix}village` WHERE `wid`=?;", array($village))->fetch();
+        $p = query("SELECT * FROM `{$engine->server->prefix}user` WHERE `uid`=?;", array($v['owner']))->fetch();
 
         $dist = $engine->world->getDistance($village, $target);
         $dataTarget = $engine->world->getMapDetail($target);
@@ -441,13 +459,13 @@ class Unit {
         if ($vref === null) {
             $return = array();
             for ($i = 0; $i < count($engine->village->data); $i += 1) {
-                $return[$i] = query("SELECT * FROM `" . $engine->server->prefix . "units` WHERE `wid`=?", array($engine->village->data[$i]['wid']))->fetch();
+                $return[$i] = query("SELECT * FROM `{$engine->server->prefix}units` WHERE `wid`=?", array($engine->village->data[$i]['wid']))->fetch();
                 if ($return[$i] == false) {
                     $return[$i] = array();
                 }
             }
         } else {
-            $return = query("SELECT * FROM `" . $engine->server->prefix . "units` WHERE `wid`=?", array($vref))->fetch();
+            $return = query("SELECT * FROM `{$engine->server->prefix}units` WHERE `wid`=?", array($vref))->fetch();
         }
         return $return;
     }
@@ -456,11 +474,11 @@ class Unit {
         global $engine;
 
         $r = array();
-        $stays = query("SELECT * FROM `" . $engine->server->prefix . "troop_stay` WHERE `wid`=?;", array($wid))->fetchAll();
+        $stays = query("SELECT * FROM `{$engine->server->prefix}troop_stay` WHERE `wid`=?;", array($wid))->fetchAll();
 
         foreach ($stays as $stay) {
-            $u = query("SELECT * FROM `" . $engine->server->prefix . "units` WHERE `id`=?;", array($stay['unit']))->fetch();
-            $v = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?;", array($u['wid']))->fetch();
+            $u = query("SELECT * FROM `{$engine->server->prefix}units` WHERE `id`=?;", array($stay['unit']))->fetch();
+            $v = query("SELECT * FROM `{$engine->server->prefix}village` WHERE `wid`=?;", array($u['wid']))->fetch();
             $p = $engine->account->getById($stay['owner']);
             $w = $engine->world->getMapDetail($u['wid']);
 
@@ -486,7 +504,7 @@ class Unit {
                 $username = $p['username'];
             }
 
-            $vl = query("SELECT * FROM `" . $engine->server->prefix . "village` WHERE `wid`=?;", array($stay['wid']))->fetch();
+            $vl = query("SELECT * FROM `{$engine->server->prefix}village` WHERE `wid`=?;", array($stay['wid']))->fetch();
             $pl = $engine->account->getByVillage($stay['wid']);
 
             $supply = 0;
@@ -544,51 +562,51 @@ class Unit {
         for ($i = 1; $i <= 11; $i++) {
             !isset($units[$i]) ? $units[$i] = 0 : '';
         }
-        query("INSERT INTO `" . $engine->server->prefix . "units` (`wid`,`u1`,`u2`,`u3`,`u4`,`u5`,`u6`,`u7`,`u8`,`u9`,`u10`,`u11`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", array($owner, $units[1], $units[2], $units[3], $units[4], $units[5], $units[6], $units[7], $units[8], $units[9], $units[10], $units[11]));
+        query("INSERT INTO `{$engine->server->prefix}units` (`wid`,`u1`,`u2`,`u3`,`u4`,`u5`,`u6`,`u7`,`u8`,`u9`,`u10`,`u11`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", array($owner, $units[1], $units[2], $units[3], $units[4], $units[5], $units[6], $units[7], $units[8], $units[9], $units[10], $units[11]));
         return $engine->sql->lastInsertId();
     }
 
     public function addStay($village, $owner = 0, $unit) {
         global $engine;
         $owner === null ? $owner = 0 : false;
-        query("INSERT INTO `" . $engine->server->prefix . "troop_stay` (`wid`,`owner`,`unit`) VALUES (?,?,?)", array($village, $owner, $unit));
+        query("INSERT INTO `{$engine->server->prefix}troop_stay` (`wid`,`owner`,`unit`) VALUES (?,?,?)", array($village, $owner, $unit));
     }
 
     public function addUnit($village, $type, $amount = 0, $owner = null) {
         global $engine;
         ($owner === null) ? $owner = $engine->account->getByVillage($village, 'uid') : $owner = $engine->account->getByVillage($village, 'uid');
 
-        $sq = query("SELECT * FROM `" . $engine->server->prefix . "troop_stay` WHERE `wid`=? AND `owner`=?;", array($village, $owner));
+        $sq = query("SELECT * FROM `{$engine->server->prefix}troop_stay` WHERE `wid`=? AND `owner`=?;", array($village, $owner));
         if ($sq->rowCount() == 0) {
             $tid = $this->createUnit($village, []);
             $this->addStay($village, $owner, $tid);
         } else {
             $tid = $sq->fetch()['unit'];
         }
-        query("UPDATE `" . $engine->server->prefix . "units` SET `u" . $type . "`=`u" . $type . "`+? WHERE `id`=?;", array($amount, $tid));
+        query("UPDATE `{$engine->server->prefix}units` SET `u" . $type . "`=`u" . $type . "`+? WHERE `id`=?;", array($amount, $tid));
     }
 
     public function setUnit($village, $type, $amount = 0, $owner = null) {
         global $engine;
         ($owner === null) ? $owner = $engine->account->getByVillage($village, 'uid') : $owner = $engine->account->getByVillage($village, 'uid');
-        $sq = query("SELECT * FROM `" . $engine->server->prefix . "troop_stay` WHERE `wid`=? AND `owner`=?;", array($village, $owner));
+        $sq = query("SELECT * FROM `{$engine->server->prefix}troop_stay` WHERE `wid`=? AND `owner`=?;", array($village, $owner));
         if ($sq->rowCount() == 0) {
             $tid = $this->createUnit($village, []);
             $this->addStay($village, $owner, $tid);
         } else {
             $tid = $sq->fetch()['unit'];
         }
-        query("UPDATE `" . $engine->server->prefix . "units` SET `u" . $type . "`=? WHERE `id`=?;", array($amount, $tid));
+        query("UPDATE `{$engine->server->prefix}units` SET `u" . $type . "`=? WHERE `id`=?;", array($amount, $tid));
     }
 
     public function removeUnit($village, $type, $amount = 'all', $owner = null) {
         global $engine;
         ($owner === null) ? $owner = $engine->account->getByVillage($village, 'uid') : $owner = $engine->account->getByVillage($village, 'uid');
-        $stay = query("SELECT * FROM `" . $engine->server->prefix . "troop_stay` WHERE `wid`=? AND `owner`=?;", array($village, $owner))->fetch();
-        $q = query("SELECT * FROM `" . $engine->server->prefix . "units` WHERE `id`=?;", array($stay['unit']))->rowCount();
+        $stay = query("SELECT * FROM `{$engine->server->prefix}troop_stay` WHERE `wid`=? AND `owner`=?;", array($village, $owner))->fetch();
+        $q = query("SELECT * FROM `{$engine->server->prefix}units` WHERE `id`=?;", array($stay['unit']))->rowCount();
         if ($q != 0) {
             $tid = $stay['unit'];
-            query("UPDATE `" . $engine->server->prefix . "units` SET `u" . $type . "`=`u" . $type . "`-? WHERE `id`=?;", array($amount, $tid));
+            query("UPDATE `{$engine->server->prefix}units` SET `u" . $type . "`=`u" . $type . "`-? WHERE `id`=?;", array($amount, $tid));
         }
     }
 

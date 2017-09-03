@@ -4,7 +4,6 @@ class Hero {
 
     public $adv_short = [6, 11];
     public $adv_long = [15, 21];
-
     /*
       Hero.STATUS_IDLE = 0;
       Hero.STATUS_RETURNING = 1;
