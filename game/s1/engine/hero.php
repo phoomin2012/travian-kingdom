@@ -226,7 +226,7 @@ class Hero {
         global $engine, $_hero_levels;
 
         $hero = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `owner`=?;", [$uid])->fetch(PDO::FETCH_ASSOC);
-        ($hero) ? $hero = ['leve' => 0, 'xp' => 0] : false;
+        ($hero) ? $hero = ['level' => 0, 'xp' => 0] : false;
         $nextXpLevel = $_hero_levels[$hero['level']];
         if ($hero['xp'] >= $nextXpLevel) {
             $levelup = 0;

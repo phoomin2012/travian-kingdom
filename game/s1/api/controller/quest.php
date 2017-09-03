@@ -70,7 +70,7 @@ if ($data['action'] == "dialogAction") {
         }
     } elseif ($data['params']['questId'] == "30") {
         if ($data['params']['command'] == "attack") {
-            $engine->move->robber_start([1 => 5], true, 7);
+            $engine->move->robber_start('536887296',- 10000 - $_SESSION[$engine->server->prefix . 'uid'], [1 => 5], true, 7);
 
             echo json_encode(array(
                 "cache" => [
@@ -311,7 +311,7 @@ if ($data['action'] == "dialogAction") {
             query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(750, 750, 750, 750, $_COOKIE['village']));
             $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->village->get($_COOKIE['village']));
             setcookie('village', $_COOKIE['village']);
-            
+
             echo json_encode([
                 "cache" => [
                     $engine->quest->giver(),

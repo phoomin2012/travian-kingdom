@@ -140,7 +140,7 @@ class Auto {
                         if ($p['tribe'] == 1)
                             query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(240, 300, 480, 300, $b['wid']));
                         elseif ($p['tribe'] == 2)
-                            query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(255, 300, 150, 300, $b['wid']));
+                            query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(375, 150, 195, 300, $b['wid']));
                         elseif ($p['tribe'] == 3)
                             query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(255, 300, 150, 300, $b['wid']));
                         else
@@ -418,7 +418,7 @@ class Auto {
     private function movement() {
         global $engine;
 
-        $m = query("SELECT * FROM `" . $engine->server->prefix . "troop_move` WHERE `end`<=?", array(time()))->fetchAll(PDO::FETCH_ASSOC);
+        $m = query("SELECT * FROM `" . $engine->server->prefix . "troop_move` WHERE `end`<=?", [time()])->fetchAll(PDO::FETCH_ASSOC);
         for ($i = 0; $i < count($m); $i++) {
             if ($m[$i]['type'] == "3") {
                 $engine->move->attack($m[$i]);
@@ -519,7 +519,7 @@ class Auto {
         $this->buildComplete();
         $this->procRes();
         $this->researchComplete();
-        //$this->trainComplete();
+        $this->trainComplete();
         $this->movement();
         $this->procTreasuryTransformations();
         $this->procAdventurePoint();

@@ -274,7 +274,7 @@ class World {
                                     'owner' => 0,
                                     'playerId' => $player['uid'],
                                     'village' => array(
-                                        'villageId' => $_COOKIE['village'],
+                                        'villageId' => - 10000 - $_SESSION[$engine->server->prefix . 'uid'],
                                         'name' => $player['username'] . "'s village",
                                         'population' => '5',
                                         'type' => 1,

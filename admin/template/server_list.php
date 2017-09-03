@@ -24,14 +24,14 @@
                     <?php
                     if ($s['installed'] == 0) {
                         ?>
-                        <a href="?p=install&id=<?php echo $s['sid']; ?>" class="btn btn-success">
+                        <a href="process.php?p=install&id=<?php echo $s['sid']; ?>" class="btn btn-success">
                             <i class="fa fa-download"></i>
                             Install
                         </a>
                         <?php
                     } else {
                         ?>
-                        <a href="?p=install&id=<?php echo $s['sid']; ?>" class="btn btn-success">
+                        <a href="process.php?p=install&id=<?php echo $s['sid']; ?>" class="btn btn-success">
                             <i class="fa fa-refresh"></i>
                             Reinstall
                         </a>

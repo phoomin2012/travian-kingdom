@@ -158,13 +158,13 @@ class Movement {
         global $engine;
 
         ##################  Check Arguments  ######################
-        if (is_array($from)) {
-            $units = $from;
-            $from = '536887296';
+        if (is_numeric($tutorial)) {
+            $time = $tutorial;
+            $tutorial = false;
         }
-        if (is_bool($from)) {
-            $tutorial = $from;
-            $from = '536887296';
+        if (is_numeric($units)) {
+            $time = $units;
+            $units = [];
         }
         if (is_array($to)) {
             $units = $to;
@@ -174,10 +174,15 @@ class Movement {
             $tutorial = $to;
             $to = null;
         }
-        if (is_numeric($units)) {
-            $time = $units;
-            $units = [];
+        if (is_array($from)) {
+            $units = $from;
+            $from = '536887296';
         }
+        if (is_bool($from)) {
+            $tutorial = $from;
+            $from = '536887296';
+        }
+        
         ($to === null) ? $to = $_COOKIE['village'] : '';
         ###########################################################
 
@@ -188,7 +193,7 @@ class Movement {
 
         if ($tutorial) {
             $p = $engine->account->getByVillage($to);
-            $end = $start + 15;
+            $end = $start + $time;
             $engine->account->edit('tutorial', 11, $p['uid']);
         }
 
@@ -387,15 +392,19 @@ class Movement {
             ]);
         } else {
             // Send Data Back
-            $p = $engine->account->getByVillage($data['from'], 'uid');
-            $engine->auto->emitCache($p, $this->get($data['from']));
-
+            if ($p && $p != null & $p != "" & $p != 0) {
+                $p = $engine->account->getByVillage($data['from'], 'uid');
+                $engine->auto->emitCache($p, $this->get($data['from']));
+            }
+            
             $pt = $engine->account->getByVillage($data['to'], 'uid');
-            $engine->auto->emitCache($pt, $this->get($data['to']));
-            $engine->auto->emitCache($pt, $engine->unit->getStay($data['to']));
+            if ($pt && $pt != null & $pt != "" & $pt != 0) {
+                $engine->auto->emitCache($pt, $this->get($data['to']));
+                $engine->auto->emitCache($pt, $engine->unit->getStay($data['to']));
 
-            //$engine->notification->add($p, 1, '1234567890', 'movement_attack_medium_flat_positive');
-            $engine->notification->add($pt, 4, '1234567890', 'movement_defent_medium_flat_positive');
+                //$engine->notification->add($p, 1, '1234567890', 'movement_attack_medium_flat_positive');
+                $engine->notification->add($pt, 4, '1234567890', 'movement_defent_medium_flat_positive');
+            }
         }
     }
 
