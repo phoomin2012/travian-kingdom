@@ -142,7 +142,7 @@ class Auto {
                         elseif ($p['tribe'] == 2)
                             query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(255, 300, 150, 300, $b['wid']));
                         elseif ($p['tribe'] == 3)
-                            query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(285, 180, 420, 300, $b['wid']));
+                            query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(255, 300, 150, 300, $b['wid']));
                         else
                             query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(500, 500, 500, 300, $b['wid']));
                     }

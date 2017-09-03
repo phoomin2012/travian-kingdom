@@ -225,6 +225,7 @@ Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
 # Requires
   - PHP 5.6+ (with PDO mysql)
   - Node.JS
+Test with PHP 5.6,7.1 with Apache & nginx
   
 *** IMPORTANT *** This script can't use in web hosting because automatice function run as service
 

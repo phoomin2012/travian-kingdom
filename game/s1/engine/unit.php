@@ -576,7 +576,7 @@ class Unit {
         global $engine;
         ($owner === null) ? $owner = $engine->account->getByVillage($village, 'uid') : $owner = $engine->account->getByVillage($village, 'uid');
 
-        $sq = query("SELECT * FROM `{$engine->server->prefix}troop_stay` WHERE `wid`=? AND `owner`=?;", array($village, $owner));
+        $sq = query("SELECT * FROM `{$engine->server->prefix}troop_stay` WHERE `wid`=? AND `owner`=?;", [$village, $owner]);
         if ($sq->rowCount() == 0) {
             $tid = $this->createUnit($village, []);
             $this->addStay($village, $owner, $tid);

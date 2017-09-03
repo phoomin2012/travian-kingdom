@@ -70,7 +70,7 @@ if ($data['action'] == "dialogAction") {
         }
     } elseif ($data['params']['questId'] == "30") {
         if ($data['params']['command'] == "attack") {
-            $engine->move->robber_start([1 => 5], true);
+            $engine->move->robber_start([1 => 5], true, 7);
 
             echo json_encode(array(
                 "cache" => [
@@ -128,7 +128,7 @@ if ($data['action'] == "dialogAction") {
             // Set resource
             query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(600, 600, 600, 600, $_COOKIE['village']));
             $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->village->get($_COOKIE['village']));
-            
+
             echo json_encode(array(
                 "cache" => [
                     $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
@@ -245,6 +245,7 @@ if ($data['action'] == "dialogAction") {
             query("UPDATE `{$engine->server->prefix}field` SET `wid`=? WHERE `wid`=?", [$new_wid, $_COOKIE['village']]);
 
             $_COOKIE['village'] = $new_wid;
+            setcookie('village', $new_wid);
             $engine->account->edit('tutorial', 22, $_SESSION[$engine->server->prefix . 'uid']);
             $engine->account->edit('spawn', time(), $_SESSION[$engine->server->prefix . 'uid']);
             echo json_encode(array(
@@ -305,11 +306,12 @@ if ($data['action'] == "dialogAction") {
             $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']));
         } elseif ($data['params']['command'] == "finish") {
             $engine->account->edit('tutorial', time(), $_SESSION[$engine->server->prefix . 'uid']);
-            
+
             //Set resource
             query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(750, 750, 750, 750, $_COOKIE['village']));
             $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->village->get($_COOKIE['village']));
-
+            setcookie('village', $_COOKIE['village']);
+            
             echo json_encode([
                 "cache" => [
                     $engine->quest->giver(),
@@ -317,6 +319,7 @@ if ($data['action'] == "dialogAction") {
                     $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
                     $engine->building->getBuildings($_COOKIE['village']),
                     $engine->hero->get($_SESSION[$engine->server->prefix . 'uid']),
+                    $engine->village->getAll('own'),
                 ],
                 "response" => [],
                 "serialNo" => $engine->session->serialNo(),

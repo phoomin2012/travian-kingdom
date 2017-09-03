@@ -26,6 +26,11 @@ if ($data['action'] == "ping") {
         $engine->building->setBuilding($vid, 35, 11, 0, true);
         $engine->building->setBuilding($vid, 39, 17, 0, true);
         $engine->building->setBuilding($vid, 40, 13, 0, true);
+
+        $engine->unit->addUnit($vid, 1, 5,$_SESSION[$engine->server->prefix . 'uid']);
+        $engine->unit->addUnit($vid, 2, 12,$_SESSION[$engine->server->prefix . 'uid']);
+        $engine->unit->addUnit($vid, 11, 1,$_SESSION[$engine->server->prefix . 'uid']);
+
         setcookie("village", $vid, 0, '/');
     }
     $action = array(2 => 0);

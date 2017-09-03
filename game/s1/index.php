@@ -19,7 +19,7 @@ header('Access-Control-Allow-Origin: *');
 
         <script>
             var config = {
-                "gameWorld": "test",
+                "gameWorld": "<?php echo SERVER_TAG; ?>",
                 "direction": "ltr",
                 "version": "0.66.9",
                 "urlGameRules": "http:\/\/www.kingdoms.com\/X\/rules",
