@@ -1,3 +1,4 @@
+## Main development : [Click Here](https://github.com/phoomin2012/travian-kingdom) / [phoomin2012 (Owner)](https://github.com/phoomin2012)
 # Travian Kingdom Clone Script
 This project is clone Travian Kingdom game. Now, **not finish** yet.<br>
 If you want to support, you can donate us by Paypal. https://paypal.me/PhuminShop<br>
