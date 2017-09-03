@@ -12,11 +12,7 @@ class World {
     public $data = null;
     public $worldmax = 100;
     public $radius = 70;
-    public $ww_locate = [
-        [0, 0],
-        [22, 45], [50, 0], [22, -45],
-        [-22, 45], [-50, 0], [-22, -45],
-    ];
+    public $ww_radius = 7;
 
     private function setField($id, $image = '0', $field = '0', $oasis = '0', $bonus = '0') {
         global $engine;
@@ -32,6 +28,20 @@ class World {
             $sql = "INSERT INTO `{$engine->server->prefix}world` (`id`,`x`,`y`,`fieldtype`,`oasistype`,`image`,`bonus`) VALUE (?,?,?,?,?,?,?);";
             query($sql, $array);
         }
+    }
+
+    public function getWWTile() {
+        global $engine;
+        $r = [];
+        foreach ($engine->server->ww_position as $ww) {
+            $x = $ww[0];
+            $y = $ww[1];
+            for ($x1 = -$this->ww_radius; $x1 <= $this->ww_radius; $x1++)
+                for ($y1 = -$this->ww_radius; $y1 <= $this->ww_radius; $y1++)
+                    if ($this->getDistance($x + $x1, $y + $y1) <= $this->ww_radius)
+                        $r[] = [$x + $x1, $y + $y1];
+        }
+        return $r;
     }
 
     public function getDistance($w1, $w2) {
@@ -85,18 +95,26 @@ class World {
 
         $unselect_village = "AND `id` NOT IN (SELECT `wid` FROM `{$engine->server->prefix}village`)";
         switch ($sector) {
-            case 1: $queryit = "0 > `x` AND `y` > 0 AND `fieldtype` = '4446' " . $unselect_village . " ORDER BY `x` DESC, `y` ASC";
+            case 1: $queryit = "`x` < 0 AND `y` > 0 AND `fieldtype` = '4446' " . $unselect_village . " ORDER BY `x` DESC, `y` ASC";
                 break;
-            case 2: $queryit = "0 < `x` AND `y` > 0 AND `fieldtype` = '4446' " . $unselect_village . " ORDER BY `x` ASC, `y` ASC";
+            case 2: $queryit = "`x` > 0 AND `y` > 0 AND `fieldtype` = '4446' " . $unselect_village . " ORDER BY `x` ASC, `y` ASC";
                 break;
-            case 3: $queryit = "0 < `x` AND `y` < 0 AND `fieldtype` = '4446' " . $unselect_village . " ORDER BY `x` ASC, `y` DESC";
+            case 3: $queryit = "`x` > 0 AND `y` < 0 AND `fieldtype` = '4446' " . $unselect_village . " ORDER BY `x` ASC, `y` DESC";
                 break;
-            case 4: $queryit = "0 > `x` AND `y` < 0 AND `fieldtype` = '4446' " . $unselect_village . " ORDER BY `x` DESC, `y` DESC";
+            case 4: $queryit = "`x` < 0 AND `y` < 0 AND `fieldtype` = '4446' " . $unselect_village . " ORDER BY `x` DESC, `y` DESC";
                 break;
         }
-        $q = "SELECT `id` FROM `{$engine->server->prefix}world` WHERE " . $queryit . " LIMIT 1";
-        $dbarray = query($q)->fetch(PDO::FETCH_ASSOC);
-        return array($dbarray['id'], $q);
+        $q = "SELECT `id`,`x`,`y` FROM `{$engine->server->prefix}world` WHERE " . $queryit . "";
+        $wdata = query($q)->fetchAll(PDO::FETCH_ASSOC);
+        $wid = $this->xy2id(0, 0);
+        $wwr = $this->getWWTile();
+        foreach ($wdata as $w) {
+            if (!in_array([$w['x'], $w['y']], $wwr)) {
+                $wid = $w['id'];
+                break;
+            }
+        }
+        return [$wid, $q];
     }
 
     public function getRegionDetail1($id = null) {
@@ -446,12 +464,12 @@ class World {
 
                     $o = $engine->oasis->get($id);
                     $troop = [];
-                    /*if ($o) {
-                        if ($o['unit'] != 0) {
-                            $troop = $engine->unit->getUnit($o['unit']);
-                        }
-                    }*/
-                    $unit = query("SELECT * FROM `{$engine->server->prefix}troop_stay` WHERE `wid`=? AND `owner`=?;",[$id,0])->fetch(PDO::FETCH_ASSOC);
+                    /* if ($o) {
+                      if ($o['unit'] != 0) {
+                      $troop = $engine->unit->getUnit($o['unit']);
+                      }
+                      } */
+                    $unit = query("SELECT * FROM `{$engine->server->prefix}troop_stay` WHERE `wid`=? AND `owner`=?;", [$id, 0])->fetch(PDO::FETCH_ASSOC);
                     $troop = $engine->unit->getUnit($unit['unit'])['data'];
                     $troop['tribeId'] = 4;
 

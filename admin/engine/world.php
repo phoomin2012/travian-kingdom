@@ -12,11 +12,7 @@ class World {
     public $data = null;
     public $worldmax = 100;
     public $radius = 70;
-    public $ww_locate = [
-        [0, 0],
-        [22, 45], [50, 0], [22, -45],
-        [-22, 45], [-50, 0], [-22, -45],
-    ];
+    public $ww_radius = 8;
 
     public function generateMap() {
         global $engine;
@@ -35,7 +31,7 @@ class World {
         }
 
 
-        $fieldsData = array("3339", "3447", "3456", "3546", "4347", "4356", "4437", "4446", "4536", "5346", "5436", "11115");
+        $fieldsData = ["3339", "3447", "3456", "3546", "4347", "4356", "4437", "4446", "4536", "5346", "5436", "11115"];
         for ($x = -$this->worldmax; $x <= $this->worldmax; $x += 1) {
             for ($y = -$this->worldmax; $y <= $this->worldmax; $y += 1) {
                 if ($y >= $border[$x][0] && $y <= $border[$x][1]) { // Check is in circle
@@ -64,6 +60,8 @@ class World {
                         $fieldtype = "5436";
                     } elseif (820 >= $rand) {
                         $fieldtype = "4536";
+                    } else {
+                        $fieldstype = $fieldsData[rand(0, count($fieldsData) - 1)];
                     }
                     $image = rand(0, 31);
                     $oasistype = "0";
@@ -71,16 +69,12 @@ class World {
                 }
             }
         }
-        foreach ($this->ww_locate as $ww) {
+        foreach ($engine->server->ww_position as $ww) {
             $this->setWonder($ww[0], $ww[1]);
         }
         $this->oasisGenerate();
 
         query("UPDATE `global_server_data` SET `genmap`=? WHERE `tag`=?;", array('2', 'server1'));
-        /* }else{
-          echo json_encode(array("message"=>"Access Denied on Map Generator","dialog"=>"error"));
-          exit;
-          } */
     }
 
     public function setWonder($xo, $yo = 0) {
@@ -221,6 +215,21 @@ class World {
         }
     }
 
+    public function getWWTile() {
+        global $engine;
+        $r = [];
+        echo "adasdf";
+        foreach ($engine->server->ww_position as $ww) {
+            $x = $ww[0];
+            $y = $ww[1];
+            for ($x1 = -$this->ww_radius; $x1 < $this->ww_radius; $x1++)
+                for ($y1 = -$this->ww_radius; $y1 < $this->ww_radius; $y1++)
+                    if ($this->getDistance($x + $x1, $y + $y1) <= $this->ww_radius)
+                        $r[] = [$x + $x1, $y + $y1];
+        }
+        return $r;
+    }
+
     public function getDistance($w1, $w2) {
         if (!is_array($w1)) {
             $w1 = $this->id2xy($w1);
@@ -243,309 +252,312 @@ class World {
         global $engine;
 
         $fs = query("SELECT * FROM `{$engine->server->prefix}world` WHERE `oasistype`=?", [0])->fetchAll(PDO::FETCH_ASSOC);
+        $wwr = $this->getWWTile();
 
         foreach ($fs as $f) {
             $x = $f['x'];
             $y = $f['y'];
             $id = $this->xy2id($f['x'], $f['y']);
             $rand = rand(100, 900);
-            
+
             //Add troops
             $troop = [];
-            for($i=1;$i<=10;$i++){
-                if(rand(0, 10) == 0){ // 10% to spawn animals
-                    $troop[$i] = rand(5,20); // random 5 to 20 animals of type will add to oasis
+            for ($i = 1; $i <= 10; $i++) {
+                if (rand(0, 10) == 0) { // 10% to spawn animals
+                    $troop[$i] = rand(5, 20); // random 5 to 20 animals of type will add to oasis
                 }
             }
-            $unit = $engine->unit->createUnit($id,$troop);
-            $engine->unit->addStay($id, 0,$unit);
-            
-            // Set field data
-            if (150 >= $rand) {
-                $oasistype = rand(1, 4);
-                if ($oasistype == 1) {
-                    $image = rand(0, 9);
-                    $bonus = array(0, 25, 25, 25, 50);
-                    if ($image == 0) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '1055', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+            $unit = $engine->unit->createUnit($id, $troop);
+            $engine->unit->addStay($id, 0, $unit);
+
+            if (!in_array([$x, $y], $wwr)) {
+                // Set field data
+                if (150 >= $rand) {
+                    $oasistype = rand(1, 4);
+                    if ($oasistype == 1) {
+                        $image = rand(0, 9);
+                        $bonus = array(0, 25, 25, 25, 50);
+                        if ($image == 0) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '1055', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 1) {
+                            if (
+                                    $this->isField($this->xy2id($x - 1, $y)) &&
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x + 1, $y))
+                            ) {
+                                $this->setField($this->xy2id($x - 1, $y), '1145', '0', $oasistype);
+                                $this->setField($this->xy2id($x, $y), '1155', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x + 1, $y), '1165', '0', $oasistype);
+                            }
+                        } elseif ($image == 2) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x, $y + 1)) &&
+                                    $this->isField($this->xy2id($x + 1, $y))
+                            ) {
+                                $this->setField($this->xy2id($x, $y), '1255', '0', $oasistype);
+                                $this->setField($this->xy2id($x, $y + 1), '1256', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x + 1, $y), '1265', '0', $oasistype);
+                            }
+                        } elseif ($image == 3) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x + 1, $y)) &&
+                                    $this->isField($this->xy2id($x, $y - 1)) &&
+                                    $this->isField($this->xy2id($x + 1, $y - 1))
+                            ) {
+                                $this->setField($this->xy2id($x, $y), '1355', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x + 1, $y), '1365', '0', $oasistype);
+                                $this->setField($this->xy2id($x, $y - 1), '1354', '0', $oasistype);
+                                $this->setField($this->xy2id($x + 1, $y - 1), '1364', '0', $oasistype);
+                            }
+                        } elseif ($image == 4) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x, $y - 1)) &&
+                                    $this->isField($this->xy2id($x + 1, $y))
+                            ) {
+                                $this->setField($this->xy2id($x, $y), '1455', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x, $y - 1), '1454', '0', $oasistype);
+                                $this->setField($this->xy2id($x + 1, $y), '1465', '0', $oasistype);
+                            }
+                        } elseif ($image == 5) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '1555', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 6) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '1655', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 7) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x, $y + 1)) &&
+                                    $this->isField($this->xy2id($x + 1, $y)) &&
+                                    $this->isField($this->xy2id($x + 1, $y - 1)) &&
+                                    $this->isField($this->xy2id($x + 1, $y + 1))
+                            ) {
+                                $this->setField($this->xy2id($x, $y), '1755', '0', $oasistype);
+                                $this->setField($this->xy2id($x, $y + 1), '1756', '0', $oasistype);
+                                $this->setField($this->xy2id($x + 1, $y), '1765', '0', $oasistype);
+                                $this->setField($this->xy2id($x + 1, $y - 1), '1764', '0', $oasistype);
+                                $this->setField($this->xy2id($x + 1, $y + 1), '1766', '0', $oasistype);
+                            }
+                        } elseif ($image == 8) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x, $y + 1)) &&
+                                    $this->isField($this->xy2id($x + 1, $y)) &&
+                                    $this->isField($this->xy2id($x + 1, $y - 1))
+                            ) {
+                                $this->setField($this->xy2id($x, $y), '1855', '0', $oasistype);
+                                $this->setField($this->xy2id($x, $y + 1), '1856', '0', $oasistype);
+                                $this->setField($this->xy2id($x + 1, $y), '1865', '0', $oasistype);
+                                $this->setField($this->xy2id($x + 1, $y - 1), '1864', '0', $oasistype);
+                            }
+                        } elseif ($image == 9) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x, $y + 1)) &&
+                                    $this->isField($this->xy2id($x + 1, $y)) &&
+                                    $this->isField($this->xy2id($x + 1, $y - 1))
+                            ) {
+                                $this->setField($this->xy2id($x, $y), '1955', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x, $y + 1), '1956', '0', $oasistype);
+                                $this->setField($this->xy2id($x + 1, $y), '1965', '0', $oasistype);
+                                $this->setField($this->xy2id($x + 1, $y - 1), '1964', '0', $oasistype);
+                            }
                         }
-                    } elseif ($image == 1) {
-                        if (
-                                $this->isField($this->xy2id($x - 1, $y)) &&
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x + 1, $y))
-                        ) {
-                            $this->setField($this->xy2id($x - 1, $y), '1145', '0', $oasistype);
-                            $this->setField($this->xy2id($x, $y), '1155', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x + 1, $y), '1165', '0', $oasistype);
+                    } elseif ($oasistype == 2) {
+                        $image = rand(0, 7);
+                        $bonus = array(25, 25, 25, 50);
+                        if ($image == 0) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '2055', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 1) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '2155', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 2) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '2255', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 3) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '2355', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 4) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '2455', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 5) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '2555', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 6) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x + 1, $y))
+                            ) {
+                                $this->setField($this->xy2id($x, $y), '2655', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x + 1, $y), '2665', '0', $oasistype);
+                            }
+                        } elseif ($image == 7) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x + 1, $y)) &&
+                                    $this->isField($this->xy2id($x, $y + 1))
+                            ) {
+                                $this->setField($this->xy2id($x, $y), '2755', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x + 1, $y), '2765', '0', $oasistype);
+                                $this->setField($this->xy2id($x, $y + 1), '2756', '0', $oasistype);
+                            }
                         }
-                    } elseif ($image == 2) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x, $y + 1)) &&
-                                $this->isField($this->xy2id($x + 1, $y))
-                        ) {
-                            $this->setField($this->xy2id($x, $y), '1255', '0', $oasistype);
-                            $this->setField($this->xy2id($x, $y + 1), '1256', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x + 1, $y), '1265', '0', $oasistype);
+                    } elseif ($oasistype == 3) {
+                        $image = rand(0, 9);
+                        $bonus = array(0, 0, 0, 25, 25, 25, 50);
+                        if ($image == 0) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '3055', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 1) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y + 1)) &&
+                                    $this->isField($this->xy2id($x, $y))
+                            ) {
+                                $this->setField($this->xy2id($x, $y + 1), '3156', '0', $oasistype);
+                                $this->setField($this->xy2id($x, $y), '3155', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 2) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x + 1, $y))
+                            ) {
+                                $this->setField($this->xy2id($x, $y), '3255', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x + 1, $y), '3265', '0', $oasistype);
+                            }
+                        } elseif ($image == 3) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x + 1, $y)) &&
+                                    $this->isField($this->xy2id($x + 1, $y + 1))
+                            ) {
+                                $this->setField($this->xy2id($x, $y), '3355', '0', $oasistype);
+                                $this->setField($this->xy2id($x + 1, $y), '3365', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x + 1, $y + 1), '3366', '0', $oasistype);
+                            }
+                        } elseif ($image == 4) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '3455', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 5) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '3555', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 6) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '3655', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 7) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x, $y + 1))
+                            ) {
+                                $this->setField($this->xy2id($x, $y), '3755', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x, $y + 1), '3756', '0', $oasistype);
+                            }
+                        } elseif ($image == 8) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y + 1)) &&
+                                    $this->isField($this->xy2id($x + 1, $y + 1))
+                            ) {
+                                $this->setField($this->xy2id($x, $y + 1), '3855', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x + 1, $y + 1), '3865', '0', $oasistype);
+                            }
+                        } elseif ($image == 8) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x + 1, $y)) &&
+                                    $this->isField($this->xy2id($x + 1, $y + 1))
+                            ) {
+                                $this->setField($this->xy2id($x, $y), '3955', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x + 1, $y), '3965', '0', $oasistype);
+                                $this->setField($this->xy2id($x + 1, $y + 1), '3966', '0', $oasistype);
+                            }
                         }
-                    } elseif ($image == 3) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x + 1, $y)) &&
-                                $this->isField($this->xy2id($x, $y - 1)) &&
-                                $this->isField($this->xy2id($x + 1, $y - 1))
-                        ) {
-                            $this->setField($this->xy2id($x, $y), '1355', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x + 1, $y), '1365', '0', $oasistype);
-                            $this->setField($this->xy2id($x, $y - 1), '1354', '0', $oasistype);
-                            $this->setField($this->xy2id($x + 1, $y - 1), '1364', '0', $oasistype);
-                        }
-                    } elseif ($image == 4) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x, $y - 1)) &&
-                                $this->isField($this->xy2id($x + 1, $y))
-                        ) {
-                            $this->setField($this->xy2id($x, $y), '1455', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x, $y - 1), '1454', '0', $oasistype);
-                            $this->setField($this->xy2id($x + 1, $y), '1465', '0', $oasistype);
-                        }
-                    } elseif ($image == 5) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '1555', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 6) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '1655', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 7) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x, $y + 1)) &&
-                                $this->isField($this->xy2id($x + 1, $y)) &&
-                                $this->isField($this->xy2id($x + 1, $y - 1)) &&
-                                $this->isField($this->xy2id($x + 1, $y + 1))
-                        ) {
-                            $this->setField($this->xy2id($x, $y), '1755', '0', $oasistype);
-                            $this->setField($this->xy2id($x, $y + 1), '1756', '0', $oasistype);
-                            $this->setField($this->xy2id($x + 1, $y), '1765', '0', $oasistype);
-                            $this->setField($this->xy2id($x + 1, $y - 1), '1764', '0', $oasistype);
-                            $this->setField($this->xy2id($x + 1, $y + 1), '1766', '0', $oasistype);
-                        }
-                    } elseif ($image == 8) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x, $y + 1)) &&
-                                $this->isField($this->xy2id($x + 1, $y)) &&
-                                $this->isField($this->xy2id($x + 1, $y - 1))
-                        ) {
-                            $this->setField($this->xy2id($x, $y), '1855', '0', $oasistype);
-                            $this->setField($this->xy2id($x, $y + 1), '1856', '0', $oasistype);
-                            $this->setField($this->xy2id($x + 1, $y), '1865', '0', $oasistype);
-                            $this->setField($this->xy2id($x + 1, $y - 1), '1864', '0', $oasistype);
-                        }
-                    } elseif ($image == 9) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x, $y + 1)) &&
-                                $this->isField($this->xy2id($x + 1, $y)) &&
-                                $this->isField($this->xy2id($x + 1, $y - 1))
-                        ) {
-                            $this->setField($this->xy2id($x, $y), '1955', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x, $y + 1), '1956', '0', $oasistype);
-                            $this->setField($this->xy2id($x + 1, $y), '1965', '0', $oasistype);
-                            $this->setField($this->xy2id($x + 1, $y - 1), '1964', '0', $oasistype);
-                        }
-                    }
-                } elseif ($oasistype == 2) {
-                    $image = rand(0, 7);
-                    $bonus = array(25, 25, 25, 50);
-                    if ($image == 0) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '2055', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 1) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '2155', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 2) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '2255', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 3) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '2355', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 4) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '2455', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 5) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '2555', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 6) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x + 1, $y))
-                        ) {
-                            $this->setField($this->xy2id($x, $y), '2655', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x + 1, $y), '2665', '0', $oasistype);
-                        }
-                    } elseif ($image == 7) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x + 1, $y)) &&
-                                $this->isField($this->xy2id($x, $y + 1))
-                        ) {
-                            $this->setField($this->xy2id($x, $y), '2755', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x + 1, $y), '2765', '0', $oasistype);
-                            $this->setField($this->xy2id($x, $y + 1), '2756', '0', $oasistype);
-                        }
-                    }
-                } elseif ($oasistype == 3) {
-                    $image = rand(0, 9);
-                    $bonus = array(0, 0, 0, 25, 25, 25, 50);
-                    if ($image == 0) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '3055', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 1) {
-                        if (
-                                $this->isField($this->xy2id($x, $y + 1)) &&
-                                $this->isField($this->xy2id($x, $y))
-                        ) {
-                            $this->setField($this->xy2id($x, $y + 1), '3156', '0', $oasistype);
-                            $this->setField($this->xy2id($x, $y), '3155', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 2) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x + 1, $y))
-                        ) {
-                            $this->setField($this->xy2id($x, $y), '3255', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x + 1, $y), '3265', '0', $oasistype);
-                        }
-                    } elseif ($image == 3) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x + 1, $y)) &&
-                                $this->isField($this->xy2id($x + 1, $y + 1))
-                        ) {
-                            $this->setField($this->xy2id($x, $y), '3355', '0', $oasistype);
-                            $this->setField($this->xy2id($x + 1, $y), '3365', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x + 1, $y + 1), '3366', '0', $oasistype);
-                        }
-                    } elseif ($image == 4) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '3455', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 5) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '3555', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 6) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '3655', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 7) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x, $y + 1))
-                        ) {
-                            $this->setField($this->xy2id($x, $y), '3755', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x, $y + 1), '3756', '0', $oasistype);
-                        }
-                    } elseif ($image == 8) {
-                        if (
-                                $this->isField($this->xy2id($x, $y + 1)) &&
-                                $this->isField($this->xy2id($x + 1, $y + 1))
-                        ) {
-                            $this->setField($this->xy2id($x, $y + 1), '3855', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x + 1, $y + 1), '3865', '0', $oasistype);
-                        }
-                    } elseif ($image == 8) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x + 1, $y)) &&
-                                $this->isField($this->xy2id($x + 1, $y + 1))
-                        ) {
-                            $this->setField($this->xy2id($x, $y), '3955', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x + 1, $y), '3965', '0', $oasistype);
-                            $this->setField($this->xy2id($x + 1, $y + 1), '3966', '0', $oasistype);
-                        }
-                    }
-                }if ($oasistype == 4) {
-                    $image = rand(0, 9);
-                    $bonus = array(25, 25, 25, 50);
-                    if ($image == 0) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '4055', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 1) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x - 1, $y))
-                        ) {
-                            #Lake#
-                            $this->setField($this->xy2id($x, $y), '4155', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x - 1, $y), '4145', '0', $oasistype);
-                        }
-                    } elseif ($image == 2) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x + 1, $y)) &&
-                                $this->isField($this->xy2id($x, $y + 1))
-                        ) {
-                            #Lake#
-                            $this->setField($this->xy2id($x, $y), '4255', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x + 1, $y), '4265', '0', $oasistype);
-                            $this->setField($this->xy2id($x, $y + 1), '4256', '0', $oasistype);
-                        }
-                    } elseif ($image == 3) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '4355', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 4) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '4455', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 5) {
-                        if ($this->isField($id)) {
-                            #Lake#
-                            $this->setField($this->xy2id($x, $y), '4555', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 6) {
-                        if ($this->isField($id)) {
-                            $this->setField($this->xy2id($x, $y), '4655', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                        }
-                    } elseif ($image == 7) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x - 1, $y))
-                        ) {
-                            $this->setField($this->xy2id($x, $y), '4755', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x - 1, $y), '4745', '0', $oasistype);
-                        }
-                    } elseif ($image == 8) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x - 1, $y))
-                        ) {
-                            $this->setField($this->xy2id($x, $y), '4855', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x - 1, $y), '4845', '0', $oasistype);
-                        }
-                    } elseif ($image == 9) {
-                        if (
-                                $this->isField($this->xy2id($x, $y)) &&
-                                $this->isField($this->xy2id($x + 1, $y)) &&
-                                $this->isField($this->xy2id($x, $y + 1))
-                        ) {
-                            $this->setField($this->xy2id($x, $y), '4955', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
-                            $this->setField($this->xy2id($x + 1, $y), '4965', '0', $oasistype);
-                            $this->setField($this->xy2id($x, $y + 1), '4956', '0', $oasistype);
+                    }if ($oasistype == 4) {
+                        $image = rand(0, 9);
+                        $bonus = array(25, 25, 25, 50);
+                        if ($image == 0) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '4055', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 1) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x - 1, $y))
+                            ) {
+                                #Lake#
+                                $this->setField($this->xy2id($x, $y), '4155', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x - 1, $y), '4145', '0', $oasistype);
+                            }
+                        } elseif ($image == 2) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x + 1, $y)) &&
+                                    $this->isField($this->xy2id($x, $y + 1))
+                            ) {
+                                #Lake#
+                                $this->setField($this->xy2id($x, $y), '4255', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x + 1, $y), '4265', '0', $oasistype);
+                                $this->setField($this->xy2id($x, $y + 1), '4256', '0', $oasistype);
+                            }
+                        } elseif ($image == 3) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '4355', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 4) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '4455', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 5) {
+                            if ($this->isField($id)) {
+                                #Lake#
+                                $this->setField($this->xy2id($x, $y), '4555', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 6) {
+                            if ($this->isField($id)) {
+                                $this->setField($this->xy2id($x, $y), '4655', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                            }
+                        } elseif ($image == 7) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x - 1, $y))
+                            ) {
+                                $this->setField($this->xy2id($x, $y), '4755', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x - 1, $y), '4745', '0', $oasistype);
+                            }
+                        } elseif ($image == 8) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x - 1, $y))
+                            ) {
+                                $this->setField($this->xy2id($x, $y), '4855', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x - 1, $y), '4845', '0', $oasistype);
+                            }
+                        } elseif ($image == 9) {
+                            if (
+                                    $this->isField($this->xy2id($x, $y)) &&
+                                    $this->isField($this->xy2id($x + 1, $y)) &&
+                                    $this->isField($this->xy2id($x, $y + 1))
+                            ) {
+                                $this->setField($this->xy2id($x, $y), '4955', '0', $oasistype, $bonus[rand(0, count($bonus) - 1)]);
+                                $this->setField($this->xy2id($x + 1, $y), '4965', '0', $oasistype);
+                                $this->setField($this->xy2id($x, $y + 1), '4956', '0', $oasistype);
+                            }
                         }
                     }
                 }

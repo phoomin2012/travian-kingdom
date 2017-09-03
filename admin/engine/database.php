@@ -12,22 +12,19 @@ class Database {
     public function listServer() {
         global $engine;
         $sql = "SELECT * FROM `global_server_data`";
-        $q = $engine->sql->query($sql);
-        $r = array();
-        $i = 0;
+        $q = query($sql, []);
         while ($s = $q->fetch(PDO::FETCH_ASSOC)) {
-            $r[$i] = $s;
-            for ($f = 0; $f < 17; $f+=1) {
-                unset($r[$i][$f]);
-            }
-            $i+=1;
+            $s['ww_position'] = json_decode($s['ww_position']);
+            $r[] = $s;
         }
         return $r;
     }
 
-    public function getServer($sid) {
+    public function getServer($id = null) {
         global $engine;
-        return query("SELECT * FROM `global_server_data` WHERE `sid`=?;", array($sid))->fetch(PDO::FETCH_ASSOC);
+        $s = query("SELECT * FROM `global_server_data` WHERE `sid`=?;", [$id])->fetch(PDO::FETCH_ASSOC);
+        $s['ww_position'] = json_decode($s['ww_position']);
+        return $s;
     }
 
 }

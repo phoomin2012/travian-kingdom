@@ -3,18 +3,12 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
-
 DROP TABLE IF EXISTS `error_nodejs`;
 CREATE TABLE `error_nodejs` (
   `id` int(11) NOT NULL,
   `host` varchar(255) NOT NULL,
   `error` longtext NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `error_php`;
 CREATE TABLE `error_php` (
@@ -26,7 +20,7 @@ CREATE TABLE `error_php` (
   `line` varchar(255) NOT NULL,
   `count` int(11) NOT NULL,
   `last` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `global_avatar`;
 CREATE TABLE `global_avatar` (
@@ -41,7 +35,7 @@ CREATE TABLE `global_avatar` (
   `hair` int(11) NOT NULL,
   `mouth` int(11) NOT NULL,
   `nose` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `global_msid`;
 CREATE TABLE `global_msid` (
@@ -49,15 +43,15 @@ CREATE TABLE `global_msid` (
   `email` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
   `ip` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `global_server_data`;
 CREATE TABLE `global_server_data` (
   `sid` int(11) NOT NULL,
-  `name` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `tag` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `folder` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `prefix` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `tag` varchar(255) NOT NULL,
+  `folder` varchar(255) NOT NULL,
+  `prefix` varchar(255) NOT NULL,
   `speed_world` int(11) DEFAULT NULL,
   `speed_unit` int(11) DEFAULT NULL,
   `multiple_hero_item` int(11) DEFAULT NULL,
@@ -66,28 +60,29 @@ CREATE TABLE `global_server_data` (
   `multiple_hero_power` int(11) DEFAULT NULL,
   `multiple_storage` int(11) DEFAULT NULL,
   `base_storage` int(11) NOT NULL,
-  `plus_time` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-  `protection` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-  `start` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `plus_time` varchar(255) DEFAULT NULL,
+  `protection` varchar(255) DEFAULT NULL,
+  `start` varchar(255) DEFAULT NULL,
   `natar` int(11) DEFAULT NULL,
   `wwvillage` int(11) DEFAULT NULL,
-  `peace` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-  `genmap` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `peace` varchar(255) DEFAULT NULL,
+  `genmap` varchar(255) DEFAULT NULL,
   `maintenance` int(11) NOT NULL,
   `recommended` int(11) NOT NULL,
-  `installed` int(11) NOT NULL
+  `installed` int(11) NOT NULL,
+  `ww_position` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `global_server_data` (`sid`, `name`, `tag`, `folder`, `prefix`, `speed_world`, `speed_unit`, `multiple_hero_item`, `multiple_hero_resource`, `multiple_hero_speed`, `multiple_hero_power`, `multiple_storage`, `base_storage`, `plus_time`, `protection`, `start`, `natar`, `wwvillage`, `peace`, `genmap`, `maintenance`, `recommended`, `installed`) VALUES
-(1, 'Developing', 'server1', 'http://ks1.t5.ph', 's1_', 100, 100, 1, 1, 1, 1, 1, 800, '86400*7', '86400*7', '1504286658', 1, 1, '0', '2', 0, 1, 0);
+INSERT INTO `global_server_data` (`sid`, `name`, `tag`, `folder`, `prefix`, `speed_world`, `speed_unit`, `multiple_hero_item`, `multiple_hero_resource`, `multiple_hero_speed`, `multiple_hero_power`, `multiple_storage`, `base_storage`, `plus_time`, `protection`, `start`, `natar`, `wwvillage`, `peace`, `genmap`, `maintenance`, `recommended`, `installed`, `ww_position`) VALUES
+(1, 'Developing', 'server1', 'http://ks1.t5.ph', 's1_', 100, 100, 1, 1, 1, 1, 1, 800, '86400*7', '86400*7', '1504465242', 1, 1, '0', '2', 0, 1, 1, '[[0, 0],[22, 45], [50, 0], [22, -45],\r\n [-22, 45], [-50, 0], [-22, -45]]');
 
 DROP TABLE IF EXISTS `global_user`;
 CREATE TABLE `global_user` (
   `uid` int(11) NOT NULL,
-  `username` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-  `timed` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `timed` varchar(255) DEFAULT NULL,
   `prestige` int(11) NOT NULL,
   `level` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -97,7 +92,7 @@ CREATE TABLE `process_php` (
   `id` int(11) NOT NULL,
   `pdi` varchar(255) NOT NULL,
   `server` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_auction`;
 CREATE TABLE `s1_auction` (
@@ -109,7 +104,7 @@ CREATE TABLE `s1_auction` (
   `bidder` int(11) NOT NULL,
   `start` varchar(255) NOT NULL,
   `end` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_building`;
 CREATE TABLE `s1_building` (
@@ -131,8 +126,8 @@ DROP TABLE IF EXISTS `s1_cache`;
 CREATE TABLE `s1_cache` (
   `id` int(11) NOT NULL,
   `owner` int(11) NOT NULL,
-  `data` text CHARACTER SET latin1 NOT NULL,
-  `timed` varchar(255) CHARACTER SET latin1 NOT NULL
+  `data` text NOT NULL,
+  `timed` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_chat_line`;
@@ -140,9 +135,9 @@ CREATE TABLE `s1_chat_line` (
   `id` int(11) NOT NULL,
   `room` varchar(255) NOT NULL,
   `from` int(11) NOT NULL,
-  `text` text CHARACTER SET utf8 NOT NULL,
+  `text` text NOT NULL,
   `time` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_chat_room`;
 CREATE TABLE `s1_chat_room` (
@@ -158,7 +153,7 @@ CREATE TABLE `s1_chat_room` (
   `lastOwnRead` varchar(255) NOT NULL,
   `time` varchar(255) NOT NULL,
   `playersRead` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_field`;
 CREATE TABLE `s1_field` (
@@ -180,7 +175,7 @@ CREATE TABLE `s1_gamecard` (
   `card3` varchar(255) NOT NULL,
   `card4` varchar(255) NOT NULL,
   `card5` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_hero`;
 CREATE TABLE `s1_hero` (
@@ -217,7 +212,7 @@ CREATE TABLE `s1_hero` (
   `use_reschest` int(11) NOT NULL,
   `use_cropchest` int(11) NOT NULL,
   `use_artwork` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_hero_item`;
 CREATE TABLE `s1_hero_item` (
@@ -234,14 +229,14 @@ CREATE TABLE `s1_hero_item` (
   `equip` int(11) NOT NULL,
   `lastChange` varchar(255) NOT NULL,
   `previousOwners` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_influence`;
 CREATE TABLE `s1_influence` (
   `wid` varchar(255) NOT NULL,
   `owner` varchar(255) NOT NULL,
   `kingdom` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_kingdom`;
 CREATE TABLE `s1_kingdom` (
@@ -256,7 +251,7 @@ CREATE TABLE `s1_kingdom` (
   `duke2` varchar(255) NOT NULL,
   `duke3` varchar(255) NOT NULL,
   `duke4` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_market`;
 CREATE TABLE `s1_market` (
@@ -278,7 +273,7 @@ CREATE TABLE `s1_nodejs` (
   `uid` varchar(255) NOT NULL,
   `data` text NOT NULL,
   `sent` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_notepad`;
 CREATE TABLE `s1_notepad` (
@@ -289,7 +284,7 @@ CREATE TABLE `s1_notepad` (
   `width` int(11) NOT NULL,
   `height` int(11) NOT NULL,
   `text` longtext NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_notification`;
 CREATE TABLE `s1_notification` (
@@ -300,7 +295,7 @@ CREATE TABLE `s1_notification` (
   `icon` varchar(255) NOT NULL,
   `count` int(11) NOT NULL DEFAULT '1',
   `expire` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_oasis`;
 CREATE TABLE `s1_oasis` (
@@ -322,7 +317,7 @@ CREATE TABLE `s1_oasis` (
   `loyalty` int(11) NOT NULL DEFAULT '100',
   `owner` varchar(255) NOT NULL DEFAULT '-1',
   `unit` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_oasis_rank`;
 CREATE TABLE `s1_oasis_rank` (
@@ -332,14 +327,14 @@ CREATE TABLE `s1_oasis_rank` (
   `village` varchar(255) NOT NULL,
   `rank` int(11) NOT NULL,
   `point` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_php`;
 CREATE TABLE `s1_php` (
   `id` int(11) NOT NULL,
   `uid` varchar(255) NOT NULL,
   `data` longtext NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_report_body`;
 CREATE TABLE `s1_report_body` (
@@ -353,7 +348,7 @@ CREATE TABLE `s1_report_body` (
   `module_target` longtext NOT NULL,
   `module_support` longtext NOT NULL,
   `time` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_report_head`;
 CREATE TABLE `s1_report_head` (
@@ -369,7 +364,7 @@ CREATE TABLE `s1_report_head` (
   `detail_data` longtext NOT NULL,
   `favorite` int(11) NOT NULL,
   `time` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_robber`;
 CREATE TABLE `s1_robber` (
@@ -383,7 +378,7 @@ CREATE TABLE `s1_robber` (
   `treasure` int(11) NOT NULL,
   `troop` varchar(255) NOT NULL,
   `expire` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_setting`;
 CREATE TABLE `s1_setting` (
@@ -407,7 +402,7 @@ CREATE TABLE `s1_setting` (
   `uiSoundVolume` varchar(255) NOT NULL DEFAULT '50',
   `WelcomeScreen` int(11) NOT NULL,
   `email` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_tdata`;
 CREATE TABLE `s1_tdata` (
@@ -431,7 +426,7 @@ CREATE TABLE `s1_tqueue` (
   `building` int(11) NOT NULL,
   `start` varchar(255) NOT NULL,
   `end` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_train`;
 CREATE TABLE `s1_train` (
@@ -442,7 +437,7 @@ CREATE TABLE `s1_train` (
   `start` varchar(255) NOT NULL,
   `next` varchar(255) NOT NULL,
   `order` tinyint(2) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_train_queue`;
 CREATE TABLE `s1_train_queue` (
@@ -450,7 +445,7 @@ CREATE TABLE `s1_train_queue` (
   `tid` varchar(255) NOT NULL COMMENT 'Train id',
   `amount` int(11) NOT NULL,
   `duration` float NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_troop_move`;
 CREATE TABLE `s1_troop_move` (
@@ -466,7 +461,7 @@ CREATE TABLE `s1_troop_move` (
   `unit` varchar(255) NOT NULL,
   `merchant` int(11) NOT NULL,
   `data` longtext NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_troop_stay`;
 CREATE TABLE `s1_troop_stay` (
@@ -474,7 +469,7 @@ CREATE TABLE `s1_troop_stay` (
   `wid` varchar(255) NOT NULL,
   `owner` varchar(255) NOT NULL,
   `unit` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_units`;
 CREATE TABLE `s1_units` (
@@ -520,7 +515,7 @@ CREATE TABLE `s1_user` (
   `lastLogin` varchar(255) NOT NULL,
   `attp` bigint(20) NOT NULL COMMENT 'Attack point',
   `defp` bigint(20) NOT NULL COMMENT 'Defend point'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_village`;
 CREATE TABLE `s1_village` (
@@ -550,7 +545,7 @@ CREATE TABLE `s1_village` (
   `expandedfrom` varchar(255) NOT NULL,
   `natar` int(11) NOT NULL,
   `area` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `s1_world`;
 CREATE TABLE `s1_world` (
@@ -577,7 +572,7 @@ ALTER TABLE `global_msid`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `global_server_data`
-  ADD PRIMARY KEY (`sid`,`name`,`tag`,`folder`);
+  ADD PRIMARY KEY (`sid`);
 
 ALTER TABLE `global_user`
   ADD PRIMARY KEY (`uid`);
@@ -685,21 +680,21 @@ ALTER TABLE `s1_world`
 ALTER TABLE `error_nodejs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `error_php`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 ALTER TABLE `global_avatar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 ALTER TABLE `global_msid`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `global_server_data`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `global_user`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `process_php`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `s1_auction`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `s1_building`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 ALTER TABLE `s1_cache`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `s1_chat_line`
@@ -719,9 +714,9 @@ ALTER TABLE `s1_kingdom`
 ALTER TABLE `s1_market`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 ALTER TABLE `s1_nodejs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 ALTER TABLE `s1_notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `s1_oasis`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `s1_oasis_rank`
@@ -737,18 +732,14 @@ ALTER TABLE `s1_setting`
 ALTER TABLE `s1_tqueue`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `s1_train`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `s1_train_queue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `s1_troop_move`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `s1_troop_stay`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15200;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15204;
 ALTER TABLE `s1_units`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15202;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15205;
 ALTER TABLE `s1_user`
   MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
