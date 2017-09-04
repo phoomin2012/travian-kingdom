@@ -559,6 +559,7 @@ class Movement {
         $engine->auto->emitCache($pt['uid'], $engine->unit->getStay($vt['villageId']));
         $engine->auto->emitCache($pt['uid'], $engine->hero->get($pt['uid']));
         $engine->auto->emitCache($pt['uid'], $engine->quest->get('', $pt['uid']));
+        $engine->auto->emitCache($pt['uid'], $engine->quest->giver($pt['uid']));
     }
 
     public function settle($data) {

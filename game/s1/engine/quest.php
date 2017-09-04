@@ -178,7 +178,7 @@ class Quest {
             ];
             // Adventure quest
             if (in_array($q, [826, 827, 821, 822, 825, 823, 824, 825, 828, 829, 830])) {
-                $rn = $this->quest_adventure($q, $rn);
+                $rn = $this->quest_adventure($q, $rn, $uid);
             }
 
             array_push($r, $rn);
@@ -423,9 +423,10 @@ class Quest {
         return $r;
     }
 
-    public function quest_adventure($id, $rn) {
+    public function quest_adventure($id, $rn, $uid = null) {
         global $engine;
-        $hero = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `owner`=?;", [$_SESSION[$engine->server->prefix . 'uid']])->fetch(PDO::FETCH_ASSOC);
+        $uid === null ? $uid = $_SESSION[$engine->server->prefix . 'uid'] : false;
+        $hero = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `owner`=?;", [$uid])->fetch(PDO::FETCH_ASSOC);
 
         switch ($id) {
             case 826:
