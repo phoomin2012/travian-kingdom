@@ -516,6 +516,7 @@ class Movement {
         } else {
             query("UPDATE `{$engine->server->prefix}hero` SET `useAdvPoint`=`useAdvPoint`+?,`health`=?,`xp`=`xp`+?  WHERE `owner`=?", [$long ? 2 : 1, $new_hp, $xp, $pt['uid']]);
         }
+        $engine->hero->checkLevelUp($pt['uid'],false,$dead);
 
         // New adventure duration
         $short = rand($engine->hero->adv_short[0], $engine->hero->adv_short[1]);
@@ -523,7 +524,6 @@ class Movement {
         query("UPDATE `{$engine->server->prefix}hero` SET `advShort`=?,`advLong`=?  WHERE `owner`=?", [$short, $long, $pt['uid']]);
 
         // Check for level up
-        $engine->hero->checkLevelUp($pt['uid']);
 
         if (!$dead) {
             // Return hero to home village

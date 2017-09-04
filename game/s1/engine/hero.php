@@ -222,7 +222,7 @@ class Hero {
             return false;
     }
 
-    public function checkLevelUp($uid, $send = true) {
+    public function checkLevelUp($uid, $send = true, $dead = false) {
         global $engine, $_hero_levels;
 
         $hero = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `owner`=?;", [$uid])->fetch(PDO::FETCH_ASSOC);
@@ -237,7 +237,7 @@ class Hero {
 
             $new_level = $hero['level'] + $levelup;
             $point = $levelup * 4;
-            query("UPDATE `{$engine->server->prefix}hero` SET `level`=?,`levelUp`=?,`point`=`point`+?,`health`=? WHERE `owner`=?;", [$new_level, $levelup, $point,100, $uid]);
+            query("UPDATE `{$engine->server->prefix}hero` SET `level`=?,`levelUp`=?,`point`=`point`+?,`health`=? WHERE `owner`=?;", [$new_level, $levelup, $point, ($dead) ? 0 : 100, $uid]);
             ($send) ? $engine->auto->emitCache($uid, $this->get($uid)) : '';
         }
     }

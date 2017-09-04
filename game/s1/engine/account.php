@@ -169,6 +169,7 @@ class Account {
         ($id === null ) ? $id = $_SESSION[$engine->server->prefix . 'uid'] : '';
 
         $p = query("SELECT * FROM `" . $engine->server->prefix . "user` WHERE `uid`=?", array($id))->fetch(PDO::FETCH_ASSOC);
+        $prestige = $this->getPrestige(null, true);
         $k = $engine->kingdom->getData($p['kingdom']);
         $r = [
             'name' => 'Player:' . $id,
@@ -189,9 +190,9 @@ class Account {
                 'villages' => $engine->village->getAll($p['uid'], false),
                 'population' => $engine->village->getAllPop($p['uid']),
                 'level' => 0,
-                'stars' => $this->getPrestige(null, true),
-                'prestige' => 266,
-                'nextLevelPrestige' => 300,
+                'stars' => $prestige['prestigeStars'],
+                'prestige' => $prestige['globalPrestige'],
+                'nextLevelPrestige' => $prestige['nextLevelGlobalPrestige'],
                 'hasNoobProtection' => false,
                 'filterInformation' => false,
                 'uiLimitations' => '-1',
