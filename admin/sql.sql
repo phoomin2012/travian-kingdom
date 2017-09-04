@@ -196,7 +196,7 @@ CREATE TABLE `s1_hero` (
   `defBonus` int(11) NOT NULL,
   `resBonus` int(11) NOT NULL,
   `resType` int(11) NOT NULL,
-  `regen` int(11) NOT NULL DEFAULT '10',
+  `regen` int(11) NOT NULL DEFAULT '15',
   `lastupdate` varchar(255) NOT NULL,
   `advPoint` int(11) NOT NULL,
   `useAdvPoint` int(11) NOT NULL,

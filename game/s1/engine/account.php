@@ -271,18 +271,20 @@ class Account {
         $email = $this->getById($uid, 'email');
         $gu = query("SELECT * FROM `global_user` WHERE `email`=?;", [$email])->fetch(PDO::FETCH_ASSOC);
         $prestige = $gu['prestige'];
-
+        $next_prestige = 0;
         foreach ($this->prestige_data as $pr => $s) {
-            if ($prestige >= $pr)
+            if ($prestige >= $pr){
                 $star = $s;
-            else
+            }else{
+                $next_prestige = $pr;
                 break;
+            }
         }
 
         $r = array(
             'gameworldPrestige' => 6,
-            'globalPrestige' => 266,
-            'nextLevelGlobalPrestige' => 300,
+            'globalPrestige' => $prestige,
+            'nextLevelGlobalPrestige' => $next_prestige,
             'remainingDays' => 5,
             'weekPrestigeAmount' => 7,
             'prestigeStars' => $star,

@@ -101,13 +101,13 @@ if ($data['action'] == "ping") {
         'cache' => $engine->cache->getAll(),
         'time' => round(microtime(true) * 1000),
         'serialNo' => $engine->session->serialNo(),
-        'event' => array(
-            array(
+        'event' => [
+            [
                 'name' => 'clearCache',
                 'data' => []
-            ),
-        ),
-        'response' => array(),
+            ],
+        ],
+        'response' => [],
     ));
     exit();
 } elseif ($data['action'] == "getAll") {

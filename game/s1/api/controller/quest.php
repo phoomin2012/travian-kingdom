@@ -1,4 +1,5 @@
 <?php
+
 $tutorial_wid = - 10000 - $_SESSION[$engine->server->prefix . 'uid'];
 if ($data['action'] == "dialogAction") {
     if ($data['params']['questId'] == "1") {
@@ -242,13 +243,17 @@ if ($data['action'] == "dialogAction") {
             query("UPDATE `{$engine->server->prefix}troop_stay` SET `wid`=? WHERE `wid`=?", [$new_wid, $old_wid]);
             query("UPDATE `{$engine->server->prefix}tdata` SET `wid`=? WHERE `wid`=?", [$new_wid, $old_wid]);
             query("UPDATE `{$engine->server->prefix}field` SET `wid`=? WHERE `wid`=?", [$new_wid, $old_wid]);
-            query("UPDATE `{$engine->server->prefix}hero` SET `village`=? WHERE `owner`=?", [$new_wid, $_SESSION[$engine->server->prefix . 'uid']]);
+            // Change hero infomation
+            $short = rand($engine->hero->adv_short[0], $engine->hero->adv_short[1]);
+            $long = rand($engine->hero->adv_long[0], $engine->hero->adv_long[1]);
+            query("UPDATE `{$engine->server->prefix}hero` SET `village`=?,`advShort`=?,`advLong`=? WHERE `owner`=?", [$new_wid, $short, $long $_SESSION[$engine->server->prefix . 'uid']]);
 
+            // Send all new data
             $_COOKIE['village'] = $new_wid;
             setcookie('village', $new_wid);
             $engine->account->edit('tutorial', 22, $_SESSION[$engine->server->prefix . 'uid']);
             $engine->account->edit('spawn', time(), $_SESSION[$engine->server->prefix . 'uid']);
-            echo json_encode(array(
+            echo json_encode([
                 "cache" => [
                     $engine->world->getMapDetail($_COOKIE['village']),
                     $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
@@ -268,12 +273,15 @@ if ($data['action'] == "dialogAction") {
                     ]
                 ],
                 "response" => [],
+                "event" => [
+                    [
+                        "name" => "clearCache",
+                        "data" => []
+                    ],
+                ],
                 "serialNo" => $engine->session->serialNo(),
                 "time" => round(microtime(true) * 1000),
-            ));
-
-            $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->quest->get());
-            $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']));
+            ]);
         }
     } elseif ($data['params']['questId'] == "302") {
         if ($data['params']['command'] == "activate") {
