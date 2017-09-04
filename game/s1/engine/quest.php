@@ -66,7 +66,7 @@ class Quest {
             ]);
         } else {
             // Advernture
-            $hero = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `owner`=?;", [$_SESSION[$engine->server->prefix . 'uid']])->fetch(PDO::FETCH_ASSOC);
+            $hero = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `owner`=?;", [$uid])->fetch(PDO::FETCH_ASSOC);
             if ($hero['move'] == '') {
                 if ($hero['dead'] == 0) {
                     //Can Adventure
@@ -80,6 +80,7 @@ class Quest {
                         ],
                     ]);
                 } else {
+                    // Can't adventure, Hero is dead
                     array_push($r, [
                         'name' => 'QuestGiver:' . $i++,
                         'data' => [
@@ -91,7 +92,7 @@ class Quest {
                     ]);
                 }
             } else {
-                //Can't adventure
+                // Can't adventure, Hero is moving
                 array_push($r, [
                     'name' => 'QuestGiver:' . $i++,
                     'data' => [
