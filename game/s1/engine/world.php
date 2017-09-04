@@ -12,7 +12,7 @@ class World {
     public $data = null;
     public $worldmax = 100;
     public $radius = 70;
-    public $ww_radius = 7;
+    public $ww_radius = 8;
 
     private function setField($id, $image = '0', $field = '0', $oasis = '0', $bonus = '0') {
         global $engine;
@@ -38,8 +38,8 @@ class World {
             $y = $ww[1];
             for ($x1 = -$this->ww_radius; $x1 <= $this->ww_radius; $x1++)
                 for ($y1 = -$this->ww_radius; $y1 <= $this->ww_radius; $y1++)
-                    if ($this->getDistance($x + $x1, $y + $y1) <= $this->ww_radius)
-                        $r[] = [$x + $x1, $y + $y1];
+                    if ($this->getDistance([$x + $x1, $y + $y1], [0, 0]) <= $this->ww_radius)
+                        $r[] = $this->xy2id($x + $x1, $y + $y1);
         }
         return $r;
     }
@@ -104,13 +104,13 @@ class World {
             case 4: $queryit = "`x` < 0 AND `y` < 0 AND `fieldtype` = '4446' " . $unselect_village . " ORDER BY `x` DESC, `y` DESC";
                 break;
         }
-        $q = "SELECT `id`,`x`,`y` FROM `{$engine->server->prefix}world` WHERE " . $queryit . "";
+        $q = "SELECT `id` FROM `{$engine->server->prefix}world` WHERE " . $queryit . "";
         $wdata = query($q)->fetchAll(PDO::FETCH_ASSOC);
         $wid = 0;
         $wwr = $this->getWWTile();
         while ($wid == 0) {
             foreach ($wdata as $w) {
-                if (!in_array([$w['x'], $w['y']], $wwr)) {
+                if (!in_array($w['id'], $wwr)) {
                     $wid = $w['id'];
                     break;
                 }

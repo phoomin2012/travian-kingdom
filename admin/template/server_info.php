@@ -140,9 +140,7 @@ $s = $engine->database->getServer($_GET['id']);
                     ?>
                     <hr>
                     <?php
-                    $q = query("SHOW TABLES LIKE ?;", ["%{$s['prefix']}%"])->fetchAll();
                     echo "<pre>";
-                    var_dump($q);
                     echo "</pre>";
                     ?>
                 </div>

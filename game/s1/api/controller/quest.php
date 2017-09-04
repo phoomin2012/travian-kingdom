@@ -1,11 +1,10 @@
 <?php
-
+$tutorial_wid = - 10000 - $_SESSION[$engine->server->prefix . 'uid'];
 if ($data['action'] == "dialogAction") {
     if ($data['params']['questId'] == "1") {
         if ($data['params']['command'] == "setName") {
             $engine->account->edit('username', $data['params']['input'], $_SESSION[$engine->server->prefix . 'uid']);
-
-            query("UPDATE `" . $engine->server->prefix . "village` SET `vname`=? WHERE `wid`=?;", array($data['params']['input'] . "'s village", $_COOKIE['village']));
+            query("UPDATE `" . $engine->server->prefix . "village` SET `vname`=? WHERE `wid`=?;", array($data['params']['input'] . "'s village", $tutorial_wid));
 
             echo json_encode(array(
                 "response" => [],
@@ -13,7 +12,7 @@ if ($data['action'] == "dialogAction") {
                 "time" => round(microtime() * 1000),
                 "cache" => [
                     $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
-                    $engine->village->get($_COOKIE['village']),
+                    $engine->village->get($tutorial_wid),
                     $engine->quest->get(),
                 ],
             ));
@@ -22,9 +21,9 @@ if ($data['action'] == "dialogAction") {
             $engine->account->edit('tutorial', 2, $_SESSION[$engine->server->prefix . 'uid']);
             $_SESSION[$engine->server->prefix . 'tutorial'] = 2;
 
-            $engine->unit->setUnit($_COOKIE['village'], 1, 5);
-            $engine->unit->setUnit($_COOKIE['village'], 2, 12);
-            $engine->unit->setUnit($_COOKIE['village'], 11, 1);
+            $engine->unit->setUnit($tutorial_wid, 1, 5);
+            $engine->unit->setUnit($tutorial_wid, 2, 12);
+            $engine->unit->setUnit($tutorial_wid, 11, 1);
             $engine->hero->create();
             $engine->session->checkLogin();
 
@@ -33,7 +32,7 @@ if ($data['action'] == "dialogAction") {
                     $engine->quest->get(),
                     $engine->quest->giver(),
                     $engine->hero->get($_SESSION[$engine->server->prefix . 'uid']),
-                    $engine->unit->getUnit($_COOKIE['village']),
+                    $engine->unit->getUnit($tutorial_wid),
                 ],
                 "response" => [],
                 "serialNo" => $engine->session->serialNo(),
@@ -47,7 +46,7 @@ if ($data['action'] == "dialogAction") {
                     $engine->quest->get(),
                     $engine->quest->giver(),
                     $engine->hero->get($_SESSION[$engine->server->prefix . 'uid']),
-                    $engine->unit->getUnit($_COOKIE['village']),
+                    $engine->unit->getUnit($tutorial_wid),
                 ],
                 "response" => [],
                 "serialNo" => $engine->session->serialNo(),
@@ -60,8 +59,8 @@ if ($data['action'] == "dialogAction") {
                 "cache" => [
                     $engine->quest->get(),
                     $engine->quest->giver(),
-                    $engine->village->get($_COOKIE['village']),
-                    $engine->building->getBuildings($_COOKIE['village']),
+                    $engine->village->get($tutorial_wid),
+                    $engine->building->getBuildings($tutorial_wid),
                 ],
                 "response" => [],
                 "serialNo" => $engine->session->serialNo(),
@@ -126,14 +125,14 @@ if ($data['action'] == "dialogAction") {
         if ($data['params']['command'] == "activate") {
             $engine->account->edit('tutorial', 15, $_SESSION[$engine->server->prefix . 'uid']);
             // Set resource
-            query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(600, 600, 600, 600, $_COOKIE['village']));
-            $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->village->get($_COOKIE['village']));
+            query("UPDATE `" . $engine->server->prefix . "village` SET `wood`=?,`clay`=?,`iron`=?,`crop`=? WHERE `wid`=?", array(600, 600, 600, 600, $tutorial_wid));
+            $engine->auto->emitCache($_SESSION[$engine->server->prefix . 'uid'], $engine->village->get($tutorial_wid));
 
             echo json_encode(array(
                 "cache" => [
                     $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
-                    $engine->building->getBuildings($_COOKIE['village']),
-                    $engine->village->get($_COOKIE['village']),
+                    $engine->building->getBuildings($tutorial_wid),
+                    $engine->village->get($tutorial_wid),
                     $engine->quest->get(),
                     $engine->quest->giver(),
                 ],
@@ -201,8 +200,8 @@ if ($data['action'] == "dialogAction") {
             echo json_encode(array(
                 "cache" => [
                     $engine->account->getAjax($_SESSION[$engine->server->prefix . 'uid']),
-                    $engine->building->getBuildings($_COOKIE['village']),
-                    $engine->village->get($_COOKIE['village']),
+                    $engine->building->getBuildings($tutorial_wid),
+                    $engine->village->get($tutorial_wid),
                     $engine->quest->get(),
                     $engine->quest->giver(),
                 ],
@@ -238,7 +237,7 @@ if ($data['action'] == "dialogAction") {
             $new_wid = $new_wid[0];
             $old_wid = - 10000 - $_SESSION[$engine->server->prefix . 'uid'];
 
-            query("UPDATE `{$engine->server->prefix}village` SET `wid`=?,`name`=? WHERE `wid`=? AND `owner`=?", [$new_wid, $_SESSION[$engine->server->prefix . 'username'] . "'s village", $old_wid, $_SESSION[$engine->server->prefix . 'uid']]);
+            query("UPDATE `{$engine->server->prefix}village` SET `wid`=?,`vname`=? WHERE `wid`=? AND `owner`=?", [$new_wid, $_SESSION[$engine->server->prefix . 'username'] . "'s village", $old_wid, $_SESSION[$engine->server->prefix . 'uid']]);
             query("UPDATE `{$engine->server->prefix}units` SET `wid`=? WHERE `wid`=?", [$new_wid, $old_wid]);
             query("UPDATE `{$engine->server->prefix}troop_stay` SET `wid`=? WHERE `wid`=?", [$new_wid, $old_wid]);
             query("UPDATE `{$engine->server->prefix}tdata` SET `wid`=? WHERE `wid`=?", [$new_wid, $old_wid]);
