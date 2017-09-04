@@ -55,8 +55,8 @@ class Building {
                 'villageId' => $id,
                 'tribeId' => $p['tribe'],
                 'freeSlots' => array(
-                    1 => 1 - count($b1n),
-                    2 => 1 - count($b2n),
+                    1 => $slotfree[0],
+                    2 => $slotfree[1],
                     4 => 1 + $p['master'] - count($b4n),
                 ),
                 'queues' => array(
