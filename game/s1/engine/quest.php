@@ -84,7 +84,7 @@ class Quest {
                         'npcId' => '11',
                         'questId' => '-1',
                         'dialog' => '-1',
-                        'questStatus' => '3',
+                        'questStatus' => '1',
                     ],
                 ]);
             }
@@ -152,9 +152,11 @@ class Quest {
                     'status' => 1,
                 ],
             ];
-            if ($player['tutorial'] == 1) {
-                
+            // Adventure quest
+            if (in_array($q, [826, 827, 821, 822, 825, 823, 824, 825, 828, 829, 830])) {
+                $rn = $this->quest_adventure($q, $rn);
             }
+
             array_push($r, $rn);
         }
         return $r;
@@ -365,9 +367,7 @@ class Quest {
 
     private function heroAdventure($uid) {
         global $engine;
-        $player = $engine->account->getById($uid);
         $hero = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `owner`=?;", [$uid])->fetch(PDO::FETCH_ASSOC);
-
         $r = [
             [
                 'name' => 'Quest:991',
@@ -397,6 +397,70 @@ class Quest {
             ],
         ];
         return $r;
+    }
+
+    public function quest_adventure($id, $rn) {
+        global $engine;
+        $hero = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `owner`=?;", [$_SESSION[$engine->server->prefix . 'uid']])->fetch(PDO::FETCH_ASSOC);
+
+        switch ($id) {
+            case 826:
+                if ($hero['useAdvPoint'] >= 1) {
+                    $rn['data']['status'] = 4;
+                }
+                break;
+            case 827:
+                if ($hero['useAdvPoint'] >= 1) {
+                    $rn['data']['status'] = 4;
+                }
+                break;
+            case 821:
+                if ($hero['useAdvPoint'] >= 1) {
+                    $rn['data']['status'] = 4;
+                }
+                break;
+            case 822:
+                if ($hero['useAdvPoint'] >= 1) {
+                    $rn['data']['status'] = 4;
+                }
+                break;
+            case 825:
+                if ($hero['useAdvPoint'] >= 1) {
+                    $rn['data']['status'] = 4;
+                }
+                break;
+            case 823:
+                if ($hero['useAdvPoint'] >= 1) {
+                    $rn['data']['status'] = 4;
+                }
+                break;
+            case 824:
+                if ($hero['useAdvPoint'] >= 1) {
+                    $rn['data']['status'] = 4;
+                }
+                break;
+            case 825:
+                if ($hero['useAdvPoint'] >= 1) {
+                    $rn['data']['status'] = 4;
+                }
+                break;
+            case 828:
+                if ($hero['useAdvPoint'] >= 1) {
+                    $rn['data']['status'] = 4;
+                }
+                break;
+            case 829:
+                if ($hero['useAdvPoint'] >= 1) {
+                    $rn['data']['status'] = 4;
+                }
+                break;
+            case 830:
+                if ($hero['useAdvPoint'] >= 1) {
+                    $rn['data']['status'] = 4;
+                }
+                break;
+        }
+        return $rn;
     }
 
 }

@@ -215,7 +215,7 @@ class Hero {
     public function isHome($uid = null) {
         global $engine;
         $uid === null ? $uid = $_SESSION[$engine->server->prefix . 'uid'] : '';
-        $hero = $this->get($uid, false);
+        $hero = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `owner`=?;", [$uid])->fetch(PDO::FETCH_ASSOC);
         if ($hero['move'] == '')
             return true;
         else
