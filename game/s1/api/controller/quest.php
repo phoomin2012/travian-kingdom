@@ -241,8 +241,8 @@ if ($data['action'] == "dialogAction") {
             query("UPDATE `{$engine->server->prefix}units` SET `wid`=? WHERE `wid`=?", [$new_wid, $old_wid]);
             query("UPDATE `{$engine->server->prefix}troop_stay` SET `wid`=? WHERE `wid`=?", [$new_wid, $old_wid]);
             query("UPDATE `{$engine->server->prefix}tdata` SET `wid`=? WHERE `wid`=?", [$new_wid, $old_wid]);
-            query("UPDATE `{$engine->server->prefix}hero` SET `village`=? WHERE `village`=?", [$new_wid, $old_wid]);
             query("UPDATE `{$engine->server->prefix}field` SET `wid`=? WHERE `wid`=?", [$new_wid, $old_wid]);
+            query("UPDATE `{$engine->server->prefix}hero` SET `village`=? WHERE `owner`=?", [$new_wid, $_SESSION[$engine->server->prefix . 'uid']]);
 
             $_COOKIE['village'] = $new_wid;
             setcookie('village', $new_wid);

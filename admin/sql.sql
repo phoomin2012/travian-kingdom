@@ -74,7 +74,7 @@ CREATE TABLE `global_server_data` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 INSERT INTO `global_server_data` (`sid`, `name`, `tag`, `folder`, `prefix`, `speed_world`, `speed_unit`, `multiple_hero_item`, `multiple_hero_resource`, `multiple_hero_speed`, `multiple_hero_power`, `multiple_storage`, `base_storage`, `plus_time`, `protection`, `start`, `natar`, `wwvillage`, `peace`, `genmap`, `maintenance`, `recommended`, `installed`, `ww_position`) VALUES
-(1, 'Developing', 'server1', 'http://ks1.t5.ph', 's1_', 100, 100, 1, 1, 1, 1, 1, 800, '86400*7', '86400*7', '1504465242', 1, 1, '0', '2', 0, 1, 1, '[[0, 0],[22, 45], [50, 0], [22, -45],\r\n [-22, 45], [-50, 0], [-22, -45]]');
+(1, 'Developing', 'server1', 'http://ks1.t5.ph', 's1_', 100, 100, 1, 1, 1, 1, 1, 800, '86400*7', '86400*7', '1504465242', 1, 1, '0', '2', 0, 1, 0, '[[0, 0],[22, 45], [50, 0], [22, -45],\r\n [-22, 45], [-50, 0], [-22, -45]]');
 
 DROP TABLE IF EXISTS `global_user`;
 CREATE TABLE `global_user` (
