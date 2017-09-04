@@ -404,7 +404,7 @@ class Quest {
                     'finishedSteps' => 0,
                     'finalStep' => 1,
                     'rewards' => [],
-                    'status' => 2,
+                    'status' => $hero['move'] == '' && $hero['dead'] == 0 ? 2 : 1,
                 ],
             ],
             [
@@ -417,7 +417,7 @@ class Quest {
                     'finishedSteps' => 0,
                     'finalStep' => 1,
                     'rewards' => [],
-                    'status' => 2,
+                    'status' => $hero['move'] == '' && $hero['dead'] == 0 ? 2 : 1,
                 ],
             ],
         ];
