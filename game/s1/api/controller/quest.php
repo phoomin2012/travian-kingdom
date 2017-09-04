@@ -246,7 +246,7 @@ if ($data['action'] == "dialogAction") {
             // Change hero infomation
             $short = rand($engine->hero->adv_short[0], $engine->hero->adv_short[1]);
             $long = rand($engine->hero->adv_long[0], $engine->hero->adv_long[1]);
-            query("UPDATE `{$engine->server->prefix}hero` SET `village`=?,`advShort`=?,`advLong`=? WHERE `owner`=?", [$new_wid, $short, $long $_SESSION[$engine->server->prefix . 'uid']]);
+            query("UPDATE `{$engine->server->prefix}hero` SET `village`=?,`advShort`=?,`advLong`=? WHERE `owner`=?", [$new_wid, $short, $long, $_SESSION[$engine->server->prefix . 'uid']]);
 
             // Send all new data
             $_COOKIE['village'] = $new_wid;
