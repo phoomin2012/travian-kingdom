@@ -510,6 +510,7 @@ class Auto {
             $engine->auto->emitCache($h['owner'], $engine->unit->getStay($h['village']));
             query("UPDATE `{$engine->server->prefix}hero` SET `revive`=?,`health`=?,`dead`=? WHERE `id`=?;", [0, 100, 0, $h['id']]);
             $this->emitCache($h['owner'], $engine->hero->get($h['owner']));
+            $this->emitCache($h['owner'], $engine->quest->get('',$h['owner']));
             $this->emitCache($h['owner'], $engine->quest->giver($h['owner']));
         }
     }
