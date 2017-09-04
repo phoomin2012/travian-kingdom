@@ -65,6 +65,7 @@ class Quest {
                 ],
             ]);
         } else {
+            // Advernture
             $hero = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `owner`=?;", [$_SESSION[$engine->server->prefix . 'uid']])->fetch(PDO::FETCH_ASSOC);
             if ($hero['move'] == '') {
                 if ($hero['dead'] == 0) {
@@ -101,6 +102,16 @@ class Quest {
                     ],
                 ]);
             }
+            // Chief
+            array_push($r, [
+                'name' => 'QuestGiver:' . $i++,
+                'data' => [
+                    'npcId' => '9',
+                    'questId' => '-1',
+                    'dialog' => '-1',
+                    'questStatus' => '2',
+                ],
+            ]);
         }
 
         return [
