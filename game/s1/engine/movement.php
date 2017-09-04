@@ -182,7 +182,7 @@ class Movement {
             $tutorial = $from;
             $from = '536887296';
         }
-        
+
         ($to === null) ? $to = $_COOKIE['village'] : '';
         ###########################################################
 
@@ -310,6 +310,8 @@ class Movement {
                 if ($unit['u' . $i] > 0) {
                     query("UPDATE `{$engine->server->prefix}hero` SET `move`=? WHERE `owner`=?;", ['', $pt]);
                     $engine->auto->emitCache($pt, $engine->hero->get($pt));
+                    $engine->auto->emitCache($pt, $engine->quest->get('', $pt));
+                    $engine->auto->emitCache($pt, $engine->quest->giver($pt));
                 }
             }
         }
@@ -396,7 +398,7 @@ class Movement {
                 $p = $engine->account->getByVillage($data['from'], 'uid');
                 $engine->auto->emitCache($p, $this->get($data['from']));
             }
-            
+
             $pt = $engine->account->getByVillage($data['to'], 'uid');
             if ($pt && $pt != null & $pt != "" & $pt != 0) {
                 $engine->auto->emitCache($pt, $this->get($data['to']));
@@ -516,7 +518,7 @@ class Movement {
         } else {
             query("UPDATE `{$engine->server->prefix}hero` SET `useAdvPoint`=`useAdvPoint`+?,`health`=?,`xp`=`xp`+?  WHERE `owner`=?", [$long ? 2 : 1, $new_hp, $xp, $pt['uid']]);
         }
-        $engine->hero->checkLevelUp($pt['uid'],false,$dead);
+        $engine->hero->checkLevelUp($pt['uid'], false, $dead);
 
         // New adventure duration
         $short = rand($engine->hero->adv_short[0], $engine->hero->adv_short[1]);
