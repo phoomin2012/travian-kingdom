@@ -77,16 +77,29 @@ class Quest {
                     ],
                 ]);
             } else {
+                $hero = query("SELECT * FROM `{$engine->server->prefix}hero` WHERE `owner`=?;", [$_SESSION[$engine->server->prefix . 'uid']])->fetch(PDO::FETCH_ASSOC);
                 //Can't adventure
-                array_push($r, [
-                    'name' => 'QuestGiver:' . $i++,
-                    'data' => [
-                        'npcId' => '11',
-                        'questId' => '-1',
-                        'dialog' => '-1',
-                        'questStatus' => '1',
-                    ],
-                ]);
+                if ($hero['dead'] == 0) {
+                    array_push($r, [
+                        'name' => 'QuestGiver:' . $i++,
+                        'data' => [
+                            'npcId' => '11',
+                            'questId' => '-1',
+                            'dialog' => '-1',
+                            'questStatus' => '1',
+                        ],
+                    ]);
+                } else {
+                    array_push($r, [
+                        'name' => 'QuestGiver:' . $i++,
+                        'data' => [
+                            'npcId' => '11',
+                            'questId' => '-1',
+                            'dialog' => '-1',
+                            'questStatus' => '2',
+                        ],
+                    ]);
+                }
             }
         }
 
