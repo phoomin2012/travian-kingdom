@@ -253,10 +253,10 @@ class Hero {
                 'type' => 3,
                 'subType' => null,
                 'amount' => [
-                    1 => rand(1000, 2000) * $hero['level'],
-                    2 => rand(1000, 2000) * $hero['level'],
-                    3 => rand(1000, 2000) * $hero['level'],
-                    4 => rand(1000, 2000) * $hero['level'],
+                    1 => rand(1000, 2000) * ($hero['level'] == 0 ? 0.75 : $hero['level']),
+                    2 => rand(1000, 2000) * ($hero['level'] == 0 ? 0.75 : $hero['level']),
+                    3 => rand(1000, 2000) * ($hero['level'] == 0 ? 0.75 : $hero['level']),
+                    4 => rand(1000, 2000) * ($hero['level'] == 0 ? 0.75 : $hero['level']),
                 ]
             ];
             array_push($r, $res);
