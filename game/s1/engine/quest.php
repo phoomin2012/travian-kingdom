@@ -146,7 +146,7 @@ class Quest {
                     'questStatus' => '2',
                 ],
             ]);
-            // Wood cutter
+            /*// Wood cutter
             array_push($r, [
                 'name' => 'QuestGiver:' . $i++,
                 'data' => [
@@ -175,7 +175,7 @@ class Quest {
                     'dialog' => '-1',
                     'questStatus' => '2',
                 ],
-            ]);
+            ]);*/
             // Envoy
             array_push($r, [
                 'name' => 'QuestGiver:' . $i++,
