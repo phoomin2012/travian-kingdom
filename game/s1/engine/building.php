@@ -40,7 +40,14 @@ class Building {
         foreach ($b5 as $key => $value) {
             $b5n[count($b5n)] = $this->makeQueue($value);
         }
-
+        $slotfree = [1, 1];
+        if ($p['tribe'] == 1) {
+            $slotfree[0] = 1 - count($b1n);
+            $slotfree[1] = 1 - count($b2n);
+        } else {
+            $slotfree[0] = 1 - count($b1n) - count($b2n);
+            $slotfree[1] = 1 - count($b1n) - count($b2n);
+        }
         $r = array(
             'name' => 'BuildingQueue:' . $id,
             'data' =>
