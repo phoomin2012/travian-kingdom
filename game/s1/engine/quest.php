@@ -92,11 +92,95 @@ class Quest {
                     ]);
                 }
             }
+            # QuestGiver.DAILY = -1;
+            # QuestGiver.MYSELF = 0;
+            # QuestGiver.WREN = 1;
+            # QuestGiver.FARMER = 2;
+            # QuestGiver.SCOUT = 3;
+            # QuestGiver.WOODCUTTER = 4;
+            # QuestGiver.CLAY_MAN = 5;
+            # QuestGiver.MINER = 6;
+            # QuestGiver.TRADER = 7;
+            # QuestGiver.ROBBER = 8;
+            # QuestGiver.CHIEF = 9;
+            # QuestGiver.ENVOY = 10;
+            # QuestGiver.ADVENTURER = 11;
+            # QuestGiver.GENERAL = 12;
             // Chief
             array_push($r, [
                 'name' => 'QuestGiver:' . $i++,
                 'data' => [
                     'npcId' => '9',
+                    'questId' => '827',
+                    'dialog' => '-1',
+                    'questStatus' => '2',
+                ],
+            ]);
+            // Wren
+            array_push($r, [
+                'name' => 'QuestGiver:' . $i++,
+                'data' => [
+                    'npcId' => '1',
+                    'questId' => '-1',
+                    'dialog' => '-1',
+                    'questStatus' => '2',
+                ],
+            ]);
+            // Farmer
+            array_push($r, [
+                'name' => 'QuestGiver:' . $i++,
+                'data' => [
+                    'npcId' => '2',
+                    'questId' => '-1',
+                    'dialog' => '-1',
+                    'questStatus' => '2',
+                ],
+            ]);
+            // Scout
+            array_push($r, [
+                'name' => 'QuestGiver:' . $i++,
+                'data' => [
+                    'npcId' => '3',
+                    'questId' => '-1',
+                    'dialog' => '-1',
+                    'questStatus' => '2',
+                ],
+            ]);
+            // Wood cutter
+            array_push($r, [
+                'name' => 'QuestGiver:' . $i++,
+                'data' => [
+                    'npcId' => '4',
+                    'questId' => '-1',
+                    'dialog' => '-1',
+                    'questStatus' => '2',
+                ],
+            ]);
+            // Clay men
+            array_push($r, [
+                'name' => 'QuestGiver:' . $i++,
+                'data' => [
+                    'npcId' => '5',
+                    'questId' => '-1',
+                    'dialog' => '-1',
+                    'questStatus' => '2',
+                ],
+            ]);
+            // Miner
+            array_push($r, [
+                'name' => 'QuestGiver:' . $i++,
+                'data' => [
+                    'npcId' => '6',
+                    'questId' => '-1',
+                    'dialog' => '-1',
+                    'questStatus' => '2',
+                ],
+            ]);
+            // Envoy
+            array_push($r, [
+                'name' => 'QuestGiver:' . $i++,
+                'data' => [
+                    'npcId' => '10',
                     'questId' => '-1',
                     'dialog' => '-1',
                     'questStatus' => '2',
@@ -425,52 +509,47 @@ class Quest {
                 }
                 break;
             case 827:
-                if ($hero['useAdvPoint'] >= 1) {
+                if ($hero['useAdvPoint'] >= 3) {
                     $rn['data']['status'] = 4;
                 }
                 break;
             case 821:
-                if ($hero['useAdvPoint'] >= 1) {
+                if ($hero['useAdvPoint'] >= 10) {
                     $rn['data']['status'] = 4;
                 }
                 break;
             case 822:
-                if ($hero['useAdvPoint'] >= 1) {
+                if ($hero['useAdvPoint'] >= 20) {
                     $rn['data']['status'] = 4;
                 }
                 break;
             case 825:
-                if ($hero['useAdvPoint'] >= 1) {
+                if ($hero['useAdvPoint'] >= 33) {
                     $rn['data']['status'] = 4;
                 }
                 break;
             case 823:
-                if ($hero['useAdvPoint'] >= 1) {
+                if ($hero['useAdvPoint'] >= 50) {
                     $rn['data']['status'] = 4;
                 }
                 break;
             case 824:
-                if ($hero['useAdvPoint'] >= 1) {
-                    $rn['data']['status'] = 4;
-                }
-                break;
-            case 825:
-                if ($hero['useAdvPoint'] >= 1) {
+                if ($hero['useAdvPoint'] >= 100) {
                     $rn['data']['status'] = 4;
                 }
                 break;
             case 828:
-                if ($hero['useAdvPoint'] >= 1) {
+                if ($hero['useAdvPoint'] >= 200) {
                     $rn['data']['status'] = 4;
                 }
                 break;
             case 829:
-                if ($hero['useAdvPoint'] >= 1) {
+                if ($hero['useAdvPoint'] >= 350) {
                     $rn['data']['status'] = 4;
                 }
                 break;
             case 830:
-                if ($hero['useAdvPoint'] >= 1) {
+                if ($hero['useAdvPoint'] >= 500) {
                     $rn['data']['status'] = 4;
                 }
                 break;
