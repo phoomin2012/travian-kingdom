@@ -91,17 +91,6 @@ class Quest {
                         ],
                     ]);
                 }
-            } else {
-                // Can't adventure, Hero is moving
-                array_push($r, [
-                    'name' => 'QuestGiver:' . $i++,
-                    'data' => [
-                        'npcId' => '11',
-                        'questId' => '-1',
-                        'dialog' => '-1',
-                        'questStatus' => '1',
-                    ],
-                ]);
             }
             // Chief
             array_push($r, [
