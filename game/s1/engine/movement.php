@@ -514,7 +514,7 @@ class Movement {
 
         // Save attributes
         if ($new_hp <= 0) {
-            query("UPDATE `{$engine->server->prefix}hero` SET `useAdvPoint`=`useAdvPoint`+?,`health`=?,`xp`=`xp`+?,`dead`=?,`move`=?  WHERE `owner`=?", [$long ? 2 : 1, 0, $xp, 1, 0, $pt['uid']]);
+            query("UPDATE `{$engine->server->prefix}hero` SET `useAdvPoint`=`useAdvPoint`+?,`health`=?,`xp`=`xp`+?,`dead`=?,`move`=?  WHERE `owner`=?", [$long ? 2 : 1, 0, $xp, 1, '', $pt['uid']]);
         } else {
             query("UPDATE `{$engine->server->prefix}hero` SET `useAdvPoint`=`useAdvPoint`+?,`health`=?,`xp`=`xp`+?  WHERE `owner`=?", [$long ? 2 : 1, $new_hp, $xp, $pt['uid']]);
         }
