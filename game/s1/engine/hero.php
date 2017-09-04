@@ -237,7 +237,7 @@ class Hero {
 
             $new_level = $hero['level'] + $levelup;
             $point = $levelup * 4;
-            query("UPDATE `{$engine->server->prefix}hero` SET `level`=?,`levelUp`=?,`point`=`point`+? WHERE `owner`=?;", [$new_level, $levelup, $point, $uid]);
+            query("UPDATE `{$engine->server->prefix}hero` SET `level`=?,`levelUp`=?,`point`=`point`+?,`health`=? WHERE `owner`=?;", [$new_level, $levelup, $point,100, $uid]);
             ($send) ? $engine->auto->emitCache($uid, $this->get($uid)) : '';
         }
     }
