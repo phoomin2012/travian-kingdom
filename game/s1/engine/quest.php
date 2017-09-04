@@ -86,7 +86,7 @@ class Quest {
                             'npcId' => '11',
                             'questId' => '-1',
                             'dialog' => '-1',
-                            'questStatus' => '2',
+                            'questStatus' => '1',
                         ],
                     ]);
                 }
