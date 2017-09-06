@@ -4,6 +4,8 @@ This project is clone Travian Kingdom game. Now, **not finish** yet.<br>
 If you want to support, you can donate us by Paypal. https://paypal.me/PhuminShop<br>
 Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
 
+Base on `Travian Kingdom` version : 0.66.8
+
 # Menu
   - [Menu](#menu)
   - [Feature](#feature)
