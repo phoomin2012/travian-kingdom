@@ -40,6 +40,14 @@ Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
     - [ ] Subscribe to newsletter
     - [ ] Logout
 - Gameplay
+  - System
+    - [x] Maintenance mode
+    - [ ] Disable attack
+    - [ ] Crop diet rule
+    - [ ] Spawn natarian village
+    - [ ] Spawn WW village on vocalno
+    - [ ] Spawn robber hideout
+    - [ ] Spawn robber camp (for kingdom)
   - Building list
     - [x] Construct building
     - [x] Upgrade building
@@ -49,19 +57,26 @@ Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
     - [x] Buy more slot
     - [x] Reserve resource
     - [x] Finish now
-  - Troops
+  - Troops & Movements
     - [x] Train troop
+    - [ ] Finish train troop immediately
+  - Movements
     - [x] Send attack (no attack)
     - [ ] Send raid (no attack)
     - [ ] Send siege (no attack)
     - [x] Settle new village
+    - [ ] Send hero to own village
+    - [ ] Send hero to other village
     - [ ] Conqure village
+    - [ ] Steal resources
+    - [ ] Steal treasures
   - Hero
     - [x] Adventure (generate item with no effect)
     - [ ] Attack
     - [ ] Reinforcement
     - [x] Inventory
     - [x] Attributes
+    - [ ] Increase resources production in village
     - [x] Change hero face
     - [x] Hero equipment
   - Silver & Gold
@@ -123,26 +138,29 @@ Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
     - [ ] Modal
     - [x] Change description
   - Auction
-    - [ ] Buy
-    - [ ] Sell
-    - [ ] Bids
-    - [ ] Silver accounting (History)
+    - [x] Sell
+    - [x] Bids
+    - [x] Silver accounting (History)
+    - [x] Remove expire item
   - Kingdom
     - [x] Create kingdom
     - [x] Change description
     - [x] Change tag
     - [x] Show member
     - [ ] Invite player
-    - [ ] Invite dukes
+    - [ ] Accept kingdom invite (player)
+    - [ ] Invite duke
+    - [ ] Accept kingdom invite (duke)
     - [x] Treasure active
     - [ ] Internation statistics
-    - [ ] Kingdom events
-    - [ ] Ranking
-    - [ ] Treasuries
-    - [ ] Tributes
+    - [ ] Show Kingdom events
+    - [ ] Show Ranking
+    - [ ] Show Treasuries
+    - [ ] Show Tributes
     - [ ] Collect tributes
-    - [ ] Diplomacy
+    - [ ] Show Diplomacy
     - [ ] Create offer
+    - [ ] Accept offer
   - Notification
     - [x] Show notification
     - [x] Remove notification
@@ -152,7 +170,7 @@ Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
     - [x] Show map cell detail
     - [x] Show village infomation
     - [x] Show oasis
-    - [ ] Show oasis troops
+    - [x] Show oasis troops
     - [ ] Show report
     - [ ] Robber
     - [ ] NPC Village
@@ -170,6 +188,7 @@ Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
     - [ ] Oasis bonus
     - [ ] Give up oasis
     - [ ] Bonus from troops in oasis
+    - [ ] Auto add animals to oasis
   - Village & Building
     - [x] Upgrade to town
     - [ ] Celebration
@@ -192,10 +211,10 @@ Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
     - [ ] Cancel offer
     - [ ] NPC merchant
   - Notepads
-    - [ ] Show/hide notepad
-    - [ ] Create a new note
-    - [ ] Edit note
-    - [ ] Delete note
+    - [x] Show/hide notepad
+    - [x] Create a new note
+    - [x] Edit note
+    - [x] Delete note
   - Message & Chat
     - [ ] Open chat on bar
     - [ ] Show chat on bar
