@@ -236,12 +236,13 @@ Base on `Travian Kingdom` version : 0.66.8
     - [ ] Show notification
   
 # Screenshot
-![Travian Kingdom Clone Script](https://s22.postimg.org/w82ihh4xt/Screen_Shot_2560-05-02_at_08.46.30.png)
-![Travian Kingdom Clone Script](https://s26.postimg.org/p937jo3bt/Screen_Shot_2560-09-06_at_23.12.17.png)
-![Travian Kingdom Clone Script](https://s1.postimg.org/s7flw3fjz/Screen_Shot_2560-05-02_at_09.03.02.png)
-![Travian Kingdom Clone Script](https://s16.postimg.org/f3kdmw3gl/Screen_Shot_2560-05-02_at_09.15.02.png)
-![Travian Kingdom Clone Script](https://s23.postimg.org/jlaolluaj/Screen_Shot_2560-05-02_at_09.15.26.png)
-![Travian Kingdom Clone Script](https://s11.postimg.org/5vs1owv8z/Screen_Shot_2560-05-02_at_09.18.24.png)
+![Travian Kingdom Clone Script](https://raw.githubusercontent.com/phoomin2012/travian-kingdom/master/screenshot/screenshot-1.png)
+![Travian Kingdom Clone Script](https://raw.githubusercontent.com/phoomin2012/travian-kingdom/master/screenshot/screenshot-2.png)
+![Travian Kingdom Clone Script](https://raw.githubusercontent.com/phoomin2012/travian-kingdom/master/screenshot/screenshot-3.png)
+![Travian Kingdom Clone Script](https://raw.githubusercontent.com/phoomin2012/travian-kingdom/master/screenshot/screenshot-4.png)
+![Travian Kingdom Clone Script](https://raw.githubusercontent.com/phoomin2012/travian-kingdom/master/screenshot/screenshot-5.png)
+![Travian Kingdom Clone Script](https://raw.githubusercontent.com/phoomin2012/travian-kingdom/master/screenshot/screenshot-6.png)
+![Travian Kingdom Clone Script](https://raw.githubusercontent.com/phoomin2012/travian-kingdom/master/screenshot/screenshot-7.png)
 
 # Requires
   - PHP 5.6+ (with PDO mysql)
