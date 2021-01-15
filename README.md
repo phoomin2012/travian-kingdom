@@ -1,8 +1,7 @@
-## Main development : [Click Here](https://github.com/phoomin2012/travian-kingdom) / [phoomin2012 (Owner)](https://github.com/phoomin2012)
+## Main development : [Click Here](https://github.com/phoomin2012/travian-kingdom)
 # Travian Kingdom Clone Script
+**Abandoned. No more support.**
 This project is clone Travian Kingdom game. Now, **not finish** yet.<br>
-If you want to support, you can donate us by Paypal. https://paypal.me/PhuminShop<br>
-Bitcoin Address : 1MaVc6fVKvdggg5KZXHYTwAVGrfTQQ7b45
 
 Base on `Travian Kingdom` version : 0.66.8
 
@@ -340,5 +339,4 @@ If you found bug please use [Issues](https://github.com/phoomin2012/travian-king
 ***NOW IS FREE***<br>
 Use **watch** button if you want to know about activities.<br>
 If you **like** this project, please give **star**.<br>
-NOT recommend to fork.<br>
 ***THANKS***
